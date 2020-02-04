@@ -421,7 +421,7 @@ extension UIChatViewController: UIDocumentPickerDelegate{
                                             file.data = data
                                             file.name = fileName
                                             
-                                            QiscusCore.shared.upload(file: file, onSuccess: { (file) in
+                                            QiscusCoreAPI.shared.upload(file: file, onSuccess: { (file) in
                                                 self.getProgressBarHeight().constant = 0.0
                                                 let message = CommentModel()
                                                 message.type = "custom"
@@ -457,7 +457,7 @@ extension UIChatViewController: UIDocumentPickerDelegate{
                                             
                     })
                 }else{
-                    QiscusCore.shared.upload(data: data, filename: fileName, onSuccess: { (file) in
+                    QiscusCoreAPI.shared.upload(data: data, filename: fileName, onSuccess: { (file) in
                         self.getProgressBarHeight().constant = 0.0
                         let message = CommentModel()
                         message.type = "file_attachment"
@@ -634,7 +634,7 @@ extension UIChatViewController : UIImagePickerControllerDelegate, UINavigationCo
                                         let file = FileUploadModel()
                                         file.data = mediaData!
                                         file.name = fileName
-                                        QiscusCore.shared.upload(file: file, onSuccess: { (file) in
+                                        QiscusCoreAPI.shared.upload(file: file, onSuccess: { (file) in
                                             let message = CommentModel()
                                             message.type = "file_attachment"
                                             message.payload = [

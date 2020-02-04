@@ -71,11 +71,11 @@ class UIChatPresenter: UIChatUserInteraction {
     }
     
     func loadRoom(withId roomId: String) {
-//        QiscusCore.shared.getChatRoomWithMessages(roomId: roomId, onSuccess: { [weak self] (room,comments) in
+//        QiscusCoreAPI.shared.getChatRoomWithMessages(roomId: roomId, onSuccess: { [weak self] (room,comments) in
 //            guard let instance = self else { return }
 //            instance.room = room
 //            instance.room?.delegate = self
-//            QiscusCore.shared.subscribeChatRoom(room)
+//            QiscusCoreAPI.shared.subscribeChatRoom(room)
 //            if comments.isEmpty {
 //                instance.viewPresenter?.onLoadMessageFailed(message: "no message")
 //                return
@@ -90,7 +90,7 @@ class UIChatPresenter: UIChatUserInteraction {
     /// Update room
     func loadRoom() {
         guard let _room = self.room else { return }
-//        QiscusCore.shared.getChatRoomWithMessages(roomId: _room.id, onSuccess: { [weak self] (room,comments) in
+//        QiscusCoreAPI.shared.getChatRoomWithMessages(roomId: _room.id, onSuccess: { [weak self] (room,comments) in
 //            guard let instance = self else { return }
 //            if comments.isEmpty {
 //                instance.viewPresenter?.onLoadMessageFailed(message: "no message")
@@ -104,13 +104,13 @@ class UIChatPresenter: UIChatUserInteraction {
     }
     
     func loadComments(withID roomId: String) {
-//        if let room = QiscusCore.database.room.find(id: roomId){
+//        if let room = QiscusCoreAPI.database.room.find(id: roomId){
 //            // load local
-//            if let _comments = QiscusCore.database.comment.find(roomId: roomId) {
+//            if let _comments = QiscusCoreAPI.database.comment.find(roomId: roomId) {
 //                guard let lastComment = _comments.last else { return }
 //                // read comment
 //                if let lastComment = room.lastComment {
-//                     QiscusCore.shared.markAsRead(roomId: roomId, commentId: lastComment.id)
+//                     QiscusCoreAPI.shared.markAsRead(roomId: roomId, commentId: lastComment.id)
 //                }
 //
 //                self.comments = self.groupingComments(_comments)
@@ -198,13 +198,13 @@ class UIChatPresenter: UIChatUserInteraction {
     
     func isTyping(_ value: Bool) {
 //        if let r = self.room {
-//            QiscusCore.shared.publishTyping(roomID: r.id, isTyping: value)
+//            QiscusCoreAPI.shared.publishTyping(roomID: r.id, isTyping: value)
 //        }
     }
     
     func sendMessage(withComment comment: CommentModel, onSuccess: @escaping (CommentModel) -> Void, onError: @escaping (String) -> Void) {
         addNewCommentUI(comment, isIncoming: false)
-//        QiscusCore.shared.sendMessage(message: comment, onSuccess: { [weak self] (comment) in
+//        QiscusCoreAPI.shared.sendMessage(message: comment, onSuccess: { [weak self] (comment) in
 //            self?.didComment(comment: comment, changeStatus: comment.status)
 //            onSuccess(comment)
 //        }) { (error) in
@@ -233,7 +233,7 @@ class UIChatPresenter: UIChatUserInteraction {
         }
        
         addNewCommentUI(message, isIncoming: false)
-        QiscusCore.shared.sendMessage(message: message, onSuccess:{ [weak self] (comment) in
+        QiscusCoreAPI.shared.sendMessage(message: message, onSuccess:{ [weak self] (comment) in
             self?.didComment(comment: comment, changeStatus: comment.status)
         }) { (error) in
             //
@@ -265,7 +265,7 @@ class UIChatPresenter: UIChatUserInteraction {
         
         // choose uidelegate
         if isIncoming {
-//            QiscusCore.shared.markAsRead(roomId: message.roomId, commentId: message.id)
+//            QiscusCoreAPI.shared.markAsRead(roomId: message.roomId, commentId: message.id)
             self.viewPresenter?.onGotNewComment(newSection: section)
         }else {
             self.viewPresenter?.onSendingComment(comment: message, newSection: section)
@@ -350,7 +350,7 @@ extension UIChatPresenter : QiscusCoreRoomDelegate {
     }
     
     func onUserTyping(userId : String, roomId : String, typing: Bool){
-//        if let user = QiscusCore.database.member.find(byUserId : userId){
+//        if let user = QiscusCoreAPI.database.member.find(byUserId : userId){
 //            self.viewPresenter?.onUser(name: user.username, typing: typing)
 //        }
     }

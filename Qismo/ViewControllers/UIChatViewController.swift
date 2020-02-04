@@ -721,7 +721,7 @@ extension UIChatViewController : UIChatInputDelegate {
 //// MARK: Handle Cell Menu
 extension UIChatViewController : UIBaseChatCellDelegate {
     func didTap(delete comment: CommentModel) {
-        QiscusCore.shared.deleteMessages(messageUniqueIds: [comment.uniqId], onSuccess: { (commentsModel) in
+        QiscusCoreAPI.shared.deleteMessages(messageUniqueIds: [comment.uniqId], onSuccess: { (commentsModel) in
             print("success delete comment for everyone")
         }) { (error) in
             print("failed delete comment for everyone")

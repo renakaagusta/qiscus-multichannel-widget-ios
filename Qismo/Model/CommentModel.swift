@@ -81,7 +81,7 @@ extension CommentModel {
 
     func isMyComment() -> Bool {
         // change this later when user savevd on presisstance storage
-        if let user = QiscusCore.getProfile() {
+        if let user = QiscusCoreAPI.getProfile() {
             return userEmail == user.email
         }else {
             return false
@@ -157,7 +157,7 @@ extension CommentModel {
     //Todo search comment from local
     internal class func comments(searchQuery: String, onSuccess:@escaping (([CommentModel])->Void), onFailed: @escaping ((String)->Void)){
         
-        let comments = QiscusCore.database.comment.all().filter({ (comment) -> Bool in
+        let comments = QiscusCoreAPI.database.comment.all().filter({ (comment) -> Bool in
             return comment.message.lowercased().contains(searchQuery.lowercased())
         })
         
@@ -195,7 +195,7 @@ extension CommentModel {
     ///   - completion: Response Comments your deleted
     func deleteMessage(uniqueIDs id: [String], onSuccess:@escaping ([CommentModel])->Void, onError:@escaping (String)->Void) {
        
-        QiscusCore.shared.deleteMessage(uniqueIDs: id, onSuccess: { (commentsModel) in
+        QiscusCoreAPI.shared.deleteMessage(uniqueIDs: id, onSuccess: { (commentsModel) in
             onSuccess(commentsModel)
         }) { (error) in
             onError(error.message)

@@ -57,7 +57,7 @@ class QiscusUploaderVC: UIViewController, UIScrollViewDelegate,UITextViewDelegat
             file.data = data!
             file.name = fileName!
             
-//            QiscusCore.shared.upload(file: file, onSuccess: { (file) in
+//            QiscusCoreAPI.shared.upload(file: file, onSuccess: { (file) in
 //                self.sendButton.isEnabled = true
 //                self.sendButton.isHidden = false
 //                self.hiddenProgress()
