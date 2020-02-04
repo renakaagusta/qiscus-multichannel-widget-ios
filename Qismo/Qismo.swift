@@ -40,18 +40,18 @@ public class Qismo {
     }
     
     public func initiateChat(userId: String, username: String, callback: @escaping (UIViewController) -> Void)  {
-        let param = [
-            "app_id"    : manager.appID,
-            "user_id"   : userId,
-            "username"  : username,
-            "nonce"     : ""
-        ]
-        
-        let url = "https://multichannel.qiscus.com/api/v1/qiscus/initiate_chat"
-        let req = Alamofire.request(URL(string: url)!, method: .post, parameters: param)
-            .responseJSON { json in
-                
-            }
+//        let param = [
+//            "app_id"    : manager.appID,
+//            "user_id"   : userId,
+//            "username"  : username,
+//            "nonce"     : ""
+//        ]
+//
+//        let url = "https://multichannel.qiscus.com/api/v1/qiscus/initiate_chat"
+//        let req = Alamofire.request(URL(string: url)!, method: .post, parameters: param)
+//            .responseJSON { json in
+//                
+//            }
         callback(UIChatViewController())
     }
     

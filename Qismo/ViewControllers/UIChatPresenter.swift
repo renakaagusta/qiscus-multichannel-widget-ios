@@ -6,8 +6,9 @@
 //
 
 import Foundation
-import QiscusCore
+import QiscusCoreAPI
 import AlamofireImage
+import SwiftyJSON
 
 protocol UIChatUserInteraction {
     func sendMessage(withText text: String)
@@ -48,7 +49,6 @@ class UIChatPresenter: UIChatUserInteraction {
     func attachView(view : UIChatViewDelegate){
         viewPresenter = view
         if let room = self.room {
-            room.delegate = self
             self.loadRoom()
             self.loadComments(withID: room.id)
             viewPresenter?.onLoadRoomFinished(roomName: room.name, roomAvatarURL: room.avatarUrl)
@@ -71,52 +71,52 @@ class UIChatPresenter: UIChatUserInteraction {
     }
     
     func loadRoom(withId roomId: String) {
-        QiscusCore.shared.getChatRoomWithMessages(roomId: roomId, onSuccess: { [weak self] (room,comments) in
-            guard let instance = self else { return }
-            instance.room = room
-            instance.room?.delegate = self
-            QiscusCore.shared.subscribeChatRoom(room)
-            if comments.isEmpty {
-                instance.viewPresenter?.onLoadMessageFailed(message: "no message")
-                return
-            }
-            instance.loadComments(withID: room.id)
-        }) { [weak self] (error) in
-            guard let instance = self else { return }
-            instance.viewPresenter?.onLoadMessageFailed(message: error.message)
-        }
+//        QiscusCore.shared.getChatRoomWithMessages(roomId: roomId, onSuccess: { [weak self] (room,comments) in
+//            guard let instance = self else { return }
+//            instance.room = room
+//            instance.room?.delegate = self
+//            QiscusCore.shared.subscribeChatRoom(room)
+//            if comments.isEmpty {
+//                instance.viewPresenter?.onLoadMessageFailed(message: "no message")
+//                return
+//            }
+//            instance.loadComments(withID: room.id)
+//        }) { [weak self] (error) in
+//            guard let instance = self else { return }
+//            instance.viewPresenter?.onLoadMessageFailed(message: error.message)
+//        }
     }
     
     /// Update room
     func loadRoom() {
         guard let _room = self.room else { return }
-        QiscusCore.shared.getChatRoomWithMessages(roomId: _room.id, onSuccess: { [weak self] (room,comments) in
-            guard let instance = self else { return }
-            if comments.isEmpty {
-                instance.viewPresenter?.onLoadMessageFailed(message: "no message")
-                return
-            }
-            instance.loadComments(withID: room.id)
-        }) { [weak self] (error) in
-            guard let instance = self else { return }
-            instance.viewPresenter?.onLoadMessageFailed(message: error.message)
-        }
+//        QiscusCore.shared.getChatRoomWithMessages(roomId: _room.id, onSuccess: { [weak self] (room,comments) in
+//            guard let instance = self else { return }
+//            if comments.isEmpty {
+//                instance.viewPresenter?.onLoadMessageFailed(message: "no message")
+//                return
+//            }
+//            instance.loadComments(withID: room.id)
+//        }) { [weak self] (error) in
+//            guard let instance = self else { return }
+//            instance.viewPresenter?.onLoadMessageFailed(message: error.message)
+//        }
     }
     
     func loadComments(withID roomId: String) {
-        if let room = QiscusCore.database.room.find(id: roomId){
-            // load local
-            if let _comments = QiscusCore.database.comment.find(roomId: roomId) {
-                guard let lastComment = _comments.last else { return }
-                // read comment
-                if let lastComment = room.lastComment {
-                     QiscusCore.shared.markAsRead(roomId: roomId, commentId: lastComment.id)
-                }
-               
-                self.comments = self.groupingComments(_comments)
-                self.viewPresenter?.onLoadMessageFinished()
-            }
-        }
+//        if let room = QiscusCore.database.room.find(id: roomId){
+//            // load local
+//            if let _comments = QiscusCore.database.comment.find(roomId: roomId) {
+//                guard let lastComment = _comments.last else { return }
+//                // read comment
+//                if let lastComment = room.lastComment {
+//                     QiscusCore.shared.markAsRead(roomId: roomId, commentId: lastComment.id)
+//                }
+//
+//                self.comments = self.groupingComments(_comments)
+//                self.viewPresenter?.onLoadMessageFinished()
+//            }
+//        }
         
     }
     
@@ -143,7 +143,7 @@ class UIChatPresenter: UIChatUserInteraction {
                 
                 // update lastIdToLoad value
                 instance.lastIdToLoad = lastComment.id
-                 QiscusCore.shared.getPreviousMessagesById(roomID: roomId,limit: 10,messageId: lastCommentId, onSuccess: { (comments) in
+                 QiscusCoreAPI.shared.getPreviousMessagesById(roomID: roomId,limit: 10,messageId: lastCommentId, onSuccess: { (comments) in
                     
                     // notify the dispatch group that the current process is complete and able to continue to the next load more process
                     instance.loadMoreDispatchGroup.leave()
@@ -197,25 +197,35 @@ class UIChatPresenter: UIChatUserInteraction {
     }
     
     func isTyping(_ value: Bool) {
-        if let r = self.room {
-            QiscusCore.shared.publishTyping(roomID: r.id, isTyping: value)
-        }
+//        if let r = self.room {
+//            QiscusCore.shared.publishTyping(roomID: r.id, isTyping: value)
+//        }
     }
     
     func sendMessage(withComment comment: CommentModel, onSuccess: @escaping (CommentModel) -> Void, onError: @escaping (String) -> Void) {
         addNewCommentUI(comment, isIncoming: false)
-        QiscusCore.shared.sendMessage(message: comment, onSuccess: { [weak self] (comment) in
-            self?.didComment(comment: comment, changeStatus: comment.status)
-            onSuccess(comment)
-        }) { (error) in
-            onError(error.message)
-        }
+//        QiscusCore.shared.sendMessage(message: comment, onSuccess: { [weak self] (comment) in
+//            self?.didComment(comment: comment, changeStatus: comment.status)
+//            onSuccess(comment)
+//        }) { (error) in
+//            onError(error.message)
+//        }
     }
     
     func sendMessage(withText text: String) {
         // create object comment
         // MARK: TODO improve object generator
-        let message = CommentModel()
+        
+        var userJson : JSON = [
+            "avatar_url"    : "",
+            "email"         : "",
+            "id_str"        : "id_str",
+            "token"         : "token",
+            "username"      : "taufik",
+            "extras"        : "extras"
+        ]
+        let user = UserModel(json: userJson)
+        let message = CommentModel(user)
         message.message = text
         message.type    = "text"
         if let r = self.room {
@@ -255,7 +265,7 @@ class UIChatPresenter: UIChatUserInteraction {
         
         // choose uidelegate
         if isIncoming {
-            QiscusCore.shared.markAsRead(roomId: message.roomId, commentId: message.id)
+//            QiscusCore.shared.markAsRead(roomId: message.roomId, commentId: message.id)
             self.viewPresenter?.onGotNewComment(newSection: section)
         }else {
             self.viewPresenter?.onSendingComment(comment: message, newSection: section)
@@ -340,20 +350,9 @@ extension UIChatPresenter : QiscusCoreRoomDelegate {
     }
     
     func onUserTyping(userId : String, roomId : String, typing: Bool){
-        if let user = QiscusCore.database.member.find(byUserId : userId){
-            self.viewPresenter?.onUser(name: user.username, typing: typing)
-        }
-    }
-    
-    func onUserOnlinePresence(userId: String, isOnline: Bool, lastSeen: Date){
-        if let room = self.room {
-            if room.type != .group {
-                let message = lastSeen.timeAgoSinceDate(numericDates: false)
-                if let user = QiscusCore.database.member.find(byUserId : userId){
-                    self.viewPresenter?.onUser(name: user.username, isOnline: isOnline, message: message)
-                }
-            }
-        }
+//        if let user = QiscusCore.database.member.find(byUserId : userId){
+//            self.viewPresenter?.onUser(name: user.username, typing: typing)
+//        }
     }
     
     //this func was deprecated

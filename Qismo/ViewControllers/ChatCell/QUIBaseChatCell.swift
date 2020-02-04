@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import QiscusCore
+import QiscusCoreAPI
 
 class enableMenuConfig : NSObject {
     override init() {}

@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import QiscusCore
+import QiscusCoreAPI
 
 // Blueprint method
 protocol UIChatInputAction {

@@ -9,7 +9,7 @@
 import UIKit
 import Photos
 import MobileCoreServices
-import QiscusCore
+import QiscusCoreAPI
 import SwiftyJSON
 
 protocol CustomChatInputDelegate {

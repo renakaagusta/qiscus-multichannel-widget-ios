@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import QiscusCore
+import QiscusCoreAPI
 
 class EmptyCell: UIBaseChatCell {
 

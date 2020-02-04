@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import QiscusCore
+import QiscusCoreAPI
 
 class UIChatNavigation: UIView {
     var contentsView            : UIView!

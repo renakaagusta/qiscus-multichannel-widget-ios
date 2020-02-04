@@ -9,7 +9,7 @@
 import UIKit
 import Photos
 import MobileCoreServices
-import QiscusCore
+import QiscusCoreAPI
 
 enum QUploaderType {
     case image
@@ -57,42 +57,42 @@ class QiscusUploaderVC: UIViewController, UIScrollViewDelegate,UITextViewDelegat
             file.data = data!
             file.name = fileName!
             
-            QiscusCore.shared.upload(file: file, onSuccess: { (file) in
-                self.sendButton.isEnabled = true
-                self.sendButton.isHidden = false
-                self.hiddenProgress()
-                
-                let message = CommentModel()
-                message.type = "custom"
-                self.content = [
-                    "caption"   : "",
-                    "file_name" : file.name,
-                    "url"       : file.url.absoluteString
-                ]
-                message.payload = [
-                    "url"       : file.url.absoluteString,
-                    "file_name" : file.name,
-                    "size"      : file.size,
-                    "caption"   : "",
-                    "content"   : self.content,
-                    "type"      : "image"
-                ]
-                
-                message.message = "Send Image"
-                self.imageData.append(message)
-            }, onError: { (error) in
-                //error
-            }, progressListener: { (progress) in
-                print("upload progress: \(progress)")
-                self.showProgress()
-                self.labelProgress.text = "\(Int(progress * 100)) %"
-                
-                let newHeight = progress * self.maxProgressHeight
-                self.heightProgressViewCons.constant = CGFloat(newHeight)
-                UIView.animate(withDuration: 0.65, animations: {
-                    self.progressView.layoutIfNeeded()
-                })
-            })
+//            QiscusCore.shared.upload(file: file, onSuccess: { (file) in
+//                self.sendButton.isEnabled = true
+//                self.sendButton.isHidden = false
+//                self.hiddenProgress()
+//
+//                let message = CommentModel()
+//                message.type = "custom"
+//                self.content = [
+//                    "caption"   : "",
+//                    "file_name" : file.name,
+//                    "url"       : file.url.absoluteString
+//                ]
+//                message.payload = [
+//                    "url"       : file.url.absoluteString,
+//                    "file_name" : file.name,
+//                    "size"      : file.size,
+//                    "caption"   : "",
+//                    "content"   : self.content,
+//                    "type"      : "image"
+//                ]
+//
+//                message.message = "Send Image"
+//                self.imageData.append(message)
+//            }, onError: { (error) in
+//                //error
+//            }, progressListener: { (progress) in
+//                print("upload progress: \(progress)")
+//                self.showProgress()
+//                self.labelProgress.text = "\(Int(progress * 100)) %"
+//
+//                let newHeight = progress * self.maxProgressHeight
+//                self.heightProgressViewCons.constant = CGFloat(newHeight)
+//                UIView.animate(withDuration: 0.65, animations: {
+//                    self.progressView.layoutIfNeeded()
+//                })
+//            })
             
         }
         
