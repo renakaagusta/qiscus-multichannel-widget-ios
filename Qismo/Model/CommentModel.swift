@@ -154,20 +154,6 @@ extension CommentModel {
         
     }
     
-    //Todo search comment from local
-    internal class func comments(searchQuery: String, onSuccess:@escaping (([CommentModel])->Void), onFailed: @escaping ((String)->Void)){
-        
-        let comments = QiscusCoreAPI.database.comment.all().filter({ (comment) -> Bool in
-            return comment.message.lowercased().contains(searchQuery.lowercased())
-        })
-        
-        if(comments.count == 0){
-            onFailed("Comment not found")
-        }else{
-            onSuccess(comments as! [CommentModel])
-        }
-    }
-    
     func encodeDictionary()->[AnyHashable : Any]{
         var data = [AnyHashable : Any]()
         
@@ -187,18 +173,4 @@ extension CommentModel {
         return data
     }
     
-    /// Delete message by id
-    ///
-    /// - Parameters:
-    ///   - uniqueID: comment unique id
-    ///   - type: forMe or ForEveryone
-    ///   - completion: Response Comments your deleted
-    func deleteMessage(uniqueIDs id: [String], onSuccess:@escaping ([CommentModel])->Void, onError:@escaping (String)->Void) {
-       
-        QiscusCoreAPI.shared.deleteMessage(uniqueIDs: id, onSuccess: { (commentsModel) in
-            onSuccess(commentsModel)
-        }) { (error) in
-            onError(error.message)
-        }
-    }
 }

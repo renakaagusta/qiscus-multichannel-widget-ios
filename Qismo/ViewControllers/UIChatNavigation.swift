@@ -79,11 +79,6 @@ class UIChatNavigation: UIView {
     func present(room: RoomModel) {
         // title value
         //always check room localDB
-        if let room = QiscusCoreAPI.database.room.find(id: room.id){
-            self.labelTitle.text = "Order Taxi"
-//            self.imageViewAvatar.af_setImage(withURL: room.avatarUrl ?? URL(string: "http://")!)
-            self.labelSubtitle.text = "Bluebird • \(room.name)"
-        }
         
         //load from rest
         if room.type == .group {
