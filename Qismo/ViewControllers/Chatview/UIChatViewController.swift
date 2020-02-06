@@ -482,6 +482,7 @@ extension UIChatViewController: UIChatViewDelegate {
     }
     
     func onSendingComment(comment: CommentModel, newSection: Bool) {
+        self.emptyMessageView.alpha = 0
         if newSection {
             self.tableViewConversation.beginUpdates()
             self.tableViewConversation.insertSections(IndexSet(integer: 0), with: .left)
