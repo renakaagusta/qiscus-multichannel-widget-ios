@@ -231,7 +231,7 @@ class UIChatViewController: UIViewController {
         let backIcon = UIImageView()
         backIcon.contentMode = .scaleAspectFit
         
-        let image = UIImage(named: "back", in: Qismo.bundle, compatibleWith: nil)?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
+        let image = UIImage(named: "ic_arrow_back", in: Qismo.bundle, compatibleWith: nil)?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
         backIcon.image = image
         backIcon.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         backIcon.contentMode = .scaleAspectFit
