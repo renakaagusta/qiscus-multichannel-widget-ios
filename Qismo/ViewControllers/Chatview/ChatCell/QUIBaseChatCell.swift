@@ -13,8 +13,7 @@ class enableMenuConfig : NSObject {
 }
 
 protocol UIBaseChatCellDelegate {
-    //qismo cant delete msg
-//    func didTap(delete comment: CommentModel)
+    func didTap(delete comment: CommentModel)
 }
 
 class UIBaseChatCell: UITableViewCell {
@@ -86,10 +85,12 @@ extension UIBaseChatCell {
     
     func setMenu() {
         
+        let delete = UIMenuItem(title: "Delete", action: #selector(deleteComment(_:)))
+        
         var menuItems: [UIMenuItem] = [UIMenuItem]()
         if let myComment = self.comment?.isMyComment() {
             if(myComment){
-                
+                menuItems.append(delete)
                 UIMenuController.shared.menuItems = menuItems
             }else{
                 //UIMenuController.shared.menuItems = [reply,share,forwardMessage,deleteForMe]
@@ -101,6 +102,10 @@ extension UIBaseChatCell {
         
     }
     
+    @objc func deleteComment(_ send:AnyObject){
+        guard let _comment = self.comment else { return }
+        self.cellMenu?.didTap(delete: _comment)
+    }
 }
 
 extension Array {
@@ -110,6 +115,3 @@ extension Array {
         return self[index]
     }
 }
-
-
-

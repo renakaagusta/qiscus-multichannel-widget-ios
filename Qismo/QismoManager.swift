@@ -10,6 +10,7 @@ import Foundation
 class QismoManager {
     
     static let shared : QismoManager = QismoManager()
+    
     var appID: String = ""
     private var userID : String = ""
     private var username : String = ""

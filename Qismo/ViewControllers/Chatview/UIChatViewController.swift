@@ -46,6 +46,12 @@ class DateHeaderLabel: UILabel {
 
 class UIChatViewController: UIViewController {
     
+    let template = ["hallo",
+                    "apakah sesuai peta?",
+                    "ok",
+                    "saya sedang menuju kesana",
+                    "mohon di tunggu" ]
+    
     public init() {
         super.init(nibName: "UIChatViewController", bundle: Qismo.bundle)
     }
@@ -177,7 +183,19 @@ class UIChatViewController: UIViewController {
         self.setupTableView()
         self.chatInput.chatInputDelegate = self
         self.setupInputBar(self.chatInput)
+//        self.setupTemplate()
     }
+    
+//    private func setupTemplate() {
+//        for temp in template {
+//            let btn = MyButton()
+//            btn.setTitle(temp, for: .normal)
+//            btn.titleLabel?.font = .systemFont(ofSize: 12)
+//            btn.setTitleColor(ColorConfiguration.baseColor, for: .normal)
+//            btn.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+//            self.stackViewChat.addArrangedSubview(btn)
+//        }
+//    }
     
     @objc func buttonAction(sender: UIButton!) {
         guard let msg = sender.titleLabel?.text else { return }
@@ -269,8 +287,7 @@ class UIChatViewController: UIViewController {
          self.registerClass(nib: UINib(nibName: "QFileLeftCell", bundle:Qismo.bundle), forMessageCellWithReuseIdentifier: "qFileLeftCell")
         self.registerClass(nib: UINib(nibName: "QImagesLeftCell", bundle:Qismo.bundle), forMessageCellWithReuseIdentifier: "qImagesLeftCell")
         self.registerClass(nib: UINib(nibName: "QLocationLeftViewCell", bundle:Qismo.bundle), forMessageCellWithReuseIdentifier: "qLocationLeftCell")
-        self.registerClass(nib: UINib(nibName: "QLocationRightCell", bundle:Qismo
-            .bundle), forMessageCellWithReuseIdentifier: "qLocationRightCell")
+        self.registerClass(nib: UINib(nibName: "QLocationRightCell", bundle:Qismo.bundle), forMessageCellWithReuseIdentifier: "qLocationRightCell")
         self.registerClass(nib: UINib(nibName: "QFileLeftCell", bundle:Qismo.bundle), forMessageCellWithReuseIdentifier: "qFileLeftCell")
         self.registerClass(nib: UINib(nibName: "QFileRightCell", bundle:Qismo.bundle), forMessageCellWithReuseIdentifier: "qFileRightCell")
         self.registerClass(nib: UINib(nibName: "EmptyCell", bundle:Qismo.bundle), forMessageCellWithReuseIdentifier: "emptyCell")
@@ -367,7 +384,7 @@ class UIChatViewController: UIViewController {
                 cell.cellMenu = self
                 return cell
             }
-//        } else if  message.type == "file_attachment" {
+//        }else if  message.type == "file_attachment" {
 //            guard let payload = message.payload else {
 //                    let cell = tableView.dequeueReusableCell(withIdentifier: "emptyCell", for: indexPath) as! EmptyCell
 //                    return cell
@@ -441,7 +458,7 @@ class UIChatViewController: UIViewController {
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "emptyCell", for: indexPath) as! EmptyCell
             return cell
-        } 
+        }
     }
 }
 
@@ -634,15 +651,15 @@ extension UIChatViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, shouldShowMenuForRowAt indexPath: IndexPath) -> Bool {
         return true
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         // get mesage at indexpath
         let comment = self.presenter.getMessage(atIndexPath: indexPath)
         self.chatDelegate?.uiChat(viewController: self, didSelectMessage: comment)
     }
-    
-    
+
+
     func tableView(_ tableView: UITableView, canPerformAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
         let comment = self.presenter.getMessage(atIndexPath: indexPath)
         if let response = self.chatDelegate?.uiChat(viewController: self, canPerformAction: action, forRowAtmessage: comment, withSender: sender) {
@@ -651,12 +668,12 @@ extension UIChatViewController: UITableViewDelegate {
             return false
         }
     }
-    
+
     func tableView(_ tableView: UITableView, performAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) {
         let comment = self.presenter.getMessage(atIndexPath: indexPath)
         self.chatDelegate?.uiChat(viewController: self, performAction: action, forRowAt: comment, withSender: sender)
     }
-    
+
 }
 
 extension UIChatViewController : UIChatView {
@@ -715,5 +732,17 @@ extension UIChatViewController : UIChatInputDelegate {
             self.presenter.isTyping(false)
             onError(error)
         }
+    }
+}
+
+//// MARK: Handle Cell Menu
+//// MARK: Handle Cell Menu
+extension UIChatViewController : UIBaseChatCellDelegate {
+    func didTap(delete comment: CommentModel) {
+//        QiscusCore.shared.deleteMessages(messageUniqueIds: [comment.uniqId], onSuccess: { (commentsModel) in
+//            print("success delete comment for everyone")
+//        }) { (error) in
+//            print("failed delete comment for everyone")
+//        }
     }
 }

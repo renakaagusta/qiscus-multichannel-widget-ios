@@ -421,71 +421,71 @@ extension UIChatViewController: UIDocumentPickerDelegate{
                                             file.data = data
                                             file.name = fileName
                                             
-                                            QiscusCoreAPI.shared.upload(file: file, onSuccess: { (file) in
-                                                self.getProgressBarHeight().constant = 0.0
-                                                let message = CommentModel()
-                                                message.type = "custom"
-                                                message.payload = [
-                                                    "url"       : file.url.absoluteString,
-                                                    "file_name" : file.name,
-                                                    "size"      : file.size,
-                                                    "caption"   : "",
-                                                ]
-                                                message.message = "Send Attachment"
-                                                self.send(message: message, onSuccess: { (comment) in
-                                                    //success
-                                                }, onError: { (error) in
-                                                    //error
-                                                    self.getProgressBarHeight().constant = 0
-                                                })
-                                            }, onError: { (error) in
-                                                self.getProgressBarHeight().constant = 0
-                                            }, progressListener: { (progress) in
-                                                print("upload progress :\(progress)")
-                                                self.getProgressBarHeight().constant = 2
-                                                self.getProgressBar().progress = Float(progress)
-                                                if(progress == 1){
-                                                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                                                        self.getProgressBarHeight().constant = 2
-                                                        self.getProgressBar().progress = 0.0
-                                                    }
-                                                }
-                                            })
+//                                            QiscusCoreAPI.shared.upload(file: file, onSuccess: { (file) in
+//                                                self.getProgressBarHeight().constant = 0.0
+//                                                let message = CommentModel()
+//                                                message.type = "custom"
+//                                                message.payload = [
+//                                                    "url"       : file.url.absoluteString,
+//                                                    "file_name" : file.name,
+//                                                    "size"      : file.size,
+//                                                    "caption"   : "",
+//                                                ]
+//                                                message.message = "Send Attachment"
+//                                                self.send(message: message, onSuccess: { (comment) in
+//                                                    //success
+//                                                }, onError: { (error) in
+//                                                    //error
+//                                                    self.getProgressBarHeight().constant = 0
+//                                                })
+//                                            }, onError: { (error) in
+//                                                self.getProgressBarHeight().constant = 0
+//                                            }, progressListener: { (progress) in
+//                                                print("upload progress :\(progress)")
+//                                                self.getProgressBarHeight().constant = 2
+//                                                self.getProgressBar().progress = Float(progress)
+//                                                if(progress == 1){
+//                                                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+//                                                        self.getProgressBarHeight().constant = 2
+//                                                        self.getProgressBar().progress = 0.0
+//                                                    }
+//                                                }
+//                                            })
                                             
                     },
                                          cancelAction: {
                                             
                     })
                 }else{
-                    QiscusCoreAPI.shared.upload(data: data, filename: fileName, onSuccess: { (file) in
-                        self.getProgressBarHeight().constant = 0.0
-                        let message = CommentModel()
-                        message.type = "file_attachment"
-                        message.payload = [
-                            "url"       : file.url.absoluteString,
-                            "file_name" : file.name,
-                            "size"      : file.size,
-                            "caption"   : ""
-                        ]
-                        message.message = "Send Attachment"
-                        self.send(message: message, onSuccess: { (comment) in
-                            //success
-                        }, onError: { (error) in
-                            self.getProgressBarHeight().constant = 0.0
-                        })
-                    }, onError: { (error) in
-                        self.getProgressBarHeight().constant = 0.0
-                    }) { (progress) in
-                        print("upload progress: \(progress)")
-                        self.getProgressBar().progress = Float(progress)
-                        self.getProgressBarHeight().constant = 2
-                        if(progress == 1){
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                                self.getProgressBarHeight().constant = 0
-                                self.getProgressBar().progress = 0.0
-                            }
-                        }
-                    }
+//                    QiscusCoreAPI.shared.upload(data: data, filename: fileName, onSuccess: { (file) in
+//                        self.getProgressBarHeight().constant = 0.0
+//                        let message = CommentModel()
+//                        message.type = "file_attachment"
+//                        message.payload = [
+//                            "url"       : file.url.absoluteString,
+//                            "file_name" : file.name,
+//                            "size"      : file.size,
+//                            "caption"   : ""
+//                        ]
+//                        message.message = "Send Attachment"
+//                        self.send(message: message, onSuccess: { (comment) in
+//                            //success
+//                        }, onError: { (error) in
+//                            self.getProgressBarHeight().constant = 0.0
+//                        })
+//                    }, onError: { (error) in
+//                        self.getProgressBarHeight().constant = 0.0
+//                    }) { (progress) in
+//                        print("upload progress: \(progress)")
+//                        self.getProgressBar().progress = Float(progress)
+//                        self.getProgressBarHeight().constant = 2
+//                        if(progress == 1){
+//                            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+//                                self.getProgressBarHeight().constant = 0
+//                                self.getProgressBar().progress = 0.0
+//                            }
+//                        }
+//                    }
                 }
                 
             }catch _{
@@ -634,26 +634,26 @@ extension UIChatViewController : UIImagePickerControllerDelegate, UINavigationCo
                                         let file = FileUploadModel()
                                         file.data = mediaData!
                                         file.name = fileName
-                                        QiscusCoreAPI.shared.upload(file: file, onSuccess: { (file) in
-                                            let message = CommentModel()
-                                            message.type = "file_attachment"
-                                            message.payload = [
-                                                "url"       : file.url.absoluteString,
-                                                "file_name" : file.name,
-                                                "size"      : file.size,
-                                                "caption"   : ""
-                                            ]
-                                            message.message = "Send Attachment"
-                                            self.send(message: message, onSuccess: { (comment) in
-                                                //success
-                                            }, onError: { (error) in
-                                                //error
-                                            })
-                                        }, onError: { (error) in
-                                            //error
-                                        }, progressListener: { (progress) in
-                                            print("progress =\(progress)")
-                                        })
+//                                        QiscusCoreAPI.shared.upload(file: file, onSuccess: { (file) in
+//                                            let message = CommentModel()
+//                                            message.type = "file_attachment"
+//                                            message.payload = [
+//                                                "url"       : file.url.absoluteString,
+//                                                "file_name" : file.name,
+//                                                "size"      : file.size,
+//                                                "caption"   : ""
+//                                            ]
+//                                            message.message = "Send Attachment"
+//                                            self.send(message: message, onSuccess: { (comment) in
+//                                                //success
+//                                            }, onError: { (error) in
+//                                                //error
+//                                            })
+//                                        }, onError: { (error) in
+//                                            //error
+//                                        }, progressListener: { (progress) in
+//                                            print("progress =\(progress)")
+//                                        })
                                         
                 },
                                      cancelAction: {

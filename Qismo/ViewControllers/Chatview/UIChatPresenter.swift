@@ -60,9 +60,9 @@ class UIChatPresenter: UIChatUserInteraction {
     
     func detachView() {
         viewPresenter = nil
-        if let room = self.room {
-            room.delegate = nil
-        }
+//        if let room = self.room {
+//            room.delegate = nil
+//        }
     }
     
     func getMessage(atIndexPath: IndexPath) -> CommentModel {
@@ -143,52 +143,52 @@ class UIChatPresenter: UIChatUserInteraction {
                 
                 // update lastIdToLoad value
                 instance.lastIdToLoad = lastComment.id
-                 QiscusCoreAPI.shared.getPreviousMessagesById(roomID: roomId,limit: 10,messageId: lastCommentId, onSuccess: { (comments) in
-                    
-                    // notify the dispatch group that the current process is complete and able to continue to the next load more process
-                    instance.loadMoreDispatchGroup.leave()
-                    
-                    // if the loadmore from core return empty comment than it means that there are no comments left to be loaded anymore
-                    if comments.count == 0 {
-                        instance.loadMoreAvailable = false
-                    }
-                    
-                    // we group the loaded comments by date(same day) and sender [[you, you][me, me][you]]
-                    var groupedLoadedComment = instance.groupingComments(comments)
-                    
-                    // check if the first comment in the first section from the load more result has the same date then add merge first section from loaded comments with last section from existing comments
-                    if lastComment.date.reduceToMonthDayYear() == groupedLoadedComment.first?.first?.date.reduceToMonthDayYear() {
-                        // last section of existing comments
-                        guard var lastGroup = instance.comments.last else { return }
-                        
-                        // first section of loaded comments
-                        guard let firstGroupInLoadedComment = groupedLoadedComment.first else { return }
-                        
-                        // merge both of them
-                        lastGroup.append(contentsOf: firstGroupInLoadedComment)
-                        
-                        // remove last section from existing comments
-                        instance.comments.removeLast()
-                        
-                        // replace with merged comment (first section loaded comments and last section existing comment)
-                        instance.comments.append(lastGroup)
-                        
-                        // remove section that has ben merged (first section) from the loaded comments
-                        groupedLoadedComment.removeFirst()
-                    }
-                    
-                    // finaly append the loaded comment from load more to existing comments
-                    instance.comments.append(contentsOf: groupedLoadedComment)
-                    
-                    DispatchQueue.main.async {
-                        // notify the ui that loadmore has completed
-                        instance.viewPresenter?.onLoadMoreMesageFinished()
-                    }
-                }) { [weak self] (error) in
-                    if let instance = self {
-                        instance.loadMoreDispatchGroup.leave()
-                    }
-                }
+//                 QiscusCoreAPI.shared.getPreviousMessagesById(roomID: roomId,limit: 10,messageId: lastCommentId, onSuccess: { (comments) in
+//
+//                    // notify the dispatch group that the current process is complete and able to continue to the next load more process
+//                    instance.loadMoreDispatchGroup.leave()
+//
+//                    // if the loadmore from core return empty comment than it means that there are no comments left to be loaded anymore
+//                    if comments.count == 0 {
+//                        instance.loadMoreAvailable = false
+//                    }
+//
+//                    // we group the loaded comments by date(same day) and sender [[you, you][me, me][you]]
+//                    var groupedLoadedComment = instance.groupingComments(comments)
+//
+//                    // check if the first comment in the first section from the load more result has the same date then add merge first section from loaded comments with last section from existing comments
+//                    if lastComment.date.reduceToMonthDayYear() == groupedLoadedComment.first?.first?.date.reduceToMonthDayYear() {
+//                        // last section of existing comments
+//                        guard var lastGroup = instance.comments.last else { return }
+//
+//                        // first section of loaded comments
+//                        guard let firstGroupInLoadedComment = groupedLoadedComment.first else { return }
+//
+//                        // merge both of them
+//                        lastGroup.append(contentsOf: firstGroupInLoadedComment)
+//
+//                        // remove last section from existing comments
+//                        instance.comments.removeLast()
+//
+//                        // replace with merged comment (first section loaded comments and last section existing comment)
+//                        instance.comments.append(lastGroup)
+//
+//                        // remove section that has ben merged (first section) from the loaded comments
+//                        groupedLoadedComment.removeFirst()
+//                    }
+//
+//                    // finaly append the loaded comment from load more to existing comments
+//                    instance.comments.append(contentsOf: groupedLoadedComment)
+//
+//                    DispatchQueue.main.async {
+//                        // notify the ui that loadmore has completed
+//                        instance.viewPresenter?.onLoadMoreMesageFinished()
+//                    }
+//                }) { [weak self] (error) in
+//                    if let instance = self {
+//                        instance.loadMoreDispatchGroup.leave()
+//                    }
+//                }
                 
                 
                 instance.loadMoreDispatchGroup.wait()
@@ -216,16 +216,7 @@ class UIChatPresenter: UIChatUserInteraction {
         // create object comment
         // MARK: TODO improve object generator
         
-        var userJson : JSON = [
-            "avatar_url"    : "",
-            "email"         : "",
-            "id_str"        : "id_str",
-            "token"         : "token",
-            "username"      : "taufik",
-            "extras"        : "extras"
-        ]
-        let user = UserModel(json: userJson)
-        let message = CommentModel(user)
+        let message = CommentModel()
         message.message = text
         message.type    = "text"
         if let r = self.room {
@@ -233,11 +224,11 @@ class UIChatPresenter: UIChatUserInteraction {
         }
        
         addNewCommentUI(message, isIncoming: false)
-        QiscusCoreAPI.shared.sendMessage(message: message, onSuccess:{ [weak self] (comment) in
-            self?.didComment(comment: comment, changeStatus: comment.status)
-        }) { (error) in
-            //
-        }
+//        QiscusCoreAPI.shared.sendMessage(message: message, onSuccess:{ [weak self] (comment) in
+//            self?.didComment(comment: comment, changeStatus: comment.status)
+//        }) { (error) in
+//            //
+//        }
     }
     
     private func addNewCommentUI(_ message: CommentModel, isIncoming: Bool) {

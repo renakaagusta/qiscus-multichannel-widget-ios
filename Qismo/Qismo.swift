@@ -23,12 +23,16 @@ public class Qismo {
             }
         }
     }
+    var qiscus : QiscusCoreAPI!
+    var network : QismoNetworkManager!
     
     let manager : QismoManager = QismoManager.shared
     
     public init(appID: String) {
         self.manager.appID = appID
-        QiscusCoreAPI.init(withAppId: appID)
+        qiscus = QiscusCoreAPI.init(withAppId: appID)
+        self.network = QismoNetworkManager(qiscusCoreApi: qiscus)
+        
     }
     
     public func setUser(id: String, displayName: String) {
@@ -40,19 +44,23 @@ public class Qismo {
     }
     
     public func initiateChat(userId: String, username: String, callback: @escaping (UIViewController) -> Void)  {
-//        let param = [
-//            "app_id"    : manager.appID,
-//            "user_id"   : userId,
-//            "username"  : username,
-//            "nonce"     : ""
-//        ]
-//
-//        let url = "https://multichannel.qiscus.com/api/v1/qiscus/initiate_chat"
-//        let req = Alamofire.request(URL(string: url)!, method: .post, parameters: param)
-//            .responseJSON { json in
-//                
-//            }
-        callback(UIChatViewController())
+        
+        let param = [
+            "app_id"    : manager.appID,
+            "user_id"   : userId,
+            "username"  : username,
+            "nonce"     : ""
+        ]
+        
+        self.network.initiateChat(param: param, onSuccess: {
+            
+        }, onError: {
+            
+        })
+        
+        let ui = UIChatViewController()
+        callback(ui)
+        
     }
     
 }
