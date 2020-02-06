@@ -46,20 +46,13 @@ class DateHeaderLabel: UILabel {
 
 class UIChatViewController: UIViewController {
     
-    let template = ["hallo",
-                    "apakah sesuai peta?",
-                    "ok",
-                    "saya sedang menuju kesana",
-                    "mohon di tunggu" ]
-    
     public init() {
         super.init(nibName: "UIChatViewController", bundle: Qismo.bundle)
     }
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    @IBOutlet weak var stackViewChat: UIStackView!
+     
     @IBOutlet weak var tableViewConversation: UITableView!
     @IBOutlet weak var viewChatInput: UIView!
     @IBOutlet weak var constraintViewInputBottom: NSLayoutConstraint!
@@ -183,19 +176,7 @@ class UIChatViewController: UIViewController {
         self.setupTableView()
         self.chatInput.chatInputDelegate = self
         self.setupInputBar(self.chatInput)
-//        self.setupTemplate()
     }
-    
-//    private func setupTemplate() {
-//        for temp in template {
-//            let btn = MyButton()
-//            btn.setTitle(temp, for: .normal)
-//            btn.titleLabel?.font = .systemFont(ofSize: 12)
-//            btn.setTitleColor(ColorConfiguration.baseColor, for: .normal)
-//            btn.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
-//            self.stackViewChat.addArrangedSubview(btn)
-//        }
-//    }
     
     @objc func buttonAction(sender: UIButton!) {
         guard let msg = sender.titleLabel?.text else { return }
@@ -219,8 +200,6 @@ class UIChatViewController: UIViewController {
             inputchatview.bottomAnchor.constraint(equalTo: self.viewChatInput.bottomAnchor, constant: 0)
             ])
         
-        // chat template
-        self.stackViewChat.clipsToBounds = false
     }
     
     private func setupNavigationTitle(){
