@@ -42,8 +42,8 @@ class CustomChatInput: UIChatInput {
 
         self.sendButton.tintColor = ColorConfiguration.sendButtonColor
         self.attachButton.tintColor = ColorConfiguration.attachmentButtonColor
-        self.attachButton.setImage(UIImage(named: "atachment", in: Qismo.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate), for: .normal)
-        self.sendButton.setImage(UIImage(named: "send", in: Qismo.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate), for: .normal)
+        self.attachButton.setImage(UIImage(named: "ic_attachment", in: Qismo.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate), for: .normal)
+        self.sendButton.setImage(UIImage(named: "ic_send", in: Qismo.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate), for: .normal)
     }
     
     @IBAction func clickSend(_ sender: Any) {
