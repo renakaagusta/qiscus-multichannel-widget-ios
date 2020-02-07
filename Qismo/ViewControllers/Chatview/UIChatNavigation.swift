@@ -7,16 +7,16 @@
 
 import UIKit
 import QiscusCoreAPI
+import AlamofireImage
 
 class UIChatNavigation: UIView {
     var contentsView            : UIView!
     // ui component
     /// UILabel title,
+    @IBOutlet weak var ivAvatar: UIImageView!
     @IBOutlet weak var labelTitle: UILabel!
     /// UILabel subtitle
     @IBOutlet weak var labelSubtitle: UILabel!
-    /// UIImageView room avatar
-    @IBOutlet weak var imageViewAvatar: UIImageView!
     
     var room: RoomModel? {
         set {
@@ -68,12 +68,9 @@ class UIChatNavigation: UIView {
     }
     
     private func setupUI() {
-        // default ui
-        if self.imageViewAvatar != nil {
-            self.imageViewAvatar.widthAnchor.constraint(equalToConstant: 30).isActive = true
-            self.imageViewAvatar.heightAnchor.constraint(equalToConstant: 30).isActive = true
-            self.imageViewAvatar.layer.cornerRadius = self.imageViewAvatar.frame.height/2
-        }
+        let imgUrl = "https://scontent.fjog3-1.fna.fbcdn.net/v/t1.0-9/67718150_865004160518655_3293319019209162752_n.png?_nc_cat=107&_nc_ohc=Md-LoEXw_pIAX9Vscuz&_nc_ht=scontent.fjog3-1.fna&oh=a14c934c6fa692325fd56e8039da034e&oe=5ED6D758"
+        
+        self.ivAvatar.af_setImage(withURL: URL(string: imgUrl)!, filter: CircleFilter())
     }
     
     func present(room: RoomModel) {
@@ -92,9 +89,6 @@ class UIChatNavigation: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        if self.imageViewAvatar != nil {
-            self.imageViewAvatar.layer.cornerRadius = self.imageViewAvatar.frame.height/2
-        }
     }
     
 }
