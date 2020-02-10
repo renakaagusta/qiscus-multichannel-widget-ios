@@ -154,7 +154,7 @@ class UIChatViewController: UIViewController {
 //                let vc = RoomInfoVC()
 //                vc.room = room
 //                self.navigationController?.pushViewController(vc, animated: true)
-            }else{
+            } else {
                 // no action for type single
             }
         }
@@ -220,8 +220,7 @@ class UIChatViewController: UIViewController {
         
         self.chatTitleView = UIChatNavigation(frame: self.navigationController?.navigationBar.frame ?? CGRect.zero)
         self.navigationItem.titleView = chatTitleView
-        self.chatTitleView.room = room
-        
+        self.chatTitleView.room = self.room
         
         let callButton = UIBarButtonItem(image: UIImage(named: "phone", in: Qismo.bundle, compatibleWith: nil), style: .plain, target: self, action: #selector(call))
         self.navigationItem.rightBarButtonItem = callButton
@@ -514,6 +513,7 @@ extension UIChatViewController: UIChatViewDelegate {
     }
     
     func onLoadMessageFinished() {
+        self.setupUI()
         if self.presenter.comments.count == 0 {
             self.tableViewConversation.isHidden = true
             self.emptyMessageView.alpha = 1

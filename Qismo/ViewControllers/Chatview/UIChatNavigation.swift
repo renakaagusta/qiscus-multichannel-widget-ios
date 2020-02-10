@@ -68,12 +68,13 @@ class UIChatNavigation: UIView {
     }
     
     private func setupUI() {
-        let imgUrl = "https://scontent.fjog3-1.fna.fbcdn.net/v/t1.0-9/67718150_865004160518655_3293319019209162752_n.png?_nc_cat=107&_nc_ohc=Md-LoEXw_pIAX9Vscuz&_nc_ht=scontent.fjog3-1.fna&oh=a14c934c6fa692325fd56e8039da034e&oe=5ED6D758"
         
-        self.ivAvatar.af_setImage(withURL: URL(string: imgUrl)!, filter: CircleFilter())
     }
     
     func present(room: RoomModel) {
+        
+        self.ivAvatar.af_setImage(withURL: room.avatarUrl!, filter: CircleFilter())
+        
         // title value
         //always check room localDB
         

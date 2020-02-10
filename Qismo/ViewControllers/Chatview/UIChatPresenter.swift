@@ -86,16 +86,23 @@ class UIChatPresenter: UIChatUserInteraction {
 //            instance.viewPresenter?.onLoadMessageFailed(message: error.message)
 //        }
         
-        Qismo.qiscus.getChatRoom(id: roomId, onSuccess: { [weak self] (room, comments) in
-//            debugPrint(room.lastComment)
+        Qismo.qiscus.getChatRoom(id: roomId, onSuccess: { [weak self] (mRoom, comments) in
             guard let instance = self else { return }
-            instance.room = room
-            instance.loadComments(withID: room.id)
+            instance.room = mRoom
+            self?.room = mRoom
+            
+            if comments.isEmpty {
+                instance.viewPresenter?.onLoadMessageFailed(message: "no message")
+                return
+            }
+            
+            instance.loadComments(withID: mRoom.id)
             instance.comments = instance.groupingComments(comments)
             instance.viewPresenter?.onLoadMessageFinished()
             
-        }, onError: { qError in
-            
+        }, onError: { [weak self] error in
+            guard let instance = self else { return }
+            instance.viewPresenter?.onLoadMessageFailed(message: error.message)
         })
     }
     

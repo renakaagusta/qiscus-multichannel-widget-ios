@@ -80,14 +80,12 @@ import QiscusCoreAPI
 extension CommentModel {
 
     func isMyComment() -> Bool {
-        // change this later when user savevd on presisstance storage
-//        if let user = QiscusCoreAPI.getProfile() {
-//            return userEmail == user.email
-//        }else {
-//            return false
-//        }
-        
-        return true
+         //change this later when user savevd on presisstance storage
+        if let user = Qismo.qiscus.userProfile {
+            return userEmail == user.email
+        } else {
+            return false
+        }
     }
     
     func date() -> Date? {
