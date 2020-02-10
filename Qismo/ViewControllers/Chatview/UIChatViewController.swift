@@ -99,6 +99,8 @@ class UIChatViewController: UIViewController {
         }
     }
     
+    var synchTimer: Timer?
+    
     open func getProgressBar() -> UIProgressView {
         return progressBar
     }
@@ -120,10 +122,18 @@ class UIChatViewController: UIViewController {
         center.addObserver(self, selector: #selector(UIChatViewController.keyboardChange(_:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         center.addObserver(self,selector: #selector(reSubscribeRoom(_:)), name: Notification.Name(rawValue: "reSubscribeRoom"),object: nil)
         view.endEditing(true)
+        
+        //sync timer
+        synchTimer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true, block: { timer in
+            self.presenter.syncMessage() 
+        })
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        //disable timer
+        synchTimer?.invalidate()
+        
         self.presenter.detachView()
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
@@ -508,12 +518,15 @@ extension UIChatViewController: UIChatViewDelegate {
         }
     }
     
+    func onLoadRoomFinished(room: RoomModel) {
+        self.setupUI()
+    }
+    
     func onLoadMoreMesageFinished() {
         self.tableViewConversation.reloadData()
     }
     
     func onLoadMessageFinished() {
-        self.setupUI()
         if self.presenter.comments.count == 0 {
             self.tableViewConversation.isHidden = true
             self.emptyMessageView.alpha = 1

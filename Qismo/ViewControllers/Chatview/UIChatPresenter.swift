@@ -21,6 +21,7 @@ protocol UIChatUserInteraction {
 
 protocol UIChatViewDelegate {
     func onLoadRoomFinished(roomName: String, roomAvatarURL: URL?)
+    func onLoadRoomFinished(room: RoomModel)
     func onLoadMessageFinished()
     func onLoadMessageFailed(message: String)
     func onLoadMoreMesageFinished()
@@ -97,8 +98,10 @@ class UIChatPresenter: UIChatUserInteraction {
             }
             
             instance.loadComments(withID: mRoom.id)
+            instance.viewPresenter?.onLoadRoomFinished(room: mRoom)
             instance.comments = instance.groupingComments(comments)
             instance.viewPresenter?.onLoadMessageFinished()
+            self?.lastIdToLoad = String(self?.room?.id ?? "")
             
         }, onError: { [weak self] error in
             guard let instance = self else { return }
@@ -140,6 +143,29 @@ class UIChatPresenter: UIChatUserInteraction {
         
         
         
+    }
+    
+    func syncMessage() {
+        
+        if lastIdToLoad.isEmpty { return }
+        
+        Qismo.qiscus.sync(lastMessageId: lastIdToLoad, onSuccess: { [weak self] comments in
+            guard let instance = self else { return }
+            if comments.count == 0 {
+                instance.loadMoreAvailable = false
+            }
+            //MARK: need review
+            for msg in comments.reversed(){
+                instance.addNewCommentUI(msg, isIncoming: true)
+                if Int64(msg.id) ?? 0 > Int64(instance.lastIdToLoad) ?? 0 {
+                    self?.lastIdToLoad = msg.id
+                }
+            }
+            
+            instance.comments.append(comments.reversed())
+        }, onError: { error in
+            debugPrint(error.message)
+        })
     }
     
     func loadMore() {
