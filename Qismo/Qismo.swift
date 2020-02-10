@@ -23,15 +23,16 @@ public class Qismo {
             }
         }
     }
-    var qiscus : QiscusCoreAPI!
+    public static var qiscus : QiscusCoreAPI!
     var network : QismoNetworkManager!
     
     let manager : QismoManager = QismoManager.shared
+    let qiscusServer = QiscusServer(url: URL(string: "https://api.qiscus.com")!, realtimeURL: "", realtimePort: 80)
     
     public init(appID: String) {
         self.manager.appID = appID
-        qiscus = QiscusCoreAPI.init(withAppId: appID)
-        self.network = QismoNetworkManager(qiscusCoreApi: qiscus)
+        Qismo.self.qiscus = QiscusCoreAPI.init(withAppId: appID, server: self.qiscusServer)
+        self.network = QismoNetworkManager(qiscusCoreApi: Qismo.qiscus)
         
     }
     
@@ -48,18 +49,22 @@ public class Qismo {
         let param = [
             "app_id"    : manager.appID,
             "user_id"   : userId,
-            "username"  : username,
+            "name"  : username,
             "nonce"     : ""
         ]
         
-        self.network.initiateChat(param: param, onSuccess: {
-            
+        self.network.initiateChat(param: param, onSuccess: { roomId in
+            debugPrint("sukses initiate chat")
+            let ui = UIChatViewController()
+            ui.roomId = roomId
+            callback(ui)
         }, onError: {
-            
+            debugPrint("failed initiate chat")
         })
         
-        let ui = UIChatViewController()
-        callback(ui)
+//        let ui = UIChatViewController()
+//        callback(ui)
+        
         
     }
     

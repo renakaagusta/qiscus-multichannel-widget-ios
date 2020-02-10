@@ -50,7 +50,7 @@ class CustomChatInput: UIChatInput {
         guard let text = self.textView.text else {return}
         if !text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty && text != TextConfiguration.sharedInstance.textPlaceholder {
             var payload:JSON? = nil
-            let comment = CommentModel()
+            let comment = Qismo.qiscus.newMessage()
             comment.type = "text"
             comment.message = text
             self.chatInputDelegate?.sendMessage(message: comment)

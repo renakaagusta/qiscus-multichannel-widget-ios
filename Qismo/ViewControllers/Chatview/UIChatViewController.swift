@@ -180,7 +180,7 @@ class UIChatViewController: UIViewController {
     
     @objc func buttonAction(sender: UIButton!) {
         guard let msg = sender.titleLabel?.text else { return }
-        let message = CommentModel()
+        let message = Qismo.qiscus.newMessage()
         message.message = msg
         self.sendMessage(message: message)
     }
@@ -695,14 +695,14 @@ extension UIChatViewController : UIChatInputDelegate {
     
     func send(message: CommentModel,onSuccess: @escaping (CommentModel) -> Void, onError: @escaping (String) -> Void) {
         
-        if message.roomId.isEmpty{
-            if let room = self.room{
+        if message.roomId.isEmpty || message.roomId == "" {
+            if let room = self.room {
                 message.roomId = room.id
             }
         }
         
         self.presenter.sendMessage(withComment: message, onSuccess: { (comment) in
-            if(self.tableViewConversation.isHidden == true){
+            if (self.tableViewConversation.isHidden == true) {
                 self.tableViewConversation.isHidden = false
                 self.emptyMessageView.alpha = 0
             }
