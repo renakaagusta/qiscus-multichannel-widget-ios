@@ -152,17 +152,20 @@ class UIChatPresenter: UIChatUserInteraction {
         Qismo.qiscus.sync(lastMessageId: lastIdToLoad, onSuccess: { [weak self] comments in
             guard let instance = self else { return }
             if comments.count == 0 {
-                instance.loadMoreAvailable = false
+                return
             }
             //MARK: need review
             for msg in comments.reversed(){
-                instance.addNewCommentUI(msg, isIncoming: true)
+                if (instance.getIndexPath(comment: msg) == nil) {
+                    instance.addNewCommentUI(msg, isIncoming: true)
+                }
                 if Int64(msg.id) ?? 0 > Int64(instance.lastIdToLoad) ?? 0 {
                     self?.lastIdToLoad = msg.id
+                    
                 }
             }
             
-            instance.comments.append(comments.reversed())
+//            instance.comments.append(comments.reversed())
         }, onError: { error in
             debugPrint(error.message)
         })
