@@ -372,81 +372,53 @@ class UIChatViewController: UIViewController {
                 cell.cellMenu = self
                 return cell
             }
-//        }else if  message.type == "file_attachment" {
-//            guard let payload = message.payload else {
-//                    let cell = tableView.dequeueReusableCell(withIdentifier: "emptyCell", for: indexPath) as! EmptyCell
-//                    return cell
-//            }
-//
-//            if (message.isMyComment() == true){
-//                let cell = tableView.dequeueReusableCell(withIdentifier: "qTextRightCell", for: indexPath) as! QTextRightCell
-//                cell.menuConfig = menuConfig
-//                cell.cellMenu = self
-//                return cell
-//            }else{
-//                let cell = tableView.dequeueReusableCell(withIdentifier: "qTextLeftCell", for: indexPath) as! QTextLeftCell
-//                if self.room?.type == .group {
-//                    cell.colorName = colorName
-//                    cell.isPublic = true
-//                }else {
-//                    cell.isPublic = false
-//                }
-//                cell.cellMenu = self
-//                return cell
-//            }
-//        } else if message.type == "image" {
-//            guard let payload = message.payload else {
-//                    let cell = tableView.dequeueReusableCell(withIdentifier: "emptyCell", for: indexPath) as! EmptyCell
-//                    return cell
-//            }
-//
-//            if (message.isMyComment() == true){
-//                let cell = tableView.dequeueReusableCell(withIdentifier: "qImagesRightCell", for: indexPath) as! QImagesRightCell
-////                cell.menuConfig = menuConfig
-//                cell.cellMenu = self
-//                return cell
-//            } else {
-//                let cell = tableView.dequeueReusableCell(withIdentifier: "qImagesLeftCell", for: indexPath) as! QImagesLeftCell
-//
-//                cell.cellMenu = self
-//                return cell
-//            }
-//        } else if message.type == "location" {
-//            guard let payload = message.payload else {
-//                    let cell = tableView.dequeueReusableCell(withIdentifier: "emptyCell", for: indexPath) as! EmptyCell
-//                    return cell
-//            }
-//
-//            if (message.isMyComment() == true){
-//                let cell = tableView.dequeueReusableCell(withIdentifier: "qLocationRightCell", for: indexPath) as! QLocationRightCell
-////                cell.menuConfig = menuConfig
-//                cell.cellMenu = self
-//                return cell
-//            } else {
-//                let cell = tableView.dequeueReusableCell(withIdentifier: "qLocationLeftCell", for: indexPath) as! QLocationLeftViewCell
-//                cell.cellMenu = self
-//                return cell
-//            }
-//        } else if message.type == "file" {
-//            guard let payload = message.payload else {
-//                    let cell = tableView.dequeueReusableCell(withIdentifier: "emptyCell", for: indexPath) as! EmptyCell
-//                    return cell
-//            }
-//
-//            if (message.isMyComment() == true){
-//                let cell = tableView.dequeueReusableCell(withIdentifier: "qFileRightCell", for: indexPath) as! QFileRightCell
-////                cell.menuConfig = menuConfig
-//                cell.cellMenu = self
-//                return cell
-//            } else {
-//                let cell = tableView.dequeueReusableCell(withIdentifier: "qFileLeftCell", for: indexPath) as! QFileLeftCell
-//                cell.cellMenu = self
-//                return cell
-//            }
-        } else {
+        }else if  message.type == "file_attachment" {
+            guard let payload = message.payload else {
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "emptyCell", for: indexPath) as! EmptyCell
+                    return cell
+            }
+                
+            if let url = payload["url"] as? String {
+                let ext = message.fileExtension(fromURL:url)
+                if(ext.contains("jpg") || ext.contains("png") || ext.contains("heic") || ext.contains("jpeg") || ext.contains("tif") || ext.contains("gif")){
+                    if (message.isMyComment() == true){
+                        let cell = tableView.dequeueReusableCell(withIdentifier: "qImagesRightCell", for: indexPath) as! QImagesRightCell
+//                        cell.menuConfig = menuConfig
+                        cell.cellMenu = self
+                        return cell
+                    }else{
+                        let cell = tableView.dequeueReusableCell(withIdentifier: "qImagesLeftCell", for: indexPath) as! QImagesLeftCell
+//                        if self.room?.type == .group {
+//                            cell.colorName = colorName
+//                            cell.isPublic = true
+//                        }else {
+//                            cell.isPublic = false
+//                        }
+                        cell.cellMenu = self
+                        return cell
+                    }
+                }
+            } else {
+                if (message.isMyComment() == true){
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "qTextRightCell", for: indexPath) as! QTextRightCell
+                    cell.menuConfig = menuConfig
+                    cell.cellMenu = self
+                    return cell
+                }else{
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "qTextLeftCell", for: indexPath) as! QTextLeftCell
+                    if self.room?.type == .group {
+                        cell.colorName = colorName
+                        cell.isPublic = true
+                    }else {
+                        cell.isPublic = false
+                    }
+                    cell.cellMenu = self
+                    return cell
+                }
+            }
+        }
             let cell = tableView.dequeueReusableCell(withIdentifier: "emptyCell", for: indexPath) as! EmptyCell
             return cell
-        }
     }
 }
 
