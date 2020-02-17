@@ -10,6 +10,9 @@ import UIKit
 import Photos
 import MobileCoreServices
 import QiscusCoreAPI
+import Alamofire
+import AlamofireImage
+import SwiftyJSON
 
 enum QUploaderType {
     case image
@@ -57,42 +60,56 @@ class QiscusUploaderVC: UIViewController, UIScrollViewDelegate,UITextViewDelegat
             file.data = data!
             file.name = fileName!
             
-//            QiscusCoreAPI.shared.upload(file: file, onSuccess: { (file) in
-//                self.sendButton.isEnabled = true
-//                self.sendButton.isHidden = false
-//                self.hiddenProgress()
-//
-//                let message = CommentModel()
-//                message.type = "custom"
-//                self.content = [
-//                    "caption"   : "",
-//                    "file_name" : file.name,
-//                    "url"       : file.url.absoluteString
-//                ]
-//                message.payload = [
-//                    "url"       : file.url.absoluteString,
-//                    "file_name" : file.name,
-//                    "size"      : file.size,
-//                    "caption"   : "",
-//                    "content"   : self.content,
-//                    "type"      : "image"
-//                ]
-//
-//                message.message = "Send Image"
-//                self.imageData.append(message)
-//            }, onError: { (error) in
-//                //error
-//            }, progressListener: { (progress) in
-//                print("upload progress: \(progress)")
-//                self.showProgress()
-//                self.labelProgress.text = "\(Int(progress * 100)) %"
-//
-//                let newHeight = progress * self.maxProgressHeight
-//                self.heightProgressViewCons.constant = CGFloat(newHeight)
-//                UIView.animate(withDuration: 0.65, animations: {
-//                    self.progressView.layoutIfNeeded()
-//                })
-//            })
+            guard let token = Qismo.qiscus.userProfile?.token else { return }
+            
+            let header: HTTPHeaders = [
+                "Content-Type": "application/json",
+                "QISCUS_SDK_APP_ID": "\(Qismo.qiscus.config.appId)",
+                "QISCUS_SDK_TOKEN" : "\(token)"
+            ]
+            Alamofire.upload(multipartFormData: { multipartFormData in
+                multipartFormData.append(self.data!, withName: "file", fileName: self.fileName!, mimeType: "image/jpg")
+            }, to: "https://api.qiscus.com/api/v2/mobile/upload", method: .post, headers : header,
+                   encodingCompletion: { encodingResult in
+                   switch encodingResult {
+                   case .success(let upload, _, _):
+                       upload.responseJSON { response in
+
+                        guard let jsonResponse = response.result.value as? [String: Any] else {return}
+                        print(jsonResponse)
+                        
+                        let image = JSON(jsonResponse)
+
+                        self.sendButton.isEnabled = true
+                        self.sendButton.isHidden = false
+                        self.hiddenProgress()
+                        
+                        let message = Qismo.qiscus.newMessage()
+                        message.type = "file_attachment"
+                        message.payload = [
+                            "url"       : image["results"]["file"]["url"].stringValue,
+                            "file_name" : file.name,
+                            "size"      : image["results"]["file"]["size"].stringValue,
+                            "caption"   : ""
+                        ]
+                        
+                        message.message = "Send Image"
+                        self.imageData.append(message)
+                       }
+                       upload.uploadProgress { progress in
+                            print(progress.fractionCompleted)
+                            self.showProgress()
+                            self.labelProgress.text = "\(Int(progress.fractionCompleted * 100)) %"
+                            let newHeight = progress.fractionCompleted * self.maxProgressHeight
+                            self.heightProgressViewCons.constant = CGFloat(newHeight)
+                            UIView.animate(withDuration: 0.65, animations: {
+                                self.progressView.layoutIfNeeded()
+                            })
+                       }
+                   case .failure(let encodingError):
+                       print(encodingError)
+                   }
+            })
             
         }
         
