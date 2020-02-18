@@ -216,9 +216,7 @@ class QiscusUploaderVC: UIViewController, UIScrollViewDelegate,UITextViewDelegat
         if type == .image {
             
             if (mediaCaption.text != TextConfiguration.sharedInstance.captionPlaceholder ){
-                self.content["caption"] = mediaCaption.text
-                self.imageData.first?.payload!["content"] = self.content
-                
+                self.imageData.first?.payload![ "caption" ] = mediaCaption.text
             }
             
             chatView?.send(message: self.imageData.first!, onSuccess: { (comment) in
