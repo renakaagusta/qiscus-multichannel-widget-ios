@@ -391,6 +391,23 @@ class UIChatViewController: UIViewController {
                         cell.cellMenu = self
                         return cell
                     }
+                } else {
+                    if (message.isMyComment() == true){
+                        let cell = tableView.dequeueReusableCell(withIdentifier: "qFileRightCell", for: indexPath) as! QFileRightCell
+//                        cell.menuConfig = menuConfig
+                            cell.cellMenu = self
+                                return cell
+                            } else {
+                                let cell = tableView.dequeueReusableCell(withIdentifier: "qFileLeftCell", for: indexPath) as! QFileLeftCell
+//                        if self.room?.type == .group {
+//                            cell.colorName = colorName
+//                            cell.isPublic = true
+//                        }else {
+//                            cell.isPublic = false
+//                        }
+                            cell.cellMenu = self
+                            return cell
+                        }
                 }
             } else {
                 if (message.isMyComment() == true){
