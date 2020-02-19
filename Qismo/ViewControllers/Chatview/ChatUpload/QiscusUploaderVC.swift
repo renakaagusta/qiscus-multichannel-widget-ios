@@ -220,9 +220,10 @@ class QiscusUploaderVC: UIViewController, UIScrollViewDelegate,UITextViewDelegat
             }
             
             chatView?.send(message: self.imageData.first!, onSuccess: { (comment) in
-                 let _ = self.navigationController?.popViewController(animated: true)
+                self.chatView?.setFromUploader(comment: comment)
+                let _ = self.navigationController?.popViewController(animated: true)
             }, onError: { (error) in
-                 let _ = self.navigationController?.popViewController(animated: true)
+                let _ = self.navigationController?.popViewController(animated: true)
             })
         }
     }

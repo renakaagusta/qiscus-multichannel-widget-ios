@@ -78,6 +78,7 @@ class UIChatViewController: UIViewController {
         }
     }
     var chatDelegate : UIChatView? = nil
+    var isFromUploader = false
     
     // UI Config
     var usersColor : [String:UIColor] = [String:UIColor]()
@@ -186,13 +187,6 @@ class UIChatViewController: UIViewController {
         self.setupTableView()
         self.chatInput.chatInputDelegate = self
         self.setupInputBar(self.chatInput)
-    }
-    
-    @objc func buttonAction(sender: UIButton!) {
-        guard let msg = sender.titleLabel?.text else { return }
-        let message = Qismo.qiscus.newMessage()
-        message.message = msg
-        self.sendMessage(message: message)
     }
     
     private func setupInputBar(_ inputchatview: UIChatInput) {
@@ -336,7 +330,7 @@ class UIChatViewController: UIViewController {
     func setBackground(with image: UIImage) {
         let imageView = UIImageView(image: image)
         imageView.contentMode = .scaleAspectFill
-        imageView.transform = imageView.transform.rotated(by: CGFloat(M_PI))
+        imageView.transform = imageView.transform.rotated(by: CGFloat(Double.pi))
         self.tableViewConversation.isOpaque = false
         self.tableViewConversation.backgroundView =   imageView
     }
@@ -487,6 +481,12 @@ extension UIChatViewController: UIChatViewDelegate {
         }else{
             self.tableViewConversation.isHidden = false
             self.emptyMessageView.alpha = 0
+        }
+        
+        //this because after upload image can't update tableview. then need reload comments from chat-sdk
+        if isFromUploader {
+            self.presenter.loadRoom(withId: roomId)
+            self.isFromUploader = false
         }
     }
     
@@ -698,9 +698,12 @@ extension UIChatViewController : UIChatInputDelegate {
             onError(error)
         }
     }
+    
+    func setFromUploader(comment: CommentModel) {
+        self.isFromUploader = true
+    }
 }
 
-//// MARK: Handle Cell Menu
 //// MARK: Handle Cell Menu
 extension UIChatViewController : UIBaseChatCellDelegate {
     func didTap(delete comment: CommentModel) {

@@ -72,20 +72,6 @@ class UIChatPresenter: UIChatUserInteraction {
     }
     
     func loadRoom(withId roomId: String) {
-//        Qismo.qiscus..getChatRoomWithMessages(roomId: roomId, onSuccess: { [weak self] (room,comments) in
-//            guard let instance = self else { return }
-//            instance.room = room
-//            instance.room?.delegate = self
-//            QiscusCoreAPI.shared.subscribeChatRoom(room)
-//            if comments.isEmpty {
-//                instance.viewPresenter?.onLoadMessageFailed(message: "no message")
-//                return
-//            }
-//            instance.loadComments(withID: room.id)
-//        }) { [weak self] (error) in
-//            guard let instance = self else { return }
-//            instance.viewPresenter?.onLoadMessageFailed(message: error.message)
-//        }
         
         Qismo.qiscus.getChatRoom(id: roomId, onSuccess: { [weak self] (mRoom, comments) in
             guard let instance = self else { return }
@@ -154,10 +140,13 @@ class UIChatPresenter: UIChatUserInteraction {
             if comments.count == 0 {
                 return
             }
-            //MARK: need review
-            for msg in comments.reversed(){
+            
+            var temp: [CommentModel] = []
+            
+            for msg in comments.reversed() {
                 if (instance.getIndexPath(comment: msg) == nil) {
                     instance.addNewCommentUI(msg, isIncoming: true)
+                    temp.append(msg)
                 }
                 if Int64(msg.id) ?? 0 > Int64(instance.lastIdToLoad) ?? 0 {
                     self?.lastIdToLoad = msg.id
@@ -165,7 +154,10 @@ class UIChatPresenter: UIChatUserInteraction {
                 }
             }
             
-//            instance.comments.append(comments.reversed())
+            if temp.count > 0 {
+                instance.comments.append(temp)
+                instance.viewPresenter?.onLoadMoreMesageFinished()
+            }
         }, onError: { error in
             debugPrint(error.message)
         })
@@ -255,13 +247,6 @@ class UIChatPresenter: UIChatUserInteraction {
     
     func sendMessage(withComment comment: CommentModel, onSuccess: @escaping (CommentModel) -> Void, onError: @escaping (String) -> Void) {
         addNewCommentUI(comment, isIncoming: false)
-//        QiscusCoreAPI.shared.sendMessage(message: comment, onSuccess: { [weak self] (comment) in
-//            self?.didComment(comment: comment, changeStatus: comment.status)
-//            onSuccess(comment)
-//        }) { (error) in
-//            onError(error.message)
-//        }
-        
         Qismo.qiscus.send(message: comment, onSuccess: {comment in
             self.didComment(comment: comment, changeStatus: comment.status)
             onSuccess(comment)
@@ -317,7 +302,7 @@ class UIChatPresenter: UIChatUserInteraction {
         if isIncoming {
 //            QiscusCoreAPI.shared.markAsRead(roomId: message.roomId, commentId: message.id)
             self.viewPresenter?.onGotNewComment(newSection: section)
-        }else {
+        } else {
             self.viewPresenter?.onSendingComment(comment: message, newSection: section)
         }
     }
@@ -432,8 +417,8 @@ extension UIChatPresenter : QiscusCoreLiteRoomDelegate {
        // check comment already exist in view
        for (group,c) in comments.enumerated() {
            if let index = c.index(where: { $0.uniqId == comment.uniqId }) {
-               comments[group][index] = comment
-               self.viewPresenter?.onUpdateComment(comment: comment, indexpath: IndexPath(row: index, section: group))
+                comments[group][index] = comment
+                self.viewPresenter?.onUpdateComment(comment: comment, indexpath: IndexPath(row: index, section: group))
            }
        }
     }
