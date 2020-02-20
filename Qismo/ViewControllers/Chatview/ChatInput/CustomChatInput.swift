@@ -11,6 +11,7 @@ import Photos
 import MobileCoreServices
 import QiscusCoreAPI
 import SwiftyJSON
+import Alamofire
 
 protocol CustomChatInputDelegate {
     func sendAttachment()
@@ -290,6 +291,7 @@ extension UIChatViewController: UIDocumentPickerDelegate{
     }
     
     public func postReceivedFile(fileUrl: URL) {
+        guard let token = Qismo.qiscus.userProfile?.token else { return }
         var contentPayload: [String: Any] = [:]
         let coordinator = NSFileCoordinator()
         coordinator.coordinate(readingItemAt: fileUrl, options: NSFileCoordinator.ReadingOptions.forUploading, error: nil) { (dataURL) in
@@ -420,72 +422,116 @@ extension UIChatViewController: UIDocumentPickerDelegate{
                                             let file = FileUploadModel()
                                             file.data = data
                                             file.name = fileName
+                                            let header: HTTPHeaders = [
+                                                "Content-Type": "application/json",
+                                                "QISCUS_SDK_APP_ID": "\(Qismo.qiscus.config.appId)",
+                                                "QISCUS_SDK_TOKEN" : "\(token)"
+                                            ]
                                             
-//                                            QiscusCoreAPI.shared.upload(file: file, onSuccess: { (file) in
-//                                                self.getProgressBarHeight().constant = 0.0
-//                                                let message = CommentModel()
-//                                                message.type = "custom"
-//                                                message.payload = [
-//                                                    "url"       : file.url.absoluteString,
-//                                                    "file_name" : file.name,
-//                                                    "size"      : file.size,
-//                                                    "caption"   : "",
-//                                                ]
-//                                                message.message = "Send Attachment"
-//                                                self.send(message: message, onSuccess: { (comment) in
-//                                                    //success
-//                                                }, onError: { (error) in
-//                                                    //error
-//                                                    self.getProgressBarHeight().constant = 0
-//                                                })
-//                                            }, onError: { (error) in
-//                                                self.getProgressBarHeight().constant = 0
-//                                            }, progressListener: { (progress) in
-//                                                print("upload progress :\(progress)")
-//                                                self.getProgressBarHeight().constant = 2
-//                                                self.getProgressBar().progress = Float(progress)
-//                                                if(progress == 1){
-//                                                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-//                                                        self.getProgressBarHeight().constant = 2
-//                                                        self.getProgressBar().progress = 0.0
-//                                                    }
-//                                                }
-//                                            })
+                                            Alamofire.upload(multipartFormData: { multipartFormData in
+                                                multipartFormData.append(file.data!, withName: "file", fileName: fileName, mimeType: "image/jpg")
+                                            }, to: "\(Qismo.qiscus.config.server.url)/upload", method: .post, headers : header,
+                                                   encodingCompletion: { encodingResult in
+                                                   switch encodingResult {
+                                                   case .success(let upload, _, _):
+                                                       upload.responseJSON { response in
+
+                                                        guard let jsonResponse = response.result.value as? [String: Any] else {return}
+                                                        print(jsonResponse)
+                                                        
+                                                        let image = JSON(jsonResponse)
+                                                        
+                                                        let message = Qismo.qiscus.newMessage()
+                                                        message.type = "file_attachment"
+                                                        message.payload = [
+                                                            "url"       : image["results"]["file"]["url"].stringValue,
+                                                            "file_name" : file.name,
+                                                            "size"      : image["results"]["file"]["size"].stringValue,
+                                                            "caption"   : ""
+                                                        ]
+                                                        
+                                                        message.message = "Send Attachment"
+                                                        self.send(message: message, onSuccess: { (comment) in
+                                                                debugPrint(message)
+                                                            }, onError: { (error) in
+                                                                self.getProgressBarHeight().constant = 0
+                                                            })
+                                                       }
+                                                       
+                                                       upload.uploadProgress { progress in
+                                                            print("upload progress :\(progress)")
+                                                            self.getProgressBarHeight().constant = 2
+                                                        self.getProgressBar().progress = Float(progress.fractionCompleted)
+                                                            if(progress.fractionCompleted == 1) {
+                                                                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                                                                    self.getProgressBarHeight().constant = 2
+                                                                    self.getProgressBar().progress = 0.0
+                                                                }
+                                                            }
+                                                       }
+                                                    
+                                                   case .failure(let encodingError):
+                                                       print(encodingError)
+                                                   }
+                                            })
                                             
                     },
-                                         cancelAction: {
+                    cancelAction: {
                                             
                     })
-                }else{
-//                    QiscusCoreAPI.shared.upload(data: data, filename: fileName, onSuccess: { (file) in
-//                        self.getProgressBarHeight().constant = 0.0
-//                        let message = CommentModel()
-//                        message.type = "file_attachment"
-//                        message.payload = [
-//                            "url"       : file.url.absoluteString,
-//                            "file_name" : file.name,
-//                            "size"      : file.size,
-//                            "caption"   : ""
-//                        ]
-//                        message.message = "Send Attachment"
-//                        self.send(message: message, onSuccess: { (comment) in
-//                            //success
-//                        }, onError: { (error) in
-//                            self.getProgressBarHeight().constant = 0.0
-//                        })
-//                    }, onError: { (error) in
-//                        self.getProgressBarHeight().constant = 0.0
-//                    }) { (progress) in
-//                        print("upload progress: \(progress)")
-//                        self.getProgressBar().progress = Float(progress)
-//                        self.getProgressBarHeight().constant = 2
-//                        if(progress == 1){
-//                            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-//                                self.getProgressBarHeight().constant = 0
-//                                self.getProgressBar().progress = 0.0
-//                            }
-//                        }
-//                    }
+                } else {
+                    let header: HTTPHeaders = [
+                        "Content-Type": "application/json",
+                        "QISCUS_SDK_APP_ID": "\(Qismo.qiscus.config.appId)",
+                        "QISCUS_SDK_TOKEN" : "\(token)"
+                    ]
+                    
+                    Alamofire.upload(multipartFormData: { multipartFormData in
+                        multipartFormData.append(data, withName: "file", fileName: fileName, mimeType: "image/jpg")
+                    }, to: "\(Qismo.qiscus.config.server.url)/upload", method: .post, headers : header,
+                           encodingCompletion: { encodingResult in
+                           switch encodingResult {
+                           case .success(let upload, _, _):
+                               upload.responseJSON { response in
+
+                                guard let jsonResponse = response.result.value as? [String: Any] else {return}
+                                print(jsonResponse)
+                                
+                                let image = JSON(jsonResponse)
+                                
+                                let message = Qismo.qiscus.newMessage()
+                                message.type = "file_attachment"
+                                message.payload = [
+                                    "url"       : image["results"]["file"]["url"].stringValue,
+                                    "file_name" : fileName,
+                                    "size"      : image["results"]["file"]["size"].stringValue,
+                                    "caption"   : ""
+                                ]
+                                
+                                message.message = "Send Attachment"
+                                self.send(message: message, onSuccess: { (comment) in
+                                        debugPrint(message)
+                                    }, onError: { (error) in
+                                        self.getProgressBarHeight().constant = 0
+                                    })
+                               }
+                               
+                               upload.uploadProgress { progress in
+                                    print("upload progress :\(progress)")
+                                    self.getProgressBarHeight().constant = 2
+                                self.getProgressBar().progress = Float(progress.fractionCompleted)
+                                    if(progress.fractionCompleted == 1) {
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                                            self.getProgressBarHeight().constant = 2
+                                            self.getProgressBar().progress = 0.0
+                                        }
+                                    }
+                               }
+                            
+                           case .failure(let encodingError):
+                               print(encodingError)
+                           }
+                    })
                 }
                 
             }catch _{
