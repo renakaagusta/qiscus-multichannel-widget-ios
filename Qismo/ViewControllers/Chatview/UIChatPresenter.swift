@@ -86,6 +86,11 @@ class UIChatPresenter: UIChatUserInteraction {
             instance.loadComments(withID: mRoom.id)
             instance.viewPresenter?.onLoadRoomFinished(room: mRoom)
             instance.comments = instance.groupingComments(comments)
+            
+            if let lastComment = mRoom.lastComment {
+                Qismo.qiscus.markAsRead(message: lastComment)
+            }
+            
             instance.viewPresenter?.onLoadMessageFinished()
             self?.lastIdToLoad = String(self?.room?.id ?? "")
             
@@ -300,7 +305,7 @@ class UIChatPresenter: UIChatUserInteraction {
         
         // choose uidelegate
         if isIncoming {
-//            QiscusCoreAPI.shared.markAsRead(roomId: message.roomId, commentId: message.id)
+            Qismo.qiscus.markAsRead(message: message)
             self.viewPresenter?.onGotNewComment(newSection: section)
         } else {
             self.viewPresenter?.onSendingComment(comment: message, newSection: section)
