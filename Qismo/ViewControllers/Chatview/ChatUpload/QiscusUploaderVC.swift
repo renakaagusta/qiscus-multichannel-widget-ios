@@ -67,9 +67,10 @@ class QiscusUploaderVC: UIViewController, UIScrollViewDelegate,UITextViewDelegat
                 "QISCUS_SDK_APP_ID": "\(Qismo.qiscus.config.appId)",
                 "QISCUS_SDK_TOKEN" : "\(token)"
             ]
+            
             Alamofire.upload(multipartFormData: { multipartFormData in
                 multipartFormData.append(self.data!, withName: "file", fileName: self.fileName!, mimeType: "image/jpg")
-            }, to: "https://api.qiscus.com/api/v2/mobile/upload", method: .post, headers : header,
+            }, to: "\(Qismo.qiscus.config.server.url)/upload", method: .post, headers : header,
                    encodingCompletion: { encodingResult in
                    switch encodingResult {
                    case .success(let upload, _, _):
