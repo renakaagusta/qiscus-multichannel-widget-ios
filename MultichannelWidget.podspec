@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
 
-s.name         = "Qismo"
+s.name         = "MultichannelWidget"
 s.version      = "1.0.0"
 s.summary      = "Customer Chat integration."
 
@@ -15,11 +15,11 @@ s.platform     = :ios, "10.0"
 
 s.source       = { :path => "." }
 
-s.source_files  = "Qismo", "Qismo/**/*.{h,m,swift,xib}"
+s.source_files  = "MultichannelWidget", "MultichannelWidget/**/*.{h,m,swift,xib}"
 
-s.resources = "Qismo/**/*.xcassets"
+s.resources = "MultichannelWidget/**/*.xcassets"
 s.resource_bundles = {
-    'Qismo' => ['Qismo/**/*.{lproj,xib,xcassets,imageset,png}']
+    'MultichannelWidget' => ['MultichannelWidget/**/*.{lproj,xib,xcassets,imageset,png}']
 }
 
 s.framework		= 'UIKit', 'AVFoundation'
