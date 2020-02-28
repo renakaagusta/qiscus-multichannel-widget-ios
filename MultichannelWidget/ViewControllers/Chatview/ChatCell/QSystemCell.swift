@@ -7,7 +7,7 @@
 
 import UIKit
 
-import QiscusCoreAPI
+import QiscusCoreApi
 
 class QSystemCell:  UIBaseChatCell {
     

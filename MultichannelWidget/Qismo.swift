@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 import Alamofire
-import QiscusCoreAPI
+import QiscusCoreApi
 
 public class Qismo {
     

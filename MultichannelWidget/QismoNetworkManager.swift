@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import QiscusCoreAPI
+import QiscusCoreApi
 import Alamofire
 
 class QismoNetworkManager {

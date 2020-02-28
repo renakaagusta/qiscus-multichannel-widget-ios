@@ -7,7 +7,7 @@
 
 import Foundation
 import SwiftyJSON
-import QiscusCoreAPI
+import QiscusCoreApi
 
 @objc enum QiscusFileType:Int{
     case image

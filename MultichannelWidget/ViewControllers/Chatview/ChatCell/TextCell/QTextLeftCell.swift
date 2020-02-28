@@ -7,7 +7,7 @@
 
 import UIKit
 
-import QiscusCoreAPI
+import QiscusCoreApi
 
 class QTextLeftCell: UIBaseChatCell {
     @IBOutlet weak var lbName: UILabel!

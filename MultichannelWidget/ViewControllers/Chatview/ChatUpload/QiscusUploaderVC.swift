@@ -9,7 +9,7 @@
 import UIKit
 import Photos
 import MobileCoreServices
-import QiscusCoreAPI
+import QiscusCoreApi
 import Alamofire
 import AlamofireImage
 import SwiftyJSON

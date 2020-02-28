@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import QiscusCoreAPI
+import QiscusCoreApi
 import AlamofireImage
 
 class UIChatNavigation: UIView {

@@ -8,7 +8,7 @@
 import UIKit
 import ContactsUI
 import SwiftyJSON
-import QiscusCoreAPI
+import QiscusCoreApi
 
 // Chat view blue print or function
 protocol UIChatView {

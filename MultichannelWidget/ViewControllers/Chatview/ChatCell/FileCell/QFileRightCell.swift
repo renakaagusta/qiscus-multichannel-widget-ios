@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import QiscusCoreAPI
+import QiscusCoreApi
 
 class QFileRightCell: UIBaseChatCell {
 
