@@ -41,6 +41,8 @@ public class Qismo {
     }
     
     public func openChat() -> UIViewController {
+        
+        
         return manager.openChat()
     }
     
