@@ -60,5 +60,11 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSFileProviderDomainUsageDescription</key>
+	<string>$(PRODUCT_NAME) want read file</string>
+	<key>NSCameraUsageDescription</key>
+	<string>$(PRODUCT_NAME) uses camera</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>$(PRODUCT_NAME) read the file</string>
 </dict>
 </plist>
