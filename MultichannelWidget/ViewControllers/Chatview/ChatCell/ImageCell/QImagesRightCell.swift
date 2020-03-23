@@ -14,10 +14,16 @@ class QImagesRightCell: UIBaseChatCell {
     @IBOutlet weak var lblCaption: UILabel!
     @IBOutlet weak var ivComment: UIImageView!
     @IBOutlet weak var lblDate: UILabel!
+    
+    var actionBlock: ((CommentModel) -> Void)? = nil
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         self.setMenu()
+        self.ivComment.isUserInteractionEnabled = true
+        let imgTouchEvent = UITapGestureRecognizer(target: self, action: #selector(QImagesRightCell.imageDidTap))
+        self.ivComment.addGestureRecognizer(imgTouchEvent)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -66,6 +72,12 @@ class QImagesRightCell: UIBaseChatCell {
         }
         
         self.lblDate.text = AppUtil.dateToHour(date: message.date())
+    }
+    
+    @objc func imageDidTap() {
+        if self.comment != nil && self.actionBlock != nil {
+            self.actionBlock!(comment!)
+        }
     }
     
 }

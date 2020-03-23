@@ -378,6 +378,13 @@ class UIChatViewController: UIViewController {
                     if (message.isMyComment() == true){
                         let cell = tableView.dequeueReusableCell(withIdentifier: "qImagesRightCell", for: indexPath) as! QImagesRightCell
 //                        cell.menuConfig = menuConfig
+                        cell.actionBlock = { comment in
+                         
+                          let fullImage = FullImageViewController(nibName: "FullImageViewController", bundle: Qismo.bundle)
+                          fullImage.message = comment
+                          self.navigationController?.pushViewController(fullImage, animated: true)
+                        }
+
                         cell.cellMenu = self
                         return cell
                     }else{
@@ -388,6 +395,13 @@ class UIChatViewController: UIViewController {
 //                        }else {
 //                            cell.isPublic = false
 //                        }
+                        cell.actionBlock = { comment in
+                           
+                            let fullImage = FullImageViewController(nibName: "FullImageViewController", bundle: Qismo.bundle)
+                            fullImage.message = comment
+                            self.navigationController?.pushViewController(fullImage, animated: true)
+                          }
+
                         cell.cellMenu = self
                         return cell
                     }

@@ -21,10 +21,16 @@ class QImagesLeftCell: UIBaseChatCell {
     var menuConfig = enableMenuConfig()
     var colorName : UIColor = UIColor.black
     
+    var actionBlock: ((CommentModel) -> Void)? = nil
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         self.setMenu()
+        self.ivComment.isUserInteractionEnabled = true
+        let imgTouchEvent = UITapGestureRecognizer(target: self, action: #selector(QImagesLeftCell.imageDidTap))
+        self.ivComment.addGestureRecognizer(imgTouchEvent)
+
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -71,6 +77,10 @@ class QImagesLeftCell: UIBaseChatCell {
         }
     }
     
-    
+    @objc func imageDidTap() {
+        if self.comment != nil && self.actionBlock != nil {
+            self.actionBlock!(comment!)
+        }
+    }
     
 }
