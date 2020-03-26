@@ -186,6 +186,7 @@ class UIChatViewController: UIViewController {
         self.qiscusAutoHideKeyboard()
         self.setupTableView()
         self.chatInput.chatInputDelegate = self
+        self.chatInput.replyChatInputDelegate = self
         self.setupInputBar(self.chatInput)
     }
     
@@ -690,6 +691,8 @@ extension UIChatViewController : UIChatView {
             return true
         case "deleteComment:":
             return true
+        case "replyComment:":
+            return true
         default:
             return false
         }
@@ -735,6 +738,14 @@ extension UIChatViewController : UIChatInputDelegate {
     }
 }
 
+extension UIChatViewController : ReplyChatInputDelegate {
+    func hideReply() {
+        self.constraintViewInputHeight.constant = 50
+    }
+    
+    
+}
+
 //// MARK: Handle Cell Menu
 extension UIChatViewController : UIBaseChatCellDelegate {
     func didTap(delete comment: CommentModel) {
@@ -744,4 +755,12 @@ extension UIChatViewController : UIBaseChatCellDelegate {
 //            print("failed delete comment for everyone")
 //        }
     }
+    
+    func didReply(reply comment: CommentModel) {
+//        chatInput.show
+        self.chatInput.showReplyView(comment: comment)
+//        self.viewChatInput.frame.size.height = 150
+        self.constraintViewInputHeight.constant = 100
+    }
+
 }

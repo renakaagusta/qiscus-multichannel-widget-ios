@@ -16,19 +16,29 @@ import Alamofire
 protocol CustomChatInputDelegate {
     func sendAttachment()
     func sendMessage(message: CommentModel)
+    func hideReply()
+}
+
+protocol ReplyChatInputDelegate {
+    func hideReply()
 }
 
 class CustomChatInput: UIChatInput {
     
     @IBOutlet weak var heightView: NSLayoutConstraint!
+    @IBOutlet weak var viewReply: UIView!
     @IBOutlet weak var sendButton: UIButton!
     @IBOutlet weak var attachButton: UIButton!
+    @IBOutlet weak var contraintTopReply: NSLayoutConstraint!
+    @IBOutlet weak var tvReply: UILabel!
     @IBOutlet weak var heightTextViewCons: NSLayoutConstraint!
     @IBOutlet weak var textView: UITextView!
     var chatInputDelegate : CustomChatInputDelegate? = nil
+    var replyChatInputDelegate: ReplyChatInputDelegate? = nil
 //    var defaultInputBarHeight: CGFloat = 34.0
 //    var customInputBarHeight: CGFloat = 34.0
     var colorName : UIColor = UIColor.black
+    var replyComment: CommentModel? = nil
     
     override func commonInit(nib: UINib) {
         let nib = UINib(nibName: "CustomChatInput", bundle: Qismo.bundle)
@@ -50,20 +60,58 @@ class CustomChatInput: UIChatInput {
     @IBAction func clickSend(_ sender: Any) {
         guard let text = self.textView.text else {return}
         if !text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty && text != TextConfiguration.sharedInstance.textPlaceholder {
-            var payload:JSON? = nil
+//            var payload:JSON? = nil
             let comment = Qismo.qiscus.newMessage()
-            comment.type = "text"
-            comment.message = text
+            
+            if let _replyData = replyComment {
+                let senderName = _replyData.username
+                comment.type = "reply"
+                comment.message = text
+                comment.payload = [
+                    "replied_comment_sender_email"       : _replyData.userEmail,
+                    "replied_comment_id" : Int(_replyData.id) ?? 0,
+                    "text"      : text,
+                    "replied_comment_message"   : _replyData.message,
+                    "replied_comment_sender_username" : senderName,
+                    "replied_comment_payload" : _replyData.payload ?? [:],
+                    "replied_comment_type" : _replyData.type
+                ]
+                self.replyComment = nil
+            } else {
+                comment.type = "text"
+                comment.message = text
+            }
+            
             self.chatInputDelegate?.sendMessage(message: comment)
         }
         
         self.textView.text = ""
         self.setHeight(50)
+        hideReply()
     }
     
     @IBAction func clickAttachment(_ sender: Any) {
          self.chatInputDelegate?.sendAttachment()
     }
+    
+    @IBAction func closeReply(_ sender: Any) {
+        hideReply()
+    }
+    
+    public func showReplyView(comment: CommentModel) {
+        self.contraintTopReply.constant = 0
+        self.viewReply.isHidden = false
+        self.tvReply.text = comment.message
+        self.replyComment = comment
+    }
+    
+    public func hideReply() {
+        self.contraintTopReply.constant = -50
+        self.viewReply.isHidden = true
+        self.replyChatInputDelegate?.hideReply()
+        self.replyComment = nil
+    }
+    
 }
 
 extension CustomChatInput : UITextViewDelegate {
@@ -85,11 +133,15 @@ extension CustomChatInput : UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         self.typing(true)
         let fixedWidth = textView.frame.size.width
-        let newSize = textView.sizeThatFits(CGSize.init(width: fixedWidth, height: CGFloat(MAXFLOAT)))
+        let newSize = textView.sizeThatFits(CGSize.init(width: fixedWidtih, height: CGFloat(MAXFLOAT)))
         if (newSize.height >= 35 && newSize.height <= 100) {
             self.heightTextViewCons.constant = newSize.height
             self.heightView.constant = newSize.height + 10.0
-            self.setHeight(self.heightView.constant)
+            if self.replyComment != nil {
+                self.setHeight(self.heightView.constant + 50)
+            } else {
+                self.setHeight(self.heightView.constant)
+            }
         }
         
         if (newSize.height >= 100) {
