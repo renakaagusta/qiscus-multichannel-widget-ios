@@ -133,7 +133,7 @@ extension CustomChatInput : UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         self.typing(true)
         let fixedWidth = textView.frame.size.width
-        let newSize = textView.sizeThatFits(CGSize.init(width: fixedWidtih, height: CGFloat(MAXFLOAT)))
+        let newSize = textView.sizeThatFits(CGSize.init(width: fixedWidth, height: CGFloat(MAXFLOAT)))
         if (newSize.height >= 35 && newSize.height <= 100) {
             self.heightTextViewCons.constant = newSize.height
             self.heightView.constant = newSize.height + 10.0
