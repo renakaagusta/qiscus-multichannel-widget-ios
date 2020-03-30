@@ -15,7 +15,7 @@ class QismoViewController: UIViewController {
     @IBOutlet weak var containerView: UIView!
     
     init() {
-        super.init(nibName: "QismoViewController", bundle: Qismo.bundle)
+        super.init(nibName: "QismoViewController", bundle: MultichannelWidget.bundle)
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

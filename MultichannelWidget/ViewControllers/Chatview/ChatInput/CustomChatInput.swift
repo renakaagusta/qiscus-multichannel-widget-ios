@@ -41,7 +41,7 @@ class CustomChatInput: UIChatInput {
     var replyComment: CommentModel? = nil
     
     override func commonInit(nib: UINib) {
-        let nib = UINib(nibName: "CustomChatInput", bundle: Qismo.bundle)
+        let nib = UINib(nibName: "CustomChatInput", bundle: MultichannelWidget.bundle)
         super.commonInit(nib: nib)
         textView.delegate = self
         textView.text = TextConfiguration.sharedInstance.textPlaceholder
@@ -53,15 +53,15 @@ class CustomChatInput: UIChatInput {
 
         self.sendButton.tintColor = ColorConfiguration.sendButtonColor
         self.attachButton.tintColor = ColorConfiguration.attachmentButtonColor
-        self.attachButton.setImage(UIImage(named: "ic_attachment", in: Qismo.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate), for: .normal)
-        self.sendButton.setImage(UIImage(named: "ic_send", in: Qismo.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate), for: .normal)
+        self.attachButton.setImage(UIImage(named: "ic_attachment", in: MultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate), for: .normal)
+        self.sendButton.setImage(UIImage(named: "ic_send", in: MultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate), for: .normal)
     }
     
     @IBAction func clickSend(_ sender: Any) {
         guard let text = self.textView.text else {return}
         if !text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty && text != TextConfiguration.sharedInstance.textPlaceholder {
 //            var payload:JSON? = nil
-            let comment = Qismo.qiscus.newMessage()
+            let comment = MultichannelWidget.qiscus.newMessage()
             
             if let _replyData = replyComment {
                 let senderName = _replyData.username
@@ -343,7 +343,7 @@ extension UIChatViewController: UIDocumentPickerDelegate{
     }
     
     public func postReceivedFile(fileUrl: URL) {
-        guard let token = Qismo.qiscus.userProfile?.token else { return }
+        guard let token = MultichannelWidget.qiscus.userProfile?.token else { return }
         var contentPayload: [String: Any] = [:]
         let coordinator = NSFileCoordinator()
         coordinator.coordinate(readingItemAt: fileUrl, options: NSFileCoordinator.ReadingOptions.forUploading, error: nil) { (dataURL) in
@@ -476,13 +476,13 @@ extension UIChatViewController: UIDocumentPickerDelegate{
                                             file.name = fileName
                                             let header: HTTPHeaders = [
                                                 "Content-Type": "application/json",
-                                                "QISCUS_SDK_APP_ID": "\(Qismo.qiscus.config.appId)",
+                                                "QISCUS_SDK_APP_ID": "\(MultichannelWidget.qiscus.config.appId)",
                                                 "QISCUS_SDK_TOKEN" : "\(token)"
                                             ]
                                             
                                             Alamofire.upload(multipartFormData: { multipartFormData in
                                                 multipartFormData.append(file.data!, withName: "file", fileName: fileName, mimeType: "image/jpg")
-                                            }, to: "\(Qismo.qiscus.config.server.url)/upload", method: .post, headers : header,
+                                            }, to: "\(MultichannelWidget.qiscus.config.server.url)/upload", method: .post, headers : header,
                                                    encodingCompletion: { encodingResult in
                                                    switch encodingResult {
                                                    case .success(let upload, _, _):
@@ -493,7 +493,7 @@ extension UIChatViewController: UIDocumentPickerDelegate{
                                                         
                                                         let image = JSON(jsonResponse)
                                                         
-                                                        let message = Qismo.qiscus.newMessage()
+                                                        let message = MultichannelWidget.qiscus.newMessage()
                                                         message.type = "file_attachment"
                                                         message.payload = [
                                                             "url"       : image["results"]["file"]["url"].stringValue,
@@ -534,13 +534,13 @@ extension UIChatViewController: UIDocumentPickerDelegate{
                 } else {
                     let header: HTTPHeaders = [
                         "Content-Type": "application/json",
-                        "QISCUS_SDK_APP_ID": "\(Qismo.qiscus.config.appId)",
+                        "QISCUS_SDK_APP_ID": "\(MultichannelWidget.qiscus.config.appId)",
                         "QISCUS_SDK_TOKEN" : "\(token)"
                     ]
                     
                     Alamofire.upload(multipartFormData: { multipartFormData in
                         multipartFormData.append(data, withName: "file", fileName: fileName, mimeType: "image/jpg")
-                    }, to: "\(Qismo.qiscus.config.server.url)/upload", method: .post, headers : header,
+                    }, to: "\(MultichannelWidget.qiscus.config.server.url)/upload", method: .post, headers : header,
                            encodingCompletion: { encodingResult in
                            switch encodingResult {
                            case .success(let upload, _, _):
@@ -551,7 +551,7 @@ extension UIChatViewController: UIDocumentPickerDelegate{
                                 
                                 let image = JSON(jsonResponse)
                                 
-                                let message = Qismo.qiscus.newMessage()
+                                let message = MultichannelWidget.qiscus.newMessage()
                                 message.type = "file_attachment"
                                 message.payload = [
                                     "url"       : image["results"]["file"]["url"].stringValue,
@@ -687,7 +687,7 @@ extension UIChatViewController : UIImagePickerControllerDelegate, UINavigationCo
                 
                 dismiss(animated:true, completion: nil)
                 
-                let uploader = QiscusUploaderVC(nibName: "QiscusUploaderVC", bundle: Qismo.bundle)
+                let uploader = QiscusUploaderVC(nibName: "QiscusUploaderVC", bundle: MultichannelWidget.bundle)
                 uploader.chatView = self
                 uploader.data = data
                 uploader.fileName = imageName

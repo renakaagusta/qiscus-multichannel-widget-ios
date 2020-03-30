@@ -47,7 +47,7 @@ class DateHeaderLabel: UILabel {
 class UIChatViewController: UIViewController {
     
     public init() {
-        super.init(nibName: "UIChatViewController", bundle: Qismo.bundle)
+        super.init(nibName: "UIChatViewController", bundle: MultichannelWidget.bundle)
     }
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -227,7 +227,7 @@ class UIChatViewController: UIViewController {
         self.navigationItem.titleView = chatTitleView
         self.chatTitleView.room = self.room
         
-        let callButton = UIBarButtonItem(image: UIImage(named: "phone", in: Qismo.bundle, compatibleWith: nil), style: .plain, target: self, action: #selector(call))
+        let callButton = UIBarButtonItem(image: UIImage(named: "phone", in: MultichannelWidget.bundle, compatibleWith: nil), style: .plain, target: self, action: #selector(call))
         self.navigationItem.rightBarButtonItem = callButton
     }
     
@@ -235,7 +235,7 @@ class UIChatViewController: UIViewController {
         let backIcon = UIImageView()
         backIcon.contentMode = .scaleAspectFit
         
-        let image = UIImage(named: "ic_arrow_back", in: Qismo.bundle, compatibleWith: nil)?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
+        let image = UIImage(named: "ic_arrow_back", in: MultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
         backIcon.image = image
         backIcon.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         backIcon.contentMode = .scaleAspectFit
@@ -263,17 +263,17 @@ class UIChatViewController: UIViewController {
         self.chatDelegate = self
         
         // support variation comment type
-        self.registerClass(nib: UINib(nibName: "QTextRightCell", bundle:Qismo.bundle), forMessageCellWithReuseIdentifier: "qTextRightCell")
-        self.registerClass(nib: UINib(nibName: "QTextLeftCell", bundle:Qismo.bundle), forMessageCellWithReuseIdentifier: "qTextLeftCell")
-        self.registerClass(nib: UINib(nibName: "QImagesRightCell", bundle:Qismo.bundle), forMessageCellWithReuseIdentifier: "qImagesRightCell")
-        self.registerClass(nib: UINib(nibName: "QFileRightCell", bundle:Qismo.bundle), forMessageCellWithReuseIdentifier: "qFileRightCell")
-         self.registerClass(nib: UINib(nibName: "QFileLeftCell", bundle:Qismo.bundle), forMessageCellWithReuseIdentifier: "qFileLeftCell")
-        self.registerClass(nib: UINib(nibName: "QImagesLeftCell", bundle:Qismo.bundle), forMessageCellWithReuseIdentifier: "qImagesLeftCell")
-        self.registerClass(nib: UINib(nibName: "QLocationLeftViewCell", bundle:Qismo.bundle), forMessageCellWithReuseIdentifier: "qLocationLeftCell")
-        self.registerClass(nib: UINib(nibName: "QLocationRightCell", bundle:Qismo.bundle), forMessageCellWithReuseIdentifier: "qLocationRightCell")
-        self.registerClass(nib: UINib(nibName: "QFileLeftCell", bundle:Qismo.bundle), forMessageCellWithReuseIdentifier: "qFileLeftCell")
-        self.registerClass(nib: UINib(nibName: "QFileRightCell", bundle:Qismo.bundle), forMessageCellWithReuseIdentifier: "qFileRightCell")
-        self.registerClass(nib: UINib(nibName: "EmptyCell", bundle:Qismo.bundle), forMessageCellWithReuseIdentifier: "emptyCell")
+        self.registerClass(nib: UINib(nibName: "QTextRightCell", bundle:MultichannelWidget.bundle), forMessageCellWithReuseIdentifier: "qTextRightCell")
+        self.registerClass(nib: UINib(nibName: "QTextLeftCell", bundle:MultichannelWidget.bundle), forMessageCellWithReuseIdentifier: "qTextLeftCell")
+        self.registerClass(nib: UINib(nibName: "QImagesRightCell", bundle:MultichannelWidget.bundle), forMessageCellWithReuseIdentifier: "qImagesRightCell")
+        self.registerClass(nib: UINib(nibName: "QFileRightCell", bundle:MultichannelWidget.bundle), forMessageCellWithReuseIdentifier: "qFileRightCell")
+         self.registerClass(nib: UINib(nibName: "QFileLeftCell", bundle:MultichannelWidget.bundle), forMessageCellWithReuseIdentifier: "qFileLeftCell")
+        self.registerClass(nib: UINib(nibName: "QImagesLeftCell", bundle:MultichannelWidget.bundle), forMessageCellWithReuseIdentifier: "qImagesLeftCell")
+        self.registerClass(nib: UINib(nibName: "QLocationLeftViewCell", bundle:MultichannelWidget.bundle), forMessageCellWithReuseIdentifier: "qLocationLeftCell")
+        self.registerClass(nib: UINib(nibName: "QLocationRightCell", bundle:MultichannelWidget.bundle), forMessageCellWithReuseIdentifier: "qLocationRightCell")
+        self.registerClass(nib: UINib(nibName: "QFileLeftCell", bundle:MultichannelWidget.bundle), forMessageCellWithReuseIdentifier: "qFileLeftCell")
+        self.registerClass(nib: UINib(nibName: "QFileRightCell", bundle:MultichannelWidget.bundle), forMessageCellWithReuseIdentifier: "qFileRightCell")
+        self.registerClass(nib: UINib(nibName: "EmptyCell", bundle:MultichannelWidget.bundle), forMessageCellWithReuseIdentifier: "emptyCell")
         
     }
     
@@ -381,7 +381,7 @@ class UIChatViewController: UIViewController {
 //                        cell.menuConfig = menuConfig
                         cell.actionBlock = { comment in
                          
-                          let fullImage = FullImageViewController(nibName: "FullImageViewController", bundle: Qismo.bundle)
+                          let fullImage = FullImageViewController(nibName: "FullImageViewController", bundle: MultichannelWidget.bundle)
                           fullImage.message = comment
                           self.navigationController?.pushViewController(fullImage, animated: true)
                         }
@@ -398,7 +398,7 @@ class UIChatViewController: UIViewController {
 //                        }
                         cell.actionBlock = { comment in
                            
-                            let fullImage = FullImageViewController(nibName: "FullImageViewController", bundle: Qismo.bundle)
+                            let fullImage = FullImageViewController(nibName: "FullImageViewController", bundle: MultichannelWidget.bundle)
                             fullImage.message = comment
                             self.navigationController?.pushViewController(fullImage, animated: true)
                           }

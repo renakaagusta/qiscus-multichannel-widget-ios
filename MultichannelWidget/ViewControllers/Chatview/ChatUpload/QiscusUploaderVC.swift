@@ -60,17 +60,17 @@ class QiscusUploaderVC: UIViewController, UIScrollViewDelegate,UITextViewDelegat
             file.data = data!
             file.name = fileName!
             
-            guard let token = Qismo.qiscus.userProfile?.token else { return }
+            guard let token = MultichannelWidget.qiscus.userProfile?.token else { return }
             
             let header: HTTPHeaders = [
                 "Content-Type": "application/json",
-                "QISCUS_SDK_APP_ID": "\(Qismo.qiscus.config.appId)",
+                "QISCUS_SDK_APP_ID": "\(MultichannelWidget.qiscus.config.appId)",
                 "QISCUS_SDK_TOKEN" : "\(token)"
             ]
             
             Alamofire.upload(multipartFormData: { multipartFormData in
                 multipartFormData.append(self.data!, withName: "file", fileName: self.fileName!, mimeType: "image/jpg")
-            }, to: "\(Qismo.qiscus.config.server.url)/upload", method: .post, headers : header,
+            }, to: "\(MultichannelWidget.qiscus.config.server.url)/upload", method: .post, headers : header,
                    encodingCompletion: { encodingResult in
                    switch encodingResult {
                    case .success(let upload, _, _):
@@ -85,7 +85,7 @@ class QiscusUploaderVC: UIViewController, UIScrollViewDelegate,UITextViewDelegat
                         self.sendButton.isHidden = false
                         self.hiddenProgress()
                         
-                        let message = Qismo.qiscus.newMessage()
+                        let message = MultichannelWidget.qiscus.newMessage()
                         message.type = "file_attachment"
                         message.payload = [
                             "url"       : image["results"]["file"]["url"].stringValue,

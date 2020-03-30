@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MultichannelWidget
 
 class ViewController: UIViewController {
 
@@ -15,6 +16,9 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        //sample purpose
+        self.txtUsername.text = "customer"
+        self.txtUserId.text = "qa_customer@mybb.com"
     }
 
     @IBAction func openMultichannel(_ sender: Any) {
@@ -29,7 +33,7 @@ class ViewController: UIViewController {
             return
         }
         
-        ChatManager.shared.client.initiateChat(userId: userId, username: username, callback: { target in
+        MultichannelWidget.shared.initiateChat(userId: userId, username: username, callback: { target in
             self.navigationController?.pushViewController(target, animated: true)
         })
     }

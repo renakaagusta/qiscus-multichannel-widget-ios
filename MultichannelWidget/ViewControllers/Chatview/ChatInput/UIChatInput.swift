@@ -42,7 +42,7 @@ class UIChatInput: UIView {
     override init(frame: CGRect) {
         // For use in code
         super.init(frame: frame)
-        let nib = UINib(nibName: "UIChatInput", bundle: Qismo.bundle)
+        let nib = UINib(nibName: "UIChatInput", bundle: MultichannelWidget.bundle)
         commonInit(nib: nib)
     }
     
@@ -50,7 +50,7 @@ class UIChatInput: UIView {
     required init?(coder aDecoder: NSCoder) {
         // For use in Interface Builder
         super.init(coder: aDecoder)
-        let nib = UINib(nibName: "UIChatInput", bundle: Qismo.bundle)
+        let nib = UINib(nibName: "UIChatInput", bundle: MultichannelWidget.bundle)
         commonInit(nib: nib)
     }
     
@@ -74,7 +74,7 @@ class UIChatInput: UIView {
     @IBAction private func clickUISendButton(_ sender: Any) {
         guard let text = self.tfInput.text else {return}
         if !text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            let message = Qismo.qiscus.newMessage()
+            let message = MultichannelWidget.qiscus.newMessage()
             message.message = text
             message.type    = "text"
             self._delegate?.send(message: message, onSuccess: { (comment) in

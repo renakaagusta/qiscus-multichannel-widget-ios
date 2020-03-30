@@ -73,7 +73,7 @@ class UIChatPresenter: UIChatUserInteraction {
     
     func loadRoom(withId roomId: String) {
         
-        Qismo.qiscus.getChatRoom(id: roomId, onSuccess: { [weak self] (mRoom, comments) in
+        MultichannelWidget.qiscus.getChatRoom(id: roomId, onSuccess: { [weak self] (mRoom, comments) in
             guard let instance = self else { return }
             instance.room = mRoom
             self?.room = mRoom
@@ -88,7 +88,7 @@ class UIChatPresenter: UIChatUserInteraction {
             instance.comments = instance.groupingComments(comments)
             
             if let lastComment = mRoom.lastComment {
-                Qismo.qiscus.markAsRead(message: lastComment)
+                MultichannelWidget.qiscus.markAsRead(message: lastComment)
             }
             
             instance.viewPresenter?.onLoadMessageFinished()
@@ -140,7 +140,7 @@ class UIChatPresenter: UIChatUserInteraction {
         
         if lastIdToLoad.isEmpty { return }
         
-        Qismo.qiscus.sync(lastMessageId: lastIdToLoad, onSuccess: { [weak self] comments in
+        MultichannelWidget.qiscus.sync(lastMessageId: lastIdToLoad, onSuccess: { [weak self] comments in
             guard let instance = self else { return }
             if comments.count == 0 {
                 return
@@ -252,7 +252,7 @@ class UIChatPresenter: UIChatUserInteraction {
     
     func sendMessage(withComment comment: CommentModel, onSuccess: @escaping (CommentModel) -> Void, onError: @escaping (String) -> Void) {
         addNewCommentUI(comment, isIncoming: false)
-        Qismo.qiscus.send(message: comment, onSuccess: {comment in
+        MultichannelWidget.qiscus.send(message: comment, onSuccess: {comment in
             self.didComment(comment: comment, changeStatus: comment.status)
             onSuccess(comment)
         }, onError: {qError in
@@ -265,7 +265,7 @@ class UIChatPresenter: UIChatUserInteraction {
         // create object comment
         // MARK: TODO improve object generator
         
-        let message = Qismo.qiscus.newMessage()
+        let message = MultichannelWidget.qiscus.newMessage()
         message.message = text
         message.type    = "text"
         if let r = self.room {
@@ -305,7 +305,7 @@ class UIChatPresenter: UIChatUserInteraction {
         
         // choose uidelegate
         if isIncoming {
-            Qismo.qiscus.markAsRead(message: message)
+            MultichannelWidget.qiscus.markAsRead(message: message)
             self.viewPresenter?.onGotNewComment(newSection: section)
         } else {
             self.viewPresenter?.onSendingComment(comment: message, newSection: section)

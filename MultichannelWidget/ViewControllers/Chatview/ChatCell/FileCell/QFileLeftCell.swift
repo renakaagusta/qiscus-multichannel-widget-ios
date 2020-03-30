@@ -42,7 +42,7 @@ class QFileLeftCell: UIBaseChatCell {
         self.lblDate.text = AppUtil.dateToHour(date: message.date())
         
         if !message.isMyComment() {
-            self.ivIcon.image = UIImage(named: "ic_file_black", in: Qismo.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
+            self.ivIcon.image = UIImage(named: "ic_file_black", in: MultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
         }
         
         let url = payload["url"] as? String

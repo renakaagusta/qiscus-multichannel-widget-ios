@@ -57,7 +57,7 @@ class QFileRightCell: UIBaseChatCell {
         
         guard let payload = message.payload else { return }
         
-        self.ivIcon.image = UIImage(named: "ic_file_white", in: Qismo.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysOriginal)
+        self.ivIcon.image = UIImage(named: "ic_file_white", in: MultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysOriginal)
         let url = payload["url"] as? String
         
         self.lblFilename.text = payload["file_name"] as? String
@@ -69,37 +69,37 @@ class QFileRightCell: UIBaseChatCell {
         
         switch message.status {
         case .deleted:
-            self.ivStatus.image = UIImage(named: "ic_deleted", in: Qismo.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
+            self.ivStatus.image = UIImage(named: "ic_deleted", in: MultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
             break
         case .sending, .pending:
             self.lblDate.textColor = ColorConfiguration.timeLabelTextColor
             self.ivStatus.tintColor = ColorConfiguration.sentOrDeliveredColor
             self.lblDate.text = TextConfiguration.sharedInstance.sendingText
-            self.ivStatus.image = UIImage(named: "ic_info_time", in: Qismo.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
+            self.ivStatus.image = UIImage(named: "ic_info_time", in: MultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
             break
         case .sent:
             self.lblDate.textColor = ColorConfiguration.timeLabelTextColor
             self.ivStatus.tintColor = ColorConfiguration.sentOrDeliveredColor
-            self.ivStatus.image = UIImage(named: "ic_sending", in: Qismo.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
+            self.ivStatus.image = UIImage(named: "ic_sending", in: MultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
             break
         case .delivered:
             self.lblDate.textColor = ColorConfiguration.timeLabelTextColor
             self.ivStatus.tintColor = ColorConfiguration.sentOrDeliveredColor
-            self.ivStatus.image = UIImage(named: "ic_read", in: Qismo.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
+            self.ivStatus.image = UIImage(named: "ic_read", in: MultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
             break
         case .read:
             self.lblDate.textColor = ColorConfiguration.timeLabelTextColor
             self.ivStatus.tintColor = ColorConfiguration.readMessageColor
-            self.ivStatus.image = UIImage(named: "ic_read", in: Qismo.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
+            self.ivStatus.image = UIImage(named: "ic_read", in: MultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
             break
         case . failed:
             self.lblDate.textColor = ColorConfiguration.timeLabelTextColor
             self.lblDate.text = TextConfiguration.sharedInstance.failedText
-            self.ivStatus.image = UIImage(named: "ic_warning", in: Qismo.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
+            self.ivStatus.image = UIImage(named: "ic_warning", in: MultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
             self.ivStatus.tintColor = ColorConfiguration.failToSendColor
             break
         case .deleting:
-            self.ivStatus.image = UIImage(named: "ic_deleted", in: Qismo.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
+            self.ivStatus.image = UIImage(named: "ic_deleted", in: MultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
             
             break
         }

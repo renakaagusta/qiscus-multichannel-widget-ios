@@ -10,11 +10,11 @@ import UIKit
 import Alamofire
 import QiscusCoreApi
 
-public class Qismo {
+public class MultichannelWidget {
     
     static var bundle:Bundle{
         get{
-            let podBundle = Bundle(for: Qismo.self)
+            let podBundle = Bundle(for: MultichannelWidget.self)
             
             if let bundleURL = podBundle.url(forResource: "BBChat", withExtension: "bundle") {
                 return Bundle(url: bundleURL)!
@@ -24,16 +24,17 @@ public class Qismo {
         }
     }
     public static var qiscus : QiscusCoreAPI!
-    var network : QismoNetworkManager!
+    private static var network : QismoNetworkManager!
     
     let manager : QismoManager = QismoManager.shared
-    let qiscusServer = QiscusServer(url: URL(string: "https://api.qiscus.com")!, realtimeURL: "", realtimePort: 80)
+    private static let qiscusServer = QiscusServer(url: URL(string: "https://api.qiscus.com")!, realtimeURL: "", realtimePort: 80)
     
-    public init(appID: String) {
-        self.manager.appID = appID
-        Qismo.self.qiscus = QiscusCoreAPI.init(withAppId: appID, server: self.qiscusServer)
-        self.network = QismoNetworkManager(qiscusCoreApi: Qismo.qiscus)
-        
+    public static let shared: MultichannelWidget = MultichannelWidget()
+    
+    public class func setup(appID: String) {
+        QismoManager.shared.appID = appID
+        MultichannelWidget.qiscus = QiscusCoreAPI.init(withAppId: appID, server: qiscusServer)
+        network = QismoNetworkManager(qiscusCoreApi: MultichannelWidget.qiscus)
     }
     
     public func setUser(id: String, displayName: String) {
@@ -55,7 +56,7 @@ public class Qismo {
             "nonce"     : ""
         ]
         
-        self.network.initiateChat(param: param, onSuccess: { roomId in
+        MultichannelWidget.network.initiateChat(param: param, onSuccess: { roomId in
             debugPrint("sukses initiate chat")
             let ui = UIChatViewController()
             ui.roomId = roomId
@@ -63,10 +64,6 @@ public class Qismo {
         }, onError: {
             debugPrint("failed initiate chat")
         })
-        
-//        let ui = UIChatViewController()
-//        callback(ui)
-        
         
     }
     
