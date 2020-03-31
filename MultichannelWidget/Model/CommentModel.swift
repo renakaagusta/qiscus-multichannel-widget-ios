@@ -18,6 +18,18 @@ import QiscusCoreApi
     case pdf
 }
 
+public enum QReplyType:Int{
+    case text
+    case image
+    case video
+    case audio
+    case document
+    case location
+    case contact
+    case file
+    case other
+}
+
 @objc enum CommentModelType:Int {
     case text
     case image
@@ -171,6 +183,29 @@ extension CommentModel {
         data["qiscus_data"] = self.payload
         
         return data
+    }
+    
+    open func replyType(message:String)->QReplyType{
+        if self.isAttachment(text: message){
+            let url = getAttachmentURL(message: message)
+            
+            switch self.fileExtension(fromURL: url) {
+            case "jpg","jpg_","png","png_","gif","gif_":
+                return .image
+            case "m4a","m4a_","aac","aac_","mp3","mp3_":
+                return .audio
+            case "mov","mov_","mp4","mp4_":
+                return .video
+            case "pdf","pdf_":
+                return .document
+            case "doc","docx","ppt","pptx","xls","xlsx","txt":
+                return .file
+            default:
+                return .other
+            }
+        }else{
+            return .text
+        }
     }
     
 }

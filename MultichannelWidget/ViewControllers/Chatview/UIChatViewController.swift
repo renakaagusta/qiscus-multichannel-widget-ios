@@ -273,6 +273,8 @@ class UIChatViewController: UIViewController {
         self.registerClass(nib: UINib(nibName: "QLocationRightCell", bundle:MultichannelWidget.bundle), forMessageCellWithReuseIdentifier: "qLocationRightCell")
         self.registerClass(nib: UINib(nibName: "QFileLeftCell", bundle:MultichannelWidget.bundle), forMessageCellWithReuseIdentifier: "qFileLeftCell")
         self.registerClass(nib: UINib(nibName: "QFileRightCell", bundle:MultichannelWidget.bundle), forMessageCellWithReuseIdentifier: "qFileRightCell")
+        self.registerClass(nib: UINib(nibName: "QReplyLeftCell", bundle:MultichannelWidget.bundle), forMessageCellWithReuseIdentifier: "qReplyLeftCell")
+        self.registerClass(nib: UINib(nibName: "QReplyRightCell", bundle:MultichannelWidget.bundle), forMessageCellWithReuseIdentifier: "qReplyRightCell")
         self.registerClass(nib: UINib(nibName: "EmptyCell", bundle:MultichannelWidget.bundle), forMessageCellWithReuseIdentifier: "emptyCell")
         
     }
@@ -441,6 +443,21 @@ class UIChatViewController: UIViewController {
                     cell.cellMenu = self
                     return cell
                 }
+            }
+        } else if message.type == "reply" {
+            if message.isMyComment() == true {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "qReplyRightCell", for: indexPath) as! QReplyRightCell
+                return cell
+            } else {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "qReplyLeftCell", for: indexPath) as! QReplyLeftCell
+                if self.room?.type == .group {
+                    cell.colorName = colorName
+                    cell.isPublic = true
+                }else {
+                    cell.isPublic = false
+                }
+                cell.cellMenu = self
+                return cell
             }
         }
             let cell = tableView.dequeueReusableCell(withIdentifier: "emptyCell", for: indexPath) as! EmptyCell
@@ -749,6 +766,7 @@ extension UIChatViewController : ReplyChatInputDelegate {
 //// MARK: Handle Cell Menu
 extension UIChatViewController : UIBaseChatCellDelegate {
     func didTap(delete comment: CommentModel) {
+//        QiscusCoreAPI.
 //        QiscusCore.shared.deleteMessages(messageUniqueIds: [comment.uniqId], onSuccess: { (commentsModel) in
 //            print("success delete comment for everyone")
 //        }) { (error) in
