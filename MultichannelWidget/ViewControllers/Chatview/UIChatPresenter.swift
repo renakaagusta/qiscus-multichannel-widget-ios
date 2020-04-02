@@ -345,6 +345,13 @@ class UIChatPresenter: UIChatUserInteraction {
         }
         return nil
     }
+    
+    func deleteMessage(comment: CommentModel) {
+        MultichannelWidget.qiscus.delete(message: comment, onSuccess: { comments in
+            self.onMessageDeleted(message: comment)
+        }, onError: { error in
+        })
+    }
 }
 
 

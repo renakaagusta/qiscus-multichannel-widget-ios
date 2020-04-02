@@ -766,18 +766,19 @@ extension UIChatViewController : ReplyChatInputDelegate {
 //// MARK: Handle Cell Menu
 extension UIChatViewController : UIBaseChatCellDelegate {
     func didTap(delete comment: CommentModel) {
-//        QiscusCoreAPI.
-//        QiscusCore.shared.deleteMessages(messageUniqueIds: [comment.uniqId], onSuccess: { (commentsModel) in
-//            print("success delete comment for everyone")
-//        }) { (error) in
-//            print("failed delete comment for everyone")
-//        }
+        
+        let alert = UIAlertController(title: "Alert", message: "Want to delete this message ?", preferredStyle: UIAlertController.Style.alert)
+        
+        alert.addAction(UIAlertAction(title: "Yes", style: UIAlertAction.Style.default, handler: { action in
+            self.presenter.deleteMessage(comment: comment)
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel))
+        
+        self.present(alert, animated: true, completion: nil)
     }
     
     func didReply(reply comment: CommentModel) {
-//        chatInput.show
         self.chatInput.showReplyView(comment: comment)
-//        self.viewChatInput.frame.size.height = 150
         self.constraintViewInputHeight.constant = 100
     }
 

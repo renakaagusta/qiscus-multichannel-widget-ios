@@ -8,7 +8,7 @@ PODS:
     - QiscusCoreAPI
     - SDWebImage
     - SwiftyJSON
-  - QiscusCoreAPI (0.1.1):
+  - QiscusCoreAPI (0.1.4):
     - SwiftyJSON
   - SDWebImage (5.5.1):
     - SDWebImage/Core (= 5.5.1)
@@ -35,7 +35,7 @@ SPEC CHECKSUMS:
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
   AlamofireImage: be9963c6582d68b39e89191f64c82a7d7bf40fdd
   MultichannelWidget: 731708a798f48d6cc42a3612c8706bb8e9919de8
-  QiscusCoreAPI: 5b3808de06ae2b36c3b04820a855b96391d69a50
+  QiscusCoreAPI: f7da5a62f3ed985e4928242833527e7f2dbc4b62
   SDWebImage: 1245d058b7b8f59adef7a6da6bbafd4f1ab67041
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
 
