@@ -97,9 +97,6 @@ class QReplyLeftCell: UIBaseChatCell {
             let filename = message.fileName(text: text!)
             self.tvCommentContent.text = filename
             let url = URL(string: message.getAttachmentURL(message: text!))
-//            self.ivCommentImage.sd_setShowActivityIndicatorView(true)
-//            self.ivCommentImage.sd_setIndicatorStyle(.gray)
-//            self.ivCommentImage.sd_setImage(with: url)
             self.ivCommentImage.af_setImage(withURL: url!)
             
         case .video:
@@ -147,10 +144,10 @@ class QReplyLeftCell: UIBaseChatCell {
             self.lbName.text = ""
             self.lblNameHeightCons.constant = 0
         }
-////        guard let user = QiscusCore.getProfile() else { return }
-//        if repliedEmail == user.email {
-//            username = "You"
-//        }
+        guard let user = MultichannelWidget.qiscus.userProfile else { return }
+        if repliedEmail == user.email {
+            username = "You"
+        }
         self.lbCommentSender.text = username
     }
     
