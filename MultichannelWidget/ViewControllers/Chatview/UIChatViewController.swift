@@ -276,6 +276,7 @@ class UIChatViewController: UIViewController {
         self.registerClass(nib: UINib(nibName: "QReplyLeftCell", bundle:MultichannelWidget.bundle), forMessageCellWithReuseIdentifier: "qReplyLeftCell")
         self.registerClass(nib: UINib(nibName: "QReplyRightCell", bundle:MultichannelWidget.bundle), forMessageCellWithReuseIdentifier: "qReplyRightCell")
         self.registerClass(nib: UINib(nibName: "EmptyCell", bundle:MultichannelWidget.bundle), forMessageCellWithReuseIdentifier: "emptyCell")
+        self.registerClass(nib: UINib(nibName: "QCardLeftCell", bundle: MultichannelWidget.bundle), forMessageCellWithReuseIdentifier: "qCardLeftCell")
         
     }
     
@@ -459,6 +460,18 @@ class UIChatViewController: UIViewController {
                 cell.cellMenu = self
                 return cell
             }
+        } else if message.type == "card" {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "qCardLeftCell", for: indexPath) as! QCardLeftCell
+            cell.menuConfig = menuConfig
+            cell.actionBlock = { customButton in
+                let webView = WebViewController()
+                webView.url = customButton.url
+                self.navigationController?.pushViewController(webView, animated: true)
+            }
+            cell.cellMenu = self
+            
+            return cell
+            
         }
             let cell = tableView.dequeueReusableCell(withIdentifier: "emptyCell", for: indexPath) as! EmptyCell
             return cell
