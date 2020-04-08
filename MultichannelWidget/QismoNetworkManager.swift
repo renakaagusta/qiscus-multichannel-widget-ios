@@ -25,7 +25,7 @@ class QismoNetworkManager {
 //            mParam = ["nonce" : nonce.nonce]
             mParam.updateValue(nonce.nonce, forKey: "nonce")
             //self.callInitiateChat(param: mParam, onSuccess: onSuccess, onError: onError)
-            Alamofire.request(URL(string: self.urlInitiateChat)!, method: .post, parameters: mParam)
+            Alamofire.request(URL(string: self.urlInitiateChat)!, method: .post, parameters: mParam, encoding: JSONEncoding.default)
             .validate()
             .responseJSON { response in
                 

@@ -47,17 +47,19 @@ public class MultichannelWidget {
         return manager.openChat()
     }
     
-    public func initiateChat(userId: String, username: String, callback: @escaping (UIViewController) -> Void)  {
+    public func initiateChat(userId: String, username: String,avatar: String = "", extras: String? = nil, userProperties: [[String:Any]]? = nil, callback: @escaping (UIViewController) -> Void)  {
         
         let param = [
-            "app_id"    : manager.appID,
-            "user_id"   : userId,
-            "name"  : username,
-            "nonce"     : ""
-        ]
+            "app_id"            : manager.appID,
+            "user_id"           : userId,
+            "name"              : username,
+            "avatar"            : avatar,
+            "extras"            : extras ?? "{}",
+            "user_properties"   : userProperties != nil ? userProperties ?? [] : [],
+            "nonce"             : ""
+            ] as [String : Any]
         
-        MultichannelWidget.network.initiateChat(param: param, onSuccess: { roomId in
-            debugPrint("sukses initiate chat")
+        MultichannelWidget.network.initiateChat(param: param as [String : Any], onSuccess: { roomId in
             let ui = UIChatViewController()
             ui.roomId = roomId
             callback(ui)

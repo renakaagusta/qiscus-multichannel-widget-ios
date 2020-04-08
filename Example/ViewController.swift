@@ -17,8 +17,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         //sample purpose
-        self.txtUsername.text = "customer"
-        self.txtUserId.text = "qa_customer@mybb.com"
+        self.txtUsername.text = "demo_1_mulcan"
+        self.txtUserId.text = "demo_1@multichannel-widget.com"
     }
 
     @IBAction func openMultichannel(_ sender: Any) {
@@ -32,8 +32,14 @@ class ViewController: UIViewController {
             showError(message: "username can't empty")
             return
         }
-        
-        MultichannelWidget.shared.initiateChat(userId: userId, username: username, callback: { target in
+        //sample user properties
+        let userProp = [["key":"job","value":"development"],["key":"Location","value":"Yogyakarta"]]
+        //sample extras
+        let ext = "{\"sample\":\"extras\"}"
+        //sample avatar
+        let ava = "https://image.flaticon.com/icons/svg/145/145867.svg"
+        MultichannelWidget.shared.initiateChat(userId: userId, username: username, avatar: ava, extras: ext, userProperties: userProp
+            ,callback: { target in
             self.navigationController?.pushViewController(target, animated: true)
         })
     }
