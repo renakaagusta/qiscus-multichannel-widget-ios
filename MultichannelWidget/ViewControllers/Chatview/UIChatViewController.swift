@@ -548,6 +548,7 @@ extension UIChatViewController: UIChatViewDelegate {
         //this because after upload image can't update tableview. then need reload comments from chat-sdk
         if isFromUploader {
             self.presenter.loadRoom(withId: roomId)
+        
             self.isFromUploader = false
         }
     }

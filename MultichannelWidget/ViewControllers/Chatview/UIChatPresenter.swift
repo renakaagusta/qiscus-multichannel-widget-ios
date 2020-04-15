@@ -103,6 +103,7 @@ class UIChatPresenter: UIChatUserInteraction {
     /// Update room
     func loadRoom() {
         guard let _room = self.room else { return }
+        self.loadRoom(withId: _room.id)
 //        QiscusCoreAPI.shared.getChatRoomWithMessages(roomId: _room.id, onSuccess: { [weak self] (room,comments) in
 //            guard let instance = self else { return }
 //            if comments.isEmpty {

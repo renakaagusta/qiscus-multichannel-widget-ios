@@ -60,6 +60,7 @@ class QImagesRightCell: UIBaseChatCell {
     func bindData(message: CommentModel) {
         
         setupBalon()
+        self.ivComment.image = nil
         self.lblCaption.isHidden = false
         guard let payload = message.payload else { return }
 
