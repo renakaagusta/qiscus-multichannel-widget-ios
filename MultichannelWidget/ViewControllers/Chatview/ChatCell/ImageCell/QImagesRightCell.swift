@@ -14,6 +14,7 @@ class QImagesRightCell: UIBaseChatCell {
     @IBOutlet weak var lblCaption: UILabel!
     @IBOutlet weak var ivComment: UIImageView!
     @IBOutlet weak var lblDate: UILabel!
+    @IBOutlet weak var marginLblComment: NSLayoutConstraint!
     
     var actionBlock: ((CommentModel) -> Void)? = nil
     
@@ -63,8 +64,13 @@ class QImagesRightCell: UIBaseChatCell {
         self.ivComment.image = nil
         self.lblCaption.isHidden = false
         guard let payload = message.payload else { return }
-
-        self.lblCaption.text = payload["caption"] as? String
+        
+        let caption = payload["caption"] as? String
+        if (caption ?? "").isEmpty {
+            self.marginLblComment.constant = -7
+        }
+            
+        self.lblCaption.text = caption
 
         if let url = payload["url"] as? String {
             if self.ivComment.image == nil {
