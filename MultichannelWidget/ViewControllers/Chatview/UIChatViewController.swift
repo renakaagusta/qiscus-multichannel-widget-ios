@@ -277,6 +277,8 @@ class UIChatViewController: UIViewController {
         self.registerClass(nib: UINib(nibName: "QReplyRightCell", bundle:MultichannelWidget.bundle), forMessageCellWithReuseIdentifier: "qReplyRightCell")
         self.registerClass(nib: UINib(nibName: "EmptyCell", bundle:MultichannelWidget.bundle), forMessageCellWithReuseIdentifier: "emptyCell")
         self.registerClass(nib: UINib(nibName: "QCardLeftCell", bundle: MultichannelWidget.bundle), forMessageCellWithReuseIdentifier: "qCardLeftCell")
+        self.registerClass(nib: UINib(nibName: "QSystemCell", bundle:MultichannelWidget.bundle), forMessageCellWithReuseIdentifier: "qSystemCell")
+        
         
     }
     
@@ -370,7 +372,10 @@ class UIChatViewController: UIViewController {
                 cell.cellMenu = self
                 return cell
             }
-        }else if  message.type == "file_attachment" {
+        } else if message.type == "system_event" {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "qSystemCell", for: indexPath) as! QSystemCell
+            return cell
+        } else if  message.type == "file_attachment" {
             guard let payload = message.payload else {
                     let cell = tableView.dequeueReusableCell(withIdentifier: "emptyCell", for: indexPath) as! EmptyCell
                     return cell

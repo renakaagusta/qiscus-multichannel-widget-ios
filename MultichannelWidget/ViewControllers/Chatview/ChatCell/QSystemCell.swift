@@ -12,6 +12,7 @@ import QiscusCoreApi
 class QSystemCell:  UIBaseChatCell {
     
     @IBOutlet weak var lbComment: UILabel!
+    @IBOutlet weak var ivBackground: UIView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -34,7 +35,13 @@ class QSystemCell:  UIBaseChatCell {
     }
     
     func bindData(message: CommentModel){
+        setupBalon()
         lbComment.text = message.message
+    }
+    
+    func setupBalon() {
+        self.ivBackground.layer.cornerRadius = 5.0
+        self.ivBackground.clipsToBounds = true
     }
     
     
