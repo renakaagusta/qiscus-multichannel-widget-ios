@@ -32,6 +32,8 @@ protocol UIChatViewDelegate {
     func onUpdateComment(comment: CommentModel, indexpath: IndexPath)
     func onUser(name: String, typing: Bool)
     func onUser(name: String, isOnline: Bool, message: String)
+    func onRoomResolved(isResolved: Bool)
+    func onClosingMessageReceived(url: String)
 }
 
 class UIChatPresenter: UIChatUserInteraction {
@@ -77,6 +79,7 @@ class UIChatPresenter: UIChatUserInteraction {
             guard let instance = self else { return }
             instance.room = mRoom
             self?.room = mRoom
+            self?.isResolvedRoom(room :mRoom)
             
             if comments.isEmpty {
                 instance.viewPresenter?.onLoadMessageFailed(message: "no message")
@@ -98,6 +101,26 @@ class UIChatPresenter: UIChatUserInteraction {
             guard let instance = self else { return }
             instance.viewPresenter?.onLoadMessageFailed(message: error.message)
         })
+    }
+    
+    //check is room already resolved
+    func isResolvedRoom(room: RoomModel) {
+        let options = room.options!
+        let param = JSON(parseJSON: options)
+        let isResolve = param["is_resolved"].boolValue
+        viewPresenter?.onRoomResolved(isResolved: isResolve)
+    }
+    
+    //check is closing message (message after resolved)
+    func isClosingMessage(message : CommentModel) {
+        let extras = message.extras
+        if extras?.count == 0 {
+            return
+        }
+        let url = extras!["survey_link"] as! String
+        viewPresenter?.onClosingMessageReceived(url: url)
+        viewPresenter?.onRoomResolved(isResolved: true)
+        
     }
     
     /// Update room
@@ -158,6 +181,8 @@ class UIChatPresenter: UIChatUserInteraction {
                     self?.lastIdToLoad = msg.id
                     
                 }
+                
+                self?.isClosingMessage(message: msg)
             }
             
             if temp.count > 0 {

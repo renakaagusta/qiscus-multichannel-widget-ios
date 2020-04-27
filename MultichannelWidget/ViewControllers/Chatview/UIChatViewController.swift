@@ -66,6 +66,7 @@ class UIChatViewController: UIViewController {
     }()
     
     var chatInput : CustomChatInput = CustomChatInput()
+    var disableInput: DisableInput = DisableInput()
     private var presenter: UIChatPresenter = UIChatPresenter()
     
     var heightAtIndexPath: [String: CGFloat] = [:]
@@ -79,6 +80,7 @@ class UIChatViewController: UIViewController {
     }
     var chatDelegate : UIChatView? = nil
     var isFromUploader = false
+    var isResolved = false
     
     // UI Config
     var usersColor : [String:UIColor] = [String:UIColor]()
@@ -187,7 +189,13 @@ class UIChatViewController: UIViewController {
         self.setupTableView()
         self.chatInput.chatInputDelegate = self
         self.chatInput.replyChatInputDelegate = self
-        self.setupInputBar(self.chatInput)
+        self.disableInput.disableInputDelegate = self
+        if self.isResolved {
+            self.setupDisableInput(self.disableInput)
+        } else {
+            self.setupInputBar(self.chatInput)
+        }
+        
     }
     
     private func setupInputBar(_ inputchatview: UIChatInput) {
@@ -205,6 +213,22 @@ class UIChatViewController: UIViewController {
             inputchatview.bottomAnchor.constraint(equalTo: self.viewChatInput.bottomAnchor, constant: 0)
             ])
         
+    }
+    
+    private func setupDisableInput(_ disableInput: DisableInput) {
+        disableInput.frame.size    = self.viewChatInput.frame.size
+        disableInput.frame.origin  = CGPoint.init(x: 0, y: 0)
+        disableInput.translatesAutoresizingMaskIntoConstraints = false
+//        disableInput.delegate = self
+        
+        self.viewChatInput.addSubview(disableInput)
+        
+        NSLayoutConstraint.activate([
+            disableInput.topAnchor.constraint(equalTo: self.viewChatInput.topAnchor, constant: 0),
+            disableInput.leftAnchor.constraint(equalTo: self.viewChatInput.leftAnchor, constant: 0),
+            disableInput.rightAnchor.constraint(equalTo: self.viewChatInput.rightAnchor, constant: 0),
+            disableInput.bottomAnchor.constraint(equalTo: self.viewChatInput.bottomAnchor, constant: 0)
+            ])
     }
     
     private func setupNavigationTitle(){
@@ -368,6 +392,11 @@ class UIChatViewController: UIViewController {
                     cell.isPublic = true
                 }else {
                     cell.isPublic = false
+                }
+                cell.openUrl = { url in
+                    let webView = WebViewController()
+                    webView.url = url.absoluteString
+                    self.navigationController?.pushViewController(webView, animated: true)
                 }
                 cell.cellMenu = self
                 return cell
@@ -608,6 +637,19 @@ extension UIChatViewController: UIChatViewDelegate {
             }
         }
     }
+    
+    func onRoomResolved(isResolved: Bool) {
+        if isResolved {
+            self.isResolved = isResolved
+            self.setupDisableInput(self.disableInput)
+        }
+    }
+    
+    func onClosingMessageReceived(url: String) {
+        let webView = WebViewController()
+        webView.url = url
+        self.navigationController?.pushViewController(webView, animated: true)
+    }
 }
 
 extension UIChatViewController: UITableViewDataSource {
@@ -779,6 +821,19 @@ extension UIChatViewController : ReplyChatInputDelegate {
         self.constraintViewInputHeight.constant = 50
     }
     
+}
+
+extension UIChatViewController : DisableChatInputDelegate {
+    func startNewChat(vc: UIChatViewController) {
+        var vcArray = self.navigationController?.viewControllers
+        vcArray!.removeLast()
+        vcArray!.append(vc)
+        self.navigationController?.setViewControllers(vcArray!, animated: true)
+    }
+    
+    func finishVC() {
+        self.dismiss(animated: true, completion: nil)
+    }
     
 }
 

@@ -9,12 +9,13 @@ import UIKit
 
 import QiscusCoreApi
 
-class QTextLeftCell: UIBaseChatCell {
+class QTextLeftCell: UIBaseChatCell, UITextViewDelegate {
     @IBOutlet weak var lbName: UILabel!
     @IBOutlet weak var tvContent: UILabel!
     @IBOutlet weak var ivBaloonLeft: UIImageView!
     @IBOutlet weak var lbTime: UILabel!
     @IBOutlet weak var viewContainer: UIView!
+    @IBOutlet weak var tvContent2: UITextView!
     @IBOutlet weak var lbNameHeight: NSLayoutConstraint!
     @IBOutlet weak var lbNameLeading: NSLayoutConstraint!
     @IBOutlet weak var lbNameTrailing: NSLayoutConstraint!
@@ -22,16 +23,19 @@ class QTextLeftCell: UIBaseChatCell {
     var isPublic: Bool = false
     var menuConfig = enableMenuConfig()
     var colorName : UIColor = UIColor.black
+    var openUrl: ((URL) -> Void)? = nil
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         self.setMenu()
+        self.tvContent2.delegate = self
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         self.setMenu()
         // Configure the view for the selected state
+        self.tvContent2.delegate = self
     }
     
     override func present(message: CommentModel) {
@@ -51,6 +55,9 @@ class QTextLeftCell: UIBaseChatCell {
         self.lbTime.textColor = ColorConfiguration.timeLabelTextColor
         self.tvContent.text = message.message
         self.tvContent.textColor = ColorConfiguration.leftBaloonTextColor
+        
+        self.tvContent2.attributedText = NSAttributedString(string: message.message)
+        self.tvContent2.textColor = ColorConfiguration.leftBaloonTextColor
         
         if(isPublic == true){
             self.lbName.text = message.username
@@ -80,6 +87,13 @@ class QTextLeftCell: UIBaseChatCell {
         formatter.timeZone      = TimeZone.current
         let defaultTimeZoneStr = formatter.string(from: date);
         return defaultTimeZoneStr
+    }
+    
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+        if openUrl != nil {
+            self.openUrl!(URL)
+        }
+        return false
     }
 
 }

@@ -51,7 +51,6 @@ class QismoNetworkManager {
                     debugPrint(qError.message)
                 })
                 
-                debugPrint(chat)
             }
             
         }, onError: { onError in

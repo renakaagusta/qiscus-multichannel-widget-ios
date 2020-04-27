@@ -48,6 +48,14 @@ public class MultichannelWidget {
     }
     
     public func initiateChat(userId: String, username: String,avatar: String = "", extras: String? = nil, userProperties: [[String:Any]]? = nil, callback: @escaping (UIViewController) -> Void)  {
+        let savedRoomId = SharedPreferences.getRoomId()
+        
+        if savedRoomId != nil {
+            let ui = UIChatViewController()
+            ui.roomId = savedRoomId!
+            callback(ui)
+            return
+        }
         
         let param = [
             "app_id"            : manager.appID,
@@ -60,6 +68,9 @@ public class MultichannelWidget {
             ] as [String : Any]
         
         MultichannelWidget.network.initiateChat(param: param as [String : Any], onSuccess: { roomId in
+            
+            SharedPreferences.saveParam(param: param)
+            SharedPreferences.saveRoomId(id: roomId)
             let ui = UIChatViewController()
             ui.roomId = roomId
             callback(ui)
