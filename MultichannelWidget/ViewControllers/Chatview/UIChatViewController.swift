@@ -826,9 +826,11 @@ extension UIChatViewController : ReplyChatInputDelegate {
 extension UIChatViewController : DisableChatInputDelegate {
     func startNewChat(vc: UIChatViewController) {
         var vcArray = self.navigationController?.viewControllers
-        vcArray!.removeLast()
-        vcArray!.append(vc)
-        self.navigationController?.setViewControllers(vcArray!, animated: true)
+        if vcArray != nil {
+            vcArray!.removeLast()
+            vcArray!.append(vc)
+            self.navigationController?.setViewControllers(vcArray!, animated: true)
+        }
     }
     
     func finishVC() {

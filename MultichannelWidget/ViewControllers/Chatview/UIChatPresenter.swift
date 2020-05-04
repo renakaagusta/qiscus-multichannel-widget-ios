@@ -44,6 +44,7 @@ class UIChatPresenter: UIChatUserInteraction {
     var participants : [MemberModel] = [MemberModel]()
     var loadMoreDispatchGroup: DispatchGroup = DispatchGroup()
     var lastIdToLoad: String = ""
+    var lastIdToSynch: String = ""
     
     init() {
         self.comments = [[CommentModel]]()
@@ -96,6 +97,7 @@ class UIChatPresenter: UIChatUserInteraction {
             
             instance.viewPresenter?.onLoadMessageFinished()
             self?.lastIdToLoad = String(self?.room?.id ?? "")
+            self?.lastIdToSynch = String(comments[0].id)
             
         }, onError: { [weak self] error in
             guard let instance = self else { return }
@@ -162,9 +164,9 @@ class UIChatPresenter: UIChatUserInteraction {
     
     func syncMessage() {
         
-        if lastIdToLoad.isEmpty { return }
+        if lastIdToSynch.isEmpty { return }
         
-        MultichannelWidget.qiscus.sync(lastMessageId: lastIdToLoad, onSuccess: { [weak self] comments in
+        MultichannelWidget.qiscus.sync(lastMessageId: lastIdToSynch, onSuccess: { [weak self] comments in
             guard let instance = self else { return }
             if comments.count == 0 {
                 return
@@ -177,8 +179,8 @@ class UIChatPresenter: UIChatUserInteraction {
                     instance.addNewCommentUI(msg, isIncoming: true)
                     temp.append(msg)
                 }
-                if Int64(msg.id) ?? 0 > Int64(instance.lastIdToLoad) ?? 0 {
-                    self?.lastIdToLoad = msg.id
+                if Int64(msg.id) ?? 0 > Int64(instance.lastIdToSynch) ?? 0 {
+                    self?.lastIdToSynch = msg.id
                     
                 }
                 
@@ -186,7 +188,6 @@ class UIChatPresenter: UIChatUserInteraction {
             }
             
             if temp.count > 0 {
-                instance.comments.append(temp)
                 instance.viewPresenter?.onLoadMoreMesageFinished()
             }
         }, onError: { error in
@@ -207,8 +208,8 @@ class UIChatPresenter: UIChatUserInteraction {
                 // avoiding on force unwrap optional value
                 guard let lastGroup = instance.comments.last else { return }
                 guard let lastComment = lastGroup.last else { return }
-                guard let roomId = instance.room?.id else { return }
-                guard let lastCommentId = Int(lastComment.id) else { return }
+//                guard let roomId = instance.room?.id else { return }
+//                guard let lastCommentId = Int(lastComment.id) else { return }
                 
                 // make sure that last comment's id isn't empty or load more for current id is still in process to prevent duplicate message
                 if lastComment.id.isEmpty || instance.lastIdToLoad == lastComment.id {
@@ -275,6 +276,8 @@ class UIChatPresenter: UIChatUserInteraction {
         addNewCommentUI(comment, isIncoming: false)
         MultichannelWidget.qiscus.send(message: comment, onSuccess: {comment in
             self.didComment(comment: comment, changeStatus: comment.status)
+            //by default, lastId is empty...and keep like that if you not update after send first msg :)
+            self.lastIdToSynch = comment.id
             onSuccess(comment)
         }, onError: {qError in
             debugPrint(qError.message)
