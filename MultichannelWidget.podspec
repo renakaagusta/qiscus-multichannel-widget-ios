@@ -28,7 +28,7 @@ s.requires_arc	= false
 s.dependency 'Alamofire'
 s.dependency 'AlamofireImage'
 s.dependency 'SwiftyJSON'
-s.dependency 'QiscusCoreAPI'
+s.dependency 'QiscusCoreAPI', '0.1.4'
 s.dependency 'SDWebImage'
 
 end

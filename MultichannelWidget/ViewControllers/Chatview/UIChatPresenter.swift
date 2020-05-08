@@ -119,9 +119,10 @@ class UIChatPresenter: UIChatUserInteraction {
         if extras?.count == 0 {
             return
         }
-        let url = extras!["survey_link"] as! String
-        viewPresenter?.onClosingMessageReceived(url: url)
-        viewPresenter?.onRoomResolved(isResolved: true)
+        if let url = extras!["survey_link"] as? String {
+            viewPresenter?.onClosingMessageReceived(url: url)
+            viewPresenter?.onRoomResolved(isResolved: true)
+        }
         
     }
     
