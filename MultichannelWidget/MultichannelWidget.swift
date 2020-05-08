@@ -80,4 +80,8 @@ public class MultichannelWidget {
         
     }
     
+    public func isMultichannelNotification(userInfo: [String:Any]) -> Bool {
+        // check app id
+    }
+    
 }
