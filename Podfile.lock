@@ -33,7 +33,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Alamofire: 9d5c5f602928e512395b30950c5984eca840093c
   AlamofireImage: c4a2ba349885fb3064feb74d2e547bd42ce9be10
-  MultichannelWidget: 1e82cd0ae92b9e08bfac2e8d5877355368015ae0
+  MultichannelWidget: 1626bfd3fff639fbfc7277a041db88a33a61f5e5
   QiscusCoreAPI: 150cbb6c076540aa48afae45815f078211984827
   SDWebImage: 48b88379b798fd1e4298f95bb25d2cdabbf4deb3
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
