@@ -12,7 +12,7 @@ s.license      = "MIT"
 s.author       = { "juang@qiscus.co" => "juang@qiscus.co" }
 
 s.platform     = :ios, "10.0"
-
+s.swift_version = '4.2'
 s.source       = { :git => "https://github.com/Qiscus-Integration/ios-multichannel-widget.git" }
 
 s.source_files  = "MultichannelWidget", "MultichannelWidget/**/*.{h,m,swift,xib}"
