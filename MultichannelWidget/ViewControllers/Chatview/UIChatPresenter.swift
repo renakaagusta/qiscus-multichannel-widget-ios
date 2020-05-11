@@ -76,7 +76,7 @@ class UIChatPresenter: UIChatUserInteraction {
     
     func loadRoom(withId roomId: String) {
         
-        MultichannelWidget.qiscus.getChatRoom(id: roomId, onSuccess: { [weak self] (mRoom, comments) in
+        QismoManager.shared.qiscus.getChatRoom(id: roomId, onSuccess: { [weak self] (mRoom, comments) in
             guard let instance = self else { return }
             instance.room = mRoom
             self?.room = mRoom
@@ -92,7 +92,7 @@ class UIChatPresenter: UIChatUserInteraction {
             instance.comments = instance.groupingComments(comments)
             
             if let lastComment = mRoom.lastComment {
-                MultichannelWidget.qiscus.markAsRead(message: lastComment)
+                QismoManager.shared.qiscus.markAsRead(message: lastComment)
             }
             
             instance.viewPresenter?.onLoadMessageFinished()
@@ -167,7 +167,7 @@ class UIChatPresenter: UIChatUserInteraction {
         
         if lastIdToSynch.isEmpty { return }
         
-        MultichannelWidget.qiscus.sync(lastMessageId: lastIdToSynch, onSuccess: { [weak self] comments in
+        QismoManager.shared.qiscus.sync(lastMessageId: lastIdToSynch, onSuccess: { [weak self] comments in
             guard let instance = self else { return }
             if comments.count == 0 {
                 return
@@ -219,7 +219,7 @@ class UIChatPresenter: UIChatUserInteraction {
                 
                 // update lastIdToLoad value
                 instance.lastIdToLoad = lastComment.id
-                MultichannelWidget.qiscus.loadMore(lastMessage: lastComment, limit: 10, onSuccess: { comments in
+                QismoManager.shared.qiscus.loadMore(lastMessage: lastComment, limit: 10, onSuccess: { comments in
 //                     notify the dispatch group that the current process is complete and able to continue to the next load more process
                     instance.loadMoreDispatchGroup.leave()
                     
@@ -275,7 +275,7 @@ class UIChatPresenter: UIChatUserInteraction {
     
     func sendMessage(withComment comment: CommentModel, onSuccess: @escaping (CommentModel) -> Void, onError: @escaping (String) -> Void) {
         addNewCommentUI(comment, isIncoming: false)
-        MultichannelWidget.qiscus.send(message: comment, onSuccess: {comment in
+        QismoManager.shared.qiscus.send(message: comment, onSuccess: {comment in
             self.didComment(comment: comment, changeStatus: comment.status)
             //by default, lastId is empty...and keep like that if you not update after send first msg :)
             self.lastIdToSynch = comment.id
@@ -290,7 +290,7 @@ class UIChatPresenter: UIChatUserInteraction {
         // create object comment
         // MARK: TODO improve object generator
         
-        let message = MultichannelWidget.qiscus.newMessage()
+        let message = QismoManager.shared.qiscus.newMessage()
         message.message = text
         message.type    = "text"
         if let r = self.room {
@@ -330,7 +330,7 @@ class UIChatPresenter: UIChatUserInteraction {
         
         // choose uidelegate
         if isIncoming {
-            MultichannelWidget.qiscus.markAsRead(message: message)
+            QismoManager.shared.qiscus.markAsRead(message: message)
             self.viewPresenter?.onGotNewComment(newSection: section)
         } else {
             self.viewPresenter?.onSendingComment(comment: message, newSection: section)
@@ -372,7 +372,7 @@ class UIChatPresenter: UIChatUserInteraction {
     }
     
     func deleteMessage(comment: CommentModel) {
-        MultichannelWidget.qiscus.delete(message: comment, onSuccess: { comments in
+        QismoManager.shared.qiscus.delete(message: comment, onSuccess: { comments in
             self.onMessageDeleted(message: comment)
         }, onError: { error in
         })

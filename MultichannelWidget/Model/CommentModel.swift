@@ -93,7 +93,7 @@ extension CommentModel {
 
     func isMyComment() -> Bool {
          //change this later when user savevd on presisstance storage
-        if let user = MultichannelWidget.qiscus.userProfile {
+        if let user = QismoManager.shared.qiscus.userProfile {
             return userEmail == user.email
         } else {
             return false

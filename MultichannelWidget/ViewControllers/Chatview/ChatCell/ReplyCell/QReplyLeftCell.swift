@@ -144,7 +144,7 @@ class QReplyLeftCell: UIBaseChatCell {
             self.lbName.text = ""
             self.lblNameHeightCons.constant = 0
         }
-        guard let user = MultichannelWidget.qiscus.userProfile else { return }
+        guard let user = QismoManager.shared.qiscus.userProfile else { return }
         if repliedEmail == user.email {
             username = "You"
         }

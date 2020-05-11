@@ -74,7 +74,7 @@ class UIChatInput: UIView {
     @IBAction private func clickUISendButton(_ sender: Any) {
         guard let text = self.tfInput.text else {return}
         if !text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            let message = MultichannelWidget.qiscus.newMessage()
+            let message = QismoManager.shared.qiscus.newMessage()
             message.message = text
             message.type    = "text"
             self._delegate?.send(message: message, onSuccess: { (comment) in
