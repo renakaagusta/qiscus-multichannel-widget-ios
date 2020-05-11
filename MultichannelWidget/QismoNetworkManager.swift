@@ -14,8 +14,8 @@ class QismoNetworkManager {
     var qiscus: QiscusCoreAPI
     let urlInitiateChat = "https://multichannel.qiscus.com/api/v1/qiscus/initiate_chat"
     
-    public init(qiscusCoreApi : QiscusCoreAPI) {
-        self.qiscus = qiscusCoreApi
+    public init(QiscusCoreAPI : QiscusCoreAPI) {
+        self.qiscus = QiscusCoreAPI
     }
     
     public func initiateChat(param: [String:Any], onSuccess: @escaping(String) -> Void, onError: @escaping() -> Void) {

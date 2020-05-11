@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        MultichannelWidget.setup(appID: "karm-gzu41e4e4dv9fu3f")
+        MultichannelWidget.setup(appID: "hap-vq8ahvrbmhiyypcmg")
         return true
     }
 

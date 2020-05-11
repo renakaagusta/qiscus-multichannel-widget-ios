@@ -34,7 +34,7 @@ public class MultichannelWidget {
     public class func setup(appID: String) {
         QismoManager.shared.appID = appID
         MultichannelWidget.qiscus = QiscusCoreAPI.init(withAppId: appID, server: qiscusServer)
-        network = QismoNetworkManager(qiscusCoreApi: MultichannelWidget.qiscus)
+        network = QismoNetworkManager(QiscusCoreAPI: MultichannelWidget.qiscus)
     }
     
     public func setUser(id: String, displayName: String) {
@@ -82,6 +82,7 @@ public class MultichannelWidget {
     
     public func isMultichannelNotification(userInfo: [String:Any]) -> Bool {
         // check app id
+        return false
     }
     
 }

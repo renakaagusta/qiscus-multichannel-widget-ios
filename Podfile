@@ -6,6 +6,7 @@ target 'Example' do
   use_frameworks!
 
   # Pods for Example
+#  pod 'QiscusCoreAPI', :path => '../QiscusCoreAPI/Build'
   pod 'MultichannelWidget', :path => '.'
 
 end

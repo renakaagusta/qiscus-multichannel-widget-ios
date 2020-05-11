@@ -25,10 +25,10 @@ s.resource_bundles = {
 s.framework		= 'UIKit', 'AVFoundation'
 s.requires_arc	= false
 
-s.dependency 'Alamofire'
+s.dependency 'Alamofire', '4.9'
 s.dependency 'AlamofireImage'
 s.dependency 'SwiftyJSON'
-s.dependency 'QiscusCoreAPI', '~> 0.2.1'
+s.dependency 'QiscusCoreAPI', '~> 0.2.2'
 s.dependency 'SDWebImage'
 
 end
