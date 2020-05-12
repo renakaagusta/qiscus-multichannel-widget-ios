@@ -26,20 +26,14 @@ public class MultichannelWidget {
     
     let manager : QismoManager = QismoManager.shared
     
-    public init(appID: String) {
-        manager.setup(appID: appID)
+    public init(appID: String, server : QiscusServer? = nil) {
+        self.manager.setup(appID: appID, server: server)
     }
     
     public func setUser(id: String, displayName: String) {
         self.manager.setUSer(id: id, username: displayName)
     }
-    
-    public func openChat() -> UIViewController {
-        
-        
-        return manager.openChat()
-    }
-    
+
     public func initiateChat(userId: String, username: String,avatar: String = "", extras: String? = nil, userProperties: [[String:Any]]? = nil, callback: @escaping (UIViewController) -> Void)  {
         
         manager.initiateChat(userId: userId, username: username, avatar: avatar, extras: extras, userProperties: userProperties, callback: callback)

@@ -17,28 +17,20 @@ class QismoManager {
     private var username : String = ""
     var network : QismoNetworkManager!
     var qiscus : QiscusCoreAPI!
-    
-    let qiscusServer = QiscusServer(url: URL(string: "https://api.qiscus.com")!, realtimeURL: "", realtimePort: 80)
+    var qiscusServer = QiscusServer(url: URL(string: "https://api.qiscus.com")!, realtimeURL: "", realtimePort: 80)
     
     func setUSer(id: String, username: String) {
         self.userID = id
         self.username = username
     }
     
-    func setup(appID: String) {
+    func setup(appID: String, server : QiscusServer? = nil) {
+        self.appID = appID
         self.qiscus = QiscusCoreAPI.init(withAppId: appID, server: qiscusServer)
         self.network = QismoNetworkManager(QiscusCoreAPI: self.qiscus)
-    }
-    
-    func openChat() -> UIViewController {
-//        let baseURL = "https://a70c02a1.ngrok.io"
-        let baseURL = "https://mybb-webview.herokuapp.com/"
-        let hide = "#hide-header"
-        let url = "\(baseURL)?appid=\(self.appID)&email=\(self.userID)&username=\(self.username)"
-        
-        let target = QismoViewController()
-        target.url = URL(string: url)
-        return target
+        if let _server = server {
+            self.qiscusServer = _server
+        }
     }
     
     func initiateChat(userId: String, username: String,avatar: String = "", extras: String? = nil, userProperties: [[String:Any]]? = nil, callback: @escaping (UIViewController) -> Void)  {
@@ -68,8 +60,8 @@ class QismoManager {
             let ui = UIChatViewController()
             ui.roomId = roomId
             callback(ui)
-        }, onError: {
-            debugPrint("failed initiate chat")
+        }, onError: { error in
+            debugPrint("failed initiate chat, \(error)")
         })
         
     }

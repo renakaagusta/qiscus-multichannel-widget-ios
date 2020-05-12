@@ -8,6 +8,7 @@
 import Foundation
 import QiscusCoreApi
 import Alamofire
+import SwiftyJSON
 
 class QismoNetworkManager {
     
@@ -18,29 +19,28 @@ class QismoNetworkManager {
         self.qiscus = QiscusCoreAPI
     }
     
-    public func initiateChat(param: [String:Any], onSuccess: @escaping(String) -> Void, onError: @escaping() -> Void) {
+    public func initiateChat(param: [String:Any], onSuccess: @escaping(String) -> Void, onError: @escaping(String) -> Void) {
         var mParam = param
         
         self.qiscus.getJWTNonce(onSuccess: { nonce in
 //            mParam = ["nonce" : nonce.nonce]
             mParam.updateValue(nonce.nonce, forKey: "nonce")
             //self.callInitiateChat(param: mParam, onSuccess: onSuccess, onError: onError)
-            Alamofire.request(URL(string: self.urlInitiateChat)!, method: .post, parameters: mParam, encoding: JSONEncoding.default)
+            let request = Alamofire.request(URL(string: self.urlInitiateChat)!, method: .post, parameters: mParam, encoding: JSONEncoding.default)
             .validate()
             .responseJSON { response in
-                
                 guard let value = response.result.value as? [String: Any],
                 let chat = value["data"] as? [String: Any] else {
                   return
                 }
                 //get identityToken
                 guard let identityToken = chat["identity_token"] as? String else {
-                    onError()
+                    onError("Failed to parsing token")
                     return
                 }
                 
                 guard let roomId = chat["room_id"] as? String else {
-                    onError()
+                    onError("failed to parsing room id")
                     return
                 }
                 //login sdk
@@ -52,9 +52,10 @@ class QismoNetworkManager {
                 })
                 
             }
-            
-        }, onError: { onError in
-            print(onError.message)
+            print(request.debugDescription)
+        }, onError: { error in
+            print(error.message)
+            onError(error.message)
         })
     }
     
