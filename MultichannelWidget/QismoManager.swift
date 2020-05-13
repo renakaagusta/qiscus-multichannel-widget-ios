@@ -7,6 +7,8 @@
 
 import Foundation
 import QiscusCoreApi
+import SwiftyJSON
+import UserNotifications
 
 class QismoManager {
     
@@ -65,4 +67,35 @@ class QismoManager {
         })
         
     }
+    
+    // MARK : Push Notifications
+    func handleNotification(userInfo: [AnyHashable : Any]) {
+        let json = JSON(userInfo)
+        print(json)
+
+        guard let qiscusEvent = json["qiscus_sdk"].string else { return }
+        if qiscusEvent == "post_comment" {
+            let roomId = json["qiscus_room_id"].intValue
+            self.removeNotification(withRoom: roomId)
+        }
+        // mybe for another notif
+    }
+    
+    private func removeNotification(withRoom id: Int) {
+        // remove all notification in room
+        let notif = UNUserNotificationCenter.current()
+        notif.getDeliveredNotifications { (n) in
+            n.forEach { (notification) in
+                let info = notification.request.content.userInfo
+                let _json = JSON(info)
+                let _roomId = _json["qiscus_room_id"].intValue
+                if _roomId == id {
+                    // remove notification with identifier for samem room id
+                    notif.removeDeliveredNotifications(withIdentifiers: [notification.request.identifier])
+                }
+            }
+        }
+    }
+    
+    
 }

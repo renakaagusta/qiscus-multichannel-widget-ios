@@ -53,4 +53,8 @@ public class MultichannelWidget {
         return false
     }
     
+    public func tapNotification(userInfo : [AnyHashable : Any]) {
+        manager.handleNotification(userInfo: userInfo)
+    }
+    
 }
