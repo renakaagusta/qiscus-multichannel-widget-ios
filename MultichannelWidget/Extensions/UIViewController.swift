@@ -120,6 +120,31 @@ extension UINavigationController {
     }
 }
 
+extension UIApplication {
+
+    class func currentViewController(_ base: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
+        if let nav = base as? UINavigationController {
+            return currentViewController(nav.visibleViewController)
+        }
+        
+        if let tab = base as? UITabBarController {
+            let moreNavigationController = tab.moreNavigationController
+            
+            if let top = moreNavigationController.topViewController, top.view.window != nil {
+                return currentViewController(top)
+            } else if let selected = tab.selectedViewController {
+                return currentViewController(selected)
+            }
+        }
+        
+        if let presented = base?.presentedViewController {
+            return currentViewController(presented)
+        }
+        
+        return base
+    }
+}
+
 extension UIBaseChatCell {
     
     func getBallon()->UIImage?{

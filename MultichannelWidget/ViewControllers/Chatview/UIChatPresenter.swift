@@ -22,6 +22,7 @@ protocol UIChatUserInteraction {
 protocol UIChatViewDelegate {
     func onLoadRoomFinished(roomName: String, roomAvatarURL: URL?)
     func onLoadRoomFinished(room: RoomModel)
+    func onLoading(message: String)
     func onLoadMessageFinished()
     func onLoadMessageFailed(message: String)
     func onLoadMoreMesageFinished()
@@ -75,7 +76,8 @@ class UIChatPresenter: UIChatUserInteraction {
     }
     
     func loadRoom(withId roomId: String) {
-        
+        // Show Loading
+        self.viewPresenter?.onLoading(message: "Load Message...")
         QismoManager.shared.qiscus.getChatRoom(id: roomId, onSuccess: { [weak self] (mRoom, comments) in
             guard let instance = self else { return }
             instance.room = mRoom

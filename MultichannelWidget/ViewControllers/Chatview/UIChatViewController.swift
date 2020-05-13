@@ -61,6 +61,9 @@ class UIChatViewController: UIViewController {
     @IBOutlet weak var progressBar: UIProgressView!
     @IBOutlet weak var heightProgressBar: NSLayoutConstraint!
     
+    @IBOutlet weak var labelEmptyMessage: UILabel!
+    @IBOutlet weak var labelEmptyNotes: UILabel!
+    
     lazy var chatTitleView : UIChatNavigation = {
         return UIChatNavigation()
     }()
@@ -514,6 +517,10 @@ class UIChatViewController: UIViewController {
 
 // MARK: UIChatDelegate
 extension UIChatViewController: UIChatViewDelegate {
+    func onLoading(message: String) {
+        self.labelEmptyMessage.text = message
+    }
+    
     func onReloadComment(){
         self.tableViewConversation.reloadData()
     }

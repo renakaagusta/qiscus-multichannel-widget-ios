@@ -77,8 +77,19 @@ class QismoManager {
         if qiscusEvent == "post_comment" {
             let roomId = json["qiscus_room_id"].intValue
             self.removeNotification(withRoom: roomId)
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(1)) {
+               self.redirectToChat(roomID: roomId)
+            }
         }
         // mybe for another notif
+    }
+    
+    private func redirectToChat(roomID id: Int) {
+        let current = UIApplication.currentViewController()
+        let target = UIChatViewController()
+        // MARK: TODO get qiscus room from local db
+        target.roomId = String(id)
+        current?.navigationController?.pushViewController(target, animated: true)
     }
     
     private func removeNotification(withRoom id: Int) {
