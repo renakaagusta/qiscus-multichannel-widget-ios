@@ -20,10 +20,18 @@ class QismoManager {
     var network : QismoNetworkManager!
     var qiscus : QiscusCoreAPI!
     var qiscusServer = QiscusServer(url: URL(string: "https://api.qiscus.com")!, realtimeURL: "", realtimePort: 80)
+    var deviceToken : String = "" // save device token for 1st time or before login
+    
     
     func setUSer(id: String, username: String) {
         self.userID = id
         self.username = username
+    }
+    
+    func clear() {
+        self.userID = ""
+        self.username = ""
+        self.qiscus.signOut()
     }
     
     func setup(appID: String, server : QiscusServer? = nil) {
@@ -62,6 +70,15 @@ class QismoManager {
             let ui = UIChatViewController()
             ui.roomId = roomId
             callback(ui)
+            
+            // check device token
+            if !self.deviceToken.isEmpty {
+                self.qiscus.register(deviceToken: self.deviceToken, isDevelopment: false, onSuccess: { (success) in
+                    if success { self.deviceToken = "" }
+                }) { (error) in
+                    //
+                }
+            }
         }, onError: { error in
             debugPrint("failed initiate chat, \(error)")
         })
