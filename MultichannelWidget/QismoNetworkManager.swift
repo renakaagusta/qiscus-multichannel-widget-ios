@@ -29,6 +29,7 @@ class QismoNetworkManager {
             let request = Alamofire.request(URL(string: self.urlInitiateChat)!, method: .post, parameters: mParam, encoding: JSONEncoding.default)
             .validate()
             .responseJSON { response in
+                print("network result \(response.result.isFailure)")
                 guard let value = response.result.value as? [String: Any],
                 let chat = value["data"] as? [String: Any] else {
                   return
