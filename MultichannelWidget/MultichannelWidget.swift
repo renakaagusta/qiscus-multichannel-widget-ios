@@ -45,9 +45,9 @@ public class MultichannelWidget {
         
     }
     
-    public func register(deviceToken token: String, isDevelopment: Bool, onSuccess: @escaping (Bool) -> Void, onError: @escaping (String) -> Void){
+    public func register(deviceToken token: String, onSuccess: @escaping (Bool) -> Void, onError: @escaping (String) -> Void){
         self.manager.deviceToken = token
-        manager.qiscus.register(deviceToken: token, isDevelopment: isDevelopment, onSuccess: { (response) in
+        manager.qiscus.register(deviceToken: token, isDevelopment: false, onSuccess: { (response) in
             if response { self.manager.deviceToken = "" }
             onSuccess(response)
         }) { (error) in
