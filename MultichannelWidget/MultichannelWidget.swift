@@ -30,8 +30,8 @@ public class MultichannelWidget {
         self.manager.setup(appID: appID, server: server)
     }
     
-    public func setUser(id: String, displayName: String) {
-        self.manager.setUSer(id: id, username: displayName)
+    public func setUser(id: String, displayName: String, avatarUrl: String = "") {
+        self.manager.setUser(id: id, username: displayName, avatarUrl: avatarUrl)
     }
     
     /// Clear all user data or logout
@@ -39,7 +39,7 @@ public class MultichannelWidget {
         self.manager.clear()
     }
 
-    public func initiateChat(userId: String, username: String,avatar: String = "", extras: String? = nil, userProperties: [[String:Any]]? = nil, callback: @escaping (UIViewController) -> Void)  {
+    public func initiateChat(userId: String? = nil, username: String? = nil, avatar: String = "", extras: String? = nil, userProperties: [[String:Any]]? = nil, callback: @escaping (UIViewController) -> Void)  {
         
         manager.initiateChat(userId: userId, username: username, avatar: avatar, extras: extras, userProperties: userProperties, callback: callback)
         
@@ -53,6 +53,10 @@ public class MultichannelWidget {
         }) { (error) in
             onError(error.message)
         }
+    }
+    
+    public func isLoggedIn() -> Bool {
+        return manager.qiscus.isLogined
     }
     
     public func isMultichannelNotification(userInfo: [String:Any]) -> Bool {
