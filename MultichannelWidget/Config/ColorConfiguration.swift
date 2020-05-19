@@ -22,6 +22,9 @@ class ColorConfiguration: NSObject {
     static var rightBaloonColor = UIColor(red: 0, green: 0.443, blue: 0.733, alpha: 1)
     
     /// Your right baloon color, using UIColor class, Default value : UIColor(red: 165/255.0, green: 226/255.0, blue: 221/255.0, alpha: 1.0)
+    static var navigationColor: UIColor?
+    
+    /// Your right baloon color, using UIColor class, Default value : UIColor(red: 165/255.0, green: 226/255.0, blue: 221/255.0, alpha: 1.0)
     static var systemBalloonColor = UIColor(red: 201/255, green: 229/255, blue: 215/255, alpha: 1)
     
     /// Your right baloon color, using UIColor class, Default value : UIColor(red: 165/255.0, green: 226/255.0, blue: 221/255.0, alpha: 1.0)

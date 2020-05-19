@@ -34,15 +34,23 @@ final class ChatManager {
     }
     
     func startChat(from sourceViewController: UIViewController, extras: String = "", userProperties: [[String: String]] = [], transition: ChatTransitionType = .push(animated: true)) {
-        widget.initiateChat(extras: extras, userProperties: userProperties, callback: { (chatViewController) in
-            switch transition {
-            case .present(let animated, let completion):
-                let chatNavigationController = UINavigationController(rootViewController: chatViewController)
-                sourceViewController.navigationController?.present(chatNavigationController, animated: animated, completion: completion)
-            case .push(let animated):
-                sourceViewController.navigationController?.pushViewController(chatViewController, animated: animated)
-            }
-        })
+        widget.prepareChat()
+            .setNavigationColor(color: .blue)
+            .setExtras(extras: extras)
+            .setUserProperties(properties: userProperties)
+            .startChat { (chatViewController) in
+                switch transition {
+                case .present(let animated, let completion):
+                    let chatNavigationController = UINavigationController(rootViewController: chatViewController)
+                    sourceViewController.navigationController?.present(chatNavigationController, animated: animated, completion: completion)
+                case .push(let animated):
+                    sourceViewController.navigationController?.pushViewController(chatViewController, animated: animated)
+                }
+        }
+        
+        //        widget.initiateChat(extras: extras, userProperties: userProperties, callback: { (chatViewController) in
+        //
+        //        })
     }
     
     func register(deviceToken: Data?) {
