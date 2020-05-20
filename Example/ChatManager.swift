@@ -33,26 +33,23 @@ final class ChatManager {
         return widget.isLoggedIn()
     }
     
-    func startChat(from sourceViewController: UIViewController, extras: String = "", userProperties: [[String: String]] = [], transition: ChatTransitionType = .push(animated: true)) {
+    func startChat(from viewController: UIViewController, extras: String = "", userProperties: [[String: String]] = [], transition: ChatTransitionType = .push(animated: true)) {
+        
         widget.prepareChat()
-            .setNavigationColor(color: .blue)
-            .setExtras(extras: extras)
-            .setRightBubbleColor(color: .green)
-            .setLeftBubbleColor(color: .orange)
-            .setUserProperties(properties: userProperties)
+            .setNavigationColor(color: #colorLiteral(red: 0.2202146215, green: 0.6294460518, blue: 0.9050356218, alpha: 1))
+            .setNavigationTitleColor(color: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0))
+            .setRightBubbleColor(color: #colorLiteral(red: 0.2202146215, green: 0.6294460518, blue: 0.9050356218, alpha: 1))
+            .setLeftBubbleColor(color: #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1))
+            .setRightBubblTextColor(color: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0))
+            .setLeftBubblTextColor(color: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0))
+            .setTimeLabelTextColor(color: #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1))
+            .setBaseColor(color: #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1))
+            .setEmptyTextColor(color: #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1))
+            .setEmptyBackgroundColor(color: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0))
             .startChat { (chatViewController) in
-                switch transition {
-                case .present(let animated, let completion):
-                    let chatNavigationController = UINavigationController(rootViewController: chatViewController)
-                    sourceViewController.navigationController?.present(chatNavigationController, animated: animated, completion: completion)
-                case .push(let animated):
-                    sourceViewController.navigationController?.pushViewController(chatViewController, animated: animated)
-                }
+                viewController.navigationController?.pushViewController(chatViewController, animated: true)
         }
         
-        //        widget.initiateChat(extras: extras, userProperties: userProperties, callback: { (chatViewController) in
-        //
-        //        })
     }
     
     func register(deviceToken: Data?) {

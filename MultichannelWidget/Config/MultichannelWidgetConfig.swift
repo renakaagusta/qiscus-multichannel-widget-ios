@@ -14,11 +14,15 @@ open class MultichannelWidgetConfig {
     private var rightBubblColor: UIColor = ColorConfiguration.rightBubbleColor
     private var leftBubblColor: UIColor = ColorConfiguration.leftBubbleColor
     private var navigationColor: UIColor? = ColorConfiguration.navigationColor
+    private var navigationTitleColor: UIColor = ColorConfiguration.navigationTitleColor
     private var systemBalloonColor: UIColor = ColorConfiguration.systemBubbleColor
     private var systemBalloonTextColor: UIColor = ColorConfiguration.systemBubbleTextColor
     private var leftBubblTextColor: UIColor = ColorConfiguration.leftBubbleTextColor
     private var rightBubblTextColor: UIColor = ColorConfiguration.rightBubbleTextColor
     private var timeLabelTextColor: UIColor = ColorConfiguration.timeLabelTextColor
+    private var baseColor: UIColor = ColorConfiguration.baseColor
+    private var emptyChatBackgroundColor: UIColor = ColorConfiguration.emptyChatBackgroundColor
+    private var emptyChatTextColor: UIColor = ColorConfiguration.emptyChatTextColor
     
     public func setExtras(extras: String) -> MultichannelWidgetConfig {
         self.extras = extras
@@ -75,8 +79,29 @@ open class MultichannelWidgetConfig {
         return self
     }
     
+    public func setNavigationTitleColor(color: UIColor) -> MultichannelWidgetConfig {
+        self.navigationTitleColor = color
+        return self
+    }
+    
+    public func setBaseColor(color: UIColor) -> MultichannelWidgetConfig {
+        self.baseColor = color
+        return self
+    }
+    
+    public func setEmptyBackgroundColor(color: UIColor) -> MultichannelWidgetConfig {
+        self.emptyChatBackgroundColor = color
+        return self
+    }
+    
+    public func setEmptyTextColor(color: UIColor) -> MultichannelWidgetConfig {
+        self.emptyChatTextColor = color
+        return self
+    }
+    
     public func startChat(callback: @escaping (UIViewController) -> Void) {
         ColorConfiguration.navigationColor = self.navigationColor
+        ColorConfiguration.navigationTitleColor = self.navigationTitleColor
         ColorConfiguration.rightBubbleColor = self.rightBubblColor
         ColorConfiguration.leftBubbleColor = self.leftBubblColor
         ColorConfiguration.systemBubbleColor = self.systemBalloonColor
@@ -84,6 +109,10 @@ open class MultichannelWidgetConfig {
         ColorConfiguration.leftBubbleTextColor = self.leftBubblTextColor
         ColorConfiguration.rightBubbleTextColor = self.rightBubblTextColor
         ColorConfiguration.timeLabelTextColor = self.timeLabelTextColor
+        ColorConfiguration.baseColor = self.baseColor
+        ColorConfiguration.emptyChatTextColor = self.emptyChatTextColor
+        ColorConfiguration.emptyChatBackgroundColor = self.emptyChatBackgroundColor
+        
         QismoManager.shared.initiateChat(extras: self.extras, userProperties: self.userProperties, callback: callback)
     }
 }

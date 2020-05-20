@@ -53,6 +53,7 @@ class UIChatViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
      
+    @IBOutlet weak var viewEmptyChat: UIView!
     @IBOutlet weak var tableViewConversation: UITableView!
     @IBOutlet weak var viewChatInput: UIView!
     @IBOutlet weak var constraintViewInputBottom: NSLayoutConstraint!
@@ -193,6 +194,10 @@ class UIChatViewController: UIViewController {
     // MARK: View Event Listener
     private func setupUI() {
         // config navBar
+        self.emptyMessageView.backgroundColor = ColorConfiguration.emptyChatBackgroundColor
+        self.labelEmptyMessage.textColor = ColorConfiguration.emptyChatTextColor
+        self.labelEmptyNotes.textColor = ColorConfiguration.emptyChatTextColor
+        self.view.backgroundColor = ColorConfiguration.baseColor
         self.setupNavigationTitle()
         self.setupToolbarHandle()
         self.qiscusAutoHideKeyboard()
@@ -258,6 +263,8 @@ class UIChatViewController: UIViewController {
         self.navigationItem.leftBarButtonItems = [backButton]
         
         self.chatTitleView = UIChatNavigation(frame: self.navigationController?.navigationBar.frame ?? CGRect.zero)
+        self.chatTitleView.labelTitle.textColor = ColorConfiguration.navigationTitleColor
+        self.chatTitleView.labelSubtitle.textColor = ColorConfiguration.navigationTitleColor
         self.navigationItem.titleView = chatTitleView
         self.chatTitleView.room = self.room
         
@@ -271,7 +278,7 @@ class UIChatViewController: UIViewController {
         
         let image = UIImage(named: "ic_arrow_back", in: MultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
         backIcon.image = image
-        backIcon.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        backIcon.tintColor = ColorConfiguration.navigationTitleColor
         backIcon.contentMode = .scaleAspectFit
         if UIApplication.shared.userInterfaceLayoutDirection == .leftToRight {
             backIcon.frame = CGRect(x: 0,y: 11,width: 20,height: 20)
