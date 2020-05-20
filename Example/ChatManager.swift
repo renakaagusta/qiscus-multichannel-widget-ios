@@ -37,6 +37,8 @@ final class ChatManager {
         widget.prepareChat()
             .setNavigationColor(color: .blue)
             .setExtras(extras: extras)
+            .setRightBubbleColor(color: .green)
+            .setLeftBubbleColor(color: .orange)
             .setUserProperties(properties: userProperties)
             .startChat { (chatViewController) in
                 switch transition {

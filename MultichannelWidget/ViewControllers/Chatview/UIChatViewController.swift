@@ -387,7 +387,7 @@ class UIChatViewController: UIViewController {
     
     func cellFor(message: CommentModel, at indexPath: IndexPath, in tableView: UITableView) -> UIBaseChatCell {
         let menuConfig = enableMenuConfig()
-        var colorName:UIColor = UIColor.lightGray
+        let colorName:UIColor = UIColor.lightGray
         
         if message.type == "text" {
             if (message.isMyComment() == true){
@@ -692,7 +692,7 @@ extension UIChatViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // get mesage at indexpath
         let comment = self.presenter.getMessage(atIndexPath: indexPath)
-        var cell = self.cellFor(message: comment, at: indexPath, in: tableView)
+        let cell = self.cellFor(message: comment, at: indexPath, in: tableView)
         cell.comment = comment
         cell.layer.shouldRasterize = true
         cell.layer.rasterizationScale = UIScreen.main.scale
