@@ -45,12 +45,14 @@ class QismoManager {
         }
     }
     
-    func initiateChat(userId: String? = nil, username: String? = nil,avatar: String? = nil, extras: String? = nil, userProperties: [[String:Any]]? = nil, callback: @escaping (UIViewController) -> Void)  {
+    func initiateChat(withTitle title: String, andSubtitle subtitle: String, userId: String? = nil, username: String? = nil,avatar: String? = nil, extras: String? = nil, userProperties: [[String:Any]]? = nil, callback: @escaping (UIViewController) -> Void)  {
         let savedRoomId = SharedPreferences.getRoomId()
         
         if savedRoomId != nil {
             let ui = UIChatViewController()
             ui.roomId = savedRoomId!
+            ui.chatTitle = title
+            ui.chatSubtitle = subtitle
             callback(ui)
             return
         }
@@ -71,6 +73,8 @@ class QismoManager {
             SharedPreferences.saveRoomId(id: roomId)
             let ui = UIChatViewController()
             ui.roomId = roomId
+            ui.chatTitle = title
+            ui.chatSubtitle = subtitle
             callback(ui)
             
             // check device token

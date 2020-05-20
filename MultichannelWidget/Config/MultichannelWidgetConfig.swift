@@ -10,6 +10,8 @@ import Foundation
 open class MultichannelWidgetConfig {
     private var avatar: String = ""
     private var extras: String = ""
+    var title: String = ""
+    var subtitle: String = ""
     private var userProperties: [[String : String]] = []
     private var rightBubblColor: UIColor = ColorConfiguration.rightBubbleColor
     private var leftBubblColor: UIColor = ColorConfiguration.leftBubbleColor
@@ -113,6 +115,6 @@ open class MultichannelWidgetConfig {
         ColorConfiguration.emptyChatTextColor = self.emptyChatTextColor
         ColorConfiguration.emptyChatBackgroundColor = self.emptyChatBackgroundColor
         
-        QismoManager.shared.initiateChat(extras: self.extras, userProperties: self.userProperties, callback: callback)
+        QismoManager.shared.initiateChat(withTitle: self.title, andSubtitle: self.subtitle, extras: self.extras, userProperties: self.userProperties, callback: callback)
     }
 }

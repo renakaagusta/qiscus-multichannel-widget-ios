@@ -40,14 +40,10 @@ public class MultichannelWidget {
     public func clearUser() {
         self.manager.clear()
     }
-
-    public func initiateChat(userId: String? = nil, username: String? = nil, avatar: String = "", extras: String? = nil, userProperties: [[String:Any]]? = nil, callback: @escaping (UIViewController) -> Void)  {
-        
-        manager.initiateChat(userId: userId, username: username, avatar: avatar, extras: extras, userProperties: userProperties, callback: callback)
-        
-    }
     
-    public func prepareChat() -> MultichannelWidgetConfig {
+    public func prepareChat(withTitle title: String, andSubtitle subtitle: String) -> MultichannelWidgetConfig {
+        widgetConfig.title = title
+        widgetConfig.subtitle = subtitle
         return widgetConfig
     }
     

@@ -82,6 +82,8 @@ class UIChatViewController: UIViewController {
             return self.presenter.room?.id ?? ""
         }
     }
+    var chatTitle: String = ""
+    var chatSubtitle: String = ""
     var chatDelegate : UIChatView? = nil
     var isFromUploader = false
     var isResolved = false
@@ -263,6 +265,8 @@ class UIChatViewController: UIViewController {
         self.navigationItem.leftBarButtonItems = [backButton]
         
         self.chatTitleView = UIChatNavigation(frame: self.navigationController?.navigationBar.frame ?? CGRect.zero)
+        self.chatTitleView.labelTitle.text = self.chatTitle
+        self.chatTitleView.labelSubtitle.text = self.chatSubtitle
         self.chatTitleView.labelTitle.textColor = ColorConfiguration.navigationTitleColor
         self.chatTitleView.labelSubtitle.textColor = ColorConfiguration.navigationTitleColor
         self.navigationItem.titleView = chatTitleView
