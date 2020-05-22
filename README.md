@@ -89,7 +89,7 @@ In order to have push notification working in your apps, you will need to follow
 1. Create a Certificate Signing Request(CSR).
 2. Create a Push Notification SSL certificate in Apple Developer site.
 3. Export a p12 file and upload it to https://support.qiscus.com/hc/en-us/requests/new.
-4. Register a device token in Qiscus SDK and parse Qiscus APNS messages.
+4. Register a device token in Multichannel Widget and handle incoming notification.
 
 #### Step Push Notification 1:  Create A Certificate Signing Request(CSR)
 
