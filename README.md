@@ -18,7 +18,7 @@
 
 ### Step 1 : Get Your APP ID
 
-Firstly, you need to register to Qiscus Multichannel, by accessing this link [dashboard](https://multichannel.qiscus.com). The APP ID can be retrieved from setting section.
+Firstly, you need to register to Qiscus Multichannel, by accessing this [link](https://multichannel.qiscus.com). The APP ID can be retrieved from setting section.
 ![Qiscus Widget Integration](/Readme/multichannel_setting.png)
 
 ### Step 2 : Activate Qiscus Widget Integration
@@ -46,15 +46,49 @@ lazy  var  widget: MultichannelWidget = {
 The Example is ready to use. You can start chatting with your customer service.
 ![Ready to Chat Image](/Readme/ready_to_chat.png)
 
-### Step 5: Setup Push Notification
+## How to use
+### Initialization
+To use the widget you will need to initialize MultichannelWidget, in order to do this you will need APP_ID.
+```swift
+let widget = MultichannelWidget(appID: "bul-3c5iczzj7aiefltec")
+```
+after the initialization, you can access all the widget's function.
+### Set the user
+set the widget's user (this is mandatory before you can start to chat).
+```swift
+widget.setUser(id: "user01", displayName: "Cus Tom R", avatarUrl: "https://customer.avatar-url.com")
+```
+### Get login status
+you can check whether the user has already logged in.
+```swift
+widget.isLoggedIn()
+```
+### Start Chatting
+Before start chatting, please don't for get to set the user. After the user has been set you can start chatting using this function.
+```swift
+widget.prepareChat(withTitle: "Customer Care", andSubtitle: "ready to serve").startChat { (chatViewController) in
 
-The Qiscus Chat SDK receives pushes through both the Qiscus Chat SDK protocol and Apple Push Notification Service (APNS), depending on usage and other conditions. Default notification sent by Qiscus Chat SDK protocol. In order to enable your application to receive apple push notifications, some setup must be performed in both application and the Qiscus Dashboard.
+    someViewController.navigationController?.pushViewController(chatViewController, animated: true)
+}
+```
+### Color Customization
+You can customize widget components color befor start chatting.
+![Color Customization Image](/Readme/color_config_example.png)
 
-Do the following steps to setup push notifications:
+### Clear User
+You will need to call this function to clear logged in user.
+```swift
+widget.clearUser()
+``` 
+
+
+
+## Push Notification
+In order to have push notification working in your apps, you will need to follow these steps below.
 
 1. Create a Certificate Signing Request(CSR).
 2. Create a Push Notification SSL certificate in Apple Developer site.
-3. Export a p12 file and upload it to Qiscus Dashboard.
+3. Export a p12 file and upload it to https://support.qiscus.com/hc/en-us/requests/new.
 4. Register a device token in Qiscus SDK and parse Qiscus APNS messages.
 
 #### Step Push Notification 1:  Create A Certificate Signing Request(CSR)
@@ -94,104 +128,119 @@ Under the Keychain Access, click the Certificates category from the left menu. F
 
 <p align="center"><br/><img src="https://d3p8ijl4igpb16.cloudfront.net/docs/assets/apns8.png" width="100%" /><br/></p>
 
-Then, log in to the [dashboard](https://www.qiscus.com/dashboard/login) and upload your `.p12` file to the Push Notification section, under Settings.
+Then, open this submit request [page](https://support.qiscus.com/hc/en-us/requests/new).
 
-<p align="center"><br/><img src="https://d3p8ijl4igpb16.cloudfront.net/docs/assets/apns9.png" width="100%" /><br/></p>
+fill in your email and subject.
+![Submit Request Form 1](/Readme/submit_apns_1.png)
 
-klik add and fill the form upload certificates
+write the description, choose Product Associated (Multichannel CS Chat), choose Category of Query (Multichannel Customer Service Chat), your APP_ID, and the most important is don't forget to attach the .p12 certificate for the APNS push notification.
+![Submit Request Form 2](/Readme/submit_apns_2.png)
 
-<p align="center"><br/><img src="https://d3p8ijl4igpb16.cloudfront.net/docs/assets/apns10.png" width="100%" /><br/></p>
-
+finally you just need to click submit.
+![Submit Request Form 3](/Readme/submit_apns_3.png)
 
 > **Note:  
 **Example of this certificate for production, you need create cert Push Notification for development, and Export A p12 File and Upload It To Qiscus Dashboard if you run from Xcode
 
-#### Step Push Notification 4: Register A Device Token In Qiscus SDK And Parse Qiscus APNS Messages.   
+#### Step Push Notification 4: Register A Device Token In Multichannel Widget.   
 
+create a class to hold the Widget (in this example we will use a Singleton Object class called ChatManager that will wrap the MultichannelWidget functionalities, in this step we will highlight the deviceToken registration and notification tap handling).
+```swift
+final  class  ChatManager {
+
+    static let shared: ChatManager = ChatManager()
+
+    lazy  var  widget: MultichannelWidget = {
+        return MultichannelWidget(appID: "bul-3c5iczzj7aiefltec")
+    }()
+    
+    ...
+    
+    func register(deviceToken: Data?) {
+
+        if let deviceToken = deviceToken {
+            var tokenString: String = ""
+            for i in 0..<deviceToken.count {
+                tokenString += String(format: "%02.2hhx", deviceToken[i] as CVarArg)
+            }
+            
+            self.widget.register(deviceToken: tokenString, isDevelopment: false, onSuccess: { (response) in
+                print("Multichannel widget success to register device token")
+            }) { (error) in
+                print("Multichannel widget failed to register device token")
+            }
+        }
+
+    }
+
+    func userTapNotification(userInfo : [AnyHashable : Any]) {
+
+        self.widget.tapNotification(userInfo: userInfo)
+    }
+
+    ...
+}
+```
 In your app's AppDelegate, store your device token as a variable.
 
-```
-func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        if #available(iOS 10.0, *) {
+```swift
+import  UserNotifications
+
+@UIApplicationMain
+class  AppDelegate:  UIResponder,  UIApplicationDelegate {
+
+    func  application(_  application:  UIApplication, didFinishLaunchingWithOptions  launchOptions [UIApplication.LaunchOptionsKey:  Any]?) ->  Bool {
+    
+        // MARK : Setup Push Notification
+        if  #available(iOS 10.0,  *) {
             // For iOS 10 display notification (sent via APNS)
-            UNUserNotificationCenter.current().delegate = self
-            
-            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+            UNUserNotificationCenter.current().delegate  =  self
+            let  authOptions:  UNAuthorizationOptions  = [.alert, .badge, .sound]
             UNUserNotificationCenter.current().requestAuthorization(
-                options: authOptions,
-                completionHandler: {_, _ in })
+                options:  authOptions,
+                completionHandler: {_,  _  in })
         } else {
-            let settings: UIUserNotificationSettings =
-                UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+            let  settings:  UIUserNotificationSettings  =
+            UIUserNotificationSettings(types: [.alert, .badge, .sound],  categories:  nil)
             application.registerUserNotificationSettings(settings)
         }
-        
+          
+        // MARK : register the app for remote notifications
         application.registerForRemoteNotifications()
-        
-        return true
-    }
-```
 
-```
-func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        
-        var tokenString: String = ""
-        for i in 0..<deviceToken.count {
-            tokenString += String(format: "%02.2hhx", deviceToken[i] as CVarArg)
-        }
-        print("token = \(tokenString)")
-        QiscusCore.shared.register(deviceToken: tokenString, onSuccess: { (response) in
-            //
-        }) { (error) in
-            //
-        }
+        return  true
     }
-    
+ 
+    func  application(_  application:  UIApplication,  didRegisterForRemoteNotificationsWithDeviceToken  deviceToken:  Data) {
 
-func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
-       print("AppDelegate. didReceive: \(notification)")
-}
+        ChatManager.shared.register(deviceToken:  deviceToken)
+    }
+
+    func  application(_  application:  UIApplication,  didReceiveRemoteNotification  userInfo: [AnyHashable  :  Any]) {
     
-func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
-        print("AppDelegate. didReceiveRemoteNotification: \(userInfo)")
-}
-    
-func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        print("AppDelegate. didReceiveRemoteNotification2: \(userInfo)")
+        ChatManager.shared.userTapNotification(userInfo: userInfo)
+    } 
 }
 
 // [START ios_10_message_handling]
-@available(iOS 10, *)
-extension AppDelegate : UNUserNotificationCenterDelegate {
-    
+@available(iOS  10,  *)
+extension  AppDelegate  :  UNUserNotificationCenterDelegate {
+  
     // Receive displayed notifications for iOS 10 devices.
-    func userNotificationCenter(_ center: UNUserNotificationCenter,
-                                willPresent notification: UNNotification,
-                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        let userInfo = notification.request.content.userInfo
-        
-        // Print full message.
-        print(userInfo)
+    func  userNotificationCenter(_  center:  UNUserNotificationCenter, willPresent  notification:  UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) ->  Void) {
+
+        completionHandler([.alert, .sound])
     }
+
+    func  userNotificationCenter(_  center:  UNUserNotificationCenter, didReceive  response:  UNNotificationResponse, withCompletionHandler  completionHandler: @escaping () ->  Void) {
     
-    func userNotificationCenter(_ center: UNUserNotificationCenter,
-                                didReceive response: UNNotificationResponse,
-                                withCompletionHandler completionHandler: @escaping () -> Void) {
-        let userInfo = response.notification.request.content.userInfo
-        
-        
-        // Print full message.
-        print(userInfo)
-        
+        let  userInfo  =  response.notification.request.content.userInfo
+        ChatManager.shared.userTapNotification(userInfo:  userInfo)
         completionHandler()
     }
 }
 // [END ios_10_message_handling]
 ```
-
-Don't forget set **Remote notifications and Background fetch** in menu **Capabilities**
-
-<p align="center"><br/><img src="https://d3p8ijl4igpb16.cloudfront.net/docs/assets/apns11.png" width="100%" /><br/></p>
 
 #### Step Push Notification 6: Test PN from third party
 
@@ -206,7 +255,3 @@ for example using tool Easy APNs Provider :
 
 ## Contribution
 ios-multichannel-widget is fully open-source. All contributions and suggestions are welcome!
-
-### Color Customization
-You can customize widget components color.
-![Color Customization Image](/Readme/color_config_example.png)
