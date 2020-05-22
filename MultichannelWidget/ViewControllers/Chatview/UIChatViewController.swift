@@ -53,6 +53,7 @@ class UIChatViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
      
+    @IBOutlet weak var viewEmptyChat: UIView!
     @IBOutlet weak var tableViewConversation: UITableView!
     @IBOutlet weak var viewChatInput: UIView!
     @IBOutlet weak var constraintViewInputBottom: NSLayoutConstraint!
@@ -81,11 +82,14 @@ class UIChatViewController: UIViewController {
             return self.presenter.room?.id ?? ""
         }
     }
+    var chatTitle: String = ""
+    var chatSubtitle: String = ""
     var chatDelegate : UIChatView? = nil
     var isFromUploader = false
     var isResolved = false
     
     // UI Config
+    var navigationOriginColor: UIColor?
     var usersColor : [String:UIColor] = [String:UIColor]()
     var currentNavbarTint = UINavigationBar.appearance().tintColor
     var latestNavbarTint = UINavigationBar.appearance().tintColor
@@ -122,6 +126,10 @@ class UIChatViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationOriginColor = self.navigationController?.navigationBar.backgroundColor
+        if let customNavigationColor = ColorConfiguration.navigationColor {
+            self.navigationController?.navigationBar.barTintColor = customNavigationColor
+        }
         self.presenter.attachView(view: self)
         let center: NotificationCenter = NotificationCenter.default
         center.addObserver(self, selector: #selector(UIChatViewController.keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -145,6 +153,8 @@ class UIChatViewController: UIViewController {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name(rawValue: "reSubscribeRoom"), object: nil)
         view.endEditing(true)
+        
+        self.navigationController?.navigationBar.barTintColor = self.navigationOriginColor
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -186,6 +196,10 @@ class UIChatViewController: UIViewController {
     // MARK: View Event Listener
     private func setupUI() {
         // config navBar
+        self.emptyMessageView.backgroundColor = ColorConfiguration.emptyChatBackgroundColor
+        self.labelEmptyMessage.textColor = ColorConfiguration.emptyChatTextColor
+        self.labelEmptyNotes.textColor = ColorConfiguration.emptyChatTextColor
+        self.view.backgroundColor = ColorConfiguration.baseColor
         self.setupNavigationTitle()
         self.setupToolbarHandle()
         self.qiscusAutoHideKeyboard()
@@ -251,6 +265,10 @@ class UIChatViewController: UIViewController {
         self.navigationItem.leftBarButtonItems = [backButton]
         
         self.chatTitleView = UIChatNavigation(frame: self.navigationController?.navigationBar.frame ?? CGRect.zero)
+        self.chatTitleView.labelTitle.text = self.chatTitle
+        self.chatTitleView.labelSubtitle.text = self.chatSubtitle
+        self.chatTitleView.labelTitle.textColor = ColorConfiguration.navigationTitleColor
+        self.chatTitleView.labelSubtitle.textColor = ColorConfiguration.navigationTitleColor
         self.navigationItem.titleView = chatTitleView
         self.chatTitleView.room = self.room
         
@@ -264,7 +282,7 @@ class UIChatViewController: UIViewController {
         
         let image = UIImage(named: "ic_arrow_back", in: MultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
         backIcon.image = image
-        backIcon.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        backIcon.tintColor = ColorConfiguration.navigationTitleColor
         backIcon.contentMode = .scaleAspectFit
         if UIApplication.shared.userInterfaceLayoutDirection == .leftToRight {
             backIcon.frame = CGRect(x: 0,y: 11,width: 20,height: 20)
@@ -380,7 +398,7 @@ class UIChatViewController: UIViewController {
     
     func cellFor(message: CommentModel, at indexPath: IndexPath, in tableView: UITableView) -> UIBaseChatCell {
         let menuConfig = enableMenuConfig()
-        var colorName:UIColor = UIColor.lightGray
+        let colorName:UIColor = UIColor.lightGray
         
         if message.type == "text" {
             if (message.isMyComment() == true){
@@ -685,7 +703,7 @@ extension UIChatViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // get mesage at indexpath
         let comment = self.presenter.getMessage(atIndexPath: indexPath)
-        var cell = self.cellFor(message: comment, at: indexPath, in: tableView)
+        let cell = self.cellFor(message: comment, at: indexPath, in: tableView)
         cell.comment = comment
         cell.layer.shouldRasterize = true
         cell.layer.rasterizationScale = UIScreen.main.scale

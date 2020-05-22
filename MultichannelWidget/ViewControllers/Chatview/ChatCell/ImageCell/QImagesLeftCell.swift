@@ -50,8 +50,8 @@ class QImagesLeftCell: UIBaseChatCell {
     func setupBalon(){
         self.ivLeftBubble.applyShadow()
         self.ivLeftBubble.image = self.getBallon()
-        self.ivLeftBubble.tintColor = ColorConfiguration.leftBaloonColor
-        self.ivLeftBubble.backgroundColor = ColorConfiguration.leftBaloonColor
+        self.ivLeftBubble.tintColor = ColorConfiguration.leftBubbleColor
+        self.ivLeftBubble.backgroundColor = ColorConfiguration.leftBubbleColor
         self.ivLeftBubble.layer.cornerRadius = 5.0
         self.ivLeftBubble.clipsToBounds = true
         
