@@ -52,7 +52,7 @@ final class ChatManager {
                 tokenString += String(format: "%02.2hhx", deviceToken[i] as CVarArg)
             }
             print("token = \(tokenString)")
-            self.widget.register(deviceToken: tokenString, isDevelopment: false, onSuccess: { (response) in
+            self.widget.register(deviceToken: tokenString, onSuccess: { (response) in
                 print("Multichannel widget success to register device token")
             }) { (error) in
                 print("Multichannel widget failed to register device token")
