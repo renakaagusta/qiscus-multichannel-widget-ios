@@ -24,10 +24,12 @@ public class MultichannelWidget {
         }
     }
     
+    let widgetConfig: MultichannelWidgetConfig
     let manager : QismoManager = QismoManager.shared
     
     public init(appID: String, server : QiscusServer? = nil) {
         self.manager.setup(appID: appID, server: server)
+        self.widgetConfig = MultichannelWidgetConfig()
     }
     
     public func setUser(id: String, displayName: String, avatarUrl: String = "") {
@@ -38,14 +40,14 @@ public class MultichannelWidget {
     public func clearUser() {
         self.manager.clear()
     }
-
-    public func initiateChat(userId: String? = nil, username: String? = nil, avatar: String = "", extras: String? = nil, userProperties: [[String:Any]]? = nil, callback: @escaping (UIViewController) -> Void)  {
-        
-        manager.initiateChat(userId: userId, username: username, avatar: avatar, extras: extras, userProperties: userProperties, callback: callback)
-        
+    
+    public func prepareChat(withTitle title: String, andSubtitle subtitle: String) -> MultichannelWidgetConfig {
+        widgetConfig.title = title
+        widgetConfig.subtitle = subtitle
+        return widgetConfig
     }
     
-    public func register(deviceToken token: String, onSuccess: @escaping (Bool) -> Void, onError: @escaping (String) -> Void){
+    public func register(deviceToken token: String, isDevelopment: Bool, onSuccess: @escaping (Bool) -> Void, onError: @escaping (String) -> Void){
         self.manager.deviceToken = token
         manager.qiscus.register(deviceToken: token, isDevelopment: false, onSuccess: { (response) in
             if response { self.manager.deviceToken = "" }

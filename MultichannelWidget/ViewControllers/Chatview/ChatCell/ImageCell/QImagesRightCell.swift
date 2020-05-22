@@ -44,10 +44,10 @@ class QImagesRightCell: UIBaseChatCell {
     func setupBalon(){
         
         self.ivRightBubble.image = self.getBallon()
-        self.ivRightBubble.tintColor = ColorConfiguration.rightBaloonColor
-        self.ivRightBubble.backgroundColor = ColorConfiguration.rightBaloonColor
+        self.ivRightBubble.tintColor = ColorConfiguration.rightBubbleColor
+        self.ivRightBubble.backgroundColor = ColorConfiguration.rightBubbleColor
         
-        self.lblCaption.textColor = ColorConfiguration.rightBaloonTextColor
+        self.lblCaption.textColor = ColorConfiguration.rightBubbleTextColor
         self.lblDate.textColor = ColorConfiguration.timeLabelTextColor
         
         self.ivRightBubble.layer.cornerRadius = 5.0

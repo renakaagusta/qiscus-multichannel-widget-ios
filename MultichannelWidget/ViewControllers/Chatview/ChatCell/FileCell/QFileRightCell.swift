@@ -40,11 +40,11 @@ class QFileRightCell: UIBaseChatCell {
     
     func setupBubble() {
         self.ivRightBubble.image = self.getBallon()
-        self.ivRightBubble.tintColor = ColorConfiguration.rightBaloonColor
-        self.ivRightBubble.backgroundColor = ColorConfiguration.rightBaloonColor
+        self.ivRightBubble.tintColor = ColorConfiguration.rightBubbleColor
+        self.ivRightBubble.backgroundColor = ColorConfiguration.rightBubbleColor
         
-        self.lblFilename.textColor = ColorConfiguration.rightBaloonTextColor
-        self.lblExtension.textColor = ColorConfiguration.rightBaloonTextColor
+        self.lblFilename.textColor = ColorConfiguration.rightBubbleTextColor
+        self.lblExtension.textColor = ColorConfiguration.rightBubbleTextColor
         self.lblDate.textColor = ColorConfiguration.timeLabelTextColor
         
         self.ivRightBubble.layer.cornerRadius = 5.0
