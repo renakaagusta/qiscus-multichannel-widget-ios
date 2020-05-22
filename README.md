@@ -140,7 +140,7 @@ finally you just need to click submit.
 ![Submit Request Form 3](/Readme/submit_apns_3.png)
 
 > **Note:  
-**Example of this certificate for production, you need create cert Push Notification for development, and Export A p12 File and Upload It To Qiscus Dashboard if you run from Xcode
+**Example of this certificate for production, you need create cert Push Notification for development, and Export A p12 File and Attach It To Sbumit Request attachment if you run from Xcode
 
 #### Step Push Notification 4: Register A Device Token In Multichannel Widget.   
 
