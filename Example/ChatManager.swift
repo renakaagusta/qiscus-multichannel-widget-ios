@@ -18,7 +18,7 @@ final class ChatManager {
     static let shared: ChatManager = ChatManager()
     
     lazy var widget: MultichannelWidget = {
-       return MultichannelWidget(appID: "bul-3c5iczzj7aiefltec")
+       return MultichannelWidget(appID: "")
     }()
     
     func setUser(id: String, displayName: String, avatarUrl: String = "") {
