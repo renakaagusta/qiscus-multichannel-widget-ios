@@ -63,7 +63,7 @@ extension UIBaseChatCell {
     
     var textAttribute:[NSAttributedString.Key: Any]{
         get{
-            var foregroundColorAttributeName = ColorConfiguration.leftBaloonTextColor
+            var foregroundColorAttributeName = ColorConfiguration.leftBubbleTextColor
             return [
                 NSAttributedString.Key.foregroundColor: foregroundColorAttributeName,
                 NSAttributedString.Key.font: ChatConfig.chatFont
@@ -73,8 +73,8 @@ extension UIBaseChatCell {
     
     var linkTextAttributes:[NSAttributedString.Key: Any]{
         get{
-            var foregroundColorAttributeName = ColorConfiguration.leftBaloonLinkColor
-            var underlineColorAttributeName = ColorConfiguration.leftBaloonLinkColor
+            var foregroundColorAttributeName = ColorConfiguration.leftBubbleLinkColor
+            var underlineColorAttributeName = ColorConfiguration.leftBubbleLinkColor
             return [
                 NSAttributedString.Key(rawValue: NSAttributedString.Key.foregroundColor.rawValue): foregroundColorAttributeName,
                 NSAttributedString.Key(rawValue: NSAttributedString.Key.underlineColor.rawValue): underlineColorAttributeName,

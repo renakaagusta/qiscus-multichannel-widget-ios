@@ -53,7 +53,7 @@ class QCardLeftCell: UIBaseChatCell {
             }
         }
         
-        self.lblDesc.textColor = ColorConfiguration.leftBaloonTextColor
+        self.lblDesc.textColor = ColorConfiguration.leftBubbleTextColor
         self.lblTitle.text = payload["title"] as? String
         self.lblDesc.text = payload["description"] as? String
         self.lblDate.text = AppUtil.dateToHour(date: message.date())
@@ -89,8 +89,8 @@ class QCardLeftCell: UIBaseChatCell {
     func setupBalon(){
         self.ivLeftBuble.applyShadow()
         self.ivLeftBuble.image = self.getBallon()
-        self.ivLeftBuble.tintColor = ColorConfiguration.leftBaloonColor
-        self.ivLeftBuble.backgroundColor = ColorConfiguration.leftBaloonColor
+        self.ivLeftBuble.tintColor = ColorConfiguration.leftBubbleColor
+        self.ivLeftBuble.backgroundColor = ColorConfiguration.leftBubbleColor
         self.ivLeftBuble.layer.cornerRadius = 5.0
         self.ivLeftBuble.clipsToBounds = true
         self.lblDate.textColor = ColorConfiguration.timeLabelTextColor

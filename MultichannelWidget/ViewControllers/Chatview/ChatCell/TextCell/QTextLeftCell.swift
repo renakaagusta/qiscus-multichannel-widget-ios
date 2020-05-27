@@ -12,7 +12,7 @@ import QiscusCoreApi
 class QTextLeftCell: UIBaseChatCell, UITextViewDelegate {
     @IBOutlet weak var lbName: UILabel!
     @IBOutlet weak var tvContent: UILabel!
-    @IBOutlet weak var ivBaloonLeft: UIImageView!
+    @IBOutlet weak var ivBubbleLeft: UIImageView!
     @IBOutlet weak var lbTime: UILabel!
     @IBOutlet weak var viewContainer: UIView!
     @IBOutlet weak var tvContent2: UITextView!
@@ -54,10 +54,10 @@ class QTextLeftCell: UIBaseChatCell, UITextViewDelegate {
         self.lbTime.text = self.hour(date: message.date())
         self.lbTime.textColor = ColorConfiguration.timeLabelTextColor
         self.tvContent.text = message.message
-        self.tvContent.textColor = ColorConfiguration.leftBaloonTextColor
+        self.tvContent.textColor = ColorConfiguration.leftBubbleTextColor
         
         self.tvContent2.attributedText = NSAttributedString(string: message.message)
-        self.tvContent2.textColor = ColorConfiguration.leftBaloonTextColor
+        self.tvContent2.textColor = ColorConfiguration.leftBubbleTextColor
         
         if(isPublic == true){
             self.lbName.text = message.username
@@ -70,12 +70,12 @@ class QTextLeftCell: UIBaseChatCell, UITextViewDelegate {
     }
     
     func setupBalon(){
-        self.ivBaloonLeft.applyShadow()
-        self.ivBaloonLeft.image = self.getBallon()
-        self.ivBaloonLeft.tintColor = ColorConfiguration.leftBaloonColor
-        self.ivBaloonLeft.backgroundColor = ColorConfiguration.leftBaloonColor
-        self.ivBaloonLeft.layer.cornerRadius = 5.0
-        self.ivBaloonLeft.clipsToBounds = true
+        self.ivBubbleLeft.applyShadow()
+        self.ivBubbleLeft.image = self.getBallon()
+        self.ivBubbleLeft.tintColor = ColorConfiguration.leftBubbleColor
+        self.ivBubbleLeft.backgroundColor = ColorConfiguration.leftBubbleColor
+        self.ivBubbleLeft.layer.cornerRadius = 5.0
+        self.ivBubbleLeft.clipsToBounds = true
     }
     
     func hour(date: Date?) -> String {

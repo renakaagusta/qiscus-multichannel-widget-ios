@@ -38,10 +38,9 @@ class ViewController: UIViewController {
         let ext = "{\"sample\":\"extras\"}"
         //sample avatar
         let ava = "https://image.flaticon.com/icons/svg/145/145867.svg"
-        MultichannelWidget.shared.initiateChat(userId: userId, username: username, avatar: ava, extras: ext, userProperties: userProp
-            ,callback: { target in
-            self.navigationController?.pushViewController(target, animated: true)
-        })
+        
+        ChatManager.shared.setUser(id: userId, displayName: username, avatarUrl: ava)
+        ChatManager.shared.startChat(from: self, extras: ext, userProperties: userProp, transition: .push(animated: true))
     }
     
     func showError(message : String) {

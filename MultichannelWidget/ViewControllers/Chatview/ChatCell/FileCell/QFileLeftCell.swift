@@ -11,7 +11,7 @@ import QiscusCoreApi
 class QFileLeftCell: UIBaseChatCell {
 
     @IBOutlet weak var lblExtension: UILabel!
-    @IBOutlet weak var ivBaloon: UIImageView!
+    @IBOutlet weak var ivBubble: UIImageView!
     @IBOutlet weak var lblDate: UILabel!
     @IBOutlet weak var ivIcon: UIImageView!
     @IBOutlet weak var lblFilename: UILabel!
@@ -51,12 +51,12 @@ class QFileLeftCell: UIBaseChatCell {
     }
     
     func setupBalon() {
-        self.ivBaloon.applyShadow()
-        self.ivBaloon.image = self.getBallon()
-        self.ivBaloon.tintColor = ColorConfiguration.leftBaloonColor
-        self.ivBaloon.backgroundColor = ColorConfiguration.leftBaloonColor
-        self.ivBaloon.layer.cornerRadius = 5.0
-        self.ivBaloon.clipsToBounds = true
+        self.ivBubble.applyShadow()
+        self.ivBubble.image = self.getBallon()
+        self.ivBubble.tintColor = ColorConfiguration.leftBubbleColor
+        self.ivBubble.backgroundColor = ColorConfiguration.leftBubbleColor
+        self.ivBubble.layer.cornerRadius = 5.0
+        self.ivBubble.clipsToBounds = true
 //
         self.lblDate.textColor = ColorConfiguration.timeLabelTextColor
     }

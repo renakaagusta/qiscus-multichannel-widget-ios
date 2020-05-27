@@ -18,7 +18,7 @@ class QReplyRightCell: UIBaseChatCell {
     @IBOutlet weak var lbTime: UILabel!
     @IBOutlet weak var lbContent: UILabel!
     @IBOutlet weak var lbName: UILabel!
-    @IBOutlet weak var ivBaloon: UIImageView!
+    @IBOutlet weak var ivBubble: UIImageView!
     @IBOutlet weak var ivStatus: UIImageView!
     var menuConfig = enableMenuConfig()
     override func awakeFromNib() {
@@ -92,14 +92,14 @@ class QReplyRightCell: UIBaseChatCell {
             self.tvCommentContent.text      = message.fileName(text: url)
             self.ivCommentImage.image       = UIImage(named: "ic_file" , in: MultichannelWidget.bundle, compatibleWith: nil)
             self.ivCommentImage.contentMode = .scaleAspectFit
-            self.ivCommentImage.tintColor   = ColorConfiguration.leftBaloonColor
+            self.ivCommentImage.tintColor   = ColorConfiguration.leftBubbleColor
         case .audio:
             self.tvCommentContent.text = text
         case .document:
             //pdf
             self.ivCommentImage.image = UIImage(named: "ic_file" , in: MultichannelWidget.bundle, compatibleWith: nil)
             self.ivCommentImage.contentMode = .scaleAspectFit
-            self.ivCommentImage.tintColor   = ColorConfiguration.leftBaloonColor
+            self.ivCommentImage.tintColor   = ColorConfiguration.leftBubbleColor
             let url = message.getAttachmentURL(message: text ?? "")
             self.tvCommentContent.text      = message.fileName(text: url)
         case .location:
@@ -113,7 +113,7 @@ class QReplyRightCell: UIBaseChatCell {
             self.tvCommentContent.text      = message.fileName(text: url)
             self.ivCommentImage.image = UIImage(named: "ic_file" , in: MultichannelWidget.bundle, compatibleWith: nil)
             self.ivCommentImage.contentMode = .scaleAspectFit
-            self.ivCommentImage.tintColor = ColorConfiguration.leftBaloonColor
+            self.ivCommentImage.tintColor = ColorConfiguration.leftBubbleColor
         case .other:
             self.tvCommentContent.text = text
             self.ivCommentImageWidhtCons.constant = 0
@@ -143,13 +143,13 @@ class QReplyRightCell: UIBaseChatCell {
     }
     
     func setupBalon(){
-        self.ivBaloon.applyShadow()
-        self.ivBaloon.image = self.getBallon()
-        self.ivBaloon.tintColor = ColorConfiguration.rightBaloonColor
-        self.ivBaloon.backgroundColor = ColorConfiguration.rightBaloonColor
+        self.ivBubble.applyShadow()
+        self.ivBubble.image = self.getBallon()
+        self.ivBubble.tintColor = ColorConfiguration.rightBubbleColor
+        self.ivBubble.backgroundColor = ColorConfiguration.rightBubbleColor
         self.viewReplyPreview.backgroundColor = .white
-        self.ivBaloon.layer.cornerRadius = 5.0
-        self.ivBaloon.clipsToBounds = true
+        self.ivBubble.layer.cornerRadius = 5.0
+        self.ivBubble.clipsToBounds = true
 //        self.lbTime.textColor = ColorConfiguration.timeLabelTextColor
     }
     

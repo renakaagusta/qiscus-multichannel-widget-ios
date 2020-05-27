@@ -17,13 +17,23 @@ class QismoManager {
     var appID: String = ""
     private var userID : String = ""
     private var username : String = ""
+    private var avatarUrl: String = ""
     var network : QismoNetworkManager!
     var qiscus : QiscusCoreAPI!
     var qiscusServer = QiscusServer(url: URL(string: "https://api.qiscus.com")!, realtimeURL: "", realtimePort: 80)
+    var deviceToken : String = "" // save device token for 1st time or before login
     
-    func setUSer(id: String, username: String) {
+    
+    func setUser(id: String, username: String, avatarUrl: String = "") {
         self.userID = id
         self.username = username
+        self.avatarUrl = avatarUrl
+    }
+    
+    func clear() {
+        self.userID = ""
+        self.username = ""
+        self.qiscus.signOut()
     }
     
     func setup(appID: String, server : QiscusServer? = nil) {
@@ -35,21 +45,23 @@ class QismoManager {
         }
     }
     
-    func initiateChat(userId: String, username: String,avatar: String = "", extras: String? = nil, userProperties: [[String:Any]]? = nil, callback: @escaping (UIViewController) -> Void)  {
+    func initiateChat(withTitle title: String, andSubtitle subtitle: String, userId: String? = nil, username: String? = nil,avatar: String? = nil, extras: String? = nil, userProperties: [[String:Any]]? = nil, callback: @escaping (UIViewController) -> Void)  {
         let savedRoomId = SharedPreferences.getRoomId()
         
         if savedRoomId != nil {
             let ui = UIChatViewController()
             ui.roomId = savedRoomId!
+            ui.chatTitle = title
+            ui.chatSubtitle = subtitle
             callback(ui)
             return
         }
         
         let param = [
             "app_id"            : appID,
-            "user_id"           : userId,
-            "name"              : username,
-            "avatar"            : avatar,
+            "user_id"           : userId ?? self.userID,
+            "name"              : username ?? self.username,
+            "avatar"            : avatar ?? self.avatarUrl,
             "extras"            : extras ?? "{}",
             "user_properties"   : userProperties != nil ? userProperties ?? [] : [],
             "nonce"             : ""
@@ -61,7 +73,18 @@ class QismoManager {
             SharedPreferences.saveRoomId(id: roomId)
             let ui = UIChatViewController()
             ui.roomId = roomId
+            ui.chatTitle = title
+            ui.chatSubtitle = subtitle
             callback(ui)
+            
+            // check device token
+            if !self.deviceToken.isEmpty {
+                self.qiscus.register(deviceToken: self.deviceToken, isDevelopment: false, onSuccess: { (success) in
+                    if success { self.deviceToken = "" }
+                }) { (error) in
+                    //
+                }
+            }
         }, onError: { error in
             debugPrint("failed initiate chat, \(error)")
         })

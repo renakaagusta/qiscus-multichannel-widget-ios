@@ -13,7 +13,7 @@ class QTextRightCell: UIBaseChatCell {
 
     @IBOutlet weak var lbName: UILabel!
     @IBOutlet weak var tvContent: UILabel!
-    @IBOutlet weak var ivBaloonLeft: UIImageView!
+    @IBOutlet weak var ivBubbleLeft: UIImageView!
     
     @IBOutlet weak var ivStatus: UIImageView!
     @IBOutlet weak var lbTime: UILabel!
@@ -51,17 +51,17 @@ class QTextRightCell: UIBaseChatCell {
         self.lbName.text = "You"
         self.lbTime.text = self.hour(date: message.date())
         self.tvContent.text = message.message
-        self.tvContent.textColor = ColorConfiguration.rightBaloonTextColor
+        self.tvContent.textColor = ColorConfiguration.rightBubbleTextColor
         self.lbNameHeight.constant = 0
-        self.ivBaloonLeft.layer.cornerRadius = 5.0
-        self.ivBaloonLeft.clipsToBounds = true
+        self.ivBubbleLeft.layer.cornerRadius = 5.0
+        self.ivBubbleLeft.clipsToBounds = true
     }
     
     func setupBalon(){
-        //self.ivBaloonLeft.applyShadow()
-        self.ivBaloonLeft.image = self.getBallon()
-        self.ivBaloonLeft.tintColor = ColorConfiguration.rightBaloonColor
-        self.ivBaloonLeft.backgroundColor = ColorConfiguration.rightBaloonColor
+        //self.ivBubbleLeft.applyShadow()
+        self.ivBubbleLeft.image = self.getBallon()
+        self.ivBubbleLeft.tintColor = ColorConfiguration.rightBubbleColor
+        self.ivBubbleLeft.backgroundColor = ColorConfiguration.rightBubbleColor
     }
     
     func status(message: CommentModel){
