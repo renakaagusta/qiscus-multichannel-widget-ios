@@ -44,7 +44,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func  application(_  application:  UIApplication,  didReceiveRemoteNotification  userInfo: [AnyHashable  :  Any]) {
         ChatManager.shared.userTapNotification(userInfo: userInfo)
     }
-
+    
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        // print
+    }
+    
 }
 
 extension AppDelegate: UNUserNotificationCenterDelegate {

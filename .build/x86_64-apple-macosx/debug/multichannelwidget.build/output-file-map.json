@@ -1,0 +1,11 @@
+{
+  "": {
+    "swift-dependencies": "/Users/asharijuang/iOS/Cocoapods/multichannelwidget/.build/x86_64-apple-macosx/debug/multichannelwidget.build/master.swiftdeps"
+  },
+  "/Users/asharijuang/iOS/Cocoapods/multichannelwidget/Sources/multichannelwidget/multichannelwidget.swift": {
+    "dependencies": "/Users/asharijuang/iOS/Cocoapods/multichannelwidget/.build/x86_64-apple-macosx/debug/multichannelwidget.build/multichannelwidget.d",
+    "object": "/Users/asharijuang/iOS/Cocoapods/multichannelwidget/.build/x86_64-apple-macosx/debug/multichannelwidget.build/multichannelwidget.swift.o",
+    "swiftmodule": "/Users/asharijuang/iOS/Cocoapods/multichannelwidget/.build/x86_64-apple-macosx/debug/multichannelwidget.build/multichannelwidget~partial.swiftmodule",
+    "swift-dependencies": "/Users/asharijuang/iOS/Cocoapods/multichannelwidget/.build/x86_64-apple-macosx/debug/multichannelwidget.build/multichannelwidget.swiftdeps"
+  }
+}

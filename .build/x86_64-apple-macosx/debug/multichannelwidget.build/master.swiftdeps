@@ -1,0 +1,5 @@
+version: "Apple Swift version 5.1.2 (swiftlang-1100.0.278 clang-1100.0.33.9)"
+options: "b1f7784208d8711c0328989eedbdf813"
+build_time: [1592177914, 753011000]
+inputs:
+  "/Users/asharijuang/iOS/Cocoapods/multichannelwidget/Sources/multichannelwidget/multichannelwidget.swift": [1592177180, 608014344]
