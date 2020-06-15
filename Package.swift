@@ -4,7 +4,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "multichannelwidget",
+    name: "MultichannelWidget",
     platforms: [
         .iOS(.v8)
     ],
@@ -24,8 +24,7 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
         .target(
             name: "multichannelwidget",
-            dependencies: [],
-            path: "MultichannelWidget"),
+            dependencies: []),
         .testTarget(
             name: "multichannelwidgetTests",
             dependencies: ["multichannelwidget"]),
