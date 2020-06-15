@@ -18,6 +18,7 @@ let package = Package(
         // Dependencies declare other packages that this package depends on.
         // .package(url: https://url/of/another/package/named/Utility, from: "1.0.0"),
         // .package(path: "MultichannelWidget")
+        .package(url: "https://github.com/SwiftyJSON/SwiftyJSON")
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
