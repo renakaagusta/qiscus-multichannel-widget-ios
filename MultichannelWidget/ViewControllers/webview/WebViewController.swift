@@ -5,7 +5,9 @@
 //  Created by qiscus on 07/04/20.
 //
 
+#if canImport(UIKit)
 import UIKit
+#endif
 import WebKit
 
 class WebViewController: UIViewController, WKUIDelegate {
