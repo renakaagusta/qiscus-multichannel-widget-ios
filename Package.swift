@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
     name: "MultichannelWidget",
     platforms: [
-        .iOS(.v8)
+        .iOS(.v10)
     ],
     products: [
         // Products define the executables and libraries produced by a package, and make them visible to other packages.
@@ -16,9 +16,10 @@ let package = Package(
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
-        // .package(url: https://url/of/another/package/named/Utility, from: "1.0.0"),
-        // .package(path: "MultichannelWidget")
-        .package(url: "https://github.com/SwiftyJSON/SwiftyJSON")
+        .package(url: "https://github.com/SwiftyJSON/SwiftyJSON", from: "5.0.0"),
+        .package(url: "https://github.com/Alamofire/Alamofire.git", .upToNextMajor(from: "5.2.0")),
+        .package(url: "https://github.com/Alamofire/AlamofireImage.git", .upToNextMajor(from: "4.1.0")),
+        .package(url: "https://github.com/SDWebImage/SDWebImage.git", from: "5.1.0")
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
