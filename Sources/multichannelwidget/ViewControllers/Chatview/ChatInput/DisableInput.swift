@@ -5,7 +5,9 @@
 //  Created by qiscus on 24/04/20.
 //
 
+#if os(iOS)
 import UIKit
+#endif
 
 protocol DisableChatInputDelegate {
     func finishVC()

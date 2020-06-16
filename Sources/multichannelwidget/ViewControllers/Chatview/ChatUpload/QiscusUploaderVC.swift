@@ -6,7 +6,9 @@
 //  Copyright © 2017 Ahmad Athaullah. All rights reserved.
 //
 
+#if os(iOS)
 import UIKit
+#endif
 import Photos
 import MobileCoreServices
 import QiscusCoreApi

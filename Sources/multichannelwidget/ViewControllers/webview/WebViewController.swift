@@ -5,7 +5,7 @@
 //  Created by qiscus on 07/04/20.
 //
 
-#if canImport(UIKit)
+#if os(iOS)
 import UIKit
 #endif
 import WebKit

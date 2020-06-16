@@ -5,7 +5,9 @@
 //  Created by asharijuang on 08/01/20.
 //
 
+#if os(iOS)
 import UIKit
+#endif
 import WebKit
 
 class QismoViewController: UIViewController {

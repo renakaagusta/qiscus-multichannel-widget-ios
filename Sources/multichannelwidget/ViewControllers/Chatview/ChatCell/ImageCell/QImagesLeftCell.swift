@@ -5,7 +5,9 @@
 //  Created by qiscus on 13/01/20.
 //
 
+#if os(iOS)
 import UIKit
+#endif
 import QiscusCoreApi
 import Alamofire
 import AlamofireImage

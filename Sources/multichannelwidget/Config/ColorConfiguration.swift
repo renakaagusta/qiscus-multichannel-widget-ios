@@ -6,7 +6,9 @@
 //  Copyright © 2016 Ahmad Athaullah. All rights reserved.
 //
 
+#if os(iOS)
 import UIKit
+#endif
 
 class ColorConfiguration: NSObject {
     

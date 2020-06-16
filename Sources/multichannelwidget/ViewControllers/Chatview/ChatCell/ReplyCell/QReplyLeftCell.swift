@@ -5,7 +5,9 @@
 //  Created by asharijuang on 05/09/18.
 //
 
+#if os(iOS)
 import UIKit
+#endif
 import QiscusCoreApi
 import SwiftyJSON
 import AlamofireImage

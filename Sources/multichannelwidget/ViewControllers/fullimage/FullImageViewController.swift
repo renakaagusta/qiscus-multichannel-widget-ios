@@ -5,7 +5,9 @@
 //  Created by qiscus on 17/03/20.
 //
 
+#if os(iOS)
 import UIKit
+#endif
 import QiscusCoreApi
 
 class FullImageViewController: UIViewController {

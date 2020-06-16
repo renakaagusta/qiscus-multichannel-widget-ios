@@ -5,7 +5,9 @@
 //  Created by Qiscus on 04/09/18.
 //
 
+#if os(iOS)
 import UIKit
+#endif
 import QiscusCoreApi
 
 // Blueprint method

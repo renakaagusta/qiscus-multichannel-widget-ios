@@ -5,7 +5,9 @@
 //  Created by qiscus on 27/01/20.
 //
 
+#if os(iOS)
 import UIKit
+#endif
 import QiscusCoreApi
 
 class QFileRightCell: UIBaseChatCell {

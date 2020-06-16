@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,6 +13,7 @@
 		0444E2D72498982E0036DF05 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0444E2D52498982E0036DF05 /* Main.storyboard */; };
 		0444E2D9249898320036DF05 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0444E2D8249898320036DF05 /* Assets.xcassets */; };
 		0444E2DC249898320036DF05 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0444E2DA249898320036DF05 /* LaunchScreen.storyboard */; };
+		0444E2E52498A3F80036DF05 /* MultichannelWidget in Frameworks */ = {isa = PBXBuildFile; productRef = 0444E2E42498A3F80036DF05 /* MultichannelWidget */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0444E2E52498A3F80036DF05 /* MultichannelWidget in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +85,9 @@
 			dependencies = (
 			);
 			name = "swift package manager";
+			packageProductDependencies = (
+				0444E2E42498A3F80036DF05 /* MultichannelWidget */,
+			);
 			productName = "swift package manager";
 			productReference = 0444E2CC2498982E0036DF05 /* swift package manager.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +116,9 @@
 				Base,
 			);
 			mainGroup = 0444E2C32498982E0036DF05;
+			packageReferences = (
+				0444E2E32498A3F80036DF05 /* XCRemoteSwiftPackageReference "ios-multichannel-widget" */,
+			);
 			productRefGroup = 0444E2CD2498982E0036DF05 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -338,6 +346,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		0444E2E32498A3F80036DF05 /* XCRemoteSwiftPackageReference "ios-multichannel-widget" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Qiscus-Integration/ios-multichannel-widget.git";
+			requirement = {
+				branch = "package-manager";
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		0444E2E42498A3F80036DF05 /* MultichannelWidget */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0444E2E32498A3F80036DF05 /* XCRemoteSwiftPackageReference "ios-multichannel-widget" */;
+			productName = MultichannelWidget;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 0444E2C42498982E0036DF05 /* Project object */;
 }

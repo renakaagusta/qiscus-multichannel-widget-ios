@@ -20,6 +20,15 @@
         }
       },
       {
+        "package": "MultichannelWidget",
+        "repositoryURL": "https://github.com/Qiscus-Integration/ios-multichannel-widget.git",
+        "state": {
+          "branch": "package-manager",
+          "revision": "baf98054c1bb8136e92f677dd9c3f43289624bb7",
+          "version": null
+        }
+      },
+      {
         "package": "SDWebImage",
         "repositoryURL": "https://github.com/SDWebImage/SDWebImage.git",
         "state": {
