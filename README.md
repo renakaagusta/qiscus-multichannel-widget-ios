@@ -41,7 +41,7 @@ dependencies: [
 ### Initialization
 To use the widget you will need to initialize MultichannelWidget, in order to do this you will need APP_ID.
 ```swift
-let widget = MultichannelWidget(appID: "bul-3c5iczzj7aiefltec")
+let widget = MultichannelWidget(appID: YOUR_APP_ID)
 ```
 after the initialization, you can access all the widget's function.
 ### Set the user

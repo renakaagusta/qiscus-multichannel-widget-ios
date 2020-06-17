@@ -14,6 +14,7 @@
 		0444E2D9249898320036DF05 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0444E2D8249898320036DF05 /* Assets.xcassets */; };
 		0444E2DC249898320036DF05 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0444E2DA249898320036DF05 /* LaunchScreen.storyboard */; };
 		0444E2E52498A3F80036DF05 /* MultichannelWidget in Frameworks */ = {isa = PBXBuildFile; productRef = 0444E2E42498A3F80036DF05 /* MultichannelWidget */; };
+		048AF1442499B2D900CE1E83 /* QiscusCoreApi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 048AF1432499B2D900CE1E83 /* QiscusCoreApi.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		0444E2D8249898320036DF05 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0444E2DB249898320036DF05 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0444E2DD249898320036DF05 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		048AF1432499B2D900CE1E83 /* QiscusCoreApi.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QiscusCoreApi.framework; path = Carthage/Checkouts/QiscusCoreApi/QiscusCoreApi.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +34,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				048AF1442499B2D900CE1E83 /* QiscusCoreApi.framework in Frameworks */,
 				0444E2E52498A3F80036DF05 /* MultichannelWidget in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -44,6 +47,7 @@
 			children = (
 				0444E2CE2498982E0036DF05 /* swift package manager */,
 				0444E2CD2498982E0036DF05 /* Products */,
+				048AF1422499B2D900CE1E83 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -67,6 +71,14 @@
 				0444E2DD249898320036DF05 /* Info.plist */,
 			);
 			path = "swift package manager";
+			sourceTree = "<group>";
+		};
+		048AF1422499B2D900CE1E83 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				048AF1432499B2D900CE1E83 /* QiscusCoreApi.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -294,6 +306,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QG8KA4P8TE;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Checkouts/QiscusCoreApi",
+				);
 				INFOPLIST_FILE = "swift package manager/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -312,6 +328,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QG8KA4P8TE;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Checkouts/QiscusCoreApi",
+				);
 				INFOPLIST_FILE = "swift package manager/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

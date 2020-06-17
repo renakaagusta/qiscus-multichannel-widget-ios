@@ -15,11 +15,11 @@ s.platform     = :ios, "10.0"
 s.swift_version = '4.2'
 s.source       = { :git => "https://github.com/Qiscus-Integration/ios-multichannel-widget.git" }
 
-s.source_files  = "MultichannelWidget", "Sources/multichannelwidget/**/*.{h,m,swift,xib}"
+s.source_files  = "MultichannelWidget", "Sources/MultichannelWidget/**/*.{h,m,swift,xib}"
 
-s.resources = "Sources/multichannelwidget/**/*.xcassets"
+s.resources = "Sources/MultichannelWidget/**/*.xcassets"
 s.resource_bundles = {
-    'MultichannelWidget' => ['Sources/multichannelwidget/**/*.{lproj,xib,xcassets,imageset,png}']
+    'MultichannelWidget' => ['Sources/MultichannelWidget/**/*.{lproj,xib,xcassets,imageset,png}']
 }
 
 s.framework		= 'UIKit', 'AVFoundation'
