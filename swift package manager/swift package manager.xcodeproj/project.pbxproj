@@ -13,9 +13,24 @@
 		0444E2D72498982E0036DF05 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0444E2D52498982E0036DF05 /* Main.storyboard */; };
 		0444E2D9249898320036DF05 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0444E2D8249898320036DF05 /* Assets.xcassets */; };
 		0444E2DC249898320036DF05 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0444E2DA249898320036DF05 /* LaunchScreen.storyboard */; };
-		048AF1442499B2D900CE1E83 /* QiscusCoreApi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 048AF1432499B2D900CE1E83 /* QiscusCoreApi.framework */; };
 		04FF64E0249A7216005F68F6 /* MultichannelWidget in Frameworks */ = {isa = PBXBuildFile; productRef = 04FF64DF249A7216005F68F6 /* MultichannelWidget */; };
+		04FF64E1249B08D3005F68F6 /* QiscusCoreApi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 048AF1432499B2D900CE1E83 /* QiscusCoreApi.framework */; };
+		04FF64E2249B08D3005F68F6 /* QiscusCoreApi.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 048AF1432499B2D900CE1E83 /* QiscusCoreApi.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		04FF64E3249B08D3005F68F6 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				04FF64E2249B08D3005F68F6 /* QiscusCoreApi.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0444E2CC2498982E0036DF05 /* swift package manager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "swift package manager.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -34,8 +49,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04FF64E1249B08D3005F68F6 /* QiscusCoreApi.framework in Frameworks */,
 				04FF64E0249A7216005F68F6 /* MultichannelWidget in Frameworks */,
-				048AF1442499B2D900CE1E83 /* QiscusCoreApi.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -91,6 +106,7 @@
 				0444E2C82498982E0036DF05 /* Sources */,
 				0444E2C92498982E0036DF05 /* Frameworks */,
 				0444E2CA2498982E0036DF05 /* Resources */,
+				04FF64E3249B08D3005F68F6 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);

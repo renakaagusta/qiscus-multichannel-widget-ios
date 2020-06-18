@@ -1,2 +1,5 @@
 github "Qiscus-Integration/QiscusCoreApi" ~> 0.2.3
-github "Qiscus-Integration/ios-multichannel-widget" ~> 1.1.6
+github "Qiscus-Integration/ios-multichannel-widget" "package-manager"
+github "Alamofire/Alamofire" ~> 4.9
+github "SwiftyJSON/SwiftyJSON"
+github "https://github.com/SDWebImage/SDWebImage.git" ~> 5.1.0
