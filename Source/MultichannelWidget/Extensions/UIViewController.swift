@@ -8,6 +8,7 @@
 #if os(iOS)
 import UIKit
 #endif
+import Foundation
 
 extension UIViewController {
 
