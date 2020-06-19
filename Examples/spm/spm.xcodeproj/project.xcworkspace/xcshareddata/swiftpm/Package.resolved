@@ -6,8 +6,8 @@
         "repositoryURL": "https://github.com/Alamofire/Alamofire.git",
         "state": {
           "branch": null,
-          "revision": "2777659076fda38bd4e487739ee331c7a65b5924",
-          "version": "5.2.1"
+          "revision": "747c8db8d57b68d5e35275f10c92d55f982adbd4",
+          "version": "4.9.1"
         }
       },
       {
@@ -15,16 +15,16 @@
         "repositoryURL": "https://github.com/Alamofire/AlamofireImage.git",
         "state": {
           "branch": null,
-          "revision": "3e8edbeb75227f8542aa87f90240cf0424d6362f",
-          "version": "4.1.0"
+          "revision": "c31e617c582102d4b51c714211071f2260e24fdd",
+          "version": "3.6.0"
         }
       },
       {
         "package": "MultichannelWidget",
         "repositoryURL": "https://github.com/Qiscus-Integration/ios-multichannel-widget.git",
         "state": {
-          "branch": "spm",
-          "revision": "0f931217c4621b43a49c32086bd06413fd0b0263",
+          "branch": "spm2",
+          "revision": "d7acecbeacaf376b22666f5bc91f318d147a7b2e",
           "version": null
         }
       },
@@ -33,7 +33,7 @@
         "repositoryURL": "https://github.com/Qiscus-Integration/QiscusCoreApi.git",
         "state": {
           "branch": "spm",
-          "revision": "55942aeeb1726cacee94f6d4723c9cf52c1848b8",
+          "revision": "58f2613ff93b6e2410d5c13ee2f21dcd8b8e46c4",
           "version": null
         }
       },

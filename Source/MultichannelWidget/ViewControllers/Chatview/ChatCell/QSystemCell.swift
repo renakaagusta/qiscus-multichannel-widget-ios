@@ -9,7 +9,7 @@
 import UIKit
 #endif
 
-import QiscusCoreApi
+import QiscusCoreAPI
 
 class QSystemCell:  UIBaseChatCell {
     

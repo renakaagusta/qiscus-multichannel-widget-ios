@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 #endif
 import Alamofire
-import QiscusCoreApi
+import QiscusCoreAPI
 
 public class MultichannelWidget {
     

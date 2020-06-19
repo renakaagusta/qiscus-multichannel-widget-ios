@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import QiscusCoreApi
+import QiscusCoreAPI
 import AlamofireImage
 import SwiftyJSON
 
