@@ -5,6 +5,10 @@
 //  Created by asharijuang on 18/12/19.
 //
 
+#if os(iOS)
+import UIKit
+#endif
+
 extension UIViewController {
 
     func qiscusAutoHideKeyboard() {

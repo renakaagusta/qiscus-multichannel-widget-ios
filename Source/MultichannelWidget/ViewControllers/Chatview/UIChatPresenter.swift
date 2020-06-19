@@ -5,6 +5,9 @@
 //  Created by Rahardyan Bisma on 07/05/18.
 //
 
+#if os(iOS)
+import UIKit
+#endif
 import Foundation
 import QiscusCoreAPI
 import AlamofireImage
