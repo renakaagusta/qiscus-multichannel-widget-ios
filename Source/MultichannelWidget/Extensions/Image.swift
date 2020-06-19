@@ -5,6 +5,9 @@
 //  Created by asharijuang on 20/12/19.
 //
 
+#if os(iOS)
+import UIKit
+#endif
 import Foundation
 
 extension UIImageView {
