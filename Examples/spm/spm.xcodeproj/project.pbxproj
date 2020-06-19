@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,7 +13,6 @@
 		047C0124249C56D6009C5A36 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 047C0122249C56D6009C5A36 /* Main.storyboard */; };
 		047C0126249C56DA009C5A36 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 047C0125249C56DA009C5A36 /* Assets.xcassets */; };
 		047C0129249C56DA009C5A36 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 047C0127249C56DA009C5A36 /* LaunchScreen.storyboard */; };
-		04812D93249C9ADD003020FB /* MultichannelWidget in Frameworks */ = {isa = PBXBuildFile; productRef = 04812D92249C9ADD003020FB /* MultichannelWidget */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,7 +31,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04812D93249C9ADD003020FB /* MultichannelWidget in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,7 +84,6 @@
 			);
 			name = spm;
 			packageProductDependencies = (
-				04812D92249C9ADD003020FB /* MultichannelWidget */,
 			);
 			productName = spm;
 			productReference = 047C0119249C56D6009C5A36 /* spm.app */;
@@ -117,7 +114,6 @@
 			);
 			mainGroup = 047C0110249C56D6009C5A36;
 			packageReferences = (
-				04812D91249C9ADD003020FB /* XCRemoteSwiftPackageReference "ios-multichannel-widget" */,
 			);
 			productRefGroup = 047C011A249C56D6009C5A36 /* Products */;
 			projectDirPath = "";
@@ -346,25 +342,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		04812D91249C9ADD003020FB /* XCRemoteSwiftPackageReference "ios-multichannel-widget" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Qiscus-Integration/ios-multichannel-widget.git";
-			requirement = {
-				branch = spm2;
-				kind = branch;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		04812D92249C9ADD003020FB /* MultichannelWidget */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 04812D91249C9ADD003020FB /* XCRemoteSwiftPackageReference "ios-multichannel-widget" */;
-			productName = MultichannelWidget;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 047C0111249C56D6009C5A36 /* Project object */;
 }
