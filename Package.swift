@@ -20,7 +20,7 @@ let package = Package(
         .package(url: "https://github.com/Alamofire/Alamofire.git", .upToNextMajor(from: "5.2.0")),
         .package(url: "https://github.com/Alamofire/AlamofireImage.git", .upToNextMajor(from: "4.1.0")),
         .package(url: "https://github.com/SDWebImage/SDWebImage.git", from: "5.1.0"),
-        .package(url: "https://github.com/Qiscus-Integration/QiscusCoreApi.git", branch: "spm")
+        .package(url: "https://github.com/Qiscus-Integration/QiscusCoreApi.git", .branch ("spm"))
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.

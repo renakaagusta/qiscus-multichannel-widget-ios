@@ -20,6 +20,15 @@
         }
       },
       {
+        "package": "QiscusCoreAPI",
+        "repositoryURL": "https://github.com/Qiscus-Integration/QiscusCoreApi.git",
+        "state": {
+          "branch": "spm",
+          "revision": "0a0cefbfd168c1f637bb86e30d239965e7c80be6",
+          "version": null
+        }
+      },
+      {
         "package": "SDWebImage",
         "repositoryURL": "https://github.com/SDWebImage/SDWebImage.git",
         "state": {
