@@ -13,7 +13,8 @@
 		047C0124249C56D6009C5A36 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 047C0122249C56D6009C5A36 /* Main.storyboard */; };
 		047C0126249C56DA009C5A36 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 047C0125249C56DA009C5A36 /* Assets.xcassets */; };
 		047C0129249C56DA009C5A36 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 047C0127249C56DA009C5A36 /* LaunchScreen.storyboard */; };
-		04812D96249C9CDB003020FB /* MultichannelWidget in Frameworks */ = {isa = PBXBuildFile; productRef = 04812D95249C9CDB003020FB /* MultichannelWidget */; };
+		04812D99249C9FB3003020FB /* MultichannelWidget in Frameworks */ = {isa = PBXBuildFile; productRef = 04812D98249C9FB3003020FB /* MultichannelWidget */; };
+		04812D9B249CA02C003020FB /* ChatManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04812D9A249CA02C003020FB /* ChatManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		047C0125249C56DA009C5A36 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		047C0128249C56DA009C5A36 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		047C012A249C56DA009C5A36 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		04812D9A249CA02C003020FB /* ChatManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatManager.swift; path = ../../cocoapods/Example/ChatManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,7 +34,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04812D96249C9CDB003020FB /* MultichannelWidget in Frameworks */,
+				04812D99249C9FB3003020FB /* MultichannelWidget in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,6 +61,7 @@
 			isa = PBXGroup;
 			children = (
 				047C011C249C56D6009C5A36 /* AppDelegate.swift */,
+				04812D9A249CA02C003020FB /* ChatManager.swift */,
 				047C011E249C56D6009C5A36 /* SceneDelegate.swift */,
 				047C0120249C56D6009C5A36 /* ViewController.swift */,
 				047C0122249C56D6009C5A36 /* Main.storyboard */,
@@ -86,7 +89,7 @@
 			);
 			name = spm;
 			packageProductDependencies = (
-				04812D95249C9CDB003020FB /* MultichannelWidget */,
+				04812D98249C9FB3003020FB /* MultichannelWidget */,
 			);
 			productName = spm;
 			productReference = 047C0119249C56D6009C5A36 /* spm.app */;
@@ -117,7 +120,7 @@
 			);
 			mainGroup = 047C0110249C56D6009C5A36;
 			packageReferences = (
-				04812D94249C9CDB003020FB /* XCRemoteSwiftPackageReference "ios-multichannel-widget" */,
+				04812D97249C9FB3003020FB /* XCRemoteSwiftPackageReference "ios-multichannel-widget" */,
 			);
 			productRefGroup = 047C011A249C56D6009C5A36 /* Products */;
 			projectDirPath = "";
@@ -149,6 +152,7 @@
 				047C0121249C56D6009C5A36 /* ViewController.swift in Sources */,
 				047C011D249C56D6009C5A36 /* AppDelegate.swift in Sources */,
 				047C011F249C56D6009C5A36 /* SceneDelegate.swift in Sources */,
+				04812D9B249CA02C003020FB /* ChatManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -348,20 +352,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		04812D94249C9CDB003020FB /* XCRemoteSwiftPackageReference "ios-multichannel-widget" */ = {
+		04812D97249C9FB3003020FB /* XCRemoteSwiftPackageReference "ios-multichannel-widget" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Qiscus-Integration/ios-multichannel-widget.git";
 			requirement = {
-				branch = spm3;
+				branch = spm;
 				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		04812D95249C9CDB003020FB /* MultichannelWidget */ = {
+		04812D98249C9FB3003020FB /* MultichannelWidget */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 04812D94249C9CDB003020FB /* XCRemoteSwiftPackageReference "ios-multichannel-widget" */;
+			package = 04812D97249C9FB3003020FB /* XCRemoteSwiftPackageReference "ios-multichannel-widget" */;
 			productName = MultichannelWidget;
 		};
 /* End XCSwiftPackageProductDependency section */

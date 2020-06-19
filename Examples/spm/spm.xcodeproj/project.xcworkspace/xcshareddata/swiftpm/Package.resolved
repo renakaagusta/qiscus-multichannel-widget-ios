@@ -23,8 +23,8 @@
         "package": "MultichannelWidget",
         "repositoryURL": "https://github.com/Qiscus-Integration/ios-multichannel-widget.git",
         "state": {
-          "branch": "spm3",
-          "revision": "3da0f1d89b2bc6e5a048c63be659ec4afc4aff27",
+          "branch": "spm",
+          "revision": "287ccc8c2b6fc2ac9fd5a5db33b3de74589b5dd8",
           "version": null
         }
       },
