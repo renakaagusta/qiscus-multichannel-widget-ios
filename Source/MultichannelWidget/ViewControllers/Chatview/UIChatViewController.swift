@@ -10,7 +10,7 @@ import UIKit
 #endif
 import ContactsUI
 import SwiftyJSON
-import QiscusCoreApi
+import QiscusCoreAPI
 
 // Chat view blue print or function
 protocol UIChatView {

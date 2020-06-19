@@ -8,7 +8,7 @@
 #if os(iOS)
 import UIKit
 #endif
-import QiscusCoreApi
+import QiscusCoreAPI
 
 class QImagesRightCell: UIBaseChatCell {
 

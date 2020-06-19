@@ -11,7 +11,7 @@ import UIKit
 #endif
 import Photos
 import MobileCoreServices
-import QiscusCoreApi
+import QiscusCoreAPI
 import Alamofire
 import AlamofireImage
 import SwiftyJSON
