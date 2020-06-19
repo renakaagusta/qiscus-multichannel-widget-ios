@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 import MultichannelWidget
 
 enum ChatTransitionType {
@@ -18,7 +19,7 @@ final class ChatManager {
     static let shared: ChatManager = ChatManager()
     
     lazy var widget: MultichannelWidget = {
-       return MultichannelWidget(appID: "")
+       return MultichannelWidget(appID: "karm-gzu41e4e4dv9fu3f")
     }()
     
     func setUser(id: String, displayName: String, avatarUrl: String = "") {

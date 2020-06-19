@@ -18,7 +18,7 @@ public class MultichannelWidget {
         get{
             let podBundle = Bundle(for: MultichannelWidget.self)
             
-            if let bundleURL = podBundle.url(forResource: "BBChat", withExtension: "bundle") {
+            if let bundleURL = podBundle.url(forResource: "MultichannelWidget", withExtension: "bundle") {
                 return Bundle(url: bundleURL)!
             }else{
                 return podBundle
