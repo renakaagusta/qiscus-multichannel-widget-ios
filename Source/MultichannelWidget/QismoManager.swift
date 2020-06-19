@@ -5,6 +5,9 @@
 //  Created by asharijuang on 17/12/19.
 //
 
+#if os(iOS)
+import UIKit
+#endif
 import Foundation
 import QiscusCoreApi
 import SwiftyJSON

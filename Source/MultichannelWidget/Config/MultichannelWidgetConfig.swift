@@ -5,6 +5,9 @@
 //  Created by Rahardyan Bisma on 19/05/20.
 //
 
+#if os(iOS)
+import UIKit
+#endif
 import Foundation
 
 open class MultichannelWidgetConfig {
