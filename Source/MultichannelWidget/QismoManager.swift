@@ -9,7 +9,7 @@
 import UIKit
 #endif
 import Foundation
-import QiscusCoreApi
+import QiscusCoreAPI
 import SwiftyJSON
 import UserNotifications
 

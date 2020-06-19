@@ -18,7 +18,7 @@ let package = Package(
         // Dependencies declare other packages that this package depends on.
         .package(url: "https://github.com/SwiftyJSON/SwiftyJSON", from: "5.0.0"),
         .package(url: "https://github.com/Alamofire/Alamofire.git", .upToNextMajor(from: "4.9.0")),
-        .package(url: "https://github.com/Alamofire/AlamofireImage.git", .upToNextMajor(from: "4.1.0")),
+        .package(url: "https://github.com/Alamofire/AlamofireImage.git", .upToNextMajor(from: "3.6.0")),
         .package(url: "https://github.com/SDWebImage/SDWebImage.git", from: "5.1.0"),
         .package(url: "https://github.com/Qiscus-Integration/QiscusCoreApi.git", .branch ("spm"))
     ],
@@ -27,7 +27,7 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
         .target(
             name: "MultichannelWidget",
-            dependencies: ["SwiftyJSON", "Alamofire", "AlamofireImage", "SDWebImage", "QiscusCoreApi"]),
+            dependencies: ["SwiftyJSON", "Alamofire", "AlamofireImage", "SDWebImage", "QiscusCoreAPI"]),
         .testTarget(
             name: "MultichannelWidgetTests",
             dependencies: ["MultichannelWidget"]),
