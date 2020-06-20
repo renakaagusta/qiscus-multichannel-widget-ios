@@ -2,7 +2,7 @@
 //  MultichannelWidget.h
 //  MultichannelWidget
 //
-//  Created by asharijuang on 18/06/20.
+//  Created by Rahardyan Bisma on 20/06/20.
 //  Copyright © 2020 Qiscus. All rights reserved.
 //
 

@@ -1,4 +1,0 @@
-module SDWebImage {
-    umbrella header "/Users/asharijuang/iOS/Cocoapods/multichannelwidget/.build/checkouts/SDWebImage/SDWebImage/include/SDWebImage/SDWebImage.h"
-    export *
-}

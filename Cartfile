@@ -1,0 +1,2 @@
+github "Alamofire/AlamofireImage" == 3.6.0
+git "https://github.com/amsibsam/QiscusCoreApi.git"

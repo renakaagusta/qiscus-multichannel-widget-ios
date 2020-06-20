@@ -1,4236 +1,865 @@
 // !$*UTF8*$!
 {
-   archiveVersion = "1";
-   objectVersion = "46";
-   objects = {
-      "Alamofire::Alamofire" = {
-         isa = "PBXNativeTarget";
-         buildConfigurationList = "OBJ_294";
-         buildPhases = (
-            "OBJ_297",
-            "OBJ_315"
-         );
-         dependencies = (
-         );
-         name = "Alamofire";
-         productName = "Alamofire";
-         productReference = "Alamofire::Alamofire::Product";
-         productType = "com.apple.product-type.framework";
-      };
-      "Alamofire::Alamofire::Product" = {
-         isa = "PBXFileReference";
-         path = "Alamofire.framework";
-         sourceTree = "BUILT_PRODUCTS_DIR";
-      };
-      "Alamofire::SwiftPMPackageDescription" = {
-         isa = "PBXNativeTarget";
-         buildConfigurationList = "OBJ_340";
-         buildPhases = (
-            "OBJ_343"
-         );
-         dependencies = (
-         );
-         name = "AlamofirePackageDescription";
-         productName = "AlamofirePackageDescription";
-         productType = "com.apple.product-type.framework";
-      };
-      "AlamofireImage::AlamofireImage" = {
-         isa = "PBXNativeTarget";
-         buildConfigurationList = "OBJ_317";
-         buildPhases = (
-            "OBJ_320",
-            "OBJ_330"
-         );
-         dependencies = (
-            "OBJ_332"
-         );
-         name = "AlamofireImage";
-         productName = "AlamofireImage";
-         productReference = "AlamofireImage::AlamofireImage::Product";
-         productType = "com.apple.product-type.framework";
-      };
-      "AlamofireImage::AlamofireImage::Product" = {
-         isa = "PBXFileReference";
-         path = "AlamofireImage.framework";
-         sourceTree = "BUILT_PRODUCTS_DIR";
-      };
-      "AlamofireImage::SwiftPMPackageDescription" = {
-         isa = "PBXNativeTarget";
-         buildConfigurationList = "OBJ_334";
-         buildPhases = (
-            "OBJ_337"
-         );
-         dependencies = (
-         );
-         name = "AlamofireImagePackageDescription";
-         productName = "AlamofireImagePackageDescription";
-         productType = "com.apple.product-type.framework";
-      };
-      "MultichannelWidget::MultichannelWidget" = {
-         isa = "PBXNativeTarget";
-         buildConfigurationList = "OBJ_346";
-         buildPhases = (
-            "OBJ_349",
-            "OBJ_386"
-         );
-         dependencies = (
-            "OBJ_392",
-            "OBJ_394",
-            "OBJ_396",
-            "OBJ_397",
-            "OBJ_398"
-         );
-         name = "MultichannelWidget";
-         productName = "MultichannelWidget";
-         productReference = "MultichannelWidget::MultichannelWidget::Product";
-         productType = "com.apple.product-type.framework";
-      };
-      "MultichannelWidget::MultichannelWidget::Product" = {
-         isa = "PBXFileReference";
-         path = "MultichannelWidget.framework";
-         sourceTree = "BUILT_PRODUCTS_DIR";
-      };
-      "MultichannelWidget::MultichannelWidgetPackageTests::ProductTarget" = {
-         isa = "PBXAggregateTarget";
-         buildConfigurationList = "OBJ_407";
-         buildPhases = (
-         );
-         dependencies = (
-            "OBJ_410"
-         );
-         name = "MultichannelWidgetPackageTests";
-         productName = "MultichannelWidgetPackageTests";
-      };
-      "MultichannelWidget::MultichannelWidgetTests" = {
-         isa = "PBXNativeTarget";
-         buildConfigurationList = "OBJ_412";
-         buildPhases = (
-            "OBJ_415",
-            "OBJ_418"
-         );
-         dependencies = (
-            "OBJ_425",
-            "OBJ_426",
-            "OBJ_427",
-            "OBJ_428",
-            "OBJ_429",
-            "OBJ_430"
-         );
-         name = "MultichannelWidgetTests";
-         productName = "MultichannelWidgetTests";
-         productReference = "MultichannelWidget::MultichannelWidgetTests::Product";
-         productType = "com.apple.product-type.bundle.unit-test";
-      };
-      "MultichannelWidget::MultichannelWidgetTests::Product" = {
-         isa = "PBXFileReference";
-         path = "MultichannelWidgetTests.xctest";
-         sourceTree = "BUILT_PRODUCTS_DIR";
-      };
-      "MultichannelWidget::SwiftPMPackageDescription" = {
-         isa = "PBXNativeTarget";
-         buildConfigurationList = "OBJ_401";
-         buildPhases = (
-            "OBJ_404"
-         );
-         dependencies = (
-         );
-         name = "MultichannelWidgetPackageDescription";
-         productName = "MultichannelWidgetPackageDescription";
-         productType = "com.apple.product-type.framework";
-      };
-      "OBJ_1" = {
-         isa = "PBXProject";
-         attributes = {
-            LastSwiftMigration = "9999";
-            LastUpgradeCheck = "9999";
-         };
-         buildConfigurationList = "OBJ_2";
-         compatibilityVersion = "Xcode 3.2";
-         developmentRegion = "en";
-         hasScannedForEncodings = "0";
-         knownRegions = (
-            "en"
-         );
-         mainGroup = "OBJ_5";
-         productRefGroup = "OBJ_280";
-         projectDirPath = ".";
-         targets = (
-            "Alamofire::Alamofire",
-            "AlamofireImage::AlamofireImage",
-            "AlamofireImage::SwiftPMPackageDescription",
-            "Alamofire::SwiftPMPackageDescription",
-            "MultichannelWidget::MultichannelWidget",
-            "MultichannelWidget::SwiftPMPackageDescription",
-            "MultichannelWidget::MultichannelWidgetPackageTests::ProductTarget",
-            "MultichannelWidget::MultichannelWidgetTests",
-            "QiscusCoreAPI::QiscusCoreAPI",
-            "QiscusCoreAPI::SwiftPMPackageDescription",
-            "SDWebImage::SDWebImage",
-            "SDWebImage::SwiftPMPackageDescription",
-            "SwiftyJSON::SwiftyJSON",
-            "SwiftyJSON::SwiftPMPackageDescription"
-         );
-      };
-      "OBJ_10" = {
-         isa = "PBXFileReference";
-         path = "Info.plist";
-         sourceTree = "<group>";
-      };
-      "OBJ_100" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_101",
-            "OBJ_102",
-            "OBJ_103"
-         );
-         name = "Endpoint";
-         path = "Endpoint";
-         sourceTree = "<group>";
-      };
-      "OBJ_101" = {
-         isa = "PBXFileReference";
-         path = "EndpointComment.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_102" = {
-         isa = "PBXFileReference";
-         path = "EndpointRoom.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_103" = {
-         isa = "PBXFileReference";
-         path = "EndpointUser.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_104" = {
-         isa = "PBXFileReference";
-         path = "HTTPUtil.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_105" = {
-         isa = "PBXFileReference";
-         path = "Router.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_106" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_107",
-            "OBJ_108"
-         );
-         name = "Protocol";
-         path = "Protocol";
-         sourceTree = "<group>";
-      };
-      "OBJ_107" = {
-         isa = "PBXFileReference";
-         path = "Interface.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_108" = {
-         isa = "PBXFileReference";
-         path = "QiscusConnectionDelegate.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_109" = {
-         isa = "PBXFileReference";
-         path = "QiscusCore.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_11" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_12"
-         );
-         name = "AppUtil";
-         path = "AppUtil";
-         sourceTree = "<group>";
-      };
-      "OBJ_110" = {
-         isa = "PBXFileReference";
-         explicitFileType = "sourcecode.swift";
-         name = "Package.swift";
-         path = "/Users/asharijuang/iOS/Cocoapods/multichannelwidget/.build/checkouts/QiscusCoreApi/Package.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_111" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_112",
-            "OBJ_244",
-            "OBJ_245"
-         );
-         name = "SDWebImage 5.8.1";
-         path = "";
-         sourceTree = "SOURCE_ROOT";
-      };
-      "OBJ_112" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_113",
-            "OBJ_171",
-            "OBJ_183"
-         );
-         name = "SDWebImage";
-         path = ".build/checkouts/SDWebImage/SDWebImage";
-         sourceTree = "SOURCE_ROOT";
-      };
-      "OBJ_113" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_114",
-            "OBJ_115",
-            "OBJ_116",
-            "OBJ_117",
-            "OBJ_118",
-            "OBJ_119",
-            "OBJ_120",
-            "OBJ_121",
-            "OBJ_122",
-            "OBJ_123",
-            "OBJ_124",
-            "OBJ_125",
-            "OBJ_126",
-            "OBJ_127",
-            "OBJ_128",
-            "OBJ_129",
-            "OBJ_130",
-            "OBJ_131",
-            "OBJ_132",
-            "OBJ_133",
-            "OBJ_134",
-            "OBJ_135",
-            "OBJ_136",
-            "OBJ_137",
-            "OBJ_138",
-            "OBJ_139",
-            "OBJ_140",
-            "OBJ_141",
-            "OBJ_142",
-            "OBJ_143",
-            "OBJ_144",
-            "OBJ_145",
-            "OBJ_146",
-            "OBJ_147",
-            "OBJ_148",
-            "OBJ_149",
-            "OBJ_150",
-            "OBJ_151",
-            "OBJ_152",
-            "OBJ_153",
-            "OBJ_154",
-            "OBJ_155",
-            "OBJ_156",
-            "OBJ_157",
-            "OBJ_158",
-            "OBJ_159",
-            "OBJ_160",
-            "OBJ_161",
-            "OBJ_162",
-            "OBJ_163",
-            "OBJ_164",
-            "OBJ_165",
-            "OBJ_166",
-            "OBJ_167",
-            "OBJ_168",
-            "OBJ_169",
-            "OBJ_170"
-         );
-         name = "Core";
-         path = "Core";
-         sourceTree = "<group>";
-      };
-      "OBJ_114" = {
-         isa = "PBXFileReference";
-         path = "NSButton+WebCache.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_115" = {
-         isa = "PBXFileReference";
-         path = "NSData+ImageContentType.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_116" = {
-         isa = "PBXFileReference";
-         path = "NSImage+Compatibility.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_117" = {
-         isa = "PBXFileReference";
-         path = "SDAnimatedImage.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_118" = {
-         isa = "PBXFileReference";
-         path = "SDAnimatedImagePlayer.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_119" = {
-         isa = "PBXFileReference";
-         path = "SDAnimatedImageRep.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_12" = {
-         isa = "PBXFileReference";
-         path = "AppUtil.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_120" = {
-         isa = "PBXFileReference";
-         path = "SDAnimatedImageView+WebCache.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_121" = {
-         isa = "PBXFileReference";
-         path = "SDAnimatedImageView.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_122" = {
-         isa = "PBXFileReference";
-         path = "SDDiskCache.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_123" = {
-         isa = "PBXFileReference";
-         path = "SDGraphicsImageRenderer.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_124" = {
-         isa = "PBXFileReference";
-         path = "SDImageAPNGCoder.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_125" = {
-         isa = "PBXFileReference";
-         path = "SDImageCache.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_126" = {
-         isa = "PBXFileReference";
-         path = "SDImageCacheConfig.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_127" = {
-         isa = "PBXFileReference";
-         path = "SDImageCacheDefine.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_128" = {
-         isa = "PBXFileReference";
-         path = "SDImageCachesManager.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_129" = {
-         isa = "PBXFileReference";
-         path = "SDImageCoder.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_13" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_14",
-            "OBJ_15",
-            "OBJ_16",
-            "OBJ_17"
-         );
-         name = "Config";
-         path = "Config";
-         sourceTree = "<group>";
-      };
-      "OBJ_130" = {
-         isa = "PBXFileReference";
-         path = "SDImageCoderHelper.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_131" = {
-         isa = "PBXFileReference";
-         path = "SDImageCodersManager.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_132" = {
-         isa = "PBXFileReference";
-         path = "SDImageFrame.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_133" = {
-         isa = "PBXFileReference";
-         path = "SDImageGIFCoder.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_134" = {
-         isa = "PBXFileReference";
-         path = "SDImageGraphics.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_135" = {
-         isa = "PBXFileReference";
-         path = "SDImageHEICCoder.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_136" = {
-         isa = "PBXFileReference";
-         path = "SDImageIOAnimatedCoder.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_137" = {
-         isa = "PBXFileReference";
-         path = "SDImageIOCoder.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_138" = {
-         isa = "PBXFileReference";
-         path = "SDImageLoader.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_139" = {
-         isa = "PBXFileReference";
-         path = "SDImageLoadersManager.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_14" = {
-         isa = "PBXFileReference";
-         path = "ChatConfig.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_140" = {
-         isa = "PBXFileReference";
-         path = "SDImageTransformer.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_141" = {
-         isa = "PBXFileReference";
-         path = "SDMemoryCache.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_142" = {
-         isa = "PBXFileReference";
-         path = "SDWebImageCacheKeyFilter.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_143" = {
-         isa = "PBXFileReference";
-         path = "SDWebImageCacheSerializer.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_144" = {
-         isa = "PBXFileReference";
-         path = "SDWebImageCompat.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_145" = {
-         isa = "PBXFileReference";
-         path = "SDWebImageDefine.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_146" = {
-         isa = "PBXFileReference";
-         path = "SDWebImageDownloader.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_147" = {
-         isa = "PBXFileReference";
-         path = "SDWebImageDownloaderConfig.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_148" = {
-         isa = "PBXFileReference";
-         path = "SDWebImageDownloaderDecryptor.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_149" = {
-         isa = "PBXFileReference";
-         path = "SDWebImageDownloaderOperation.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_15" = {
-         isa = "PBXFileReference";
-         path = "ColorConfiguration.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_150" = {
-         isa = "PBXFileReference";
-         path = "SDWebImageDownloaderRequestModifier.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_151" = {
-         isa = "PBXFileReference";
-         path = "SDWebImageDownloaderResponseModifier.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_152" = {
-         isa = "PBXFileReference";
-         path = "SDWebImageError.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_153" = {
-         isa = "PBXFileReference";
-         path = "SDWebImageIndicator.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_154" = {
-         isa = "PBXFileReference";
-         path = "SDWebImageManager.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_155" = {
-         isa = "PBXFileReference";
-         path = "SDWebImageOperation.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_156" = {
-         isa = "PBXFileReference";
-         path = "SDWebImageOptionsProcessor.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_157" = {
-         isa = "PBXFileReference";
-         path = "SDWebImagePrefetcher.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_158" = {
-         isa = "PBXFileReference";
-         path = "SDWebImageTransition.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_159" = {
-         isa = "PBXFileReference";
-         path = "UIButton+WebCache.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_16" = {
-         isa = "PBXFileReference";
-         path = "MultichannelWidgetConfig.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_160" = {
-         isa = "PBXFileReference";
-         path = "UIImage+ExtendedCacheData.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_161" = {
-         isa = "PBXFileReference";
-         path = "UIImage+ForceDecode.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_162" = {
-         isa = "PBXFileReference";
-         path = "UIImage+GIF.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_163" = {
-         isa = "PBXFileReference";
-         path = "UIImage+MemoryCacheCost.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_164" = {
-         isa = "PBXFileReference";
-         path = "UIImage+Metadata.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_165" = {
-         isa = "PBXFileReference";
-         path = "UIImage+MultiFormat.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_166" = {
-         isa = "PBXFileReference";
-         path = "UIImage+Transform.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_167" = {
-         isa = "PBXFileReference";
-         path = "UIImageView+HighlightedWebCache.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_168" = {
-         isa = "PBXFileReference";
-         path = "UIImageView+WebCache.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_169" = {
-         isa = "PBXFileReference";
-         path = "UIView+WebCache.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_17" = {
-         isa = "PBXFileReference";
-         path = "QiscusTextConfiguration.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_170" = {
-         isa = "PBXFileReference";
-         path = "UIView+WebCacheOperation.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_171" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_172",
-            "OBJ_173",
-            "OBJ_174",
-            "OBJ_175",
-            "OBJ_176",
-            "OBJ_177",
-            "OBJ_178",
-            "OBJ_179",
-            "OBJ_180",
-            "OBJ_181",
-            "OBJ_182"
-         );
-         name = "Private";
-         path = "Private";
-         sourceTree = "<group>";
-      };
-      "OBJ_172" = {
-         isa = "PBXFileReference";
-         path = "NSBezierPath+SDRoundedCorners.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_173" = {
-         isa = "PBXFileReference";
-         path = "SDAssociatedObject.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_174" = {
-         isa = "PBXFileReference";
-         path = "SDAsyncBlockOperation.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_175" = {
-         isa = "PBXFileReference";
-         path = "SDDeviceHelper.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_176" = {
-         isa = "PBXFileReference";
-         path = "SDDisplayLink.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_177" = {
-         isa = "PBXFileReference";
-         path = "SDFileAttributeHelper.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_178" = {
-         isa = "PBXFileReference";
-         path = "SDImageAssetManager.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_179" = {
-         isa = "PBXFileReference";
-         path = "SDImageCachesManagerOperation.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_18" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_19",
-            "OBJ_20",
-            "OBJ_21"
-         );
-         name = "Extensions";
-         path = "Extensions";
-         sourceTree = "<group>";
-      };
-      "OBJ_180" = {
-         isa = "PBXFileReference";
-         path = "SDInternalMacros.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_181" = {
-         isa = "PBXFileReference";
-         path = "SDWeakProxy.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_182" = {
-         isa = "PBXFileReference";
-         path = "UIColor+SDHexString.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_183" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_184",
-            "OBJ_243"
-         );
-         name = "include";
-         path = "include";
-         sourceTree = "<group>";
-      };
-      "OBJ_184" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_185",
-            "OBJ_186",
-            "OBJ_187",
-            "OBJ_188",
-            "OBJ_189",
-            "OBJ_190",
-            "OBJ_191",
-            "OBJ_192",
-            "OBJ_193",
-            "OBJ_194",
-            "OBJ_195",
-            "OBJ_196",
-            "OBJ_197",
-            "OBJ_198",
-            "OBJ_199",
-            "OBJ_200",
-            "OBJ_201",
-            "OBJ_202",
-            "OBJ_203",
-            "OBJ_204",
-            "OBJ_205",
-            "OBJ_206",
-            "OBJ_207",
-            "OBJ_208",
-            "OBJ_209",
-            "OBJ_210",
-            "OBJ_211",
-            "OBJ_212",
-            "OBJ_213",
-            "OBJ_214",
-            "OBJ_215",
-            "OBJ_216",
-            "OBJ_217",
-            "OBJ_218",
-            "OBJ_219",
-            "OBJ_220",
-            "OBJ_221",
-            "OBJ_222",
-            "OBJ_223",
-            "OBJ_224",
-            "OBJ_225",
-            "OBJ_226",
-            "OBJ_227",
-            "OBJ_228",
-            "OBJ_229",
-            "OBJ_230",
-            "OBJ_231",
-            "OBJ_232",
-            "OBJ_233",
-            "OBJ_234",
-            "OBJ_235",
-            "OBJ_236",
-            "OBJ_237",
-            "OBJ_238",
-            "OBJ_239",
-            "OBJ_240",
-            "OBJ_241",
-            "OBJ_242"
-         );
-         name = "SDWebImage";
-         path = "SDWebImage";
-         sourceTree = "<group>";
-      };
-      "OBJ_185" = {
-         isa = "PBXFileReference";
-         path = "UIImage+ExtendedCacheData.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_186" = {
-         isa = "PBXFileReference";
-         path = "SDAnimatedImageRep.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_187" = {
-         isa = "PBXFileReference";
-         path = "SDDiskCache.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_188" = {
-         isa = "PBXFileReference";
-         path = "SDImageIOCoder.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_189" = {
-         isa = "PBXFileReference";
-         path = "NSButton+WebCache.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_19" = {
-         isa = "PBXFileReference";
-         path = "Date.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_190" = {
-         isa = "PBXFileReference";
-         path = "SDImageGraphics.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_191" = {
-         isa = "PBXFileReference";
-         path = "UIImageView+WebCache.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_192" = {
-         isa = "PBXFileReference";
-         path = "NSData+ImageContentType.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_193" = {
-         isa = "PBXFileReference";
-         path = "SDImageTransformer.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_194" = {
-         isa = "PBXFileReference";
-         path = "SDImageCachesManager.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_195" = {
-         isa = "PBXFileReference";
-         path = "SDWebImageTransition.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_196" = {
-         isa = "PBXFileReference";
-         path = "SDImageLoadersManager.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_197" = {
-         isa = "PBXFileReference";
-         path = "SDWebImageDownloaderOperation.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_198" = {
-         isa = "PBXFileReference";
-         path = "SDImageFrame.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_199" = {
-         isa = "PBXFileReference";
-         path = "SDImageGIFCoder.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_2" = {
-         isa = "XCConfigurationList";
-         buildConfigurations = (
-            "OBJ_3",
-            "OBJ_4"
-         );
-         defaultConfigurationIsVisible = "0";
-         defaultConfigurationName = "Release";
-      };
-      "OBJ_20" = {
-         isa = "PBXFileReference";
-         path = "Image.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_200" = {
-         isa = "PBXFileReference";
-         path = "SDImageCache.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_201" = {
-         isa = "PBXFileReference";
-         path = "SDWebImageDownloaderConfig.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_202" = {
-         isa = "PBXFileReference";
-         path = "SDImageCacheConfig.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_203" = {
-         isa = "PBXFileReference";
-         path = "SDWebImageCacheKeyFilter.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_204" = {
-         isa = "PBXFileReference";
-         path = "UIImage+MemoryCacheCost.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_205" = {
-         isa = "PBXFileReference";
-         path = "SDImageCacheDefine.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_206" = {
-         isa = "PBXFileReference";
-         path = "UIButton+WebCache.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_207" = {
-         isa = "PBXFileReference";
-         path = "SDWebImageDownloaderRequestModifier.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_208" = {
-         isa = "PBXFileReference";
-         path = "UIImage+Metadata.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_209" = {
-         isa = "PBXFileReference";
-         path = "SDWebImage.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_21" = {
-         isa = "PBXFileReference";
-         path = "UIViewController.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_210" = {
-         isa = "PBXFileReference";
-         path = "SDWebImageOptionsProcessor.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_211" = {
-         isa = "PBXFileReference";
-         path = "UIView+WebCache.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_212" = {
-         isa = "PBXFileReference";
-         path = "UIView+WebCacheOperation.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_213" = {
-         isa = "PBXFileReference";
-         path = "SDWebImageDefine.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_214" = {
-         isa = "PBXFileReference";
-         path = "SDImageCoder.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_215" = {
-         isa = "PBXFileReference";
-         path = "SDAnimatedImageView+WebCache.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_216" = {
-         isa = "PBXFileReference";
-         path = "NSImage+Compatibility.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_217" = {
-         isa = "PBXFileReference";
-         path = "SDImageHEICCoder.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_218" = {
-         isa = "PBXFileReference";
-         path = "SDAnimatedImageView.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_219" = {
-         isa = "PBXFileReference";
-         path = "SDAnimatedImage.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_22" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_23"
-         );
-         name = "Model";
-         path = "Model";
-         sourceTree = "<group>";
-      };
-      "OBJ_220" = {
-         isa = "PBXFileReference";
-         path = "UIImageView+HighlightedWebCache.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_221" = {
-         isa = "PBXFileReference";
-         path = "SDImageIOAnimatedCoder.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_222" = {
-         isa = "PBXFileReference";
-         path = "SDWebImageManager.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_223" = {
-         isa = "PBXFileReference";
-         path = "SDWebImageDownloaderDecryptor.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_224" = {
-         isa = "PBXFileReference";
-         path = "SDWebImageOperation.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_225" = {
-         isa = "PBXFileReference";
-         path = "SDGraphicsImageRenderer.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_226" = {
-         isa = "PBXFileReference";
-         path = "SDWebImageIndicator.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_227" = {
-         isa = "PBXFileReference";
-         path = "SDWebImageCacheSerializer.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_228" = {
-         isa = "PBXFileReference";
-         path = "SDImageLoader.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_229" = {
-         isa = "PBXFileReference";
-         path = "SDWebImageDownloader.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_23" = {
-         isa = "PBXFileReference";
-         path = "CommentModel.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_230" = {
-         isa = "PBXFileReference";
-         path = "UIImage+Transform.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_231" = {
-         isa = "PBXFileReference";
-         path = "SDAnimatedImagePlayer.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_232" = {
-         isa = "PBXFileReference";
-         path = "UIImage+ForceDecode.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_233" = {
-         isa = "PBXFileReference";
-         path = "SDImageCoderHelper.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_234" = {
-         isa = "PBXFileReference";
-         path = "SDWebImagePrefetcher.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_235" = {
-         isa = "PBXFileReference";
-         path = "SDWebImageDownloaderResponseModifier.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_236" = {
-         isa = "PBXFileReference";
-         path = "SDImageAPNGCoder.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_237" = {
-         isa = "PBXFileReference";
-         path = "SDWebImageError.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_238" = {
-         isa = "PBXFileReference";
-         path = "SDWebImageCompat.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_239" = {
-         isa = "PBXFileReference";
-         path = "SDMemoryCache.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_24" = {
-         isa = "PBXFileReference";
-         path = "MultichannelWidget.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_240" = {
-         isa = "PBXFileReference";
-         path = "UIImage+MultiFormat.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_241" = {
-         isa = "PBXFileReference";
-         path = "SDImageCodersManager.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_242" = {
-         isa = "PBXFileReference";
-         path = "UIImage+GIF.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_243" = {
-         isa = "PBXFileReference";
-         name = "module.modulemap";
-         path = "/Users/asharijuang/iOS/Cocoapods/multichannelwidget/MultichannelWidget.xcodeproj/GeneratedModuleMap/SDWebImage/module.modulemap";
-         sourceTree = "<group>";
-      };
-      "OBJ_244" = {
-         isa = "PBXGroup";
-         children = (
-         );
-         name = "SDWebImageMapKit";
-         path = ".build/checkouts/SDWebImage/SDWebImageMapKit";
-         sourceTree = "SOURCE_ROOT";
-      };
-      "OBJ_245" = {
-         isa = "PBXFileReference";
-         explicitFileType = "sourcecode.swift";
-         name = "Package.swift";
-         path = "/Users/asharijuang/iOS/Cocoapods/multichannelwidget/.build/checkouts/SDWebImage/Package.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_246" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_247",
-            "OBJ_248",
-            "OBJ_249",
-            "OBJ_250",
-            "OBJ_251",
-            "OBJ_252",
-            "OBJ_253",
-            "OBJ_254",
-            "OBJ_255",
-            "OBJ_256"
-         );
-         name = "AlamofireImage 3.6.0";
-         path = ".build/checkouts/AlamofireImage/Source";
-         sourceTree = "SOURCE_ROOT";
-      };
-      "OBJ_247" = {
-         isa = "PBXFileReference";
-         explicitFileType = "sourcecode.swift";
-         name = "Package.swift";
-         path = "/Users/asharijuang/iOS/Cocoapods/multichannelwidget/.build/checkouts/AlamofireImage/Package.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_248" = {
-         isa = "PBXFileReference";
-         path = "AFIError.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_249" = {
-         isa = "PBXFileReference";
-         path = "Image.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_25" = {
-         isa = "PBXFileReference";
-         path = "QismoManager.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_250" = {
-         isa = "PBXFileReference";
-         path = "ImageCache.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_251" = {
-         isa = "PBXFileReference";
-         path = "ImageDownloader.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_252" = {
-         isa = "PBXFileReference";
-         path = "ImageFilter.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_253" = {
-         isa = "PBXFileReference";
-         path = "Request+AlamofireImage.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_254" = {
-         isa = "PBXFileReference";
-         path = "UIButton+AlamofireImage.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_255" = {
-         isa = "PBXFileReference";
-         path = "UIImage+AlamofireImage.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_256" = {
-         isa = "PBXFileReference";
-         path = "UIImageView+AlamofireImage.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_257" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_258",
-            "OBJ_259",
-            "OBJ_260",
-            "OBJ_261",
-            "OBJ_262",
-            "OBJ_263",
-            "OBJ_264",
-            "OBJ_265",
-            "OBJ_266",
-            "OBJ_267",
-            "OBJ_268",
-            "OBJ_269",
-            "OBJ_270",
-            "OBJ_271",
-            "OBJ_272",
-            "OBJ_273",
-            "OBJ_274",
-            "OBJ_275"
-         );
-         name = "Alamofire 4.9.1";
-         path = ".build/checkouts/Alamofire/Source";
-         sourceTree = "SOURCE_ROOT";
-      };
-      "OBJ_258" = {
-         isa = "PBXFileReference";
-         explicitFileType = "sourcecode.swift";
-         name = "Package.swift";
-         path = "/Users/asharijuang/iOS/Cocoapods/multichannelwidget/.build/checkouts/Alamofire/Package.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_259" = {
-         isa = "PBXFileReference";
-         path = "AFError.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_26" = {
-         isa = "PBXFileReference";
-         path = "QismoNetworkManager.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_260" = {
-         isa = "PBXFileReference";
-         path = "Alamofire.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_261" = {
-         isa = "PBXFileReference";
-         path = "DispatchQueue+Alamofire.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_262" = {
-         isa = "PBXFileReference";
-         path = "MultipartFormData.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_263" = {
-         isa = "PBXFileReference";
-         path = "NetworkReachabilityManager.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_264" = {
-         isa = "PBXFileReference";
-         path = "Notifications.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_265" = {
-         isa = "PBXFileReference";
-         path = "ParameterEncoding.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_266" = {
-         isa = "PBXFileReference";
-         path = "Request.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_267" = {
-         isa = "PBXFileReference";
-         path = "Response.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_268" = {
-         isa = "PBXFileReference";
-         path = "ResponseSerialization.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_269" = {
-         isa = "PBXFileReference";
-         path = "Result.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_27" = {
-         isa = "PBXFileReference";
-         path = "SharedPreferences.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_270" = {
-         isa = "PBXFileReference";
-         path = "ServerTrustPolicy.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_271" = {
-         isa = "PBXFileReference";
-         path = "SessionDelegate.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_272" = {
-         isa = "PBXFileReference";
-         path = "SessionManager.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_273" = {
-         isa = "PBXFileReference";
-         path = "TaskDelegate.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_274" = {
-         isa = "PBXFileReference";
-         path = "Timeline.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_275" = {
-         isa = "PBXFileReference";
-         path = "Validation.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_276" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_277",
-            "OBJ_279"
-         );
-         name = "SwiftyJSON 5.0.0";
-         path = "";
-         sourceTree = "SOURCE_ROOT";
-      };
-      "OBJ_277" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_278"
-         );
-         name = "SwiftyJSON";
-         path = ".build/checkouts/SwiftyJSON/Source/SwiftyJSON";
-         sourceTree = "SOURCE_ROOT";
-      };
-      "OBJ_278" = {
-         isa = "PBXFileReference";
-         path = "SwiftyJSON.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_279" = {
-         isa = "PBXFileReference";
-         explicitFileType = "sourcecode.swift";
-         name = "Package.swift";
-         path = "/Users/asharijuang/iOS/Cocoapods/multichannelwidget/.build/checkouts/SwiftyJSON/Package.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_28" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_29",
-            "OBJ_58",
-            "OBJ_59",
-            "OBJ_61"
-         );
-         name = "ViewControllers";
-         path = "ViewControllers";
-         sourceTree = "<group>";
-      };
-      "OBJ_280" = {
-         isa = "PBXGroup";
-         children = (
-            "SDWebImage::SDWebImage::Product",
-            "MultichannelWidget::MultichannelWidgetTests::Product",
-            "SwiftyJSON::SwiftyJSON::Product",
-            "QiscusCoreAPI::QiscusCoreAPI::Product",
-            "Alamofire::Alamofire::Product",
-            "AlamofireImage::AlamofireImage::Product",
-            "MultichannelWidget::MultichannelWidget::Product"
-         );
-         name = "Products";
-         path = "";
-         sourceTree = "BUILT_PRODUCTS_DIR";
-      };
-      "OBJ_288" = {
-         isa = "PBXFileReference";
-         path = "MultichannelWidget";
-         sourceTree = "SOURCE_ROOT";
-      };
-      "OBJ_289" = {
-         isa = "PBXFileReference";
-         path = "Readme";
-         sourceTree = "SOURCE_ROOT";
-      };
-      "OBJ_29" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_30",
-            "OBJ_48",
-            "OBJ_52",
-            "OBJ_54",
-            "OBJ_55",
-            "OBJ_56",
-            "OBJ_57"
-         );
-         name = "Chatview";
-         path = "Chatview";
-         sourceTree = "<group>";
-      };
-      "OBJ_290" = {
-         isa = "PBXFileReference";
-         path = "Examples";
-         sourceTree = "SOURCE_ROOT";
-      };
-      "OBJ_291" = {
-         isa = "PBXFileReference";
-         path = "README.md";
-         sourceTree = "<group>";
-      };
-      "OBJ_292" = {
-         isa = "PBXFileReference";
-         path = "MultichannelWidget.podspec";
-         sourceTree = "<group>";
-      };
-      "OBJ_294" = {
-         isa = "XCConfigurationList";
-         buildConfigurations = (
-            "OBJ_295",
-            "OBJ_296"
-         );
-         defaultConfigurationIsVisible = "0";
-         defaultConfigurationName = "Release";
-      };
-      "OBJ_295" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            ENABLE_TESTABILITY = "YES";
-            FRAMEWORK_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(PLATFORM_DIR)/Developer/Library/Frameworks"
-            );
-            HEADER_SEARCH_PATHS = (
-               "$(inherited)"
-            );
-            INFOPLIST_FILE = "MultichannelWidget.xcodeproj/Alamofire_Info.plist";
-            IPHONEOS_DEPLOYMENT_TARGET = "8.0";
-            LD_RUNPATH_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx"
-            );
-            MACOSX_DEPLOYMENT_TARGET = "10.10";
-            OTHER_CFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_LDFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_SWIFT_FLAGS = (
-               "$(inherited)"
-            );
-            PRODUCT_BUNDLE_IDENTIFIER = "Alamofire";
-            PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
-            PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-            SKIP_INSTALL = "YES";
-            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-               "$(inherited)"
-            );
-            SWIFT_VERSION = "5.0";
-            TARGET_NAME = "Alamofire";
-            TVOS_DEPLOYMENT_TARGET = "9.0";
-            WATCHOS_DEPLOYMENT_TARGET = "2.0";
-         };
-         name = "Debug";
-      };
-      "OBJ_296" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            ENABLE_TESTABILITY = "YES";
-            FRAMEWORK_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(PLATFORM_DIR)/Developer/Library/Frameworks"
-            );
-            HEADER_SEARCH_PATHS = (
-               "$(inherited)"
-            );
-            INFOPLIST_FILE = "MultichannelWidget.xcodeproj/Alamofire_Info.plist";
-            IPHONEOS_DEPLOYMENT_TARGET = "8.0";
-            LD_RUNPATH_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx"
-            );
-            MACOSX_DEPLOYMENT_TARGET = "10.10";
-            OTHER_CFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_LDFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_SWIFT_FLAGS = (
-               "$(inherited)"
-            );
-            PRODUCT_BUNDLE_IDENTIFIER = "Alamofire";
-            PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
-            PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-            SKIP_INSTALL = "YES";
-            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-               "$(inherited)"
-            );
-            SWIFT_VERSION = "5.0";
-            TARGET_NAME = "Alamofire";
-            TVOS_DEPLOYMENT_TARGET = "9.0";
-            WATCHOS_DEPLOYMENT_TARGET = "2.0";
-         };
-         name = "Release";
-      };
-      "OBJ_297" = {
-         isa = "PBXSourcesBuildPhase";
-         files = (
-            "OBJ_298",
-            "OBJ_299",
-            "OBJ_300",
-            "OBJ_301",
-            "OBJ_302",
-            "OBJ_303",
-            "OBJ_304",
-            "OBJ_305",
-            "OBJ_306",
-            "OBJ_307",
-            "OBJ_308",
-            "OBJ_309",
-            "OBJ_310",
-            "OBJ_311",
-            "OBJ_312",
-            "OBJ_313",
-            "OBJ_314"
-         );
-      };
-      "OBJ_298" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_259";
-      };
-      "OBJ_299" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_260";
-      };
-      "OBJ_3" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            CLANG_ENABLE_OBJC_ARC = "YES";
-            COMBINE_HIDPI_IMAGES = "YES";
-            COPY_PHASE_STRIP = "NO";
-            DEBUG_INFORMATION_FORMAT = "dwarf";
-            DYLIB_INSTALL_NAME_BASE = "@rpath";
-            ENABLE_NS_ASSERTIONS = "YES";
-            GCC_OPTIMIZATION_LEVEL = "0";
-            GCC_PREPROCESSOR_DEFINITIONS = (
-               "$(inherited)",
-               "SWIFT_PACKAGE=1",
-               "DEBUG=1"
-            );
-            MACOSX_DEPLOYMENT_TARGET = "10.10";
-            ONLY_ACTIVE_ARCH = "YES";
-            OTHER_SWIFT_FLAGS = (
-               "$(inherited)",
-               "-DXcode"
-            );
-            PRODUCT_NAME = "$(TARGET_NAME)";
-            SDKROOT = "macosx";
-            SUPPORTED_PLATFORMS = (
-               "macosx",
-               "iphoneos",
-               "iphonesimulator",
-               "appletvos",
-               "appletvsimulator",
-               "watchos",
-               "watchsimulator"
-            );
-            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-               "$(inherited)",
-               "SWIFT_PACKAGE",
-               "DEBUG"
-            );
-            SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-            USE_HEADERMAP = "NO";
-         };
-         name = "Debug";
-      };
-      "OBJ_30" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_31",
-            "OBJ_33",
-            "OBJ_34",
-            "OBJ_37",
-            "OBJ_40",
-            "OBJ_41",
-            "OBJ_42",
-            "OBJ_45"
-         );
-         name = "ChatCell";
-         path = "ChatCell";
-         sourceTree = "<group>";
-      };
-      "OBJ_300" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_261";
-      };
-      "OBJ_301" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_262";
-      };
-      "OBJ_302" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_263";
-      };
-      "OBJ_303" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_264";
-      };
-      "OBJ_304" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_265";
-      };
-      "OBJ_305" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_266";
-      };
-      "OBJ_306" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_267";
-      };
-      "OBJ_307" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_268";
-      };
-      "OBJ_308" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_269";
-      };
-      "OBJ_309" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_270";
-      };
-      "OBJ_31" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_32"
-         );
-         name = "CardCell";
-         path = "CardCell";
-         sourceTree = "<group>";
-      };
-      "OBJ_310" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_271";
-      };
-      "OBJ_311" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_272";
-      };
-      "OBJ_312" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_273";
-      };
-      "OBJ_313" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_274";
-      };
-      "OBJ_314" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_275";
-      };
-      "OBJ_315" = {
-         isa = "PBXFrameworksBuildPhase";
-         files = (
-         );
-      };
-      "OBJ_317" = {
-         isa = "XCConfigurationList";
-         buildConfigurations = (
-            "OBJ_318",
-            "OBJ_319"
-         );
-         defaultConfigurationIsVisible = "0";
-         defaultConfigurationName = "Release";
-      };
-      "OBJ_318" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            ENABLE_TESTABILITY = "YES";
-            FRAMEWORK_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(PLATFORM_DIR)/Developer/Library/Frameworks"
-            );
-            HEADER_SEARCH_PATHS = (
-               "$(inherited)"
-            );
-            INFOPLIST_FILE = "MultichannelWidget.xcodeproj/AlamofireImage_Info.plist";
-            IPHONEOS_DEPLOYMENT_TARGET = "8.0";
-            LD_RUNPATH_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx"
-            );
-            MACOSX_DEPLOYMENT_TARGET = "10.10";
-            OTHER_CFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_LDFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_SWIFT_FLAGS = (
-               "$(inherited)"
-            );
-            PRODUCT_BUNDLE_IDENTIFIER = "AlamofireImage";
-            PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
-            PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-            SKIP_INSTALL = "YES";
-            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-               "$(inherited)"
-            );
-            SWIFT_VERSION = "5.0";
-            TARGET_NAME = "AlamofireImage";
-            TVOS_DEPLOYMENT_TARGET = "9.0";
-            WATCHOS_DEPLOYMENT_TARGET = "2.0";
-         };
-         name = "Debug";
-      };
-      "OBJ_319" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            ENABLE_TESTABILITY = "YES";
-            FRAMEWORK_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(PLATFORM_DIR)/Developer/Library/Frameworks"
-            );
-            HEADER_SEARCH_PATHS = (
-               "$(inherited)"
-            );
-            INFOPLIST_FILE = "MultichannelWidget.xcodeproj/AlamofireImage_Info.plist";
-            IPHONEOS_DEPLOYMENT_TARGET = "8.0";
-            LD_RUNPATH_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx"
-            );
-            MACOSX_DEPLOYMENT_TARGET = "10.10";
-            OTHER_CFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_LDFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_SWIFT_FLAGS = (
-               "$(inherited)"
-            );
-            PRODUCT_BUNDLE_IDENTIFIER = "AlamofireImage";
-            PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
-            PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-            SKIP_INSTALL = "YES";
-            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-               "$(inherited)"
-            );
-            SWIFT_VERSION = "5.0";
-            TARGET_NAME = "AlamofireImage";
-            TVOS_DEPLOYMENT_TARGET = "9.0";
-            WATCHOS_DEPLOYMENT_TARGET = "2.0";
-         };
-         name = "Release";
-      };
-      "OBJ_32" = {
-         isa = "PBXFileReference";
-         path = "QCardLeftCell.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_320" = {
-         isa = "PBXSourcesBuildPhase";
-         files = (
-            "OBJ_321",
-            "OBJ_322",
-            "OBJ_323",
-            "OBJ_324",
-            "OBJ_325",
-            "OBJ_326",
-            "OBJ_327",
-            "OBJ_328",
-            "OBJ_329"
-         );
-      };
-      "OBJ_321" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_248";
-      };
-      "OBJ_322" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_249";
-      };
-      "OBJ_323" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_250";
-      };
-      "OBJ_324" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_251";
-      };
-      "OBJ_325" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_252";
-      };
-      "OBJ_326" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_253";
-      };
-      "OBJ_327" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_254";
-      };
-      "OBJ_328" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_255";
-      };
-      "OBJ_329" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_256";
-      };
-      "OBJ_33" = {
-         isa = "PBXFileReference";
-         path = "EmptyCell.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_330" = {
-         isa = "PBXFrameworksBuildPhase";
-         files = (
-            "OBJ_331"
-         );
-      };
-      "OBJ_331" = {
-         isa = "PBXBuildFile";
-         fileRef = "Alamofire::Alamofire::Product";
-      };
-      "OBJ_332" = {
-         isa = "PBXTargetDependency";
-         target = "Alamofire::Alamofire";
-      };
-      "OBJ_334" = {
-         isa = "XCConfigurationList";
-         buildConfigurations = (
-            "OBJ_335",
-            "OBJ_336"
-         );
-         defaultConfigurationIsVisible = "0";
-         defaultConfigurationName = "Release";
-      };
-      "OBJ_335" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            LD = "/usr/bin/true";
-            OTHER_SWIFT_FLAGS = (
-               "-swift-version",
-               "5",
-               "-I",
-               "$(TOOLCHAIN_DIR)/usr/lib/swift/pm/4_2",
-               "-target",
-               "x86_64-apple-macosx10.10",
-               "-sdk",
-               "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk",
-               "-package-description-version",
-               "5.0.0"
-            );
-            SWIFT_VERSION = "5.0";
-         };
-         name = "Debug";
-      };
-      "OBJ_336" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            LD = "/usr/bin/true";
-            OTHER_SWIFT_FLAGS = (
-               "-swift-version",
-               "5",
-               "-I",
-               "$(TOOLCHAIN_DIR)/usr/lib/swift/pm/4_2",
-               "-target",
-               "x86_64-apple-macosx10.10",
-               "-sdk",
-               "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk",
-               "-package-description-version",
-               "5.0.0"
-            );
-            SWIFT_VERSION = "5.0";
-         };
-         name = "Release";
-      };
-      "OBJ_337" = {
-         isa = "PBXSourcesBuildPhase";
-         files = (
-            "OBJ_338"
-         );
-      };
-      "OBJ_338" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_247";
-      };
-      "OBJ_34" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_35",
-            "OBJ_36"
-         );
-         name = "FileCell";
-         path = "FileCell";
-         sourceTree = "<group>";
-      };
-      "OBJ_340" = {
-         isa = "XCConfigurationList";
-         buildConfigurations = (
-            "OBJ_341",
-            "OBJ_342"
-         );
-         defaultConfigurationIsVisible = "0";
-         defaultConfigurationName = "Release";
-      };
-      "OBJ_341" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            LD = "/usr/bin/true";
-            OTHER_SWIFT_FLAGS = (
-               "-swift-version",
-               "5",
-               "-I",
-               "$(TOOLCHAIN_DIR)/usr/lib/swift/pm/4_2",
-               "-target",
-               "x86_64-apple-macosx10.10",
-               "-sdk",
-               "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk",
-               "-package-description-version",
-               "5.0.0"
-            );
-            SWIFT_VERSION = "5.0";
-         };
-         name = "Debug";
-      };
-      "OBJ_342" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            LD = "/usr/bin/true";
-            OTHER_SWIFT_FLAGS = (
-               "-swift-version",
-               "5",
-               "-I",
-               "$(TOOLCHAIN_DIR)/usr/lib/swift/pm/4_2",
-               "-target",
-               "x86_64-apple-macosx10.10",
-               "-sdk",
-               "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk",
-               "-package-description-version",
-               "5.0.0"
-            );
-            SWIFT_VERSION = "5.0";
-         };
-         name = "Release";
-      };
-      "OBJ_343" = {
-         isa = "PBXSourcesBuildPhase";
-         files = (
-            "OBJ_344"
-         );
-      };
-      "OBJ_344" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_258";
-      };
-      "OBJ_346" = {
-         isa = "XCConfigurationList";
-         buildConfigurations = (
-            "OBJ_347",
-            "OBJ_348"
-         );
-         defaultConfigurationIsVisible = "0";
-         defaultConfigurationName = "Release";
-      };
-      "OBJ_347" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            ENABLE_TESTABILITY = "YES";
-            FRAMEWORK_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(PLATFORM_DIR)/Developer/Library/Frameworks"
-            );
-            HEADER_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(SRCROOT)/.build/checkouts/SDWebImage/SDWebImage/include",
-               "$(SRCROOT)/MultichannelWidget.xcodeproj/GeneratedModuleMap/SDWebImage"
-            );
-            INFOPLIST_FILE = "MultichannelWidget.xcodeproj/MultichannelWidget_Info.plist";
-            IPHONEOS_DEPLOYMENT_TARGET = "10.0";
-            LD_RUNPATH_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx"
-            );
-            MACOSX_DEPLOYMENT_TARGET = "10.10";
-            OTHER_CFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_LDFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_SWIFT_FLAGS = (
-               "$(inherited)",
-               "-Xcc",
-               "-fmodule-map-file=$(SRCROOT)/MultichannelWidget.xcodeproj/GeneratedModuleMap/SDWebImage/module.modulemap"
-            );
-            PRODUCT_BUNDLE_IDENTIFIER = "MultichannelWidget";
-            PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
-            PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-            SKIP_INSTALL = "YES";
-            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-               "$(inherited)"
-            );
-            SWIFT_VERSION = "5.0";
-            TARGET_NAME = "MultichannelWidget";
-            TVOS_DEPLOYMENT_TARGET = "9.0";
-            WATCHOS_DEPLOYMENT_TARGET = "2.0";
-         };
-         name = "Debug";
-      };
-      "OBJ_348" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            ENABLE_TESTABILITY = "YES";
-            FRAMEWORK_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(PLATFORM_DIR)/Developer/Library/Frameworks"
-            );
-            HEADER_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(SRCROOT)/.build/checkouts/SDWebImage/SDWebImage/include",
-               "$(SRCROOT)/MultichannelWidget.xcodeproj/GeneratedModuleMap/SDWebImage"
-            );
-            INFOPLIST_FILE = "MultichannelWidget.xcodeproj/MultichannelWidget_Info.plist";
-            IPHONEOS_DEPLOYMENT_TARGET = "10.0";
-            LD_RUNPATH_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx"
-            );
-            MACOSX_DEPLOYMENT_TARGET = "10.10";
-            OTHER_CFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_LDFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_SWIFT_FLAGS = (
-               "$(inherited)",
-               "-Xcc",
-               "-fmodule-map-file=$(SRCROOT)/MultichannelWidget.xcodeproj/GeneratedModuleMap/SDWebImage/module.modulemap"
-            );
-            PRODUCT_BUNDLE_IDENTIFIER = "MultichannelWidget";
-            PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
-            PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-            SKIP_INSTALL = "YES";
-            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-               "$(inherited)"
-            );
-            SWIFT_VERSION = "5.0";
-            TARGET_NAME = "MultichannelWidget";
-            TVOS_DEPLOYMENT_TARGET = "9.0";
-            WATCHOS_DEPLOYMENT_TARGET = "2.0";
-         };
-         name = "Release";
-      };
-      "OBJ_349" = {
-         isa = "PBXSourcesBuildPhase";
-         files = (
-            "OBJ_350",
-            "OBJ_351",
-            "OBJ_352",
-            "OBJ_353",
-            "OBJ_354",
-            "OBJ_355",
-            "OBJ_356",
-            "OBJ_357",
-            "OBJ_358",
-            "OBJ_359",
-            "OBJ_360",
-            "OBJ_361",
-            "OBJ_362",
-            "OBJ_363",
-            "OBJ_364",
-            "OBJ_365",
-            "OBJ_366",
-            "OBJ_367",
-            "OBJ_368",
-            "OBJ_369",
-            "OBJ_370",
-            "OBJ_371",
-            "OBJ_372",
-            "OBJ_373",
-            "OBJ_374",
-            "OBJ_375",
-            "OBJ_376",
-            "OBJ_377",
-            "OBJ_378",
-            "OBJ_379",
-            "OBJ_380",
-            "OBJ_381",
-            "OBJ_382",
-            "OBJ_383",
-            "OBJ_384",
-            "OBJ_385"
-         );
-      };
-      "OBJ_35" = {
-         isa = "PBXFileReference";
-         path = "QFileLeftCell.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_350" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_12";
-      };
-      "OBJ_351" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_14";
-      };
-      "OBJ_352" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_15";
-      };
-      "OBJ_353" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_16";
-      };
-      "OBJ_354" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_17";
-      };
-      "OBJ_355" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_19";
-      };
-      "OBJ_356" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_20";
-      };
-      "OBJ_357" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_21";
-      };
-      "OBJ_358" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_23";
-      };
-      "OBJ_359" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_24";
-      };
-      "OBJ_36" = {
-         isa = "PBXFileReference";
-         path = "QFileRightCell.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_360" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_25";
-      };
-      "OBJ_361" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_26";
-      };
-      "OBJ_362" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_27";
-      };
-      "OBJ_363" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_32";
-      };
-      "OBJ_364" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_33";
-      };
-      "OBJ_365" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_35";
-      };
-      "OBJ_366" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_36";
-      };
-      "OBJ_367" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_38";
-      };
-      "OBJ_368" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_39";
-      };
-      "OBJ_369" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_40";
-      };
-      "OBJ_37" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_38",
-            "OBJ_39"
-         );
-         name = "ImageCell";
-         path = "ImageCell";
-         sourceTree = "<group>";
-      };
-      "OBJ_370" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_41";
-      };
-      "OBJ_371" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_43";
-      };
-      "OBJ_372" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_44";
-      };
-      "OBJ_373" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_46";
-      };
-      "OBJ_374" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_47";
-      };
-      "OBJ_375" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_49";
-      };
-      "OBJ_376" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_50";
-      };
-      "OBJ_377" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_51";
-      };
-      "OBJ_378" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_53";
-      };
-      "OBJ_379" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_54";
-      };
-      "OBJ_38" = {
-         isa = "PBXFileReference";
-         path = "QImagesLeftCell.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_380" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_55";
-      };
-      "OBJ_381" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_56";
-      };
-      "OBJ_382" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_57";
-      };
-      "OBJ_383" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_58";
-      };
-      "OBJ_384" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_60";
-      };
-      "OBJ_385" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_62";
-      };
-      "OBJ_386" = {
-         isa = "PBXFrameworksBuildPhase";
-         files = (
-            "OBJ_387",
-            "OBJ_388",
-            "OBJ_389",
-            "OBJ_390",
-            "OBJ_391"
-         );
-      };
-      "OBJ_387" = {
-         isa = "PBXBuildFile";
-         fileRef = "QiscusCoreAPI::QiscusCoreAPI::Product";
-      };
-      "OBJ_388" = {
-         isa = "PBXBuildFile";
-         fileRef = "SDWebImage::SDWebImage::Product";
-      };
-      "OBJ_389" = {
-         isa = "PBXBuildFile";
-         fileRef = "AlamofireImage::AlamofireImage::Product";
-      };
-      "OBJ_39" = {
-         isa = "PBXFileReference";
-         path = "QImagesRightCell.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_390" = {
-         isa = "PBXBuildFile";
-         fileRef = "Alamofire::Alamofire::Product";
-      };
-      "OBJ_391" = {
-         isa = "PBXBuildFile";
-         fileRef = "SwiftyJSON::SwiftyJSON::Product";
-      };
-      "OBJ_392" = {
-         isa = "PBXTargetDependency";
-         target = "QiscusCoreAPI::QiscusCoreAPI";
-      };
-      "OBJ_394" = {
-         isa = "PBXTargetDependency";
-         target = "SDWebImage::SDWebImage";
-      };
-      "OBJ_396" = {
-         isa = "PBXTargetDependency";
-         target = "AlamofireImage::AlamofireImage";
-      };
-      "OBJ_397" = {
-         isa = "PBXTargetDependency";
-         target = "Alamofire::Alamofire";
-      };
-      "OBJ_398" = {
-         isa = "PBXTargetDependency";
-         target = "SwiftyJSON::SwiftyJSON";
-      };
-      "OBJ_4" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            CLANG_ENABLE_OBJC_ARC = "YES";
-            COMBINE_HIDPI_IMAGES = "YES";
-            COPY_PHASE_STRIP = "YES";
-            DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-            DYLIB_INSTALL_NAME_BASE = "@rpath";
-            GCC_OPTIMIZATION_LEVEL = "s";
-            GCC_PREPROCESSOR_DEFINITIONS = (
-               "$(inherited)",
-               "SWIFT_PACKAGE=1"
-            );
-            MACOSX_DEPLOYMENT_TARGET = "10.10";
-            OTHER_SWIFT_FLAGS = (
-               "$(inherited)",
-               "-DXcode"
-            );
-            PRODUCT_NAME = "$(TARGET_NAME)";
-            SDKROOT = "macosx";
-            SUPPORTED_PLATFORMS = (
-               "macosx",
-               "iphoneos",
-               "iphonesimulator",
-               "appletvos",
-               "appletvsimulator",
-               "watchos",
-               "watchsimulator"
-            );
-            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-               "$(inherited)",
-               "SWIFT_PACKAGE"
-            );
-            SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-            USE_HEADERMAP = "NO";
-         };
-         name = "Release";
-      };
-      "OBJ_40" = {
-         isa = "PBXFileReference";
-         path = "QSystemCell.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_401" = {
-         isa = "XCConfigurationList";
-         buildConfigurations = (
-            "OBJ_402",
-            "OBJ_403"
-         );
-         defaultConfigurationIsVisible = "0";
-         defaultConfigurationName = "Release";
-      };
-      "OBJ_402" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            LD = "/usr/bin/true";
-            OTHER_SWIFT_FLAGS = (
-               "-swift-version",
-               "5",
-               "-I",
-               "$(TOOLCHAIN_DIR)/usr/lib/swift/pm/4_2",
-               "-target",
-               "x86_64-apple-macosx10.10",
-               "-sdk",
-               "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk",
-               "-package-description-version",
-               "5.1.0"
-            );
-            SWIFT_VERSION = "5.0";
-         };
-         name = "Debug";
-      };
-      "OBJ_403" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            LD = "/usr/bin/true";
-            OTHER_SWIFT_FLAGS = (
-               "-swift-version",
-               "5",
-               "-I",
-               "$(TOOLCHAIN_DIR)/usr/lib/swift/pm/4_2",
-               "-target",
-               "x86_64-apple-macosx10.10",
-               "-sdk",
-               "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk",
-               "-package-description-version",
-               "5.1.0"
-            );
-            SWIFT_VERSION = "5.0";
-         };
-         name = "Release";
-      };
-      "OBJ_404" = {
-         isa = "PBXSourcesBuildPhase";
-         files = (
-            "OBJ_405"
-         );
-      };
-      "OBJ_405" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_6";
-      };
-      "OBJ_407" = {
-         isa = "XCConfigurationList";
-         buildConfigurations = (
-            "OBJ_408",
-            "OBJ_409"
-         );
-         defaultConfigurationIsVisible = "0";
-         defaultConfigurationName = "Release";
-      };
-      "OBJ_408" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-         };
-         name = "Debug";
-      };
-      "OBJ_409" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-         };
-         name = "Release";
-      };
-      "OBJ_41" = {
-         isa = "PBXFileReference";
-         path = "QUIBaseChatCell.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_410" = {
-         isa = "PBXTargetDependency";
-         target = "MultichannelWidget::MultichannelWidgetTests";
-      };
-      "OBJ_412" = {
-         isa = "XCConfigurationList";
-         buildConfigurations = (
-            "OBJ_413",
-            "OBJ_414"
-         );
-         defaultConfigurationIsVisible = "0";
-         defaultConfigurationName = "Release";
-      };
-      "OBJ_413" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            CLANG_ENABLE_MODULES = "YES";
-            EMBEDDED_CONTENT_CONTAINS_SWIFT = "YES";
-            FRAMEWORK_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(PLATFORM_DIR)/Developer/Library/Frameworks"
-            );
-            HEADER_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(SRCROOT)/.build/checkouts/SDWebImage/SDWebImage/include",
-               "$(SRCROOT)/MultichannelWidget.xcodeproj/GeneratedModuleMap/SDWebImage"
-            );
-            INFOPLIST_FILE = "MultichannelWidget.xcodeproj/MultichannelWidgetTests_Info.plist";
-            IPHONEOS_DEPLOYMENT_TARGET = "10.0";
-            LD_RUNPATH_SEARCH_PATHS = (
-               "$(inherited)",
-               "@loader_path/../Frameworks",
-               "@loader_path/Frameworks"
-            );
-            MACOSX_DEPLOYMENT_TARGET = "10.10";
-            OTHER_CFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_LDFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_SWIFT_FLAGS = (
-               "$(inherited)",
-               "-Xcc",
-               "-fmodule-map-file=$(SRCROOT)/MultichannelWidget.xcodeproj/GeneratedModuleMap/SDWebImage/module.modulemap"
-            );
-            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-               "$(inherited)"
-            );
-            SWIFT_VERSION = "5.0";
-            TARGET_NAME = "MultichannelWidgetTests";
-            TVOS_DEPLOYMENT_TARGET = "9.0";
-            WATCHOS_DEPLOYMENT_TARGET = "2.0";
-         };
-         name = "Debug";
-      };
-      "OBJ_414" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            CLANG_ENABLE_MODULES = "YES";
-            EMBEDDED_CONTENT_CONTAINS_SWIFT = "YES";
-            FRAMEWORK_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(PLATFORM_DIR)/Developer/Library/Frameworks"
-            );
-            HEADER_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(SRCROOT)/.build/checkouts/SDWebImage/SDWebImage/include",
-               "$(SRCROOT)/MultichannelWidget.xcodeproj/GeneratedModuleMap/SDWebImage"
-            );
-            INFOPLIST_FILE = "MultichannelWidget.xcodeproj/MultichannelWidgetTests_Info.plist";
-            IPHONEOS_DEPLOYMENT_TARGET = "10.0";
-            LD_RUNPATH_SEARCH_PATHS = (
-               "$(inherited)",
-               "@loader_path/../Frameworks",
-               "@loader_path/Frameworks"
-            );
-            MACOSX_DEPLOYMENT_TARGET = "10.10";
-            OTHER_CFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_LDFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_SWIFT_FLAGS = (
-               "$(inherited)",
-               "-Xcc",
-               "-fmodule-map-file=$(SRCROOT)/MultichannelWidget.xcodeproj/GeneratedModuleMap/SDWebImage/module.modulemap"
-            );
-            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-               "$(inherited)"
-            );
-            SWIFT_VERSION = "5.0";
-            TARGET_NAME = "MultichannelWidgetTests";
-            TVOS_DEPLOYMENT_TARGET = "9.0";
-            WATCHOS_DEPLOYMENT_TARGET = "2.0";
-         };
-         name = "Release";
-      };
-      "OBJ_415" = {
-         isa = "PBXSourcesBuildPhase";
-         files = (
-            "OBJ_416",
-            "OBJ_417"
-         );
-      };
-      "OBJ_416" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_65";
-      };
-      "OBJ_417" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_66";
-      };
-      "OBJ_418" = {
-         isa = "PBXFrameworksBuildPhase";
-         files = (
-            "OBJ_419",
-            "OBJ_420",
-            "OBJ_421",
-            "OBJ_422",
-            "OBJ_423",
-            "OBJ_424"
-         );
-      };
-      "OBJ_419" = {
-         isa = "PBXBuildFile";
-         fileRef = "MultichannelWidget::MultichannelWidget::Product";
-      };
-      "OBJ_42" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_43",
-            "OBJ_44"
-         );
-         name = "ReplyCell";
-         path = "ReplyCell";
-         sourceTree = "<group>";
-      };
-      "OBJ_420" = {
-         isa = "PBXBuildFile";
-         fileRef = "QiscusCoreAPI::QiscusCoreAPI::Product";
-      };
-      "OBJ_421" = {
-         isa = "PBXBuildFile";
-         fileRef = "SDWebImage::SDWebImage::Product";
-      };
-      "OBJ_422" = {
-         isa = "PBXBuildFile";
-         fileRef = "AlamofireImage::AlamofireImage::Product";
-      };
-      "OBJ_423" = {
-         isa = "PBXBuildFile";
-         fileRef = "Alamofire::Alamofire::Product";
-      };
-      "OBJ_424" = {
-         isa = "PBXBuildFile";
-         fileRef = "SwiftyJSON::SwiftyJSON::Product";
-      };
-      "OBJ_425" = {
-         isa = "PBXTargetDependency";
-         target = "MultichannelWidget::MultichannelWidget";
-      };
-      "OBJ_426" = {
-         isa = "PBXTargetDependency";
-         target = "QiscusCoreAPI::QiscusCoreAPI";
-      };
-      "OBJ_427" = {
-         isa = "PBXTargetDependency";
-         target = "SDWebImage::SDWebImage";
-      };
-      "OBJ_428" = {
-         isa = "PBXTargetDependency";
-         target = "AlamofireImage::AlamofireImage";
-      };
-      "OBJ_429" = {
-         isa = "PBXTargetDependency";
-         target = "Alamofire::Alamofire";
-      };
-      "OBJ_43" = {
-         isa = "PBXFileReference";
-         path = "QReplyLeftCell.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_430" = {
-         isa = "PBXTargetDependency";
-         target = "SwiftyJSON::SwiftyJSON";
-      };
-      "OBJ_431" = {
-         isa = "XCConfigurationList";
-         buildConfigurations = (
-            "OBJ_432",
-            "OBJ_433"
-         );
-         defaultConfigurationIsVisible = "0";
-         defaultConfigurationName = "Release";
-      };
-      "OBJ_432" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            ENABLE_TESTABILITY = "YES";
-            FRAMEWORK_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(PLATFORM_DIR)/Developer/Library/Frameworks"
-            );
-            HEADER_SEARCH_PATHS = (
-               "$(inherited)"
-            );
-            INFOPLIST_FILE = "MultichannelWidget.xcodeproj/QiscusCoreAPI_Info.plist";
-            IPHONEOS_DEPLOYMENT_TARGET = "10.0";
-            LD_RUNPATH_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx"
-            );
-            MACOSX_DEPLOYMENT_TARGET = "10.10";
-            OTHER_CFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_LDFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_SWIFT_FLAGS = (
-               "$(inherited)"
-            );
-            PRODUCT_BUNDLE_IDENTIFIER = "QiscusCoreAPI";
-            PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
-            PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-            SKIP_INSTALL = "YES";
-            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-               "$(inherited)"
-            );
-            SWIFT_VERSION = "5.0";
-            TARGET_NAME = "QiscusCoreAPI";
-            TVOS_DEPLOYMENT_TARGET = "9.0";
-            WATCHOS_DEPLOYMENT_TARGET = "2.0";
-         };
-         name = "Debug";
-      };
-      "OBJ_433" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            ENABLE_TESTABILITY = "YES";
-            FRAMEWORK_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(PLATFORM_DIR)/Developer/Library/Frameworks"
-            );
-            HEADER_SEARCH_PATHS = (
-               "$(inherited)"
-            );
-            INFOPLIST_FILE = "MultichannelWidget.xcodeproj/QiscusCoreAPI_Info.plist";
-            IPHONEOS_DEPLOYMENT_TARGET = "10.0";
-            LD_RUNPATH_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx"
-            );
-            MACOSX_DEPLOYMENT_TARGET = "10.10";
-            OTHER_CFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_LDFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_SWIFT_FLAGS = (
-               "$(inherited)"
-            );
-            PRODUCT_BUNDLE_IDENTIFIER = "QiscusCoreAPI";
-            PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
-            PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-            SKIP_INSTALL = "YES";
-            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-               "$(inherited)"
-            );
-            SWIFT_VERSION = "5.0";
-            TARGET_NAME = "QiscusCoreAPI";
-            TVOS_DEPLOYMENT_TARGET = "9.0";
-            WATCHOS_DEPLOYMENT_TARGET = "2.0";
-         };
-         name = "Release";
-      };
-      "OBJ_434" = {
-         isa = "PBXSourcesBuildPhase";
-         files = (
-            "OBJ_435",
-            "OBJ_436",
-            "OBJ_437",
-            "OBJ_438",
-            "OBJ_439",
-            "OBJ_440",
-            "OBJ_441",
-            "OBJ_442",
-            "OBJ_443",
-            "OBJ_444",
-            "OBJ_445",
-            "OBJ_446",
-            "OBJ_447",
-            "OBJ_448",
-            "OBJ_449",
-            "OBJ_450",
-            "OBJ_451",
-            "OBJ_452",
-            "OBJ_453",
-            "OBJ_454",
-            "OBJ_455",
-            "OBJ_456",
-            "OBJ_457",
-            "OBJ_458",
-            "OBJ_459",
-            "OBJ_460",
-            "OBJ_461",
-            "OBJ_462",
-            "OBJ_463",
-            "OBJ_464"
-         );
-      };
-      "OBJ_435" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_70";
-      };
-      "OBJ_436" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_72";
-      };
-      "OBJ_437" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_73";
-      };
-      "OBJ_438" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_75";
-      };
-      "OBJ_439" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_78";
-      };
-      "OBJ_44" = {
-         isa = "PBXFileReference";
-         path = "QReplyRightCell.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_440" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_79";
-      };
-      "OBJ_441" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_80";
-      };
-      "OBJ_442" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_82";
-      };
-      "OBJ_443" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_83";
-      };
-      "OBJ_444" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_84";
-      };
-      "OBJ_445" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_85";
-      };
-      "OBJ_446" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_86";
-      };
-      "OBJ_447" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_87";
-      };
-      "OBJ_448" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_88";
-      };
-      "OBJ_449" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_89";
-      };
-      "OBJ_45" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_46",
-            "OBJ_47"
-         );
-         name = "TextCell";
-         path = "TextCell";
-         sourceTree = "<group>";
-      };
-      "OBJ_450" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_90";
-      };
-      "OBJ_451" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_93";
-      };
-      "OBJ_452" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_94";
-      };
-      "OBJ_453" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_95";
-      };
-      "OBJ_454" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_96";
-      };
-      "OBJ_455" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_97";
-      };
-      "OBJ_456" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_99";
-      };
-      "OBJ_457" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_101";
-      };
-      "OBJ_458" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_102";
-      };
-      "OBJ_459" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_103";
-      };
-      "OBJ_46" = {
-         isa = "PBXFileReference";
-         path = "QTextLeftCell.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_460" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_104";
-      };
-      "OBJ_461" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_105";
-      };
-      "OBJ_462" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_107";
-      };
-      "OBJ_463" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_108";
-      };
-      "OBJ_464" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_109";
-      };
-      "OBJ_465" = {
-         isa = "PBXFrameworksBuildPhase";
-         files = (
-            "OBJ_466"
-         );
-      };
-      "OBJ_466" = {
-         isa = "PBXBuildFile";
-         fileRef = "SwiftyJSON::SwiftyJSON::Product";
-      };
-      "OBJ_467" = {
-         isa = "PBXTargetDependency";
-         target = "SwiftyJSON::SwiftyJSON";
-      };
-      "OBJ_469" = {
-         isa = "XCConfigurationList";
-         buildConfigurations = (
-            "OBJ_470",
-            "OBJ_471"
-         );
-         defaultConfigurationIsVisible = "0";
-         defaultConfigurationName = "Release";
-      };
-      "OBJ_47" = {
-         isa = "PBXFileReference";
-         path = "QTextRightCell.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_470" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            LD = "/usr/bin/true";
-            OTHER_SWIFT_FLAGS = (
-               "-swift-version",
-               "5",
-               "-I",
-               "$(TOOLCHAIN_DIR)/usr/lib/swift/pm/4_2",
-               "-target",
-               "x86_64-apple-macosx10.10",
-               "-sdk",
-               "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk",
-               "-package-description-version",
-               "5.1.0"
-            );
-            SWIFT_VERSION = "5.0";
-         };
-         name = "Debug";
-      };
-      "OBJ_471" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            LD = "/usr/bin/true";
-            OTHER_SWIFT_FLAGS = (
-               "-swift-version",
-               "5",
-               "-I",
-               "$(TOOLCHAIN_DIR)/usr/lib/swift/pm/4_2",
-               "-target",
-               "x86_64-apple-macosx10.10",
-               "-sdk",
-               "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk",
-               "-package-description-version",
-               "5.1.0"
-            );
-            SWIFT_VERSION = "5.0";
-         };
-         name = "Release";
-      };
-      "OBJ_472" = {
-         isa = "PBXSourcesBuildPhase";
-         files = (
-            "OBJ_473"
-         );
-      };
-      "OBJ_473" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_110";
-      };
-      "OBJ_474" = {
-         isa = "XCConfigurationList";
-         buildConfigurations = (
-            "OBJ_475",
-            "OBJ_476"
-         );
-         defaultConfigurationIsVisible = "0";
-         defaultConfigurationName = "Release";
-      };
-      "OBJ_475" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            DEFINES_MODULE = "NO";
-            ENABLE_TESTABILITY = "YES";
-            FRAMEWORK_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(PLATFORM_DIR)/Developer/Library/Frameworks"
-            );
-            HEADER_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(SRCROOT)/.build/checkouts/SDWebImage/SDWebImage/include",
-               "Core",
-               "Private"
-            );
-            INFOPLIST_FILE = "MultichannelWidget.xcodeproj/SDWebImage_Info.plist";
-            IPHONEOS_DEPLOYMENT_TARGET = "8.0";
-            LD_RUNPATH_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx"
-            );
-            MACOSX_DEPLOYMENT_TARGET = "10.10";
-            OTHER_CFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_LDFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_SWIFT_FLAGS = (
-               "$(inherited)"
-            );
-            PRODUCT_BUNDLE_IDENTIFIER = "SDWebImage";
-            PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
-            PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-            SKIP_INSTALL = "YES";
-            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-               "$(inherited)"
-            );
-            TARGET_NAME = "SDWebImage";
-            TVOS_DEPLOYMENT_TARGET = "9.0";
-            WATCHOS_DEPLOYMENT_TARGET = "2.0";
-         };
-         name = "Debug";
-      };
-      "OBJ_476" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            DEFINES_MODULE = "NO";
-            ENABLE_TESTABILITY = "YES";
-            FRAMEWORK_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(PLATFORM_DIR)/Developer/Library/Frameworks"
-            );
-            HEADER_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(SRCROOT)/.build/checkouts/SDWebImage/SDWebImage/include",
-               "Core",
-               "Private"
-            );
-            INFOPLIST_FILE = "MultichannelWidget.xcodeproj/SDWebImage_Info.plist";
-            IPHONEOS_DEPLOYMENT_TARGET = "8.0";
-            LD_RUNPATH_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx"
-            );
-            MACOSX_DEPLOYMENT_TARGET = "10.10";
-            OTHER_CFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_LDFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_SWIFT_FLAGS = (
-               "$(inherited)"
-            );
-            PRODUCT_BUNDLE_IDENTIFIER = "SDWebImage";
-            PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
-            PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-            SKIP_INSTALL = "YES";
-            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-               "$(inherited)"
-            );
-            TARGET_NAME = "SDWebImage";
-            TVOS_DEPLOYMENT_TARGET = "9.0";
-            WATCHOS_DEPLOYMENT_TARGET = "2.0";
-         };
-         name = "Release";
-      };
-      "OBJ_477" = {
-         isa = "PBXSourcesBuildPhase";
-         files = (
-            "OBJ_478",
-            "OBJ_479",
-            "OBJ_480",
-            "OBJ_481",
-            "OBJ_482",
-            "OBJ_483",
-            "OBJ_484",
-            "OBJ_485",
-            "OBJ_486",
-            "OBJ_487",
-            "OBJ_488",
-            "OBJ_489",
-            "OBJ_490",
-            "OBJ_491",
-            "OBJ_492",
-            "OBJ_493",
-            "OBJ_494",
-            "OBJ_495",
-            "OBJ_496",
-            "OBJ_497",
-            "OBJ_498",
-            "OBJ_499",
-            "OBJ_500",
-            "OBJ_501",
-            "OBJ_502",
-            "OBJ_503",
-            "OBJ_504",
-            "OBJ_505",
-            "OBJ_506",
-            "OBJ_507",
-            "OBJ_508",
-            "OBJ_509",
-            "OBJ_510",
-            "OBJ_511",
-            "OBJ_512",
-            "OBJ_513",
-            "OBJ_514",
-            "OBJ_515",
-            "OBJ_516",
-            "OBJ_517",
-            "OBJ_518",
-            "OBJ_519",
-            "OBJ_520",
-            "OBJ_521",
-            "OBJ_522",
-            "OBJ_523",
-            "OBJ_524",
-            "OBJ_525",
-            "OBJ_526",
-            "OBJ_527",
-            "OBJ_528",
-            "OBJ_529",
-            "OBJ_530",
-            "OBJ_531",
-            "OBJ_532",
-            "OBJ_533",
-            "OBJ_534",
-            "OBJ_535",
-            "OBJ_536",
-            "OBJ_537",
-            "OBJ_538",
-            "OBJ_539",
-            "OBJ_540",
-            "OBJ_541",
-            "OBJ_542",
-            "OBJ_543",
-            "OBJ_544",
-            "OBJ_545"
-         );
-      };
-      "OBJ_478" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_114";
-      };
-      "OBJ_479" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_115";
-      };
-      "OBJ_48" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_49",
-            "OBJ_50",
-            "OBJ_51"
-         );
-         name = "ChatInput";
-         path = "ChatInput";
-         sourceTree = "<group>";
-      };
-      "OBJ_480" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_116";
-      };
-      "OBJ_481" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_117";
-      };
-      "OBJ_482" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_118";
-      };
-      "OBJ_483" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_119";
-      };
-      "OBJ_484" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_120";
-      };
-      "OBJ_485" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_121";
-      };
-      "OBJ_486" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_122";
-      };
-      "OBJ_487" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_123";
-      };
-      "OBJ_488" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_124";
-      };
-      "OBJ_489" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_125";
-      };
-      "OBJ_49" = {
-         isa = "PBXFileReference";
-         path = "CustomChatInput.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_490" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_126";
-      };
-      "OBJ_491" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_127";
-      };
-      "OBJ_492" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_128";
-      };
-      "OBJ_493" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_129";
-      };
-      "OBJ_494" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_130";
-      };
-      "OBJ_495" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_131";
-      };
-      "OBJ_496" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_132";
-      };
-      "OBJ_497" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_133";
-      };
-      "OBJ_498" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_134";
-      };
-      "OBJ_499" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_135";
-      };
-      "OBJ_5" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_6",
-            "OBJ_7",
-            "OBJ_63",
-            "OBJ_67",
-            "OBJ_280",
-            "OBJ_288",
-            "OBJ_289",
-            "OBJ_290",
-            "OBJ_291",
-            "OBJ_292"
-         );
-         path = "";
-         sourceTree = "<group>";
-      };
-      "OBJ_50" = {
-         isa = "PBXFileReference";
-         path = "DisableInput.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_500" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_136";
-      };
-      "OBJ_501" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_137";
-      };
-      "OBJ_502" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_138";
-      };
-      "OBJ_503" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_139";
-      };
-      "OBJ_504" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_140";
-      };
-      "OBJ_505" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_141";
-      };
-      "OBJ_506" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_142";
-      };
-      "OBJ_507" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_143";
-      };
-      "OBJ_508" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_144";
-      };
-      "OBJ_509" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_145";
-      };
-      "OBJ_51" = {
-         isa = "PBXFileReference";
-         path = "UIChatInput.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_510" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_146";
-      };
-      "OBJ_511" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_147";
-      };
-      "OBJ_512" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_148";
-      };
-      "OBJ_513" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_149";
-      };
-      "OBJ_514" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_150";
-      };
-      "OBJ_515" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_151";
-      };
-      "OBJ_516" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_152";
-      };
-      "OBJ_517" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_153";
-      };
-      "OBJ_518" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_154";
-      };
-      "OBJ_519" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_155";
-      };
-      "OBJ_52" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_53"
-         );
-         name = "ChatUpload";
-         path = "ChatUpload";
-         sourceTree = "<group>";
-      };
-      "OBJ_520" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_156";
-      };
-      "OBJ_521" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_157";
-      };
-      "OBJ_522" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_158";
-      };
-      "OBJ_523" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_159";
-      };
-      "OBJ_524" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_160";
-      };
-      "OBJ_525" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_161";
-      };
-      "OBJ_526" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_162";
-      };
-      "OBJ_527" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_163";
-      };
-      "OBJ_528" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_164";
-      };
-      "OBJ_529" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_165";
-      };
-      "OBJ_53" = {
-         isa = "PBXFileReference";
-         path = "QiscusUploaderVC.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_530" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_166";
-      };
-      "OBJ_531" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_167";
-      };
-      "OBJ_532" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_168";
-      };
-      "OBJ_533" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_169";
-      };
-      "OBJ_534" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_170";
-      };
-      "OBJ_535" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_172";
-      };
-      "OBJ_536" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_173";
-      };
-      "OBJ_537" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_174";
-      };
-      "OBJ_538" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_175";
-      };
-      "OBJ_539" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_176";
-      };
-      "OBJ_54" = {
-         isa = "PBXFileReference";
-         path = "QismoViewController.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_540" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_177";
-      };
-      "OBJ_541" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_178";
-      };
-      "OBJ_542" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_179";
-      };
-      "OBJ_543" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_180";
-      };
-      "OBJ_544" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_181";
-      };
-      "OBJ_545" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_182";
-      };
-      "OBJ_546" = {
-         isa = "PBXFrameworksBuildPhase";
-         files = (
-         );
-      };
-      "OBJ_548" = {
-         isa = "XCConfigurationList";
-         buildConfigurations = (
-            "OBJ_549",
-            "OBJ_550"
-         );
-         defaultConfigurationIsVisible = "0";
-         defaultConfigurationName = "Release";
-      };
-      "OBJ_549" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            LD = "/usr/bin/true";
-            OTHER_SWIFT_FLAGS = (
-               "-swift-version",
-               "5",
-               "-I",
-               "$(TOOLCHAIN_DIR)/usr/lib/swift/pm/4_2",
-               "-target",
-               "x86_64-apple-macosx10.10",
-               "-sdk",
-               "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk",
-               "-package-description-version",
-               "5.0.0"
-            );
-            SWIFT_VERSION = "5.0";
-         };
-         name = "Debug";
-      };
-      "OBJ_55" = {
-         isa = "PBXFileReference";
-         path = "UIChatNavigation.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_550" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            LD = "/usr/bin/true";
-            OTHER_SWIFT_FLAGS = (
-               "-swift-version",
-               "5",
-               "-I",
-               "$(TOOLCHAIN_DIR)/usr/lib/swift/pm/4_2",
-               "-target",
-               "x86_64-apple-macosx10.10",
-               "-sdk",
-               "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk",
-               "-package-description-version",
-               "5.0.0"
-            );
-            SWIFT_VERSION = "5.0";
-         };
-         name = "Release";
-      };
-      "OBJ_551" = {
-         isa = "PBXSourcesBuildPhase";
-         files = (
-            "OBJ_552"
-         );
-      };
-      "OBJ_552" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_245";
-      };
-      "OBJ_553" = {
-         isa = "XCConfigurationList";
-         buildConfigurations = (
-            "OBJ_554",
-            "OBJ_555"
-         );
-         defaultConfigurationIsVisible = "0";
-         defaultConfigurationName = "Release";
-      };
-      "OBJ_554" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            ENABLE_TESTABILITY = "YES";
-            FRAMEWORK_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(PLATFORM_DIR)/Developer/Library/Frameworks"
-            );
-            HEADER_SEARCH_PATHS = (
-               "$(inherited)"
-            );
-            INFOPLIST_FILE = "MultichannelWidget.xcodeproj/SwiftyJSON_Info.plist";
-            IPHONEOS_DEPLOYMENT_TARGET = "8.0";
-            LD_RUNPATH_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx"
-            );
-            MACOSX_DEPLOYMENT_TARGET = "10.10";
-            OTHER_CFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_LDFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_SWIFT_FLAGS = (
-               "$(inherited)"
-            );
-            PRODUCT_BUNDLE_IDENTIFIER = "SwiftyJSON";
-            PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
-            PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-            SKIP_INSTALL = "YES";
-            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-               "$(inherited)"
-            );
-            SWIFT_VERSION = "5.0";
-            TARGET_NAME = "SwiftyJSON";
-            TVOS_DEPLOYMENT_TARGET = "9.0";
-            WATCHOS_DEPLOYMENT_TARGET = "3.0";
-         };
-         name = "Debug";
-      };
-      "OBJ_555" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            ENABLE_TESTABILITY = "YES";
-            FRAMEWORK_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(PLATFORM_DIR)/Developer/Library/Frameworks"
-            );
-            HEADER_SEARCH_PATHS = (
-               "$(inherited)"
-            );
-            INFOPLIST_FILE = "MultichannelWidget.xcodeproj/SwiftyJSON_Info.plist";
-            IPHONEOS_DEPLOYMENT_TARGET = "8.0";
-            LD_RUNPATH_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx"
-            );
-            MACOSX_DEPLOYMENT_TARGET = "10.10";
-            OTHER_CFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_LDFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_SWIFT_FLAGS = (
-               "$(inherited)"
-            );
-            PRODUCT_BUNDLE_IDENTIFIER = "SwiftyJSON";
-            PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
-            PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-            SKIP_INSTALL = "YES";
-            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-               "$(inherited)"
-            );
-            SWIFT_VERSION = "5.0";
-            TARGET_NAME = "SwiftyJSON";
-            TVOS_DEPLOYMENT_TARGET = "9.0";
-            WATCHOS_DEPLOYMENT_TARGET = "3.0";
-         };
-         name = "Release";
-      };
-      "OBJ_556" = {
-         isa = "PBXSourcesBuildPhase";
-         files = (
-            "OBJ_557"
-         );
-      };
-      "OBJ_557" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_278";
-      };
-      "OBJ_558" = {
-         isa = "PBXFrameworksBuildPhase";
-         files = (
-         );
-      };
-      "OBJ_56" = {
-         isa = "PBXFileReference";
-         path = "UIChatPresenter.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_560" = {
-         isa = "XCConfigurationList";
-         buildConfigurations = (
-            "OBJ_561",
-            "OBJ_562"
-         );
-         defaultConfigurationIsVisible = "0";
-         defaultConfigurationName = "Release";
-      };
-      "OBJ_561" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            LD = "/usr/bin/true";
-            OTHER_SWIFT_FLAGS = (
-               "-swift-version",
-               "5",
-               "-I",
-               "$(TOOLCHAIN_DIR)/usr/lib/swift/pm/4_2",
-               "-target",
-               "x86_64-apple-macosx10.10",
-               "-sdk",
-               "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk",
-               "-package-description-version",
-               "5.0.0"
-            );
-            SWIFT_VERSION = "5.0";
-         };
-         name = "Debug";
-      };
-      "OBJ_562" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            LD = "/usr/bin/true";
-            OTHER_SWIFT_FLAGS = (
-               "-swift-version",
-               "5",
-               "-I",
-               "$(TOOLCHAIN_DIR)/usr/lib/swift/pm/4_2",
-               "-target",
-               "x86_64-apple-macosx10.10",
-               "-sdk",
-               "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk",
-               "-package-description-version",
-               "5.0.0"
-            );
-            SWIFT_VERSION = "5.0";
-         };
-         name = "Release";
-      };
-      "OBJ_563" = {
-         isa = "PBXSourcesBuildPhase";
-         files = (
-            "OBJ_564"
-         );
-      };
-      "OBJ_564" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_279";
-      };
-      "OBJ_57" = {
-         isa = "PBXFileReference";
-         path = "UIChatViewController.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_58" = {
-         isa = "PBXFileReference";
-         path = "QPopUpView.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_59" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_60"
-         );
-         name = "fullimage";
-         path = "fullimage";
-         sourceTree = "<group>";
-      };
-      "OBJ_6" = {
-         isa = "PBXFileReference";
-         explicitFileType = "sourcecode.swift";
-         path = "Package.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_60" = {
-         isa = "PBXFileReference";
-         path = "FullImageViewController.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_61" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_62"
-         );
-         name = "webview";
-         path = "webview";
-         sourceTree = "<group>";
-      };
-      "OBJ_62" = {
-         isa = "PBXFileReference";
-         path = "WebViewController.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_63" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_64"
-         );
-         name = "Tests";
-         path = "";
-         sourceTree = "SOURCE_ROOT";
-      };
-      "OBJ_64" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_65",
-            "OBJ_66"
-         );
-         name = "MultichannelWidgetTests";
-         path = "Tests/MultichannelWidgetTests";
-         sourceTree = "SOURCE_ROOT";
-      };
-      "OBJ_65" = {
-         isa = "PBXFileReference";
-         path = "XCTestManifests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_66" = {
-         isa = "PBXFileReference";
-         path = "multichannelwidgetTests.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_67" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_68",
-            "OBJ_111",
-            "OBJ_246",
-            "OBJ_257",
-            "OBJ_276"
-         );
-         name = "Dependencies";
-         path = "";
-         sourceTree = "<group>";
-      };
-      "OBJ_68" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_69",
-            "OBJ_110"
-         );
-         name = "QiscusCoreAPI";
-         path = "";
-         sourceTree = "SOURCE_ROOT";
-      };
-      "OBJ_69" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_70",
-            "OBJ_71",
-            "OBJ_74",
-            "OBJ_76",
-            "OBJ_91",
-            "OBJ_106",
-            "OBJ_109"
-         );
-         name = "QiscusCoreAPI";
-         path = ".build/checkouts/QiscusCoreApi/Source/QiscusCoreAPI";
-         sourceTree = "SOURCE_ROOT";
-      };
-      "OBJ_7" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_8"
-         );
-         name = "Sources";
-         path = "";
-         sourceTree = "SOURCE_ROOT";
-      };
-      "OBJ_70" = {
-         isa = "PBXFileReference";
-         path = "ConfigManager.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_71" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_72",
-            "OBJ_73"
-         );
-         name = "Extentions";
-         path = "Extentions";
-         sourceTree = "<group>";
-      };
-      "OBJ_72" = {
-         isa = "PBXFileReference";
-         path = "Data.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_73" = {
-         isa = "PBXFileReference";
-         path = "UIDeviceInfo.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_74" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_75"
-         );
-         name = "Helper";
-         path = "Helper";
-         sourceTree = "<group>";
-      };
-      "OBJ_75" = {
-         isa = "PBXFileReference";
-         path = "QiscusLogger.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_76" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_77",
-            "OBJ_79",
-            "OBJ_80",
-            "OBJ_81",
-            "OBJ_83",
-            "OBJ_84",
-            "OBJ_85",
-            "OBJ_86",
-            "OBJ_87",
-            "OBJ_88",
-            "OBJ_89",
-            "OBJ_90"
-         );
-         name = "Model";
-         path = "Model";
-         sourceTree = "<group>";
-      };
-      "OBJ_77" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_78"
-         );
-         name = "Base";
-         path = "Base";
-         sourceTree = "<group>";
-      };
-      "OBJ_78" = {
-         isa = "PBXFileReference";
-         path = "ApiResponse.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_79" = {
-         isa = "PBXFileReference";
-         path = "CommentInfo.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_8" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_9",
-            "OBJ_10",
-            "OBJ_11",
-            "OBJ_13",
-            "OBJ_18",
-            "OBJ_22",
-            "OBJ_24",
-            "OBJ_25",
-            "OBJ_26",
-            "OBJ_27",
-            "OBJ_28"
-         );
-         name = "MultichannelWidget";
-         path = "Source/MultichannelWidget";
-         sourceTree = "SOURCE_ROOT";
-      };
-      "OBJ_80" = {
-         isa = "PBXFileReference";
-         path = "CommentModel.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_81" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_82"
-         );
-         name = "Config";
-         path = "Config";
-         sourceTree = "<group>";
-      };
-      "OBJ_82" = {
-         isa = "PBXFileReference";
-         path = "QiscusConfig.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_83" = {
-         isa = "PBXFileReference";
-         path = "FileModel.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_84" = {
-         isa = "PBXFileReference";
-         path = "GenericModel.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_85" = {
-         isa = "PBXFileReference";
-         path = "LBModel.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_86" = {
-         isa = "PBXFileReference";
-         path = "NonceModel.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_87" = {
-         isa = "PBXFileReference";
-         path = "QError.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_88" = {
-         isa = "PBXFileReference";
-         path = "RoomEvent.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_89" = {
-         isa = "PBXFileReference";
-         path = "RoomModel.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_9" = {
-         isa = "PBXFileReference";
-         path = "QismoMobile.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_90" = {
-         isa = "PBXFileReference";
-         path = "UserModel.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_91" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_92",
-            "OBJ_95",
-            "OBJ_96",
-            "OBJ_97",
-            "OBJ_98"
-         );
-         name = "Network";
-         path = "Network";
-         sourceTree = "<group>";
-      };
-      "OBJ_92" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_93",
-            "OBJ_94"
-         );
-         name = "Encoding";
-         path = "Encoding";
-         sourceTree = "<group>";
-      };
-      "OBJ_93" = {
-         isa = "PBXFileReference";
-         path = "ParameterEncoder.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_94" = {
-         isa = "PBXFileReference";
-         path = "ParameterEncoding.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_95" = {
-         isa = "PBXFileReference";
-         path = "NetworkManager.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_96" = {
-         isa = "PBXFileReference";
-         path = "NetworkMessage.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_97" = {
-         isa = "PBXFileReference";
-         path = "NetworkRoom.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_98" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_99",
-            "OBJ_100",
-            "OBJ_104",
-            "OBJ_105"
-         );
-         name = "Service";
-         path = "Service";
-         sourceTree = "<group>";
-      };
-      "OBJ_99" = {
-         isa = "PBXFileReference";
-         path = "Endpoint.swift";
-         sourceTree = "<group>";
-      };
-      "QiscusCoreAPI::QiscusCoreAPI" = {
-         isa = "PBXNativeTarget";
-         buildConfigurationList = "OBJ_431";
-         buildPhases = (
-            "OBJ_434",
-            "OBJ_465"
-         );
-         dependencies = (
-            "OBJ_467"
-         );
-         name = "QiscusCoreAPI";
-         productName = "QiscusCoreAPI";
-         productReference = "QiscusCoreAPI::QiscusCoreAPI::Product";
-         productType = "com.apple.product-type.framework";
-      };
-      "QiscusCoreAPI::QiscusCoreAPI::Product" = {
-         isa = "PBXFileReference";
-         path = "QiscusCoreAPI.framework";
-         sourceTree = "BUILT_PRODUCTS_DIR";
-      };
-      "QiscusCoreAPI::SwiftPMPackageDescription" = {
-         isa = "PBXNativeTarget";
-         buildConfigurationList = "OBJ_469";
-         buildPhases = (
-            "OBJ_472"
-         );
-         dependencies = (
-         );
-         name = "QiscusCoreAPIPackageDescription";
-         productName = "QiscusCoreAPIPackageDescription";
-         productType = "com.apple.product-type.framework";
-      };
-      "SDWebImage::SDWebImage" = {
-         isa = "PBXNativeTarget";
-         buildConfigurationList = "OBJ_474";
-         buildPhases = (
-            "OBJ_477",
-            "OBJ_546"
-         );
-         dependencies = (
-         );
-         name = "SDWebImage";
-         productName = "SDWebImage";
-         productReference = "SDWebImage::SDWebImage::Product";
-         productType = "com.apple.product-type.framework";
-      };
-      "SDWebImage::SDWebImage::Product" = {
-         isa = "PBXFileReference";
-         path = "SDWebImage.framework";
-         sourceTree = "BUILT_PRODUCTS_DIR";
-      };
-      "SDWebImage::SwiftPMPackageDescription" = {
-         isa = "PBXNativeTarget";
-         buildConfigurationList = "OBJ_548";
-         buildPhases = (
-            "OBJ_551"
-         );
-         dependencies = (
-         );
-         name = "SDWebImagePackageDescription";
-         productName = "SDWebImagePackageDescription";
-         productType = "com.apple.product-type.framework";
-      };
-      "SwiftyJSON::SwiftPMPackageDescription" = {
-         isa = "PBXNativeTarget";
-         buildConfigurationList = "OBJ_560";
-         buildPhases = (
-            "OBJ_563"
-         );
-         dependencies = (
-         );
-         name = "SwiftyJSONPackageDescription";
-         productName = "SwiftyJSONPackageDescription";
-         productType = "com.apple.product-type.framework";
-      };
-      "SwiftyJSON::SwiftyJSON" = {
-         isa = "PBXNativeTarget";
-         buildConfigurationList = "OBJ_553";
-         buildPhases = (
-            "OBJ_556",
-            "OBJ_558"
-         );
-         dependencies = (
-         );
-         name = "SwiftyJSON";
-         productName = "SwiftyJSON";
-         productReference = "SwiftyJSON::SwiftyJSON::Product";
-         productType = "com.apple.product-type.framework";
-      };
-      "SwiftyJSON::SwiftyJSON::Product" = {
-         isa = "PBXFileReference";
-         path = "SwiftyJSON.framework";
-         sourceTree = "BUILT_PRODUCTS_DIR";
-      };
-   };
-   rootObject = "OBJ_1";
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		11449BCD249DDB5900E32D9F /* MultichannelWidget.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11449BC3249DDB5900E32D9F /* MultichannelWidget.framework */; };
+		11449BD2249DDB5900E32D9F /* MultichannelWidgetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11449BD1249DDB5900E32D9F /* MultichannelWidgetTests.swift */; };
+		11449BD4249DDB5900E32D9F /* MultichannelWidget.h in Headers */ = {isa = PBXBuildFile; fileRef = 11449BC6249DDB5900E32D9F /* MultichannelWidget.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		11449C2A249DDB9800E32D9F /* QismoMobile.h in Headers */ = {isa = PBXBuildFile; fileRef = 11449BDF249DDB9800E32D9F /* QismoMobile.h */; };
+		11449C2B249DDB9800E32D9F /* QismoNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11449BE0249DDB9800E32D9F /* QismoNetworkManager.swift */; };
+		11449C2C249DDB9800E32D9F /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11449BE1249DDB9800E32D9F /* Media.xcassets */; };
+		11449C2D249DDB9800E32D9F /* QiscusTextConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11449BE3249DDB9800E32D9F /* QiscusTextConfiguration.swift */; };
+		11449C2E249DDB9800E32D9F /* ColorConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11449BE4249DDB9800E32D9F /* ColorConfiguration.swift */; };
+		11449C2F249DDB9800E32D9F /* MultichannelWidgetConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11449BE5249DDB9800E32D9F /* MultichannelWidgetConfig.swift */; };
+		11449C30249DDB9800E32D9F /* ChatConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11449BE6249DDB9800E32D9F /* ChatConfig.swift */; };
+		11449C31249DDB9800E32D9F /* AppUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11449BE8249DDB9800E32D9F /* AppUtil.swift */; };
+		11449C32249DDB9800E32D9F /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11449BEA249DDB9800E32D9F /* Date.swift */; };
+		11449C33249DDB9800E32D9F /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11449BEB249DDB9800E32D9F /* Image.swift */; };
+		11449C34249DDB9800E32D9F /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11449BEC249DDB9800E32D9F /* UIViewController.swift */; };
+		11449C35249DDB9800E32D9F /* FullImageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11449BEF249DDB9800E32D9F /* FullImageViewController.xib */; };
+		11449C36249DDB9800E32D9F /* FullImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11449BF0249DDB9800E32D9F /* FullImageViewController.swift */; };
+		11449C37249DDB9800E32D9F /* EmptyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11449BF3249DDB9800E32D9F /* EmptyCell.swift */; };
+		11449C38249DDB9800E32D9F /* QTextLeftCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11449BF5249DDB9800E32D9F /* QTextLeftCell.xib */; };
+		11449C39249DDB9800E32D9F /* QTextRightCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11449BF6249DDB9800E32D9F /* QTextRightCell.xib */; };
+		11449C3A249DDB9800E32D9F /* QTextLeftCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11449BF7249DDB9800E32D9F /* QTextLeftCell.swift */; };
+		11449C3B249DDB9800E32D9F /* QTextRightCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11449BF8249DDB9800E32D9F /* QTextRightCell.swift */; };
+		11449C3C249DDB9800E32D9F /* QImagesRightCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11449BFA249DDB9800E32D9F /* QImagesRightCell.swift */; };
+		11449C3D249DDB9800E32D9F /* QImagesLeftCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11449BFB249DDB9800E32D9F /* QImagesLeftCell.xib */; };
+		11449C3E249DDB9800E32D9F /* QImagesLeftCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11449BFC249DDB9800E32D9F /* QImagesLeftCell.swift */; };
+		11449C3F249DDB9800E32D9F /* QImagesRightCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11449BFD249DDB9800E32D9F /* QImagesRightCell.xib */; };
+		11449C40249DDB9800E32D9F /* EmptyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11449BFE249DDB9800E32D9F /* EmptyCell.xib */; };
+		11449C41249DDB9800E32D9F /* QSystemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11449BFF249DDB9800E32D9F /* QSystemCell.xib */; };
+		11449C42249DDB9800E32D9F /* QFileRightCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11449C01249DDB9800E32D9F /* QFileRightCell.xib */; };
+		11449C43249DDB9800E32D9F /* QFileRightCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11449C02249DDB9800E32D9F /* QFileRightCell.swift */; };
+		11449C44249DDB9800E32D9F /* QFileLeftCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11449C03249DDB9800E32D9F /* QFileLeftCell.swift */; };
+		11449C45249DDB9800E32D9F /* QFileLeftCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11449C04249DDB9800E32D9F /* QFileLeftCell.xib */; };
+		11449C46249DDB9800E32D9F /* QSystemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11449C05249DDB9800E32D9F /* QSystemCell.swift */; };
+		11449C47249DDB9800E32D9F /* QReplyLeftCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11449C07249DDB9800E32D9F /* QReplyLeftCell.xib */; };
+		11449C48249DDB9800E32D9F /* QReplyRightCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11449C08249DDB9800E32D9F /* QReplyRightCell.xib */; };
+		11449C49249DDB9800E32D9F /* QReplyLeftCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11449C09249DDB9800E32D9F /* QReplyLeftCell.swift */; };
+		11449C4A249DDB9800E32D9F /* QReplyRightCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11449C0A249DDB9800E32D9F /* QReplyRightCell.swift */; };
+		11449C4B249DDB9800E32D9F /* QUIBaseChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11449C0B249DDB9800E32D9F /* QUIBaseChatCell.swift */; };
+		11449C4C249DDB9800E32D9F /* QCardLeftCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11449C0D249DDB9800E32D9F /* QCardLeftCell.xib */; };
+		11449C4D249DDB9800E32D9F /* QCardLeftCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11449C0E249DDB9800E32D9F /* QCardLeftCell.swift */; };
+		11449C4E249DDB9800E32D9F /* UIChatPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11449C0F249DDB9800E32D9F /* UIChatPresenter.swift */; };
+		11449C4F249DDB9800E32D9F /* QismoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11449C10249DDB9800E32D9F /* QismoViewController.swift */; };
+		11449C50249DDB9800E32D9F /* UIChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11449C11249DDB9800E32D9F /* UIChatViewController.swift */; };
+		11449C51249DDB9800E32D9F /* UIChatNavigation.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11449C12249DDB9800E32D9F /* UIChatNavigation.xib */; };
+		11449C52249DDB9800E32D9F /* UIChatNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11449C13249DDB9800E32D9F /* UIChatNavigation.swift */; };
+		11449C53249DDB9800E32D9F /* QiscusUploaderVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11449C15249DDB9800E32D9F /* QiscusUploaderVC.xib */; };
+		11449C54249DDB9800E32D9F /* QiscusUploaderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11449C16249DDB9800E32D9F /* QiscusUploaderVC.swift */; };
+		11449C55249DDB9800E32D9F /* UIChatInput.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11449C18249DDB9800E32D9F /* UIChatInput.xib */; };
+		11449C56249DDB9800E32D9F /* UIChatInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11449C19249DDB9800E32D9F /* UIChatInput.swift */; };
+		11449C57249DDB9800E32D9F /* DisableInput.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11449C1A249DDB9800E32D9F /* DisableInput.xib */; };
+		11449C58249DDB9800E32D9F /* CustomChatInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11449C1B249DDB9800E32D9F /* CustomChatInput.swift */; };
+		11449C59249DDB9800E32D9F /* DisableInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11449C1C249DDB9800E32D9F /* DisableInput.swift */; };
+		11449C5A249DDB9800E32D9F /* CustomChatInput.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11449C1D249DDB9800E32D9F /* CustomChatInput.xib */; };
+		11449C5B249DDB9800E32D9F /* QismoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11449C1E249DDB9800E32D9F /* QismoViewController.xib */; };
+		11449C5C249DDB9800E32D9F /* UIChatViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11449C1F249DDB9800E32D9F /* UIChatViewController.xib */; };
+		11449C5D249DDB9800E32D9F /* QPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11449C20249DDB9800E32D9F /* QPopUpView.swift */; };
+		11449C5E249DDB9800E32D9F /* QPopUpView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11449C21249DDB9800E32D9F /* QPopUpView.xib */; };
+		11449C5F249DDB9800E32D9F /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11449C23249DDB9800E32D9F /* WebViewController.swift */; };
+		11449C60249DDB9800E32D9F /* QismoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11449C24249DDB9800E32D9F /* QismoManager.swift */; };
+		11449C61249DDB9800E32D9F /* CommentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11449C26249DDB9800E32D9F /* CommentModel.swift */; };
+		11449C62249DDB9800E32D9F /* SharedPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11449C27249DDB9800E32D9F /* SharedPreferences.swift */; };
+		11449C63249DDB9800E32D9F /* MultichannelWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11449C28249DDB9800E32D9F /* MultichannelWidget.swift */; };
+		11449C68249DDC8300E32D9F /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11449C66249DDC8300E32D9F /* SwiftyJSON.framework */; };
+		11449C69249DDC8300E32D9F /* QiscusCoreAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11449C67249DDC8300E32D9F /* QiscusCoreAPI.framework */; };
+		11449C6C249DDE5800E32D9F /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11449C6A249DDE5800E32D9F /* Alamofire.framework */; };
+		11449C6D249DDE5800E32D9F /* AlamofireImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11449C6B249DDE5800E32D9F /* AlamofireImage.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		11449BCE249DDB5900E32D9F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 11449BBA249DDB5900E32D9F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 11449BC2249DDB5900E32D9F;
+			remoteInfo = MultichannelWidget;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		11449BC3249DDB5900E32D9F /* MultichannelWidget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MultichannelWidget.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		11449BC6249DDB5900E32D9F /* MultichannelWidget.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MultichannelWidget.h; sourceTree = "<group>"; };
+		11449BC7249DDB5900E32D9F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		11449BCC249DDB5900E32D9F /* MultichannelWidgetTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MultichannelWidgetTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		11449BD1249DDB5900E32D9F /* MultichannelWidgetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultichannelWidgetTests.swift; sourceTree = "<group>"; };
+		11449BD3249DDB5900E32D9F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		11449BDF249DDB9800E32D9F /* QismoMobile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QismoMobile.h; sourceTree = "<group>"; };
+		11449BE0249DDB9800E32D9F /* QismoNetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QismoNetworkManager.swift; sourceTree = "<group>"; };
+		11449BE1249DDB9800E32D9F /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
+		11449BE3249DDB9800E32D9F /* QiscusTextConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QiscusTextConfiguration.swift; sourceTree = "<group>"; };
+		11449BE4249DDB9800E32D9F /* ColorConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorConfiguration.swift; sourceTree = "<group>"; };
+		11449BE5249DDB9800E32D9F /* MultichannelWidgetConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultichannelWidgetConfig.swift; sourceTree = "<group>"; };
+		11449BE6249DDB9800E32D9F /* ChatConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatConfig.swift; sourceTree = "<group>"; };
+		11449BE8249DDB9800E32D9F /* AppUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUtil.swift; sourceTree = "<group>"; };
+		11449BEA249DDB9800E32D9F /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		11449BEB249DDB9800E32D9F /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		11449BEC249DDB9800E32D9F /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
+		11449BEF249DDB9800E32D9F /* FullImageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FullImageViewController.xib; sourceTree = "<group>"; };
+		11449BF0249DDB9800E32D9F /* FullImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullImageViewController.swift; sourceTree = "<group>"; };
+		11449BF3249DDB9800E32D9F /* EmptyCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyCell.swift; sourceTree = "<group>"; };
+		11449BF5249DDB9800E32D9F /* QTextLeftCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QTextLeftCell.xib; sourceTree = "<group>"; };
+		11449BF6249DDB9800E32D9F /* QTextRightCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QTextRightCell.xib; sourceTree = "<group>"; };
+		11449BF7249DDB9800E32D9F /* QTextLeftCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QTextLeftCell.swift; sourceTree = "<group>"; };
+		11449BF8249DDB9800E32D9F /* QTextRightCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QTextRightCell.swift; sourceTree = "<group>"; };
+		11449BFA249DDB9800E32D9F /* QImagesRightCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QImagesRightCell.swift; sourceTree = "<group>"; };
+		11449BFB249DDB9800E32D9F /* QImagesLeftCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QImagesLeftCell.xib; sourceTree = "<group>"; };
+		11449BFC249DDB9800E32D9F /* QImagesLeftCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QImagesLeftCell.swift; sourceTree = "<group>"; };
+		11449BFD249DDB9800E32D9F /* QImagesRightCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QImagesRightCell.xib; sourceTree = "<group>"; };
+		11449BFE249DDB9800E32D9F /* EmptyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmptyCell.xib; sourceTree = "<group>"; };
+		11449BFF249DDB9800E32D9F /* QSystemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QSystemCell.xib; sourceTree = "<group>"; };
+		11449C01249DDB9800E32D9F /* QFileRightCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QFileRightCell.xib; sourceTree = "<group>"; };
+		11449C02249DDB9800E32D9F /* QFileRightCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QFileRightCell.swift; sourceTree = "<group>"; };
+		11449C03249DDB9800E32D9F /* QFileLeftCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QFileLeftCell.swift; sourceTree = "<group>"; };
+		11449C04249DDB9800E32D9F /* QFileLeftCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QFileLeftCell.xib; sourceTree = "<group>"; };
+		11449C05249DDB9800E32D9F /* QSystemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QSystemCell.swift; sourceTree = "<group>"; };
+		11449C07249DDB9800E32D9F /* QReplyLeftCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QReplyLeftCell.xib; sourceTree = "<group>"; };
+		11449C08249DDB9800E32D9F /* QReplyRightCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QReplyRightCell.xib; sourceTree = "<group>"; };
+		11449C09249DDB9800E32D9F /* QReplyLeftCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QReplyLeftCell.swift; sourceTree = "<group>"; };
+		11449C0A249DDB9800E32D9F /* QReplyRightCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QReplyRightCell.swift; sourceTree = "<group>"; };
+		11449C0B249DDB9800E32D9F /* QUIBaseChatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QUIBaseChatCell.swift; sourceTree = "<group>"; };
+		11449C0D249DDB9800E32D9F /* QCardLeftCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QCardLeftCell.xib; sourceTree = "<group>"; };
+		11449C0E249DDB9800E32D9F /* QCardLeftCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QCardLeftCell.swift; sourceTree = "<group>"; };
+		11449C0F249DDB9800E32D9F /* UIChatPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIChatPresenter.swift; sourceTree = "<group>"; };
+		11449C10249DDB9800E32D9F /* QismoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QismoViewController.swift; sourceTree = "<group>"; };
+		11449C11249DDB9800E32D9F /* UIChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIChatViewController.swift; sourceTree = "<group>"; };
+		11449C12249DDB9800E32D9F /* UIChatNavigation.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UIChatNavigation.xib; sourceTree = "<group>"; };
+		11449C13249DDB9800E32D9F /* UIChatNavigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIChatNavigation.swift; sourceTree = "<group>"; };
+		11449C15249DDB9800E32D9F /* QiscusUploaderVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QiscusUploaderVC.xib; sourceTree = "<group>"; };
+		11449C16249DDB9800E32D9F /* QiscusUploaderVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QiscusUploaderVC.swift; sourceTree = "<group>"; };
+		11449C18249DDB9800E32D9F /* UIChatInput.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UIChatInput.xib; sourceTree = "<group>"; };
+		11449C19249DDB9800E32D9F /* UIChatInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIChatInput.swift; sourceTree = "<group>"; };
+		11449C1A249DDB9800E32D9F /* DisableInput.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DisableInput.xib; sourceTree = "<group>"; };
+		11449C1B249DDB9800E32D9F /* CustomChatInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomChatInput.swift; sourceTree = "<group>"; };
+		11449C1C249DDB9800E32D9F /* DisableInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisableInput.swift; sourceTree = "<group>"; };
+		11449C1D249DDB9800E32D9F /* CustomChatInput.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomChatInput.xib; sourceTree = "<group>"; };
+		11449C1E249DDB9800E32D9F /* QismoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QismoViewController.xib; sourceTree = "<group>"; };
+		11449C1F249DDB9800E32D9F /* UIChatViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UIChatViewController.xib; sourceTree = "<group>"; };
+		11449C20249DDB9800E32D9F /* QPopUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QPopUpView.swift; sourceTree = "<group>"; };
+		11449C21249DDB9800E32D9F /* QPopUpView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QPopUpView.xib; sourceTree = "<group>"; };
+		11449C23249DDB9800E32D9F /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		11449C24249DDB9800E32D9F /* QismoManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QismoManager.swift; sourceTree = "<group>"; };
+		11449C26249DDB9800E32D9F /* CommentModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentModel.swift; sourceTree = "<group>"; };
+		11449C27249DDB9800E32D9F /* SharedPreferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedPreferences.swift; sourceTree = "<group>"; };
+		11449C28249DDB9800E32D9F /* MultichannelWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultichannelWidget.swift; sourceTree = "<group>"; };
+		11449C66249DDC8300E32D9F /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
+		11449C67249DDC8300E32D9F /* QiscusCoreAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QiscusCoreAPI.framework; path = Carthage/Build/iOS/QiscusCoreAPI.framework; sourceTree = "<group>"; };
+		11449C6A249DDE5800E32D9F /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
+		11449C6B249DDE5800E32D9F /* AlamofireImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlamofireImage.framework; path = Carthage/Build/iOS/AlamofireImage.framework; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		11449BC0249DDB5900E32D9F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				11449C68249DDC8300E32D9F /* SwiftyJSON.framework in Frameworks */,
+				11449C69249DDC8300E32D9F /* QiscusCoreAPI.framework in Frameworks */,
+				11449C6C249DDE5800E32D9F /* Alamofire.framework in Frameworks */,
+				11449C6D249DDE5800E32D9F /* AlamofireImage.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		11449BC9249DDB5900E32D9F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				11449BCD249DDB5900E32D9F /* MultichannelWidget.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		11449BB9249DDB5900E32D9F = {
+			isa = PBXGroup;
+			children = (
+				11449BC5249DDB5900E32D9F /* MultichannelWidget */,
+				11449BD0249DDB5900E32D9F /* MultichannelWidgetTests */,
+				11449BC4249DDB5900E32D9F /* Products */,
+				11449C65249DDC8200E32D9F /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		11449BC4249DDB5900E32D9F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				11449BC3249DDB5900E32D9F /* MultichannelWidget.framework */,
+				11449BCC249DDB5900E32D9F /* MultichannelWidgetTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		11449BC5249DDB5900E32D9F /* MultichannelWidget */ = {
+			isa = PBXGroup;
+			children = (
+				11449BDD249DDB9800E32D9F /* Source */,
+				11449BC6249DDB5900E32D9F /* MultichannelWidget.h */,
+				11449BC7249DDB5900E32D9F /* Info.plist */,
+			);
+			path = MultichannelWidget;
+			sourceTree = "<group>";
+		};
+		11449BD0249DDB5900E32D9F /* MultichannelWidgetTests */ = {
+			isa = PBXGroup;
+			children = (
+				11449BD1249DDB5900E32D9F /* MultichannelWidgetTests.swift */,
+				11449BD3249DDB5900E32D9F /* Info.plist */,
+			);
+			path = MultichannelWidgetTests;
+			sourceTree = "<group>";
+		};
+		11449BDD249DDB9800E32D9F /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				11449BDE249DDB9800E32D9F /* MultichannelWidget */,
+			);
+			path = Source;
+			sourceTree = SOURCE_ROOT;
+		};
+		11449BDE249DDB9800E32D9F /* MultichannelWidget */ = {
+			isa = PBXGroup;
+			children = (
+				11449BDF249DDB9800E32D9F /* QismoMobile.h */,
+				11449BE0249DDB9800E32D9F /* QismoNetworkManager.swift */,
+				11449BE1249DDB9800E32D9F /* Media.xcassets */,
+				11449BE2249DDB9800E32D9F /* Config */,
+				11449BE7249DDB9800E32D9F /* AppUtil */,
+				11449BE9249DDB9800E32D9F /* Extensions */,
+				11449BED249DDB9800E32D9F /* ViewControllers */,
+				11449C24249DDB9800E32D9F /* QismoManager.swift */,
+				11449C25249DDB9800E32D9F /* Model */,
+				11449C27249DDB9800E32D9F /* SharedPreferences.swift */,
+				11449C28249DDB9800E32D9F /* MultichannelWidget.swift */,
+			);
+			path = MultichannelWidget;
+			sourceTree = "<group>";
+		};
+		11449BE2249DDB9800E32D9F /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				11449BE3249DDB9800E32D9F /* QiscusTextConfiguration.swift */,
+				11449BE4249DDB9800E32D9F /* ColorConfiguration.swift */,
+				11449BE5249DDB9800E32D9F /* MultichannelWidgetConfig.swift */,
+				11449BE6249DDB9800E32D9F /* ChatConfig.swift */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		11449BE7249DDB9800E32D9F /* AppUtil */ = {
+			isa = PBXGroup;
+			children = (
+				11449BE8249DDB9800E32D9F /* AppUtil.swift */,
+			);
+			path = AppUtil;
+			sourceTree = "<group>";
+		};
+		11449BE9249DDB9800E32D9F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				11449BEA249DDB9800E32D9F /* Date.swift */,
+				11449BEB249DDB9800E32D9F /* Image.swift */,
+				11449BEC249DDB9800E32D9F /* UIViewController.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		11449BED249DDB9800E32D9F /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				11449BEE249DDB9800E32D9F /* fullimage */,
+				11449BF1249DDB9800E32D9F /* Chatview */,
+				11449C20249DDB9800E32D9F /* QPopUpView.swift */,
+				11449C21249DDB9800E32D9F /* QPopUpView.xib */,
+				11449C22249DDB9800E32D9F /* webview */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		11449BEE249DDB9800E32D9F /* fullimage */ = {
+			isa = PBXGroup;
+			children = (
+				11449BEF249DDB9800E32D9F /* FullImageViewController.xib */,
+				11449BF0249DDB9800E32D9F /* FullImageViewController.swift */,
+			);
+			path = fullimage;
+			sourceTree = "<group>";
+		};
+		11449BF1249DDB9800E32D9F /* Chatview */ = {
+			isa = PBXGroup;
+			children = (
+				11449BF2249DDB9800E32D9F /* ChatCell */,
+				11449C0F249DDB9800E32D9F /* UIChatPresenter.swift */,
+				11449C10249DDB9800E32D9F /* QismoViewController.swift */,
+				11449C11249DDB9800E32D9F /* UIChatViewController.swift */,
+				11449C12249DDB9800E32D9F /* UIChatNavigation.xib */,
+				11449C13249DDB9800E32D9F /* UIChatNavigation.swift */,
+				11449C14249DDB9800E32D9F /* ChatUpload */,
+				11449C17249DDB9800E32D9F /* ChatInput */,
+				11449C1E249DDB9800E32D9F /* QismoViewController.xib */,
+				11449C1F249DDB9800E32D9F /* UIChatViewController.xib */,
+			);
+			path = Chatview;
+			sourceTree = "<group>";
+		};
+		11449BF2249DDB9800E32D9F /* ChatCell */ = {
+			isa = PBXGroup;
+			children = (
+				11449BF3249DDB9800E32D9F /* EmptyCell.swift */,
+				11449BF4249DDB9800E32D9F /* TextCell */,
+				11449BF9249DDB9800E32D9F /* ImageCell */,
+				11449BFE249DDB9800E32D9F /* EmptyCell.xib */,
+				11449BFF249DDB9800E32D9F /* QSystemCell.xib */,
+				11449C00249DDB9800E32D9F /* FileCell */,
+				11449C05249DDB9800E32D9F /* QSystemCell.swift */,
+				11449C06249DDB9800E32D9F /* ReplyCell */,
+				11449C0B249DDB9800E32D9F /* QUIBaseChatCell.swift */,
+				11449C0C249DDB9800E32D9F /* CardCell */,
+			);
+			path = ChatCell;
+			sourceTree = "<group>";
+		};
+		11449BF4249DDB9800E32D9F /* TextCell */ = {
+			isa = PBXGroup;
+			children = (
+				11449BF5249DDB9800E32D9F /* QTextLeftCell.xib */,
+				11449BF6249DDB9800E32D9F /* QTextRightCell.xib */,
+				11449BF7249DDB9800E32D9F /* QTextLeftCell.swift */,
+				11449BF8249DDB9800E32D9F /* QTextRightCell.swift */,
+			);
+			path = TextCell;
+			sourceTree = "<group>";
+		};
+		11449BF9249DDB9800E32D9F /* ImageCell */ = {
+			isa = PBXGroup;
+			children = (
+				11449BFA249DDB9800E32D9F /* QImagesRightCell.swift */,
+				11449BFB249DDB9800E32D9F /* QImagesLeftCell.xib */,
+				11449BFC249DDB9800E32D9F /* QImagesLeftCell.swift */,
+				11449BFD249DDB9800E32D9F /* QImagesRightCell.xib */,
+			);
+			path = ImageCell;
+			sourceTree = "<group>";
+		};
+		11449C00249DDB9800E32D9F /* FileCell */ = {
+			isa = PBXGroup;
+			children = (
+				11449C01249DDB9800E32D9F /* QFileRightCell.xib */,
+				11449C02249DDB9800E32D9F /* QFileRightCell.swift */,
+				11449C03249DDB9800E32D9F /* QFileLeftCell.swift */,
+				11449C04249DDB9800E32D9F /* QFileLeftCell.xib */,
+			);
+			path = FileCell;
+			sourceTree = "<group>";
+		};
+		11449C06249DDB9800E32D9F /* ReplyCell */ = {
+			isa = PBXGroup;
+			children = (
+				11449C07249DDB9800E32D9F /* QReplyLeftCell.xib */,
+				11449C08249DDB9800E32D9F /* QReplyRightCell.xib */,
+				11449C09249DDB9800E32D9F /* QReplyLeftCell.swift */,
+				11449C0A249DDB9800E32D9F /* QReplyRightCell.swift */,
+			);
+			path = ReplyCell;
+			sourceTree = "<group>";
+		};
+		11449C0C249DDB9800E32D9F /* CardCell */ = {
+			isa = PBXGroup;
+			children = (
+				11449C0D249DDB9800E32D9F /* QCardLeftCell.xib */,
+				11449C0E249DDB9800E32D9F /* QCardLeftCell.swift */,
+			);
+			path = CardCell;
+			sourceTree = "<group>";
+		};
+		11449C14249DDB9800E32D9F /* ChatUpload */ = {
+			isa = PBXGroup;
+			children = (
+				11449C15249DDB9800E32D9F /* QiscusUploaderVC.xib */,
+				11449C16249DDB9800E32D9F /* QiscusUploaderVC.swift */,
+			);
+			path = ChatUpload;
+			sourceTree = "<group>";
+		};
+		11449C17249DDB9800E32D9F /* ChatInput */ = {
+			isa = PBXGroup;
+			children = (
+				11449C18249DDB9800E32D9F /* UIChatInput.xib */,
+				11449C19249DDB9800E32D9F /* UIChatInput.swift */,
+				11449C1A249DDB9800E32D9F /* DisableInput.xib */,
+				11449C1B249DDB9800E32D9F /* CustomChatInput.swift */,
+				11449C1C249DDB9800E32D9F /* DisableInput.swift */,
+				11449C1D249DDB9800E32D9F /* CustomChatInput.xib */,
+			);
+			path = ChatInput;
+			sourceTree = "<group>";
+		};
+		11449C22249DDB9800E32D9F /* webview */ = {
+			isa = PBXGroup;
+			children = (
+				11449C23249DDB9800E32D9F /* WebViewController.swift */,
+			);
+			path = webview;
+			sourceTree = "<group>";
+		};
+		11449C25249DDB9800E32D9F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				11449C26249DDB9800E32D9F /* CommentModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		11449C65249DDC8200E32D9F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				11449C6A249DDE5800E32D9F /* Alamofire.framework */,
+				11449C6B249DDE5800E32D9F /* AlamofireImage.framework */,
+				11449C67249DDC8300E32D9F /* QiscusCoreAPI.framework */,
+				11449C66249DDC8300E32D9F /* SwiftyJSON.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		11449BBE249DDB5900E32D9F /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				11449C2A249DDB9800E32D9F /* QismoMobile.h in Headers */,
+				11449BD4249DDB5900E32D9F /* MultichannelWidget.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		11449BC2249DDB5900E32D9F /* MultichannelWidget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 11449BD7249DDB5900E32D9F /* Build configuration list for PBXNativeTarget "MultichannelWidget" */;
+			buildPhases = (
+				11449BBE249DDB5900E32D9F /* Headers */,
+				11449BBF249DDB5900E32D9F /* Sources */,
+				11449BC0249DDB5900E32D9F /* Frameworks */,
+				11449BC1249DDB5900E32D9F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MultichannelWidget;
+			productName = MultichannelWidget;
+			productReference = 11449BC3249DDB5900E32D9F /* MultichannelWidget.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		11449BCB249DDB5900E32D9F /* MultichannelWidgetTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 11449BDA249DDB5900E32D9F /* Build configuration list for PBXNativeTarget "MultichannelWidgetTests" */;
+			buildPhases = (
+				11449BC8249DDB5900E32D9F /* Sources */,
+				11449BC9249DDB5900E32D9F /* Frameworks */,
+				11449BCA249DDB5900E32D9F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				11449BCF249DDB5900E32D9F /* PBXTargetDependency */,
+			);
+			name = MultichannelWidgetTests;
+			productName = MultichannelWidgetTests;
+			productReference = 11449BCC249DDB5900E32D9F /* MultichannelWidgetTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		11449BBA249DDB5900E32D9F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1140;
+				LastUpgradeCheck = 1140;
+				ORGANIZATIONNAME = Qiscus;
+				TargetAttributes = {
+					11449BC2249DDB5900E32D9F = {
+						CreatedOnToolsVersion = 11.4.1;
+					};
+					11449BCB249DDB5900E32D9F = {
+						CreatedOnToolsVersion = 11.4.1;
+					};
+				};
+			};
+			buildConfigurationList = 11449BBD249DDB5900E32D9F /* Build configuration list for PBXProject "MultichannelWidget" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 11449BB9249DDB5900E32D9F;
+			productRefGroup = 11449BC4249DDB5900E32D9F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				11449BC2249DDB5900E32D9F /* MultichannelWidget */,
+				11449BCB249DDB5900E32D9F /* MultichannelWidgetTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		11449BC1249DDB5900E32D9F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				11449C47249DDB9800E32D9F /* QReplyLeftCell.xib in Resources */,
+				11449C3F249DDB9800E32D9F /* QImagesRightCell.xib in Resources */,
+				11449C42249DDB9800E32D9F /* QFileRightCell.xib in Resources */,
+				11449C51249DDB9800E32D9F /* UIChatNavigation.xib in Resources */,
+				11449C2C249DDB9800E32D9F /* Media.xcassets in Resources */,
+				11449C40249DDB9800E32D9F /* EmptyCell.xib in Resources */,
+				11449C45249DDB9800E32D9F /* QFileLeftCell.xib in Resources */,
+				11449C35249DDB9800E32D9F /* FullImageViewController.xib in Resources */,
+				11449C53249DDB9800E32D9F /* QiscusUploaderVC.xib in Resources */,
+				11449C5A249DDB9800E32D9F /* CustomChatInput.xib in Resources */,
+				11449C4C249DDB9800E32D9F /* QCardLeftCell.xib in Resources */,
+				11449C5E249DDB9800E32D9F /* QPopUpView.xib in Resources */,
+				11449C48249DDB9800E32D9F /* QReplyRightCell.xib in Resources */,
+				11449C3D249DDB9800E32D9F /* QImagesLeftCell.xib in Resources */,
+				11449C57249DDB9800E32D9F /* DisableInput.xib in Resources */,
+				11449C5C249DDB9800E32D9F /* UIChatViewController.xib in Resources */,
+				11449C5B249DDB9800E32D9F /* QismoViewController.xib in Resources */,
+				11449C38249DDB9800E32D9F /* QTextLeftCell.xib in Resources */,
+				11449C41249DDB9800E32D9F /* QSystemCell.xib in Resources */,
+				11449C55249DDB9800E32D9F /* UIChatInput.xib in Resources */,
+				11449C39249DDB9800E32D9F /* QTextRightCell.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		11449BCA249DDB5900E32D9F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		11449BBF249DDB5900E32D9F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				11449C30249DDB9800E32D9F /* ChatConfig.swift in Sources */,
+				11449C62249DDB9800E32D9F /* SharedPreferences.swift in Sources */,
+				11449C33249DDB9800E32D9F /* Image.swift in Sources */,
+				11449C34249DDB9800E32D9F /* UIViewController.swift in Sources */,
+				11449C4A249DDB9800E32D9F /* QReplyRightCell.swift in Sources */,
+				11449C3E249DDB9800E32D9F /* QImagesLeftCell.swift in Sources */,
+				11449C2B249DDB9800E32D9F /* QismoNetworkManager.swift in Sources */,
+				11449C32249DDB9800E32D9F /* Date.swift in Sources */,
+				11449C49249DDB9800E32D9F /* QReplyLeftCell.swift in Sources */,
+				11449C4B249DDB9800E32D9F /* QUIBaseChatCell.swift in Sources */,
+				11449C36249DDB9800E32D9F /* FullImageViewController.swift in Sources */,
+				11449C37249DDB9800E32D9F /* EmptyCell.swift in Sources */,
+				11449C3A249DDB9800E32D9F /* QTextLeftCell.swift in Sources */,
+				11449C4F249DDB9800E32D9F /* QismoViewController.swift in Sources */,
+				11449C50249DDB9800E32D9F /* UIChatViewController.swift in Sources */,
+				11449C3B249DDB9800E32D9F /* QTextRightCell.swift in Sources */,
+				11449C5F249DDB9800E32D9F /* WebViewController.swift in Sources */,
+				11449C2D249DDB9800E32D9F /* QiscusTextConfiguration.swift in Sources */,
+				11449C60249DDB9800E32D9F /* QismoManager.swift in Sources */,
+				11449C3C249DDB9800E32D9F /* QImagesRightCell.swift in Sources */,
+				11449C59249DDB9800E32D9F /* DisableInput.swift in Sources */,
+				11449C54249DDB9800E32D9F /* QiscusUploaderVC.swift in Sources */,
+				11449C56249DDB9800E32D9F /* UIChatInput.swift in Sources */,
+				11449C31249DDB9800E32D9F /* AppUtil.swift in Sources */,
+				11449C4D249DDB9800E32D9F /* QCardLeftCell.swift in Sources */,
+				11449C44249DDB9800E32D9F /* QFileLeftCell.swift in Sources */,
+				11449C4E249DDB9800E32D9F /* UIChatPresenter.swift in Sources */,
+				11449C63249DDB9800E32D9F /* MultichannelWidget.swift in Sources */,
+				11449C5D249DDB9800E32D9F /* QPopUpView.swift in Sources */,
+				11449C61249DDB9800E32D9F /* CommentModel.swift in Sources */,
+				11449C52249DDB9800E32D9F /* UIChatNavigation.swift in Sources */,
+				11449C46249DDB9800E32D9F /* QSystemCell.swift in Sources */,
+				11449C58249DDB9800E32D9F /* CustomChatInput.swift in Sources */,
+				11449C2E249DDB9800E32D9F /* ColorConfiguration.swift in Sources */,
+				11449C43249DDB9800E32D9F /* QFileRightCell.swift in Sources */,
+				11449C2F249DDB9800E32D9F /* MultichannelWidgetConfig.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		11449BC8249DDB5900E32D9F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				11449BD2249DDB5900E32D9F /* MultichannelWidgetTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		11449BCF249DDB5900E32D9F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 11449BC2249DDB5900E32D9F /* MultichannelWidget */;
+			targetProxy = 11449BCE249DDB5900E32D9F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		11449BD5249DDB5900E32D9F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		11449BD6249DDB5900E32D9F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		11449BD8249DDB5900E32D9F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = MultichannelWidget/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.qiscus.qismo.MultichannelWidget;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		11449BD9249DDB5900E32D9F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = MultichannelWidget/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.qiscus.qismo.MultichannelWidget;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		11449BDB249DDB5900E32D9F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = MultichannelWidgetTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.qiscus.qismo.MultichannelWidgetTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		11449BDC249DDB5900E32D9F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = MultichannelWidgetTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.qiscus.qismo.MultichannelWidgetTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		11449BBD249DDB5900E32D9F /* Build configuration list for PBXProject "MultichannelWidget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				11449BD5249DDB5900E32D9F /* Debug */,
+				11449BD6249DDB5900E32D9F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		11449BD7249DDB5900E32D9F /* Build configuration list for PBXNativeTarget "MultichannelWidget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				11449BD8249DDB5900E32D9F /* Debug */,
+				11449BD9249DDB5900E32D9F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		11449BDA249DDB5900E32D9F /* Build configuration list for PBXNativeTarget "MultichannelWidgetTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				11449BDB249DDB5900E32D9F /* Debug */,
+				11449BDC249DDB5900E32D9F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 11449BBA249DDB5900E32D9F /* Project object */;
 }

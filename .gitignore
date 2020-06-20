@@ -1,6 +1,8 @@
+Carthage/*
 Pods/*
 Podfile.lock
 Example.xcworkspace/*
 Example.xcodeproj/xcuserdata/*
 .build/*
+Examples/carthage/Carthage
 swift package manager/Carthage/*
