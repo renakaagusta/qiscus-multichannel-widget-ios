@@ -27,7 +27,16 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
         .target(
             name: "MultichannelWidget",
-            dependencies: ["SwiftyJSON", "Alamofire", "AlamofireImage", "SDWebImage", "QiscusCoreAPI"]),
+            dependencies: ["SwiftyJSON", "Alamofire", "AlamofireImage", "SDWebImage", "QiscusCoreAPI"],
+            resources: [
+                .bundle(name: "MultichannelWidget", content: [
+                    "Sources/MultichannelWidget/**/*.{h,m,swift,xib}": .resource
+                ]),
+                .include(content: [
+                    "Sources/MultichannelWidget/**/*.png": .xcassets
+                ])
+            ]
+        ),
         .testTarget(
             name: "MultichannelWidgetTests",
             dependencies: ["MultichannelWidget"]),
