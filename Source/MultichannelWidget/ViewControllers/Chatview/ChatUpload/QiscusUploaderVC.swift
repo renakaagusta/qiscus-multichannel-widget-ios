@@ -69,50 +69,48 @@ class QiscusUploaderVC: UIViewController, UIScrollViewDelegate,UITextViewDelegat
                 "QISCUS_SDK_APP_ID": "\(QismoManager.shared.qiscus.config.appId)",
                 "QISCUS_SDK_TOKEN" : "\(token)"
             ]
-            
-            Alamofire.upload(multipartFormData: { multipartFormData in
+
+            AF.upload(multipartFormData: { (multipartFormData) in
                 multipartFormData.append(self.data!, withName: "file", fileName: self.fileName!, mimeType: "image/jpg")
-            }, to: "\(QismoManager.shared.qiscus.config.server.url)/upload", method: .post, headers : header,
-                   encodingCompletion: { encodingResult in
-                   switch encodingResult {
-                   case .success(let upload, _, _):
-                       upload.responseJSON { response in
+            }, to: "\(QismoManager.shared.qiscus.config.server.url)/upload", method: .post, headers: header, interceptor: nil).uploadProgress { [weak self] (progress) in
+                guard let self = self else {
+                    return
+                }
+                print(progress.fractionCompleted)
+                self.showProgress()
+                self.labelProgress.text = "\(Int(progress.fractionCompleted * 100)) %"
+                let newHeight = progress.fractionCompleted * self.maxProgressHeight
+                self.heightProgressViewCons.constant = CGFloat(newHeight)
+                UIView.animate(withDuration: 0.65, animations: {
+                    self.progressView.layoutIfNeeded()
+                })
+            }.responseJSON { response in
+                switch response.result {
+                case .success(_):
+                    guard let jsonResponse = response.value as? [String: Any] else {return}
+                    print(jsonResponse)
+                    
+                    let image = JSON(jsonResponse)
 
-                        guard let jsonResponse = response.result.value as? [String: Any] else {return}
-                        print(jsonResponse)
-                        
-                        let image = JSON(jsonResponse)
-
-                        self.sendButton.isEnabled = true
-                        self.sendButton.isHidden = false
-                        self.hiddenProgress()
-                        
-                        let message = QismoManager.shared.qiscus.newMessage()
-                        message.type = "file_attachment"
-                        message.payload = [
-                            "url"       : image["results"]["file"]["url"].stringValue,
-                            "file_name" : file.name,
-                            "size"      : image["results"]["file"]["size"].stringValue,
-                            "caption"   : ""
-                        ]
-                        
-                        message.message = "Send Image"
-                        self.imageData.append(message)
-                       }
-                       upload.uploadProgress { progress in
-                            print(progress.fractionCompleted)
-                            self.showProgress()
-                            self.labelProgress.text = "\(Int(progress.fractionCompleted * 100)) %"
-                            let newHeight = progress.fractionCompleted * self.maxProgressHeight
-                            self.heightProgressViewCons.constant = CGFloat(newHeight)
-                            UIView.animate(withDuration: 0.65, animations: {
-                                self.progressView.layoutIfNeeded()
-                            })
-                       }
-                   case .failure(let encodingError):
-                       print(encodingError)
-                   }
-            })
+                    self.sendButton.isEnabled = true
+                    self.sendButton.isHidden = false
+                    self.hiddenProgress()
+                    
+                    let message = QismoManager.shared.qiscus.newMessage()
+                    message.type = "file_attachment"
+                    message.payload = [
+                        "url"       : image["results"]["file"]["url"].stringValue,
+                        "file_name" : file.name,
+                        "size"      : image["results"]["file"]["size"].stringValue,
+                        "caption"   : ""
+                    ]
+                    
+                    message.message = "Send Image"
+                    self.imageData.append(message)
+                case .failure(let error):
+                    print(error)
+                }
+            }
             
         }
         
