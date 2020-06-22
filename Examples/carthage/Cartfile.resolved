@@ -1,5 +1,5 @@
 github "Alamofire/Alamofire" "4.9.1"
 github "Alamofire/AlamofireImage" "3.6.0"
+github "Qiscus-Integration/QiscusCoreApi" "50572e57938d1e2a384a5a51782d79267a49fab9"
+github "Qiscus-Integration/ios-multichannel-widget" "d789a4baaf5428ffffd4f3f924b1b71632dd9313"
 github "SwiftyJSON/SwiftyJSON" "5.0.0"
-github "amsibsam/QiscusCoreApi" "0.2.6"
-github "amsibsam/ios-multichannel-widget" "1.1.7"

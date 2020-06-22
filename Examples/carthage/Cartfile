@@ -1,1 +1,1 @@
-git "https://github.com/Qiscus-Integration/ios-multichannel-widget.git" "spm"
+github "Qiscus-Integration/ios-multichannel-widget" "spm"
