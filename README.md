@@ -24,16 +24,12 @@
 pod 'MultichannelWidget', '~> 1.1.6'
 ```
 
-### Swift Package Manager
+### Carthage
 
-The [Swift Package Manager](https://swift.org/package-manager/) is a tool for automating the distribution of Swift code and is integrated into the `swift` compiler.
+[Carthage](https://github.com/Carthage/Carthage) is a decentralized dependency manager that builds your dependencies and provides you with binary frameworks. To integrate MultichannelWidget into your Xcode project using Carthage, specify it in your `Cartfile`:
 
-Once you have your Swift package set up, adding MultichannelWidget as a dependency is as easy as adding it to the `dependencies` value of your `Package.swift`.
-
-```swift
-dependencies: [
-    .package(url: "https://github.com/Qiscus-Integration/ios-multichannel-widget.git", .upToNextMajor(from: "1.1.6"))
-]
+```ogdl
+github "Qiscus-Integration/ios-multichannel-widget"
 ```
 
 ## How to use
