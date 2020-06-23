@@ -1,1 +1,1 @@
-github "Qiscus-Integration/ios-multichannel-widget" "spm"
+github "https://github.com/amsibsam/ios-multichannel-widget.git" "carthage"
