@@ -1,0 +1,8 @@
+github "Alamofire/Alamofire" "5.2.1"
+github "Alamofire/AlamofireImage" "4.1.0"
+github "Moya/Moya" "14.0.0"
+github "Qiscus-Integration/QiscusCoreApi" "50572e57938d1e2a384a5a51782d79267a49fab9"
+github "Qiscus-Integration/ios-multichannel-widget" "cb835e5d8185dd27c1b0487a6ecc70f5b65362ba"
+github "ReactiveCocoa/ReactiveSwift" "6.3.0"
+github "ReactiveX/RxSwift" "5.1.1"
+github "SwiftyJSON/SwiftyJSON" "5.0.0"
