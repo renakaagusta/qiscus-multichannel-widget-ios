@@ -1,1 +1,2 @@
-github "Qiscus-Integration/ios-multichannel-widget" "spm"
+github "Moya/Moya" "14.0.0"
+github "Qiscus-Integration/ios-multichannel-widget" "carthage"
