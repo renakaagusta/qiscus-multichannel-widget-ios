@@ -26,11 +26,11 @@ class QismoNetworkManager {
 //            mParam = ["nonce" : nonce.nonce]
             mParam.updateValue(nonce.nonce, forKey: "nonce")
             //self.callInitiateChat(param: mParam, onSuccess: onSuccess, onError: onError)
-            let request = Alamofire.request(URL(string: self.urlInitiateChat)!, method: .post, parameters: mParam, encoding: JSONEncoding.default)
+            let request = AF.request(URL(string: self.urlInitiateChat)!, method: .post, parameters: mParam, encoding: JSONEncoding.default)
             .validate()
             .responseJSON { response in
-                print("network result \(response.result.isFailure)")
-                guard let value = response.result.value as? [String: Any],
+                print("network result \(response.result)")
+                guard let value = response.value as? [String: Any],
                 let chat = value["data"] as? [String: Any] else {
                   return
                 }
@@ -53,7 +53,7 @@ class QismoNetworkManager {
                 })
                 
             }
-            print(request.debugDescription)
+            print(request.description)
         }, onError: { error in
             print(error.message)
             onError(error.message)
@@ -62,7 +62,7 @@ class QismoNetworkManager {
     
     private func callInitiateChat(param: [String:Any], onSuccess: @escaping() -> Void, onError: @escaping() -> Void) {
         let url = "https://multichannel.qiscus.com/api/v1/qiscus/initiate_chat"
-        Alamofire.request(URL(string: url)!, method: .post, parameters: param)
+        AF.request(URL(string: url)!, method: .post, parameters: param)
             .responseJSON { json in
                 
             }
