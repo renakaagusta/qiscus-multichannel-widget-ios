@@ -332,6 +332,7 @@ class UIChatViewController: UIViewController {
     @objc func goBack() {
         view.endEditing(true)
         self.navigationController?.popViewController(animated: true)
+        self.dismiss(animated: true, completion: nil)
     }
     
     @objc func call() {
