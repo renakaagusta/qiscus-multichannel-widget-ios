@@ -1,0 +1,45 @@
+PODS:
+  - Alamofire (5.2.0)
+  - AlamofireImage (4.1.0):
+    - Alamofire (~> 5.1)
+  - MultichannelWidget (1.1.6):
+    - Alamofire (= 5.2)
+    - AlamofireImage
+    - QiscusCoreAPI (~> 0.3.0)
+    - SDWebImage
+    - SwiftyJSON
+  - QiscusCoreAPI (0.3.1):
+    - SwiftyJSON
+  - SDWebImage (5.8.1):
+    - SDWebImage/Core (= 5.8.1)
+  - SDWebImage/Core (5.8.1)
+  - SwiftyJSON (5.0.0)
+
+DEPENDENCIES:
+  - MultichannelWidget (from `../../`)
+  - QiscusCoreAPI (from `../../../QiscusCoreAPI/`)
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - AlamofireImage
+    - SDWebImage
+    - SwiftyJSON
+
+EXTERNAL SOURCES:
+  MultichannelWidget:
+    :path: "../../"
+  QiscusCoreAPI:
+    :path: "../../../QiscusCoreAPI/"
+
+SPEC CHECKSUMS:
+  Alamofire: c1ca147559e730bfb2182c8c7aafbdd90a867987
+  AlamofireImage: c4a2ba349885fb3064feb74d2e547bd42ce9be10
+  MultichannelWidget: b7b62ed900285ecbea1113e4ad3253a3ff4548ea
+  QiscusCoreAPI: 7d06a8c07e9743186b0538ccf82efbc7d52845fb
+  SDWebImage: e3eae2eda88578db0685a0c88597fdadd9433f05
+  SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
+
+PODFILE CHECKSUM: 27eb81a8cb0752e60d78f10768db8720affef655
+
+COCOAPODS: 1.9.3

@@ -7,6 +7,7 @@ target 'Example' do
 
   # Pods for Example
 #  pod 'QiscusCoreAPI', :path => '../QiscusCoreAPI/Build'
+  pod 'QiscusCoreAPI', :path => '../../../QiscusCoreAPI/'
   pod 'MultichannelWidget', :path => '../../'
 
 end

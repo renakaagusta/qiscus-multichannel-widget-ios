@@ -17,10 +17,14 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         //sample purpose
-        self.txtUsername.text = "demo_1_mulcan"
-        self.txtUserId.text = "demo_1@multichannel-widget.com"
+        self.txtUsername.text = "username"
+        self.txtUserId.text = "userid"
     }
 
+    @IBAction func clickLogout(_ sender: Any) {
+        ChatManager.shared.signOut()
+    }
+    
     @IBAction func openMultichannel(_ sender: Any) {
         
         guard let userId = self.txtUserId.text, userId.count > 0 else {

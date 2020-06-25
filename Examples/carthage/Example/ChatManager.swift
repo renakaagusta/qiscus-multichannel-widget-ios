@@ -50,7 +50,7 @@ final class ChatManager {
             .startChat { (chatViewController) in
                 viewController.navigationController?.pushViewController(chatViewController, animated: true)
         }
-        
+        widget.clearUser()
     }
     
     func register(deviceToken: Data?) {

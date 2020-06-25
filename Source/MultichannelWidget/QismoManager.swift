@@ -37,6 +37,7 @@ class QismoManager {
         self.userID = ""
         self.username = ""
         self.qiscus.signOut()
+        SharedPreferences.removeRoomId()
     }
     
     func setup(appID: String, server : QiscusServer? = nil) {
