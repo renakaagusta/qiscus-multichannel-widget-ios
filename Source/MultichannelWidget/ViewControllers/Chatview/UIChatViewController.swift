@@ -128,7 +128,7 @@ class UIChatViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationOriginColor = self.navigationController?.navigationBar.backgroundColor
+        self.navigationOriginColor = self.navigationController?.navigationBar.barTintColor
         if let customNavigationColor = ColorConfiguration.navigationColor {
             self.navigationController?.navigationBar.barTintColor = customNavigationColor
         }
