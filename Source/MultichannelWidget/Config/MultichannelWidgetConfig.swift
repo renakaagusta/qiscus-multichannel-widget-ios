@@ -18,7 +18,7 @@ open class MultichannelWidgetConfig {
     private var userProperties: [[String : String]] = []
     private var rightBubblColor: UIColor = ColorConfiguration.rightBubbleColor
     private var leftBubblColor: UIColor = ColorConfiguration.leftBubbleColor
-    private var navigationColor: UIColor? = ColorConfiguration.navigationColor
+    private var navigationColor: UIColor? = nil
     private var navigationTitleColor: UIColor = ColorConfiguration.navigationTitleColor
     private var systemBalloonColor: UIColor = ColorConfiguration.systemBubbleColor
     private var systemBalloonTextColor: UIColor = ColorConfiguration.systemBubbleTextColor

@@ -128,8 +128,9 @@ class UIChatViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationOriginColor = self.navigationController?.navigationBar.barTintColor
+        
         if let customNavigationColor = ColorConfiguration.navigationColor {
+            self.navigationOriginColor = self.navigationController?.navigationBar.barTintColor
             self.navigationController?.navigationBar.barTintColor = customNavigationColor
         }
         self.presenter.attachView(view: self)
@@ -155,8 +156,9 @@ class UIChatViewController: UIViewController {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name(rawValue: "reSubscribeRoom"), object: nil)
         view.endEditing(true)
-        
-        self.navigationController?.navigationBar.barTintColor = self.navigationOriginColor
+        if (self.navigationOriginColor != nil) {
+            self.navigationController?.navigationBar.barTintColor = self.navigationOriginColor
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {

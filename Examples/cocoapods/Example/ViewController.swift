@@ -19,7 +19,7 @@ class ViewController: UIViewController {
         //sample purpose
         self.txtUsername.text = "username"
         self.txtUserId.text = "userid"
-        self.navigationController?.navigationBar.backgroundColor = .brown
+        self.navigationController?.navigationBar.backgroundColor = .red
     }
 
     @IBAction func clickLogout(_ sender: Any) {
