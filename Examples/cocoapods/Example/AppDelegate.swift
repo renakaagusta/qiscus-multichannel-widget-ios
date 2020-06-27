@@ -30,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
           
         // MARK : register the app for remote notifications
         application.registerForRemoteNotifications()
-        
+        application.unregisterForRemoteNotifications()
         // Override point for customization after application launch.
         return true
     }
