@@ -29,7 +29,7 @@
       "CFNetwork",
       "Security",
       "Foundation",
-      "MobileCoreServices",
+      "CoreServices",
       "CoreData"
     ]
   },

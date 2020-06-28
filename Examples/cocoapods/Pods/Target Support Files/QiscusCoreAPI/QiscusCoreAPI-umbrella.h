@@ -11,7 +11,6 @@
 #endif
 
 #import "QiscusCoreAPI.h"
-#import "QiscusCoreAPI.h"
 
 FOUNDATION_EXPORT double QiscusCoreAPIVersionNumber;
 FOUNDATION_EXPORT const unsigned char QiscusCoreAPIVersionString[];

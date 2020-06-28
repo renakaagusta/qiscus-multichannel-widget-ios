@@ -508,6 +508,7 @@ class UIChatViewController: UIViewController {
         } else if message.type == "reply" {
             if message.isMyComment() == true {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "qReplyRightCell", for: indexPath) as! QReplyRightCell
+                cell.cellMenu = self
                 return cell
             } else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "qReplyLeftCell", for: indexPath) as! QReplyLeftCell
