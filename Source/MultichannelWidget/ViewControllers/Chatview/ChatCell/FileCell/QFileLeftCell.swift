@@ -59,7 +59,9 @@ class QFileLeftCell: UIBaseChatCell {
         self.ivBubble.backgroundColor = ColorConfiguration.leftBubbleColor
         self.ivBubble.layer.cornerRadius = 5.0
         self.ivBubble.clipsToBounds = true
-//
+
+        self.lblFilename.textColor = ColorConfiguration.leftBubbleTextColor
+        self.lblExtension.textColor = ColorConfiguration.leftBubbleTextColor
         self.lblDate.textColor = ColorConfiguration.timeLabelTextColor
     }
     
