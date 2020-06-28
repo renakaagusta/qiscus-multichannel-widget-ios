@@ -1,6 +1,0 @@
-framework module MultichannelWidget {
-  umbrella header "MultichannelWidget-umbrella.h"
-
-  export *
-  module * { export * }
-}
