@@ -680,7 +680,7 @@ extension UIChatViewController : UIImagePickerControllerDelegate, UINavigationCo
                 
                 dismiss(animated:true, completion: nil)
                 
-                let uploader = QiscusUploaderVC(nibName: "QiscusUploaderVC", bundle: MultichannelWidget.bundle)
+                let uploader = QiscusUploaderVC()
                 uploader.chatView = self
                 uploader.data = data
                 uploader.fileName = imageName

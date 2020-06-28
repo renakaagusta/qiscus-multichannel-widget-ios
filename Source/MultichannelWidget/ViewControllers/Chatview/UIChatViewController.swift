@@ -156,9 +156,8 @@ class UIChatViewController: UIViewController {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name(rawValue: "reSubscribeRoom"), object: nil)
         view.endEditing(true)
-        if (self.navigationOriginColor != nil) {
-            self.navigationController?.navigationBar.barTintColor = self.navigationOriginColor
-        }
+        
+        self.navigationController?.navigationBar.barTintColor = self.navigationOriginColor
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -303,7 +302,8 @@ class UIChatViewController: UIViewController {
     private func setupTableView() {
         let rotate = CGAffineTransform(rotationAngle: .pi)
         self.tableViewConversation.transform = rotate
-        self.tableViewConversation.scrollIndicatorInsets = UIEdgeInsets(top: 0,left: 0,bottom: 0,right: UIScreen.main.bounds.width - 8)
+        self.tableViewConversation.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
+        self.tableViewConversation.scrollIndicatorInsets = UIEdgeInsets(top: 0,left: 0,bottom: 0, right: UIScreen.main.bounds.width - 8)
         self.tableViewConversation.rowHeight = UITableView.automaticDimension
         self.tableViewConversation.dataSource = self
         self.tableViewConversation.delegate = self

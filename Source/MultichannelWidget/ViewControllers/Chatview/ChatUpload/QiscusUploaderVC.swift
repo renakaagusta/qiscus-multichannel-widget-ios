@@ -23,13 +23,12 @@ enum QUploaderType {
 
 class QiscusUploaderVC: UIViewController, UIScrollViewDelegate,UITextViewDelegate {
 
-    @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var heightProgressViewCons: NSLayoutConstraint!
     @IBOutlet weak var labelProgress: UILabel!
     @IBOutlet weak var progressView: UIView!
     @IBOutlet weak var containerProgressView: UIView!
-    @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var sendButton: UIButton!
+    
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var inputBottom: NSLayoutConstraint!
@@ -50,13 +49,20 @@ class QiscusUploaderVC: UIViewController, UIScrollViewDelegate,UITextViewDelegat
      */
     var maxUploadSizeInKB:Double = Double(100) * Double(1024)
     
+    init() {
+          super.init(nibName: "QiscusUploaderVC", bundle: MultichannelWidget.bundle)
+      }
+      required init?(coder aDecoder: NSCoder) {
+          fatalError("init(coder:) has not been implemented")
+      }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
        
         self.setupUI()
         
         if self.fileName != nil && self.data != nil && self.imageData.count == 0 {
-            self.labelTitle.text = self.fileName!
+            self.title = self.fileName!
             
             let file = FileUploadModel()
             file.data = data!
@@ -120,7 +126,7 @@ class QiscusUploaderVC: UIViewController, UIScrollViewDelegate,UITextViewDelegat
     }
     
     func setupUI(){
-        self.labelTitle.text = "Image"
+        self.title = "Image"
         self.hiddenProgress()
         self.containerProgressView.layer.cornerRadius = self.containerProgressView.frame.height / 2
         
@@ -188,6 +194,7 @@ class QiscusUploaderVC: UIViewController, UIScrollViewDelegate,UITextViewDelegat
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.topItem?.title = ""
         if self.data != nil {
             if type == .image {
                 self.imageView.image = UIImage(data: self.data!)
@@ -197,7 +204,6 @@ class QiscusUploaderVC: UIViewController, UIScrollViewDelegate,UITextViewDelegat
         let center: NotificationCenter = NotificationCenter.default
         center.addObserver(self, selector: #selector(QiscusUploaderVC.keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         center.addObserver(self, selector: #selector(QiscusUploaderVC.keyboardChange(_:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
-        self.navigationController?.isNavigationBarHidden = true
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -206,7 +212,6 @@ class QiscusUploaderVC: UIViewController, UIScrollViewDelegate,UITextViewDelegat
     override func viewWillDisappear(_ animated: Bool) {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
-        self.navigationController?.isNavigationBarHidden = false
     }
     
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
