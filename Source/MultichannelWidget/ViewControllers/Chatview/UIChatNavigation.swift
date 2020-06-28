@@ -75,7 +75,7 @@ class UIChatNavigation: UIView {
     
     func present(room: RoomModel) {
         
-        self.ivAvatar.af_setImage(withURL: room.avatarUrl!, filter: CircleFilter())
+        self.ivAvatar.af.setImage(withURL: room.avatarUrl!, filter: CircleFilter())
         
         // title value
         //always check room localDB

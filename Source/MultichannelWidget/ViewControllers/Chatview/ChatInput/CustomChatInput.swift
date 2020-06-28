@@ -14,6 +14,7 @@ import MobileCoreServices
 import QiscusCoreAPI
 import SwiftyJSON
 import Alamofire
+import AlamofireImage
 
 protocol CustomChatInputDelegate {
     func sendAttachment()
@@ -28,6 +29,9 @@ protocol ReplyChatInputDelegate {
 class CustomChatInput: UIChatInput {
     
     @IBOutlet weak var heightView: NSLayoutConstraint!
+    @IBOutlet weak var widthReplyImage: NSLayoutConstraint!
+    
+    @IBOutlet weak var imageThumb: UIImageView!
     @IBOutlet weak var viewReply: UIView!
     @IBOutlet weak var sendButton: UIButton!
     @IBOutlet weak var attachButton: UIButton!
@@ -105,6 +109,19 @@ class CustomChatInput: UIChatInput {
         self.viewReply.isHidden = false
         self.tvReply.text = comment.message
         self.replyComment = comment
+        if comment.isAttachment(text: comment.message) {
+            self.widthReplyImage.constant = 40
+            let url = URL(string: comment.getAttachmentURL(message: comment.message))
+            self.imageThumb.af.setImage(withURL: url!)
+
+            if let payload = comment.payload, let caption = payload["caption"] as? String, !caption.isEmpty {
+                self.tvReply.text = caption
+            }else {
+                self.tvReply.text = "File Attachment"
+            }
+        }else {
+            self.widthReplyImage.constant = 0
+        }
     }
     
     public func hideReply() {

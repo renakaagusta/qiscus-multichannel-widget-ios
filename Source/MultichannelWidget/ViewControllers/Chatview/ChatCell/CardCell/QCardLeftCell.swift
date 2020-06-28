@@ -51,7 +51,7 @@ class QCardLeftCell: UIBaseChatCell {
         guard let payload = message.payload else { return }
         if let url = payload["image"] as? String {
             if self.ivAttachment.image == nil {
-                self.ivAttachment.af_setImage(withURL: URL(string: url)!)
+                self.ivAttachment.af.setImage(withURL: URL(string: url)!)
             }
         }
         

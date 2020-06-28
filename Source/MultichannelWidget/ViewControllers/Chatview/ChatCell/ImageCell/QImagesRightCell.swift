@@ -76,7 +76,7 @@ class QImagesRightCell: UIBaseChatCell {
 
         if let url = payload["url"] as? String {
             if self.ivComment.image == nil {
-                self.ivComment.af_setImage(withURL: URL(string: url)!)
+                self.ivComment.af.setImage(withURL: URL(string: url)!)
             }
         }
         

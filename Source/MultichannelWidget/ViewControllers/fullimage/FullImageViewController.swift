@@ -23,7 +23,7 @@ class FullImageViewController: UIViewController {
         if message != nil {
             if let url = message!.payload?["url"] as? String {
                 if self.ivImage.image == nil {
-                    self.ivImage.af_setImage(withURL: URL(string: url)!)
+                    self.ivImage.af.setImage(withURL: URL(string: url)!)
                 }
             }
         }

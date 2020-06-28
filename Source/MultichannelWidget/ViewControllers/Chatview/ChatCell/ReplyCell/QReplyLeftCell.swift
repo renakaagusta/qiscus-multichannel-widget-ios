@@ -99,7 +99,7 @@ class QReplyLeftCell: UIBaseChatCell {
             let filename = message.fileName(text: text!)
             self.tvCommentContent.text = filename
             let url = URL(string: message.getAttachmentURL(message: text!))
-            self.ivCommentImage.af_setImage(withURL: url!)
+            self.ivCommentImage.af.setImage(withURL: url!)
             
         case .video:
             let url = message.getAttachmentURL(message: text ?? "")

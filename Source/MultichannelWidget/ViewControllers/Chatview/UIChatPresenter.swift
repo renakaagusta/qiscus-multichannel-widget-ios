@@ -346,7 +346,7 @@ class UIChatPresenter: UIChatUserInteraction {
         if self.comments.count > 0 {
             if self.comments[0].count > 0 {
                 if let url = self.comments[0][0].userAvatarUrl {
-                    imageView.af_setImage(withURL: url)
+                    imageView.af.setImage(withURL: url)
                 }
             }
         }
