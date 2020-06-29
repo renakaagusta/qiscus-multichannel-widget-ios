@@ -40,31 +40,27 @@
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qp7-X5-EkF" userLabel="progressView">
                                     <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="koa-FC-LAD">
-                                            <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
                                     <color key="backgroundColor" red="0.14316189230000001" green="0.78178174079999996" blue="0.53946288170000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="40" id="HKN-xd-3wJ"/>
-                                        <constraint firstAttribute="trailing" secondItem="koa-FC-LAD" secondAttribute="trailing" id="OSy-FY-IpL"/>
-                                        <constraint firstItem="koa-FC-LAD" firstAttribute="leading" secondItem="Qp7-X5-EkF" secondAttribute="leading" id="a42-sD-Wg7"/>
-                                        <constraint firstItem="koa-FC-LAD" firstAttribute="top" secondItem="Qp7-X5-EkF" secondAttribute="top" id="knt-3X-oMd"/>
-                                        <constraint firstAttribute="bottom" secondItem="koa-FC-LAD" secondAttribute="bottom" id="nZI-Bg-j1H"/>
                                     </constraints>
                                 </view>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="koa-FC-LAD">
+                                    <rect key="frame" x="3.5" y="12" width="33.5" height="16"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                             </subviews>
                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
-                                <constraint firstAttribute="bottom" secondItem="Qp7-X5-EkF" secondAttribute="bottom" id="3xP-DN-O6U"/>
+                                <constraint firstItem="koa-FC-LAD" firstAttribute="centerY" secondItem="Qp7-X5-EkF" secondAttribute="centerY" id="9lh-wX-ENs"/>
                                 <constraint firstItem="Qp7-X5-EkF" firstAttribute="width" secondItem="ccg-50-kH9" secondAttribute="width" id="Lu3-T6-G1V"/>
                                 <constraint firstAttribute="width" constant="40" id="QJZ-tY-13I"/>
                                 <constraint firstAttribute="height" constant="40" id="feo-yb-ma9"/>
                                 <constraint firstItem="Qp7-X5-EkF" firstAttribute="centerX" secondItem="ccg-50-kH9" secondAttribute="centerX" id="mJ1-gE-jG7"/>
+                                <constraint firstItem="Qp7-X5-EkF" firstAttribute="centerY" secondItem="ccg-50-kH9" secondAttribute="centerY" id="mfP-Du-sIe"/>
+                                <constraint firstItem="koa-FC-LAD" firstAttribute="centerX" secondItem="Qp7-X5-EkF" secondAttribute="centerX" id="pZr-4U-2bx"/>
                             </constraints>
                         </view>
                     </subviews>
