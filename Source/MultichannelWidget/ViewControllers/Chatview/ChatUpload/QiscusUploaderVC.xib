@@ -97,6 +97,9 @@
                             <state key="disabled">
                                 <color key="titleShadowColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <connections>
+                                <action selector="sendMedia:" destination="-1" eventType="touchUpInside" id="CKw-pd-snW"/>
+                            </connections>
                         </button>
                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vyh-K8-DfA">
                             <rect key="frame" x="10" y="8" width="346" height="32"/>
