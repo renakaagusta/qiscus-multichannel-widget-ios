@@ -15,7 +15,6 @@
                 <outlet property="imageView" destination="yDF-TI-BNY" id="Ki2-4C-zgv"/>
                 <outlet property="inputBottom" destination="pL4-lS-M39" id="j3Y-Cb-lF6"/>
                 <outlet property="labelProgress" destination="koa-FC-LAD" id="H5j-rV-tAI"/>
-                <outlet property="mediaBottomMargin" destination="qaf-tC-BYN" id="zls-jN-D4i"/>
                 <outlet property="mediaCaption" destination="Vyh-K8-DfA" id="BqX-Tj-Z1r"/>
                 <outlet property="minInputHeight" destination="MZJ-4s-woM" id="gyP-F1-TLQ"/>
                 <outlet property="progressView" destination="Qp7-X5-EkF" id="pm7-fg-E9e"/>
@@ -85,7 +84,7 @@
                     <rect key="frame" x="0.0" y="814" width="414" height="48"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" highlighted="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VKX-wa-0hr">
-                            <rect key="frame" x="360" y="2" width="50" height="44"/>
+                            <rect key="frame" x="360" y="8" width="50" height="44"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="44" id="Uub-cl-mxI"/>
@@ -139,8 +138,8 @@
                         <constraint firstAttribute="trailing" secondItem="VKX-wa-0hr" secondAttribute="trailing" constant="4" id="6sd-rB-5P1"/>
                         <constraint firstAttribute="height" secondItem="Vyh-K8-DfA" secondAttribute="height" constant="16" id="FKz-2z-dFO"/>
                         <constraint firstAttribute="bottom" secondItem="Vyh-K8-DfA" secondAttribute="bottom" constant="8" id="JgH-33-PSs"/>
+                        <constraint firstItem="VKX-wa-0hr" firstAttribute="top" secondItem="Vyh-K8-DfA" secondAttribute="top" id="P1P-rY-eFX"/>
                         <constraint firstAttribute="trailing" secondItem="Vyh-K8-DfA" secondAttribute="trailing" constant="58" id="r39-3I-dhQ"/>
-                        <constraint firstAttribute="bottom" secondItem="VKX-wa-0hr" secondAttribute="bottom" constant="2" id="rZC-r1-C3k"/>
                         <constraint firstItem="Vyh-K8-DfA" firstAttribute="leading" secondItem="pJb-b8-C46" secondAttribute="leading" constant="10" id="vtP-HQ-6fa"/>
                     </constraints>
                 </view>
