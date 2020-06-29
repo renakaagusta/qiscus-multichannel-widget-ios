@@ -23,6 +23,9 @@ class QTextRightCell: UIBaseChatCell {
     @IBOutlet weak var lbNameHeight: NSLayoutConstraint!
     @IBOutlet weak var lbNameLeading: NSLayoutConstraint!
     @IBOutlet weak var lbNameTrailing: NSLayoutConstraint!
+    
+    var actionBlock: ((CommentModel) -> Void)? = nil
+    
     var menuConfig = enableMenuConfig()
     override func awakeFromNib() {
         super.awakeFromNib()
