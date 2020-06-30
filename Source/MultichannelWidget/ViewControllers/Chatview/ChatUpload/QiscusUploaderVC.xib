@@ -15,7 +15,6 @@
                 <outlet property="imageView" destination="yDF-TI-BNY" id="Ki2-4C-zgv"/>
                 <outlet property="inputBottom" destination="pL4-lS-M39" id="j3Y-Cb-lF6"/>
                 <outlet property="labelProgress" destination="koa-FC-LAD" id="H5j-rV-tAI"/>
-                <outlet property="mediaBottomMargin" destination="qaf-tC-BYN" id="zls-jN-D4i"/>
                 <outlet property="mediaCaption" destination="Vyh-K8-DfA" id="BqX-Tj-Z1r"/>
                 <outlet property="minInputHeight" destination="MZJ-4s-woM" id="gyP-F1-TLQ"/>
                 <outlet property="progressView" destination="Qp7-X5-EkF" id="pm7-fg-E9e"/>
@@ -41,31 +40,27 @@
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qp7-X5-EkF" userLabel="progressView">
                                     <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="koa-FC-LAD">
-                                            <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
                                     <color key="backgroundColor" red="0.14316189230000001" green="0.78178174079999996" blue="0.53946288170000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="40" id="HKN-xd-3wJ"/>
-                                        <constraint firstAttribute="trailing" secondItem="koa-FC-LAD" secondAttribute="trailing" id="OSy-FY-IpL"/>
-                                        <constraint firstItem="koa-FC-LAD" firstAttribute="leading" secondItem="Qp7-X5-EkF" secondAttribute="leading" id="a42-sD-Wg7"/>
-                                        <constraint firstItem="koa-FC-LAD" firstAttribute="top" secondItem="Qp7-X5-EkF" secondAttribute="top" id="knt-3X-oMd"/>
-                                        <constraint firstAttribute="bottom" secondItem="koa-FC-LAD" secondAttribute="bottom" id="nZI-Bg-j1H"/>
                                     </constraints>
                                 </view>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="koa-FC-LAD">
+                                    <rect key="frame" x="3.5" y="12" width="33.5" height="16"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                             </subviews>
                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
-                                <constraint firstAttribute="bottom" secondItem="Qp7-X5-EkF" secondAttribute="bottom" id="3xP-DN-O6U"/>
+                                <constraint firstItem="koa-FC-LAD" firstAttribute="centerY" secondItem="Qp7-X5-EkF" secondAttribute="centerY" id="9lh-wX-ENs"/>
                                 <constraint firstItem="Qp7-X5-EkF" firstAttribute="width" secondItem="ccg-50-kH9" secondAttribute="width" id="Lu3-T6-G1V"/>
                                 <constraint firstAttribute="width" constant="40" id="QJZ-tY-13I"/>
                                 <constraint firstAttribute="height" constant="40" id="feo-yb-ma9"/>
                                 <constraint firstItem="Qp7-X5-EkF" firstAttribute="centerX" secondItem="ccg-50-kH9" secondAttribute="centerX" id="mJ1-gE-jG7"/>
+                                <constraint firstItem="Qp7-X5-EkF" firstAttribute="centerY" secondItem="ccg-50-kH9" secondAttribute="centerY" id="mfP-Du-sIe"/>
+                                <constraint firstItem="koa-FC-LAD" firstAttribute="centerX" secondItem="Qp7-X5-EkF" secondAttribute="centerX" id="pZr-4U-2bx"/>
                             </constraints>
                         </view>
                     </subviews>
@@ -85,7 +80,7 @@
                     <rect key="frame" x="0.0" y="814" width="414" height="48"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" highlighted="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VKX-wa-0hr">
-                            <rect key="frame" x="360" y="2" width="50" height="44"/>
+                            <rect key="frame" x="360" y="8" width="50" height="44"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="44" id="Uub-cl-mxI"/>
@@ -97,6 +92,9 @@
                             <state key="disabled">
                                 <color key="titleShadowColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <connections>
+                                <action selector="sendMedia:" destination="-1" eventType="touchUpInside" id="CKw-pd-snW"/>
+                            </connections>
                         </button>
                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vyh-K8-DfA">
                             <rect key="frame" x="10" y="8" width="346" height="32"/>
@@ -136,8 +134,8 @@
                         <constraint firstAttribute="trailing" secondItem="VKX-wa-0hr" secondAttribute="trailing" constant="4" id="6sd-rB-5P1"/>
                         <constraint firstAttribute="height" secondItem="Vyh-K8-DfA" secondAttribute="height" constant="16" id="FKz-2z-dFO"/>
                         <constraint firstAttribute="bottom" secondItem="Vyh-K8-DfA" secondAttribute="bottom" constant="8" id="JgH-33-PSs"/>
+                        <constraint firstItem="VKX-wa-0hr" firstAttribute="top" secondItem="Vyh-K8-DfA" secondAttribute="top" id="P1P-rY-eFX"/>
                         <constraint firstAttribute="trailing" secondItem="Vyh-K8-DfA" secondAttribute="trailing" constant="58" id="r39-3I-dhQ"/>
-                        <constraint firstAttribute="bottom" secondItem="VKX-wa-0hr" secondAttribute="bottom" constant="2" id="rZC-r1-C3k"/>
                         <constraint firstItem="Vyh-K8-DfA" firstAttribute="leading" secondItem="pJb-b8-C46" secondAttribute="leading" constant="10" id="vtP-HQ-6fa"/>
                     </constraints>
                 </view>

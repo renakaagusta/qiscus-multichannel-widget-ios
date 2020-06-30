@@ -34,7 +34,7 @@ class QiscusUploaderVC: UIViewController, UIScrollViewDelegate,UITextViewDelegat
     @IBOutlet weak var inputBottom: NSLayoutConstraint!
     @IBOutlet weak var mediaCaption: UITextView!
     @IBOutlet weak var minInputHeight: NSLayoutConstraint!
-    @IBOutlet weak var mediaBottomMargin: NSLayoutConstraint!
+    
     
     var chatView:UIChatViewController?
     var type = QUploaderType.image
@@ -240,7 +240,7 @@ class QiscusUploaderVC: UIViewController, UIScrollViewDelegate,UITextViewDelegat
         
         let animateDuration = info[UIResponder.keyboardAnimationDurationUserInfoKey] as! Double
         self.inputBottom.constant = 0
-        self.mediaBottomMargin.constant = 8
+        self.minInputHeight.constant = 32
         UIView.animate(withDuration: animateDuration, delay: 0, options: UIView.AnimationOptions(), animations: {
             self.view.layoutIfNeeded()
             
@@ -254,7 +254,7 @@ class QiscusUploaderVC: UIViewController, UIScrollViewDelegate,UITextViewDelegat
         let animateDuration = info[UIResponder.keyboardAnimationDurationUserInfoKey] as! Double
         
         self.inputBottom.constant = keyboardHeight
-        self.mediaBottomMargin.constant = -(self.mediaCaption.frame.height + 8)
+        self.minInputHeight.constant = 32 * 3
         UIView.animate(withDuration: animateDuration, delay: 0, options: UIView.AnimationOptions(), animations: {
             self.view.layoutIfNeeded()
         }, completion: nil)
