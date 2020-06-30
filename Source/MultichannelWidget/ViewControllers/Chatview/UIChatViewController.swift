@@ -61,8 +61,8 @@ class UIChatViewController: UIViewController {
     @IBOutlet weak var constraintViewInputBottom: NSLayoutConstraint!
     @IBOutlet weak var constraintViewInputHeight: NSLayoutConstraint!
     @IBOutlet weak var emptyMessageView: UIView!
-    @IBOutlet weak var progressBar: UIProgressView!
     @IBOutlet weak var heightProgressBar: NSLayoutConstraint!
+    @IBOutlet weak var widthProgress: NSLayoutConstraint!
     
     @IBOutlet weak var labelEmptyMessage: UILabel!
     @IBOutlet weak var labelEmptyNotes: UILabel!
@@ -112,14 +112,6 @@ class UIChatViewController: UIViewController {
     }
     
     var synchTimer: Timer?
-    
-    open func getProgressBar() -> UIProgressView {
-        return progressBar
-    }
-    
-    open func getProgressBarHeight() ->  NSLayoutConstraint{
-        return heightProgressBar
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -472,20 +464,26 @@ class UIChatViewController: UIViewController {
                 } else {
                     if (message.isMyComment() == true){
                         let cell = tableView.dequeueReusableCell(withIdentifier: "qFileRightCell", for: indexPath) as! QFileRightCell
-//                        cell.menuConfig = menuConfig
-                            cell.cellMenu = self
-                                return cell
-                            } else {
-                                let cell = tableView.dequeueReusableCell(withIdentifier: "qFileLeftCell", for: indexPath) as! QFileLeftCell
-//                        if self.room?.type == .group {
-//                            cell.colorName = colorName
-//                            cell.isPublic = true
-//                        }else {
-//                            cell.isPublic = false
-//                        }
-                            cell.cellMenu = self
-                            return cell
+                        //                        cell.menuConfig = menuConfig
+                        cell.cellMenu = self
+                        cell.actionBlock = { comment in
+                            print("download the file \(comment.getAttachmentURL(message: comment.message))")
                         }
+                        return cell
+                    } else {
+                        let cell = tableView.dequeueReusableCell(withIdentifier: "qFileLeftCell", for: indexPath) as! QFileLeftCell
+                        //                        if self.room?.type == .group {
+                        //                            cell.colorName = colorName
+                        //                            cell.isPublic = true
+                        //                        }else {
+                        //                            cell.isPublic = false
+                        //                        }
+                        cell.cellMenu = self
+                        cell.actionBlock = { comment in
+                            print("download the file \(comment.getAttachmentURL(message: comment.message))")
+                        }
+                        return cell
+                    }
                 }
             } else {
                 if (message.isMyComment() == true){
@@ -784,7 +782,7 @@ extension UIChatViewController: UITableViewDelegate {
 
 extension UIChatViewController : UIChatView {
     func uiChat(viewController: UIChatViewController, didSelectMessage message: CommentModel) {
-        
+        print("selected message \(message)")
     }
     
     func uiChat(viewController: UIChatViewController, performAction action: Selector, forRowAt message: CommentModel, withSender sender: Any?) {

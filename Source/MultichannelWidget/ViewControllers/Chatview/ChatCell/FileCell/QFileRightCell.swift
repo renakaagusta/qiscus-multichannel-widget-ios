@@ -19,6 +19,9 @@ class QFileRightCell: UIBaseChatCell {
     @IBOutlet weak var lblDate: UILabel!
     @IBOutlet weak var ivStatus: UIImageView!
     
+    var actionBlock: ((CommentModel) -> Void)? = nil
+    private var message: CommentModel? = nil
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -51,9 +54,22 @@ class QFileRightCell: UIBaseChatCell {
         
         self.ivRightBubble.layer.cornerRadius = 5.0
         self.ivRightBubble.clipsToBounds = true
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.didTap))
+        self.ivRightBubble.addGestureRecognizer(tapGesture)
+        self.ivRightBubble.isUserInteractionEnabled = true
+    }
+    
+    @objc private func didTap() {
+        guard let message = self.message else {
+            return
+        }
+        
+        self.actionBlock?(message)
     }
     
     func bind(message: CommentModel) {
+        self.message = message
         self.setupBubble()
         self.status(message: message)
         

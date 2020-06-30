@@ -505,15 +505,17 @@ extension UIChatViewController: UIDocumentPickerDelegate{
                                                 guard let self = self else {
                                                     return
                                                 }
-                                                print("upload progress :\(progress)")
-                                                self.getProgressBarHeight().constant = 2
-                                                self.getProgressBar().progress = Float(progress.fractionCompleted)
+                                                self.heightProgressBar.constant = 10
+                                                self.widthProgress.constant = CGFloat(progress.fractionCompleted) * UIScreen.main.bounds.width
+                                                print("upload progress :\(progress) isMainThread \(Thread.isMainThread)")
+                                                
                                                 if(progress.fractionCompleted == 1) {
                                                     DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                                                        self.getProgressBarHeight().constant = 2
-                                                        self.getProgressBar().progress = 0.0
+                                                        self.heightProgressBar.constant = 0
+                                                        self.widthProgress.constant = 0
                                                     }
                                                 }
+                                                
                                             }.responseJSON { response in
                                                 switch response.result {
                                                 case .success(_):
@@ -535,7 +537,8 @@ extension UIChatViewController: UIDocumentPickerDelegate{
                                                     self.send(message: message, onSuccess: { (comment) in
                                                         debugPrint(message)
                                                     }, onError: { (error) in
-                                                        self.getProgressBarHeight().constant = 0
+                                                        self.heightProgressBar.constant = 0
+                                                        self.widthProgress.constant = 0
                                                     })
                                                 case .failure(let error):
                                                     print(error)
@@ -559,12 +562,14 @@ extension UIChatViewController: UIDocumentPickerDelegate{
                             return
                         }
                         print("upload progress :\(progress)")
-                        self.getProgressBarHeight().constant = 2
-                        self.getProgressBar().progress = Float(progress.fractionCompleted)
+                        self.heightProgressBar.constant = 10
+                        self.widthProgress.constant = CGFloat(progress.fractionCompleted) * UIScreen.main.bounds.width
+                        print("upload progress :\(progress) isMainThread \(Thread.isMainThread)")
+                        
                         if(progress.fractionCompleted == 1) {
                             DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                                self.getProgressBarHeight().constant = 2
-                                self.getProgressBar().progress = 0.0
+                                self.heightProgressBar.constant = 0
+                                self.widthProgress.constant = 0
                             }
                         }
                     }.responseJSON { response in
@@ -588,7 +593,8 @@ extension UIChatViewController: UIDocumentPickerDelegate{
                             self.send(message: message, onSuccess: { (comment) in
                                 debugPrint(message)
                             }, onError: { (error) in
-                                self.getProgressBarHeight().constant = 0
+                                self.heightProgressBar.constant = 0
+                                self.widthProgress.constant = 0
                             })
                         case .failure(let error):
                             print(error)

@@ -17,6 +17,10 @@ class QFileLeftCell: UIBaseChatCell {
     @IBOutlet weak var lblDate: UILabel!
     @IBOutlet weak var ivIcon: UIImageView!
     @IBOutlet weak var lblFilename: UILabel!
+    
+    var actionBlock: ((CommentModel) -> Void)? = nil
+    private var message: CommentModel? = nil
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -39,6 +43,7 @@ class QFileLeftCell: UIBaseChatCell {
     }
     
     func bind(message: CommentModel) {
+        self.message = message
         self.setupBalon()
         guard let payload = message.payload else { return }
         self.lblDate.text = AppUtil.dateToHour(date: message.date())
@@ -52,6 +57,14 @@ class QFileLeftCell: UIBaseChatCell {
         self.lblExtension.text = ("\(message.fileExtension(fromURL: url!)) file")
     }
     
+    @objc private func didTap() {
+        guard let message = self.message else {
+            return
+        }
+        
+        self.actionBlock?(message)
+    }
+    
     func setupBalon() {
         self.ivBubble.applyShadow()
         self.ivBubble.image = self.getBallon()
@@ -63,6 +76,9 @@ class QFileLeftCell: UIBaseChatCell {
         self.lblFilename.textColor = ColorConfiguration.leftBubbleTextColor
         self.lblExtension.textColor = ColorConfiguration.leftBubbleTextColor
         self.lblDate.textColor = ColorConfiguration.timeLabelTextColor
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.didTap))
+        self.ivBubble.addGestureRecognizer(tapGesture)
+        self.ivBubble.isUserInteractionEnabled = true
     }
     
 }
