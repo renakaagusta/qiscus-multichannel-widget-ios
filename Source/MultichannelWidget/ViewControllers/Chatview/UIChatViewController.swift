@@ -149,7 +149,9 @@ class UIChatViewController: UIViewController {
         NotificationCenter.default.removeObserver(self, name: Notification.Name(rawValue: "reSubscribeRoom"), object: nil)
         view.endEditing(true)
         
-        self.navigationController?.navigationBar.barTintColor = self.navigationOriginColor
+        if let customNavigationColor = ColorConfiguration.navigationColor {
+            self.navigationController?.navigationBar.barTintColor = self.navigationOriginColor
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
