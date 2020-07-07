@@ -469,7 +469,17 @@ class UIChatViewController: UIViewController {
                         //                        cell.menuConfig = menuConfig
                         cell.cellMenu = self
                         cell.actionBlock = { comment in
-                            print("download the file \(comment.getAttachmentURL(message: comment.message))")
+                            let fileUrl = comment.getAttachmentURL(message: comment.message)
+                            
+                            if fileUrl.isPDF {
+                                let webFileViewController = WebFileViewController()
+                                webFileViewController.fileUrl = fileUrl
+                                self.navigationController?.pushViewController(webFileViewController, animated: true)
+                            } else {
+                                guard let url = URL(string: fileUrl) else { return }
+                                UIApplication.shared.open(url)
+                            }
+                            
                         }
                         return cell
                     } else {
@@ -482,7 +492,16 @@ class UIChatViewController: UIViewController {
                         //                        }
                         cell.cellMenu = self
                         cell.actionBlock = { comment in
-                            print("download the file \(comment.getAttachmentURL(message: comment.message))")
+                            let fileUrl = comment.getAttachmentURL(message: comment.message)
+                            
+                            if fileUrl.isPDF {
+                                let webFileViewController = WebFileViewController()
+                                webFileViewController.fileUrl = fileUrl
+                                self.navigationController?.pushViewController(webFileViewController, animated: true)
+                            } else {
+                                guard let url = URL(string: fileUrl) else { return }
+                                UIApplication.shared.open(url)
+                            }
                         }
                         return cell
                     }
