@@ -34,6 +34,12 @@ open class MultichannelWidgetConfig {
         return self
     }
     
+    public func setNavigation(title: String, subtitle: String) -> MultichannelWidgetConfig {
+        self.title = title
+        self.subtitle = subtitle
+        return self
+    }
+    
     public func setUserProperties(properties: [[String : String]]) -> MultichannelWidgetConfig {
         self.userProperties = properties
         return self
@@ -119,5 +125,24 @@ open class MultichannelWidgetConfig {
         ColorConfiguration.emptyChatBackgroundColor = self.emptyChatBackgroundColor
         
         QismoManager.shared.initiateChat(withTitle: self.title, andSubtitle: self.subtitle, extras: self.extras, userProperties: self.userProperties, callback: callback)
+    }
+    
+    public func startChat(withRoomId id: String, callback: @escaping (UIViewController) -> Void) {
+        ColorConfiguration.navigationColor = self.navigationColor
+        ColorConfiguration.navigationTitleColor = self.navigationTitleColor
+        ColorConfiguration.rightBubbleColor = self.rightBubblColor
+        ColorConfiguration.leftBubbleColor = self.leftBubblColor
+        ColorConfiguration.systemBubbleColor = self.systemBalloonColor
+        ColorConfiguration.systemBubbleTextColor = self.systemBalloonTextColor
+        ColorConfiguration.leftBubbleTextColor = self.leftBubblTextColor
+        ColorConfiguration.rightBubbleTextColor = self.rightBubblTextColor
+        ColorConfiguration.timeLabelTextColor = self.timeLabelTextColor
+        ColorConfiguration.baseColor = self.baseColor
+        ColorConfiguration.emptyChatTextColor = self.emptyChatTextColor
+        ColorConfiguration.emptyChatBackgroundColor = self.emptyChatBackgroundColor
+        
+        QismoManager.shared.chatViewController(withRoomId: id, Title: self.title, andSubtitle: self.subtitle) { (chatview) in
+            callback(chatview)
+        }
     }
 }

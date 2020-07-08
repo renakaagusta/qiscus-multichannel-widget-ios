@@ -26,7 +26,7 @@ class QismoNetworkManager {
 //            mParam = ["nonce" : nonce.nonce]
             mParam.updateValue(nonce.nonce, forKey: "nonce")
             //self.callInitiateChat(param: mParam, onSuccess: onSuccess, onError: onError)
-            let request = AF.request(URL(string: self.urlInitiateChat)!, method: .post, parameters: mParam, encoding: JSONEncoding.default)
+            let request = AF.request(self.urlInitiateChat, method: .post, parameters: mParam, encoding: JSONEncoding.default)
             .validate()
             .responseJSON { response in
                 print("network result \(response.result)")
@@ -53,7 +53,7 @@ class QismoNetworkManager {
                 })
                 
             }
-            print(request.description)
+            print("initiate chat \(request.description)")
         }, onError: { error in
             print(error.message)
             onError(error.message)

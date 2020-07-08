@@ -70,6 +70,7 @@ final class ChatManager {
     
     
     func userTapNotification(userInfo : [AnyHashable : Any]) {
-        self.widget.tapNotification(userInfo: userInfo)
+        self.widget.handleNotification(userInfo: userInfo, removePreviousNotif: true)
+        .startChat(withRoomId: <#T##String#>, callback: <#T##(UIViewController) -> Void#>)
     }
 }

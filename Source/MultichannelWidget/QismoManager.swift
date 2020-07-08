@@ -95,22 +95,47 @@ class QismoManager {
         
     }
     
-    // MARK : Push Notifications
-    func handleNotification(userInfo: [AnyHashable : Any]) {
+    
+    /// Go to Chat user room id. Example when tap notification
+    /// - Parameters:
+    ///   - id: Room id
+    ///   - title: navigation title
+    ///   - subtitle: navigation subtitle
+    func chatViewController(withRoomId id:String, Title title: String, andSubtitle subtitle: String, callback: @escaping (UIViewController) -> Void) {
+        let ui = UIChatViewController()
+        ui.roomId = id
+        ui.chatTitle = title
+        ui.chatSubtitle = subtitle
+        callback(ui)
+    }
+    
+    func isMultichannelNotification(userInfo: [AnyHashable : Any]) -> Bool {
         let json = JSON(userInfo)
         print(json)
-
-        guard let qiscusEvent = json["qiscus_sdk"].string else { return }
-        if qiscusEvent == "post_comment" {
+        guard let payload = json["payload"].dictionary, let app_code = payload["app_code"]?.string else { return false }
+        return app_code == self.appID
+    }
+    
+    // MARK : Push Notifications
+    func handleNotification(userInfo: [AnyHashable : Any], removePreviousNotif: Bool) {
+        let json = JSON(userInfo)
+        print(json)
+        
+        if !isMultichannelNotification(userInfo: userInfo) { return }
+        
+        if let qiscusEvent = json["qiscus_sdk"].string, qiscusEvent == "post_comment" {
             let roomId = json["qiscus_room_id"].intValue
-            self.removeNotification(withRoom: roomId)
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(1)) {
-               self.redirectToChat(roomID: roomId)
+            if removePreviousNotif {
+                self.removeNotification(withRoom: roomId)
             }
+//            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(1)) {
+//               self.redirectToChat(roomID: roomId)
+//            }
         }
         // mybe for another notif
     }
     
+    @available(*, deprecated, message: "Not relevan, since user can config chat view with title and color")
     private func redirectToChat(roomID id: Int) {
         let current = UIApplication.currentViewController()
         let target = UIChatViewController()

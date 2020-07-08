@@ -43,7 +43,14 @@ public class MultichannelWidget {
         self.manager.clear()
     }
     
+    @available(*, deprecated, message: "Please replace with initiateChat")
     public func prepareChat(withTitle title: String, andSubtitle subtitle: String) -> MultichannelWidgetConfig {
+        widgetConfig.title = title
+        widgetConfig.subtitle = subtitle
+        return widgetConfig
+    }
+    
+    public func initiateChat(withTitle title: String, andSubtitle subtitle: String) -> MultichannelWidgetConfig {
         widgetConfig.title = title
         widgetConfig.subtitle = subtitle
         return widgetConfig
@@ -68,8 +75,12 @@ public class MultichannelWidget {
         return false
     }
     
-    public func tapNotification(userInfo : [AnyHashable : Any]) {
-        manager.handleNotification(userInfo: userInfo)
+    public func isMultichannelNotification(userInfo: [AnyHashable : Any]) -> Bool {
+        return manager.isMultichannelNotification(userInfo: userInfo)
+    }
+    
+    public func handleNotification(userInfo : [AnyHashable : Any], removePreviousNotif: Bool) {
+        manager.handleNotification(userInfo: userInfo, removePreviousNotif: removePreviousNotif)
     }
     
 }
