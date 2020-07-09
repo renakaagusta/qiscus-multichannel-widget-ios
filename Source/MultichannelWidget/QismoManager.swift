@@ -128,9 +128,9 @@ class QismoManager {
             if removePreviousNotif {
                 self.removeNotification(withRoom: roomId)
             }
-//            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(1)) {
-//               self.redirectToChat(roomID: roomId)
-//            }
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(1)) {
+               self.redirectToChat(roomID: roomId)
+            }
         }
         // mybe for another notif
     }
