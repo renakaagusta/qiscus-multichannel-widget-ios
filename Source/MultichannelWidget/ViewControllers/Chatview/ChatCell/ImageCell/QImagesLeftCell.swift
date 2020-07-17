@@ -8,7 +8,7 @@
 #if os(iOS)
 import UIKit
 #endif
-import QiscusCoreAPI
+import QiscusCore
 import Alamofire
 import AlamofireImage
 
@@ -23,7 +23,7 @@ class QImagesLeftCell: UIBaseChatCell {
     var menuConfig = enableMenuConfig()
     var colorName : UIColor = UIColor.black
     
-    var actionBlock: ((CommentModel) -> Void)? = nil
+    var actionBlock: ((QMessage) -> Void)? = nil
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -41,11 +41,11 @@ class QImagesLeftCell: UIBaseChatCell {
         // Configure the view for the selected state
     }
     
-    override func present(message: CommentModel) {
+    override func present(message: QMessage) {
         self.bindData(message: message)
     }
     
-    override func update(message: CommentModel) {
+    override func update(message: QMessage) {
         self.bindData(message: message)
     }
     
@@ -61,9 +61,9 @@ class QImagesLeftCell: UIBaseChatCell {
         
     }
     
-    func bindData(message: CommentModel) {
+    func bindData(message: QMessage) {
         setupBalon()
-        self.lblDate.text = AppUtil.dateToHour(date: message.date())
+        self.lblDate.text = AppUtil.dateToHour(date: message.timestamp)
         self.lblDate.textColor = ColorConfiguration.timeLabelTextColor
         guard let payload = message.payload else { return }
 

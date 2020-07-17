@@ -8,7 +8,7 @@
 #if os(iOS)
 import UIKit
 #endif
-import QiscusCoreAPI
+import QiscusCore
 
 class QFileLeftCell: UIBaseChatCell {
 
@@ -18,8 +18,8 @@ class QFileLeftCell: UIBaseChatCell {
     @IBOutlet weak var ivIcon: UIImageView!
     @IBOutlet weak var lblFilename: UILabel!
     
-    var actionBlock: ((CommentModel) -> Void)? = nil
-    private var message: CommentModel? = nil
+    var actionBlock: ((QMessage) -> Void)? = nil
+    private var message: QMessage? = nil
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -34,15 +34,15 @@ class QFileLeftCell: UIBaseChatCell {
         self.setMenu()
     }
     
-    override func present(message: CommentModel) {
+    override func present(message: QMessage) {
         self.bind(message: message)
     }
     
-    override func update(message: CommentModel) {
+    override func update(message: QMessage) {
         self.bind(message: message)
     }
     
-    func bind(message: CommentModel) {
+    func bind(message: QMessage) {
         self.message = message
         self.setupBalon()
         guard let payload = message.payload else { return }

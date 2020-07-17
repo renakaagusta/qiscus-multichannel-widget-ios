@@ -124,7 +124,7 @@ open class MultichannelWidgetConfig {
         ColorConfiguration.emptyChatTextColor = self.emptyChatTextColor
         ColorConfiguration.emptyChatBackgroundColor = self.emptyChatBackgroundColor
         
-        QismoManager.shared.initiateChat(withTitle: self.title, andSubtitle: self.subtitle, extras: self.extras, userProperties: self.userProperties, callback: callback)
+        QismoManagerV2.shared.initiateChat(withTitle: self.title, andSubtitle: self.subtitle, extras: self.extras, userProperties: self.userProperties, callback: callback)
     }
     
     public func startChat(withRoomId id: String, callback: @escaping (UIViewController) -> Void) {
@@ -141,7 +141,7 @@ open class MultichannelWidgetConfig {
         ColorConfiguration.emptyChatTextColor = self.emptyChatTextColor
         ColorConfiguration.emptyChatBackgroundColor = self.emptyChatBackgroundColor
         
-        QismoManager.shared.chatViewController(withRoomId: id, Title: self.title, andSubtitle: self.subtitle) { (chatview) in
+        QismoManagerV2.shared.chatViewController(withRoomId: id, Title: self.title, andSubtitle: self.subtitle) { (chatview) in
             callback(chatview)
         }
     }

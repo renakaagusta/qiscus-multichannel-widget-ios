@@ -8,6 +8,8 @@ target 'Example' do
   # Pods for Example
 #  pod 'QiscusCoreAPI', :path => '../QiscusCoreAPI/Build'
 #  pod 'QiscusCoreAPI', :path => '../../../QiscusCoreAPI/'
+  pod 'QiscusRealtime', :path => '../../../QiscusRealtime-iOS'
+  pod 'QiscusCore', :path => '../../../QiscusCore-iOS/'
   pod 'MultichannelWidget', :path => '../../'
 
 end

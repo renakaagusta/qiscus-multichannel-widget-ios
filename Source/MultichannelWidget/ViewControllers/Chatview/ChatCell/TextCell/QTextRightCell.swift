@@ -9,7 +9,7 @@
 import UIKit
 #endif
 
-import QiscusCoreAPI
+import QiscusCore
 
 class QTextRightCell: UIBaseChatCell {
 
@@ -24,7 +24,7 @@ class QTextRightCell: UIBaseChatCell {
     @IBOutlet weak var lbNameLeading: NSLayoutConstraint!
     @IBOutlet weak var lbNameTrailing: NSLayoutConstraint!
     
-    var actionBlock: ((CommentModel) -> Void)? = nil
+    var actionBlock: ((QMessage) -> Void)? = nil
     
     var menuConfig = enableMenuConfig()
     override func awakeFromNib() {
@@ -39,22 +39,22 @@ class QTextRightCell: UIBaseChatCell {
         // Configure the view for the selected state
     }
     
-    override func present(message: CommentModel) {
+    override func present(message: QMessage) {
         // parsing payload
         self.bindData(message: message)
         
     }
     
-    override func update(message: CommentModel) {
+    override func update(message: QMessage) {
         self.bindData(message: message)
     }
     
-    func bindData(message: CommentModel){
+    func bindData(message: QMessage){
         self.setupBalon()
         self.status(message: message)
         
         self.lbName.text = "You"
-        self.lbTime.text = self.hour(date: message.date())
+        self.lbTime.text = self.hour(date: message.timestamp)
         self.tvContent.text = message.message
         self.tvContent.textColor = ColorConfiguration.rightBubbleTextColor
         self.lbNameHeight.constant = 0
@@ -69,7 +69,7 @@ class QTextRightCell: UIBaseChatCell {
         self.ivBubbleLeft.backgroundColor = ColorConfiguration.rightBubbleColor
     }
     
-    func status(message: CommentModel){
+    func status(message: QMessage){
         
         switch message.status {
         case .deleted:
