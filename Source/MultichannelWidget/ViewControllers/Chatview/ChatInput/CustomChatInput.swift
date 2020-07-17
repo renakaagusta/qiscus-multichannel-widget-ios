@@ -507,7 +507,7 @@ extension UIChatViewController: UIDocumentPickerDelegate{
                                                 let message = QMessage()
                                                 message.type = "file_attachment"
                                                 message.payload = [
-                                                    "url"       : fileModel.url,
+                                                    "url"       : fileModel.url.absoluteString,
                                                     "file_name" : fileModel.name,
                                                     "size"      : fileModel.size,
                                                     "caption"   : ""
@@ -557,7 +557,7 @@ extension UIChatViewController: UIDocumentPickerDelegate{
                         let message = QMessage()
                         message.type = "file_attachment"
                         message.payload = [
-                            "url"       : fileModel.url,
+                            "url"       : fileModel.url.absoluteString,
                             "file_name" : fileModel.name,
                             "size"      : fileModel.size,
                             "caption"   : ""

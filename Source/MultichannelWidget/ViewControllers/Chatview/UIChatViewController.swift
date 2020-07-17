@@ -400,7 +400,7 @@ class UIChatViewController: UIViewController {
         let colorName:UIColor = UIColor.lightGray
         
         if message.type == "text" {
-            if (message.isMyComment() == true){
+            if (message.isMyComment() == true || message.userEmail.isEmpty){
                 let cell = tableView.dequeueReusableCell(withIdentifier: "qTextRightCell", for: indexPath) as! QTextRightCell
                 cell.menuConfig = menuConfig
                 cell.cellMenu = self

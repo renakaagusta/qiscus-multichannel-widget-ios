@@ -68,40 +68,25 @@ class QiscusUploaderVC: UIViewController, UIScrollViewDelegate,UITextViewDelegat
             file.data = data!
             file.name = fileName!
             
-            guard let token = QismoManagerV2.shared.network.qiscusUser?.token else { return }
-            
-            let header: HTTPHeaders = [
-                "Content-Type": "application/json",
-                "QISCUS_SDK_APP_ID": "\(QismoManagerV2.shared.appID)",
-                "QISCUS_SDK_TOKEN" : "\(token)"
-            ]
-
-            let fileUpload = FileUploadModel()
-            fileUpload.data = self.data
-            fileUpload.name = self.fileName ?? ""
-            QismoManagerV2.shared.qiscus.shared.upload(file: fileUpload, onSuccess: { (fileModel) in
+            QismoManagerV2.shared.qiscus.shared.upload(file: file, onSuccess: { (file) in
                 self.sendButton.isEnabled = true
+                self.sendButton.isHidden = false
                 self.hiddenProgress()
-                self.view.layoutIfNeeded()
                 
                 let message = QMessage()
                 message.type = "file_attachment"
                 message.payload = [
-                    "url"       : fileModel.url,
-                    "file_name" : fileModel.name,
-                    "size"      : fileModel.size,
+                    "url"       : file.url.absoluteString,
+                    "file_name" : file.name,
+                    "size"      : file.size,
                     "caption"   : ""
                 ]
-                
                 message.message = "Send Image"
                 self.imageData.append(message)
             }, onError: { (error) in
-                print(error)
-            }) { [weak self](progress) in
-                guard let self = self else {
-                    return
-                }
-                
+                //error
+            }, progressListener: { (progress) in
+                print("upload progress: \(progress)")
                 self.showProgress()
                 self.labelProgress.text = "\(Int(progress * 100)) %"
                 
@@ -109,7 +94,7 @@ class QiscusUploaderVC: UIViewController, UIScrollViewDelegate,UITextViewDelegat
                 UIView.animate(withDuration: 0.65, animations: {
                     self.viewProgressContainer.layoutIfNeeded()
                 })
-            }
+            })
             
         }
         
