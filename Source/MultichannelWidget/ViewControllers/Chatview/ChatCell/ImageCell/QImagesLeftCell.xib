@@ -64,6 +64,7 @@
                 <outlet property="ivLeftBubble" destination="eu1-6U-37q" id="Sdc-aj-d4h"/>
                 <outlet property="lblCaption" destination="YJe-iK-bzn" id="dHC-Jz-0ZG"/>
                 <outlet property="lblDate" destination="rXz-FS-aHg" id="PeP-3g-OLR"/>
+                <outlet property="marginCommentTop" destination="Zel-t1-xVa" id="e9g-0W-CR8"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="168.41517857142856"/>
         </tableViewCell>
