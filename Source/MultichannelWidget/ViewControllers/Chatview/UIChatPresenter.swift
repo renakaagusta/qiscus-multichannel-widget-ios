@@ -57,6 +57,16 @@ class UIChatPresenter: UIChatUserInteraction {
     func attachView(view : UIChatViewDelegate){
         viewPresenter = view
         if let room = self.room {
+            
+            QismoManager.shared.qiscus.roomDelegate = self
+            QismoManager.shared.qiscus.activeChatRoom = room
+            QismoManager.shared.qiscus.shared.subscribeChatRoom(room)
+            
+            guard let participants = room.participants else { return }
+            for u in participants {
+                QismoManager.shared.qiscus.shared.subscribeUserOnlinePresence(userId: u.id)
+            }
+            
             self.loadRoom()
             self.loadComments(withID: room.id)
             viewPresenter?.onLoadRoomFinished(roomName: room.name, roomAvatarURL: room.avatarUrl)
@@ -84,6 +94,15 @@ class UIChatPresenter: UIChatUserInteraction {
         
         QismoManager.shared.qiscus.shared.getChatRoomWithMessages(roomId: roomId, onSuccess: { [weak self] (room,comments) in
             guard let instance = self else { return }
+            QismoManager.shared.qiscus.roomDelegate = self
+            QismoManager.shared.qiscus.activeChatRoom = room
+            QismoManager.shared.qiscus.shared.subscribeChatRoom(room)
+            
+            guard let participants = room.participants else { return }
+            for u in participants {
+                QismoManager.shared.qiscus.shared.subscribeUserOnlinePresence(userId: u.id)
+            }
+            
             instance.room = room
             self?.room = room
             self?.isResolvedRoom(room :room)
@@ -276,9 +295,9 @@ class UIChatPresenter: UIChatUserInteraction {
     }
     
     func isTyping(_ value: Bool) {
-//        if let r = self.room {
-//            QiscusCoreAPI.shared.publishTyping(roomID: r.id, isTyping: value)
-//        }
+        if let r = self.room {
+            QismoManager.shared.qiscus.shared.publishTyping(roomID: r.id, isTyping: value)
+        }
     }
     
     func sendMessage(withComment comment: QMessage, onSuccess: @escaping (QMessage) -> Void, onError: @escaping (String) -> Void) {
@@ -435,9 +454,9 @@ extension UIChatPresenter : QiscusCoreRoomDelegate {
     }
 
     func onUserTyping(userId : String, roomId : String, typing: Bool){
-//        if let user = QiscusCoreAPI.database.member.find(byUserId : userId){
-//            self.viewPresenter?.onUser(name: user.username, typing: typing)
-//        }
+        if let user = QismoManager.shared.qiscus.database.participant.find(byUserId : userId){
+            self.viewPresenter?.onUser(name: user.name, typing: typing)
+        }
     }
 
     //this func was deprecated

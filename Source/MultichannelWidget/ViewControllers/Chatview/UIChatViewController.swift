@@ -593,11 +593,7 @@ extension UIChatViewController: UIChatViewDelegate {
             }
         }else {
             if let room = self.presenter.room {
-                if room.type == .group {
-                    self.chatTitleView.labelSubtitle.text = getParticipant()
-                }else{
-                    self.chatTitleView.labelSubtitle.text = "Online"
-                }
+                self.chatTitleView.labelSubtitle.text = "ready to serve"
             }
         }
     }

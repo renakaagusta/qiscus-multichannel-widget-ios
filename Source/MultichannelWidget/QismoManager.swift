@@ -46,6 +46,7 @@ class QismoManager {
         self.appID = appID
         self.qiscus = QiscusCore()
         self.qiscus.setup(AppID: appID)
+        _ = self.qiscus.connect(delegate: self)
         self.network = QismoNetworkManager(qiscusCore: self.qiscus)
         if let _server = server {
             self.qiscusServer = _server
@@ -166,3 +167,22 @@ class QismoManager {
     
 }
 
+extension QismoManager : QiscusConnectionDelegate {
+    public func connectionState(change state: QiscusConnectionState) {
+        print("::realtime connection state \(state)")
+    }
+    
+    public func onConnected() {
+        print("::realtime connected")
+    }
+    
+    public func onReconnecting() {
+        print("::realtime reconnecting")
+    }
+    
+    public func onDisconnected(withError err: QError?) {
+        print("::realtime disconnected \(err?.message)")
+    }
+    
+    
+}
