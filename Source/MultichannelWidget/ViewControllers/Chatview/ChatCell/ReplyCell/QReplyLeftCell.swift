@@ -146,7 +146,7 @@ class QReplyLeftCell: UIBaseChatCell {
             self.lbName.text = ""
             self.lblNameHeightCons.constant = 0
         }
-        guard let user = QismoManagerV2.shared.network.qiscusUser else { return }
+        guard let user = QismoManager.shared.network.qiscusUser else { return }
         if repliedEmail == user.id {
             username = "You"
         }

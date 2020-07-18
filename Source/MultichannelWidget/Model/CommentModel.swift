@@ -93,7 +93,7 @@ extension QMessage {
     
     func isMyComment() -> Bool {
         //change this later when user savevd on presisstance storage
-        if let user = QismoManagerV2.shared.qiscus.getProfile() {
+        if let user = QismoManager.shared.qiscus.getProfile() {
             return userEmail == user.id
         }else {
             return false

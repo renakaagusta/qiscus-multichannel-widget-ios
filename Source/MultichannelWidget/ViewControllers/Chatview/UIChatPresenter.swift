@@ -82,7 +82,7 @@ class UIChatPresenter: UIChatUserInteraction {
         // Show Loading
         self.viewPresenter?.onLoading(message: "Load Message...")
         
-        QismoManagerV2.shared.qiscus.shared.getChatRoomWithMessages(roomId: roomId, onSuccess: { [weak self] (room,comments) in
+        QismoManager.shared.qiscus.shared.getChatRoomWithMessages(roomId: roomId, onSuccess: { [weak self] (room,comments) in
             guard let instance = self else { return }
             instance.room = room
             self?.room = room
@@ -98,7 +98,7 @@ class UIChatPresenter: UIChatUserInteraction {
             instance.comments = instance.groupingComments(comments)
             
             if let lastComment = room.lastComment {
-                QismoManagerV2.shared.qiscus.shared.markAsRead(roomId: lastComment.chatRoomId, commentId: lastComment.id)
+                QismoManager.shared.qiscus.shared.markAsRead(roomId: lastComment.chatRoomId, commentId: lastComment.id)
             }
             
             instance.viewPresenter?.onLoadMessageFinished()
@@ -176,7 +176,7 @@ class UIChatPresenter: UIChatUserInteraction {
         
         if lastIdToSynch.isEmpty { return }
         
-        QismoManagerV2.shared.qiscus.synchronize(lastMessageId: lastIdToLoad, onSuccess: { [weak self] (comments) in
+        QismoManager.shared.qiscus.synchronize(lastMessageId: lastIdToLoad, onSuccess: { [weak self] (comments) in
             guard let instance = self else { return }
             if comments.count == 0 {
                 return
@@ -228,7 +228,7 @@ class UIChatPresenter: UIChatUserInteraction {
                 
                 // update lastIdToLoad value
                 instance.lastIdToLoad = lastComment.id
-                QismoManagerV2.shared.qiscus.shared.loadMore(roomID: lastComment.chatRoomId, lastCommentID: lastComment.id, limit: 10, onSuccess: { (comments) in
+                QismoManager.shared.qiscus.shared.loadMore(roomID: lastComment.chatRoomId, lastCommentID: lastComment.id, limit: 10, onSuccess: { (comments) in
                     instance.loadMoreDispatchGroup.leave()
                     
                     // if the loadmore from core return empty comment than it means that there are no comments left to be loaded anymore
@@ -283,7 +283,7 @@ class UIChatPresenter: UIChatUserInteraction {
     
     func sendMessage(withComment comment: QMessage, onSuccess: @escaping (QMessage) -> Void, onError: @escaping (String) -> Void) {
         addNewCommentUI(comment, isIncoming: false)
-        QismoManagerV2.shared.qiscus.shared.sendMessage(message: comment, onSuccess: { [weak self] (comment) in
+        QismoManager.shared.qiscus.shared.sendMessage(message: comment, onSuccess: { [weak self] (comment) in
             self?.didComment(comment: comment, changeStatus: comment.status)
             //by default, lastId is empty...and keep like that if you not update after send first msg :)
             self?.lastIdToSynch = comment.id
@@ -338,7 +338,7 @@ class UIChatPresenter: UIChatUserInteraction {
         
         // choose uidelegate
         if isIncoming {
-            QismoManagerV2.shared.qiscus.shared.markAsRead(roomId: message.chatRoomId, commentId: message.id)
+            QismoManager.shared.qiscus.shared.markAsRead(roomId: message.chatRoomId, commentId: message.id)
             self.viewPresenter?.onGotNewComment(newSection: section)
         } else {
             self.viewPresenter?.onSendingComment(comment: message, newSection: section)
@@ -380,7 +380,7 @@ class UIChatPresenter: UIChatUserInteraction {
     }
     
     func deleteMessage(comment: QMessage) {
-        QismoManagerV2.shared.qiscus.shared.deleteMessages(messageUniqueIds: [comment.uniqueId], onSuccess: { [weak self] (comments) in
+        QismoManager.shared.qiscus.shared.deleteMessages(messageUniqueIds: [comment.uniqueId], onSuccess: { [weak self] (comments) in
             self?.onMessageDeleted(message: comment)
         }) { (error) in
             

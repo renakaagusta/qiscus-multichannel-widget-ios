@@ -27,7 +27,7 @@ public class MultichannelWidget {
     }
     
     let widgetConfig: MultichannelWidgetConfig
-    let manager : QismoManagerV2 = QismoManagerV2.shared
+    let manager : QismoManager = QismoManager.shared
     
     public init(appID: String, server : QiscusServer? = nil) {
         self.manager.setup(appID: appID)
