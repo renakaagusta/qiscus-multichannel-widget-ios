@@ -111,8 +111,6 @@ class UIChatViewController: UIViewController {
         }
     }
     
-    var synchTimer: Timer?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupUI()
@@ -131,17 +129,11 @@ class UIChatViewController: UIViewController {
         center.addObserver(self, selector: #selector(UIChatViewController.keyboardChange(_:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         center.addObserver(self,selector: #selector(reSubscribeRoom(_:)), name: Notification.Name(rawValue: "reSubscribeRoom"),object: nil)
         view.endEditing(true)
-        
-        //sync timer
-        synchTimer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true, block: { timer in
-            self.presenter.syncMessage() 
-        })
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         //disable timer
-        synchTimer?.invalidate()
         
         self.presenter.detachView()
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
