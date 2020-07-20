@@ -18,6 +18,7 @@ class QImagesLeftCell: UIBaseChatCell {
     @IBOutlet weak var ivLeftBubble: UIImageView!
     @IBOutlet weak var lblDate: UILabel!
     @IBOutlet weak var ivComment: UIImageView!
+    @IBOutlet weak var marginCommentTop: NSLayoutConstraint!
     
     var isPublic: Bool = false
     var menuConfig = enableMenuConfig()
@@ -66,8 +67,14 @@ class QImagesLeftCell: UIBaseChatCell {
         self.lblDate.text = AppUtil.dateToHour(date: message.timestamp)
         self.lblDate.textColor = ColorConfiguration.timeLabelTextColor
         guard let payload = message.payload else { return }
-
+        
+        
         let caption = payload["caption"] as? String
+        
+        if (caption ?? "").isEmpty {
+            self.marginCommentTop.constant = -7
+        }
+        
         if caption != nil {
             self.lblCaption.text = caption
         } else {
