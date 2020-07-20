@@ -7,7 +7,7 @@
 
 import Foundation
 import SwiftyJSON
-import QiscusCoreAPI
+import QiscusCore
 
 @objc enum QiscusFileType:Int{
     case image
@@ -89,22 +89,23 @@ public enum QReplyType:Int{
     }
 }
 
-extension CommentModel {
-
+extension QMessage {
+    
     func isMyComment() -> Bool {
-         //change this later when user savevd on presisstance storage
-        if let user = QismoManager.shared.qiscus.userProfile {
-            return userEmail == user.email
-        } else {
+        //change this later when user savevd on presisstance storage
+        if let user = QismoManager.shared.qiscus.getProfile() {
+            return userEmail == user.id
+        }else {
             return false
         }
+        
     }
     
     func date() -> Date? {
         let formatter = DateFormatter()
         formatter.dateFormat    = "yyyy-MM-dd'T'HH:mm:ssZ"
         formatter.timeZone      = TimeZone(abbreviation: "UTC")
-        let date = formatter.date(from: self.timestamp)
+        let date = formatter.date(from: self.timestampString)
         return date
     }
     
@@ -170,14 +171,14 @@ extension CommentModel {
         var data = [AnyHashable : Any]()
         
         data["qiscus_commentdata"] = true
-        data["qiscus_uniqueId"] = self.uniqId
+        data["qiscus_uniqueId"] = self.uniqueId
         data["qiscus_id"] = self.id
-        data["qiscus_roomId"] = self.roomId
-        data["qiscus_beforeId"] = self.commentBeforeId
+        data["qiscus_roomId"] = self.chatRoomId
+        data["qiscus_beforeId"] = self.previousMessageId
         data["qiscus_text"] = self.message
         data["qiscus_createdAt"] = self.unixTimestamp
         data["qiscus_senderEmail"] = self.userEmail
-        data["qiscus_senderName"] = self.username
+        data["qiscus_senderName"] = self.userId
         data["qiscus_statusRaw"] = self.status
         data["qiscus_typeRaw"] = self.type
         data["qiscus_data"] = self.payload

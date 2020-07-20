@@ -8,7 +8,7 @@
 #if os(iOS)
 import UIKit
 #endif
-import QiscusCoreAPI
+import QiscusCore
 import SwiftyJSON
 
 class QReplyRightCell: UIBaseChatCell {
@@ -44,17 +44,17 @@ class QReplyRightCell: UIBaseChatCell {
         
     }
     
-    override func present(message: CommentModel) {
+    override func present(message: QMessage) {
         // parsing payload
         self.bindData(message: message)
         
     }
     
-    override func update(message: CommentModel) {
+    override func update(message: QMessage) {
         self.bindData(message: message)
     }
     
-    func bindData(message: CommentModel){
+    func bindData(message: QMessage){
         self.setupBalon()
         self.status(message: message)
         
@@ -127,11 +127,11 @@ class QReplyRightCell: UIBaseChatCell {
         if(message.isMyComment() == true){
             self.lbName.text = "You"
         }else{
-            self.lbName.text = message.username
+            self.lbName.text = message.sender.name
         }
         
-        guard let user = QismoManager.shared.qiscus.userProfile else { return }
-        if repliedEmail == user.email {
+        guard let user = QismoManager.shared.network.qiscusUser else { return }
+        if repliedEmail == user.id {
             username = "You"
         }
         self.lbCommentSender.text = username
@@ -155,7 +155,7 @@ class QReplyRightCell: UIBaseChatCell {
 //        self.lbTime.textColor = ColorConfiguration.timeLabelTextColor
     }
     
-    func status(message: CommentModel){
+    func status(message: QMessage){
         
         switch message.status {
         case .deleted:

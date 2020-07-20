@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import MultichannelWidget
+import QiscusCore
 
 enum ChatTransitionType {
     case push(animated: Bool)
@@ -71,6 +72,6 @@ final class ChatManager {
     
     func userTapNotification(userInfo : [AnyHashable : Any]) {
         self.widget.handleNotification(userInfo: userInfo, removePreviousNotif: true)
-        .startChat(withRoomId: <#T##String#>, callback: <#T##(UIViewController) -> Void#>)
+//        .startChat(withRoomId: <#T##String#>, callback: <#T##(UIViewController) -> Void#>)
     }
 }

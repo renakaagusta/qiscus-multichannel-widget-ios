@@ -8,7 +8,7 @@
 #if os(iOS)
 import UIKit
 #endif
-import QiscusCoreAPI
+import QiscusCore
 
 class QImagesRightCell: UIBaseChatCell {
 
@@ -18,7 +18,7 @@ class QImagesRightCell: UIBaseChatCell {
     @IBOutlet weak var lblDate: UILabel!
     @IBOutlet weak var marginLblComment: NSLayoutConstraint!
     
-    var actionBlock: ((CommentModel) -> Void)? = nil
+    var actionBlock: ((QMessage) -> Void)? = nil
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -35,11 +35,11 @@ class QImagesRightCell: UIBaseChatCell {
         // Configure the view for the selected state
     }
     
-    override func present(message: CommentModel) {
+    override func present(message: QMessage) {
         self.bindData(message: message)
     }
     
-    override func update(message: CommentModel) {
+    override func update(message: QMessage) {
         self.bindData(message: message)
     }
     
@@ -60,7 +60,7 @@ class QImagesRightCell: UIBaseChatCell {
         
     }
     
-    func bindData(message: CommentModel) {
+    func bindData(message: QMessage) {
         
         setupBalon()
         self.ivComment.image = nil
@@ -80,7 +80,7 @@ class QImagesRightCell: UIBaseChatCell {
             }
         }
         
-        self.lblDate.text = AppUtil.dateToHour(date: message.date())
+        self.lblDate.text = AppUtil.dateToHour(date: message.timestamp)
     }
     
     @objc func imageDidTap() {

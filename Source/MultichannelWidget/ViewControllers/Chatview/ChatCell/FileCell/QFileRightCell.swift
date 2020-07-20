@@ -8,7 +8,7 @@
 #if os(iOS)
 import UIKit
 #endif
-import QiscusCoreAPI
+import QiscusCore
 
 class QFileRightCell: UIBaseChatCell {
 
@@ -19,8 +19,8 @@ class QFileRightCell: UIBaseChatCell {
     @IBOutlet weak var lblDate: UILabel!
     @IBOutlet weak var ivStatus: UIImageView!
     
-    var actionBlock: ((CommentModel) -> Void)? = nil
-    private var message: CommentModel? = nil
+    var actionBlock: ((QMessage) -> Void)? = nil
+    private var message: QMessage? = nil
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -35,11 +35,11 @@ class QFileRightCell: UIBaseChatCell {
         self.setMenu()
     }
     
-    override func present(message: CommentModel) {
+    override func present(message: QMessage) {
         self.bind(message: message)
     }
     
-    override func update(message: CommentModel) {
+    override func update(message: QMessage) {
         self.bind(message: message)
     }
     
@@ -68,7 +68,7 @@ class QFileRightCell: UIBaseChatCell {
         self.actionBlock?(message)
     }
     
-    func bind(message: CommentModel) {
+    func bind(message: QMessage) {
         self.message = message
         self.setupBubble()
         self.status(message: message)
@@ -79,11 +79,11 @@ class QFileRightCell: UIBaseChatCell {
         let url = payload["url"] as? String
         
         self.lblFilename.text = payload["file_name"] as? String
-        self.lblDate.text = AppUtil.dateToHour(date: message.date())
+        self.lblDate.text = AppUtil.dateToHour(date: message.timestamp)
         self.lblExtension.text = ("\(message.fileExtension(fromURL: url!)) file")
     }
     
-    func status(message: CommentModel){
+    func status(message: QMessage){
         
         switch message.status {
         case .deleted:
