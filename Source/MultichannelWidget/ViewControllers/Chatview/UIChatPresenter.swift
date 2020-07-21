@@ -463,7 +463,7 @@ extension UIChatPresenter : QiscusCoreRoomDelegate {
                 if let index = c.index(where: { $0.uniqueId == message.uniqueId }) {
                     self.comments[group][index] = message
                     
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    DispatchQueue.main.async {
                         self.viewPresenter?.onUpdateComment(comment: message, indexpath: IndexPath(row: index, section: group))
                     }
                 }
@@ -486,7 +486,7 @@ extension UIChatPresenter : QiscusCoreRoomDelegate {
                 if let index = c.index(where: { $0.uniqueId == message.uniqueId }) {
                     self.comments[group][index] = message
                     
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    DispatchQueue.main.async {
                       self.viewPresenter?.onUpdateComment(comment: message, indexpath: IndexPath(row: index, section: group))
                     }
                 }
