@@ -17,6 +17,7 @@ class QImagesRightCell: UIBaseChatCell {
     @IBOutlet weak var ivComment: UIImageView!
     @IBOutlet weak var lblDate: UILabel!
     @IBOutlet weak var marginLblComment: NSLayoutConstraint!
+    @IBOutlet weak var lblStatus: UILabel!
     
     var actionBlock: ((QMessage) -> Void)? = nil
     
@@ -61,8 +62,8 @@ class QImagesRightCell: UIBaseChatCell {
     }
     
     func bindData(message: QMessage) {
-        
         setupBalon()
+        status(message: message)
         self.ivComment.image = nil
         self.lblCaption.isHidden = false
         guard let payload = message.payload else { return }
@@ -81,6 +82,53 @@ class QImagesRightCell: UIBaseChatCell {
         }
         
         self.lblDate.text = AppUtil.dateToHour(date: message.timestamp)
+    }
+    
+    func status(message: QMessage){
+        
+        switch message.status {
+        case .deleted:
+            //            ivStatus.image = UIImage(named: "ic_deleted", in: MultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
+            break
+        case .sending, .pending:
+            lblDate.textColor = ColorConfiguration.timeLabelTextColor
+            //            ivStatus.tintColor = ColorConfiguration.timeLabelTextColor
+            lblDate.text = TextConfiguration.sharedInstance.sendingText
+            //            ivStatus.image = UIImage(named: "ic_info_time", in: MultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
+            lblStatus.text = "Sending.."
+            lblStatus.textColor = .gray
+            break
+        case .sent:
+            lblDate.textColor = ColorConfiguration.timeLabelTextColor
+            //            ivStatus.tintColor = ColorConfiguration.timeLabelTextColor
+            //            ivStatus.image = UIImage(named: "ic_sending", in: MultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
+            lblStatus.text = "Sent"
+            lblStatus.textColor = .gray
+            break
+        case .delivered:
+            lblDate.textColor = ColorConfiguration.timeLabelTextColor
+            //            ivStatus.tintColor = ColorConfiguration.timeLabelTextColor
+            //            ivStatus.image = UIImage(named: "ic_read", in: MultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
+            lblStatus.text = "delivered"
+            lblStatus.textColor = .gray
+            break
+        case .read:
+            lblDate.textColor = ColorConfiguration.timeLabelTextColor
+            //            ivStatus.tintColor = ColorConfiguration.readMessageColor
+            //            ivStatus.image = UIImage(named: "ic_read", in: MultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
+            lblStatus.text = "read"
+            lblStatus.textColor = .blue
+            break
+        case . failed:
+            lblDate.textColor = ColorConfiguration.failToSendColor
+            lblDate.text = TextConfiguration.sharedInstance.failedText
+            //            ivStatus.image = UIImage(named: "ic_warning", in: MultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
+            //            ivStatus.tintColor = ColorConfiguration.failToSendColor
+            break
+        case .deleting:
+            //            ivStatus.image = UIImage(named: "ic_deleted", in: MultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
+            break
+        }
     }
     
     @objc func imageDidTap() {
