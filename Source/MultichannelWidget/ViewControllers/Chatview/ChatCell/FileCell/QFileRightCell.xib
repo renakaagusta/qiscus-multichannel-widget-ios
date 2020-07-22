@@ -41,28 +41,28 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="L4x-zc-WJv" userLabel="ivStatus">
-                        <rect key="frame" x="49" y="21" width="14" height="14"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="14" id="FXd-0a-rZN"/>
-                            <constraint firstAttribute="width" constant="14" id="Lyn-Uz-Ic3"/>
-                        </constraints>
-                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DwM-48-vuU" userLabel="lblExtension">
                         <rect key="frame" x="126" y="34" width="31" height="15"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Delivered" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wWq-j0-x6c" userLabel="lblDate">
+                        <rect key="frame" x="13" y="22" width="50" height="14"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="wWq-j0-x6c" firstAttribute="top" secondItem="lOI-hU-hXh" secondAttribute="bottom" constant="8" id="0kZ-Oe-SdS"/>
                     <constraint firstItem="rjV-gC-ulL" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="2IH-cD-4qE"/>
                     <constraint firstItem="DwM-48-vuU" firstAttribute="leading" secondItem="g47-bS-NFU" secondAttribute="leading" id="C3W-f8-f17"/>
                     <constraint firstItem="DwM-48-vuU" firstAttribute="top" secondItem="g47-bS-NFU" secondAttribute="bottom" constant="7.5" id="INT-Wa-gi3"/>
                     <constraint firstItem="rjV-gC-ulL" firstAttribute="bottom" secondItem="F4D-2U-yPu" secondAttribute="bottom" constant="5" id="Msl-xg-hFu"/>
                     <constraint firstItem="F4D-2U-yPu" firstAttribute="top" secondItem="rjV-gC-ulL" secondAttribute="top" constant="5" id="RzJ-qV-vYE"/>
-                    <constraint firstItem="L4x-zc-WJv" firstAttribute="top" secondItem="lOI-hU-hXh" secondAttribute="bottom" constant="7" id="TzA-y9-QfT"/>
                     <constraint firstItem="rjV-gC-ulL" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="48" id="U1k-Sf-D35"/>
+                    <constraint firstItem="wWq-j0-x6c" firstAttribute="trailing" secondItem="lOI-hU-hXh" secondAttribute="trailing" id="UDK-iD-V8P"/>
                     <constraint firstItem="g47-bS-NFU" firstAttribute="top" secondItem="F4D-2U-yPu" secondAttribute="top" constant="7" id="X6J-nm-cAi"/>
                     <constraint firstItem="rjV-gC-ulL" firstAttribute="trailing" secondItem="g47-bS-NFU" secondAttribute="trailing" constant="5" id="dzY-tW-rtv"/>
                     <constraint firstAttribute="trailingMargin" secondItem="rjV-gC-ulL" secondAttribute="trailing" constant="5" id="giv-lN-3VZ"/>
@@ -70,7 +70,6 @@
                     <constraint firstAttribute="bottom" secondItem="rjV-gC-ulL" secondAttribute="bottom" constant="8" id="k0R-Hx-9mk"/>
                     <constraint firstItem="g47-bS-NFU" firstAttribute="leading" secondItem="F4D-2U-yPu" secondAttribute="trailing" constant="5" id="n64-3m-2LX"/>
                     <constraint firstItem="F4D-2U-yPu" firstAttribute="leading" secondItem="rjV-gC-ulL" secondAttribute="leading" constant="5" id="qud-Zk-Dpd"/>
-                    <constraint firstItem="L4x-zc-WJv" firstAttribute="trailing" secondItem="lOI-hU-hXh" secondAttribute="trailing" id="rqJ-a0-Clg"/>
                     <constraint firstItem="rjV-gC-ulL" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="40" id="tvI-Yh-ue4"/>
                     <constraint firstItem="rjV-gC-ulL" firstAttribute="leading" secondItem="lOI-hU-hXh" secondAttribute="trailing" constant="5" id="zzK-dX-ZSO"/>
                 </constraints>
@@ -80,7 +79,6 @@
             <connections>
                 <outlet property="ivIcon" destination="F4D-2U-yPu" id="AOg-l9-Ars"/>
                 <outlet property="ivRightBubble" destination="rjV-gC-ulL" id="ISt-ng-Ppm"/>
-                <outlet property="ivStatus" destination="L4x-zc-WJv" id="XXg-C5-Wgo"/>
                 <outlet property="lblDate" destination="lOI-hU-hXh" id="b1T-dB-FPN"/>
                 <outlet property="lblExtension" destination="DwM-48-vuU" id="0VD-xq-KNm"/>
                 <outlet property="lblFilename" destination="g47-bS-NFU" id="X45-Ww-Xbl"/>

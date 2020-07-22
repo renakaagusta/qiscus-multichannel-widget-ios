@@ -199,11 +199,11 @@ class QiscusUploaderVC: UIViewController, UIScrollViewDelegate,UITextViewDelegat
                 self.imageData.first?.payload![ "caption" ] = mediaCaption.text
             }
             
+            let _ = self.navigationController?.popViewController(animated: true)
             chatView?.send(message: self.imageData.first!, onSuccess: { (comment) in
                 self.chatView?.setFromUploader(comment: comment)
-                let _ = self.navigationController?.popViewController(animated: true)
             }, onError: { (error) in
-                let _ = self.navigationController?.popViewController(animated: true)
+                print("error send image \(error)")
             })
         }
     }
