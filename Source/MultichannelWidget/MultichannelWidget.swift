@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 #endif
 import Alamofire
-import QiscusCoreAPI
 
 public class MultichannelWidget {
     
@@ -29,7 +28,7 @@ public class MultichannelWidget {
     let widgetConfig: MultichannelWidgetConfig
     let manager : QismoManager = QismoManager.shared
     
-    public init(appID: String, server : QiscusServer? = nil) {
+    public init(appID: String) {
         self.manager.setup(appID: appID)
         self.widgetConfig = MultichannelWidgetConfig()
     }
