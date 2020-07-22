@@ -21,7 +21,7 @@ enum QUploaderType {
     case video
 }
 
-class QiscusUploaderVC: UIViewController, UIScrollViewDelegate,UITextViewDelegate {
+class QiscusUploaderVC: UIViewController, UIScrollViewDelegate {
 
     @IBOutlet weak var viewProgressContainer: UIView!
     @IBOutlet weak var labelProgress: UILabel!
@@ -228,7 +228,7 @@ class QiscusUploaderVC: UIViewController, UIScrollViewDelegate,UITextViewDelegat
         let animateDuration = info[UIResponder.keyboardAnimationDurationUserInfoKey] as! Double
         
         self.inputBottom.constant = keyboardHeight
-        self.minInputHeight.constant = 32 * 3
+//        self.minInputHeight.constant = 32 * 3
         UIView.animate(withDuration: animateDuration, delay: 0, options: UIView.AnimationOptions(), animations: {
             self.view.layoutIfNeeded()
         }, completion: nil)
@@ -239,3 +239,23 @@ class QiscusUploaderVC: UIViewController, UIScrollViewDelegate,UITextViewDelegat
     }
 }
 
+extension QiscusUploaderVC : UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        chatView?.typing(true)
+        let fixedWidth = textView.frame.size.width
+        let newSize = textView.sizeThatFits(CGSize.init(width: fixedWidth, height: CGFloat(MAXFLOAT)))
+        if (newSize.height >= 35 && newSize.height <= 100) {
+            self.minInputHeight.constant = newSize.height
+//            self.heightView.constant = newSize.height + 10.0
+//            if self.replyComment != nil {
+//                self.setHeight(self.heightView.constant + 50)
+//            } else {
+//                self.setHeight(self.heightView.constant)
+//            }
+        }
+        
+        if (newSize.height >= 100) {
+            textView.isScrollEnabled = true
+        }
+    }
+}
