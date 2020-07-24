@@ -82,6 +82,7 @@
                 <outlet property="lblDate" destination="lOI-hU-hXh" id="b1T-dB-FPN"/>
                 <outlet property="lblExtension" destination="DwM-48-vuU" id="0VD-xq-KNm"/>
                 <outlet property="lblFilename" destination="g47-bS-NFU" id="X45-Ww-Xbl"/>
+                <outlet property="lblStatus" destination="wWq-j0-x6c" id="uHH-Ig-Q82"/>
             </connections>
             <point key="canvasLocation" x="211.59420289855075" y="78.348214285714278"/>
         </tableViewCell>
