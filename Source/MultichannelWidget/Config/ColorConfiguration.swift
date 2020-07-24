@@ -21,7 +21,7 @@ class ColorConfiguration: NSObject {
     /// Your navigation color, using UIColor class, Default value : nil
     static var navigationColor: UIColor?
     
-    static var navigationTitleColor: UIColor = .systemBlue
+    static var navigationTitleColor: UIColor = .white
     
     /// Your right bubble color, using UIColor class, Default value : UIColor(red: 165/255.0, green: 226/255.0, blue: 221/255.0, alpha: 1.0)
     static var systemBubbleColor: UIColor = UIColor(red: 201/255, green: 229/255, blue: 215/255, alpha: 1)
