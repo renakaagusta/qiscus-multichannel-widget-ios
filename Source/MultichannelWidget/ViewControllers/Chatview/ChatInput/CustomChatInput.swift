@@ -362,7 +362,7 @@ extension UIChatViewController: UIDocumentPickerDelegate{
     }
     
     public func postReceivedFile(fileUrl: URL) {
-        guard let token = QismoManager.shared.network.qiscusUser?.token else { return }
+        // guard let token = QismoManager.shared.network.qiscusUser?.token else { return }
         var contentPayload: [String: Any] = [:]
         let coordinator = NSFileCoordinator()
         coordinator.coordinate(readingItemAt: fileUrl, options: NSFileCoordinator.ReadingOptions.forUploading, error: nil) { (dataURL) in
@@ -493,11 +493,11 @@ extension UIChatViewController: UIDocumentPickerDelegate{
                                             let file = FileUploadModel()
                                             file.data = data
                                             file.name = fileName
-                                            let header: HTTPHeaders = [
-                                                "Content-Type": "application/json",
-                                                "QISCUS_SDK_APP_ID": "\(QismoManager.shared.appID)",
-                                                "QISCUS_SDK_TOKEN" : "\(token)"
-                                            ]
+//                                            let header: HTTPHeaders = [
+//                                                "Content-Type": "application/json",
+//                                                "QISCUS_SDK_APP_ID": "\(QismoManager.shared.appID)",
+//                                                "QISCUS_SDK_TOKEN" : "\(token)"
+//                                            ]
                                             
                                             let fileModel = FileUploadModel()
                                             fileModel.name = fileName
@@ -543,11 +543,11 @@ extension UIChatViewController: UIDocumentPickerDelegate{
                                             
                     })
                 } else {
-                    let header: HTTPHeaders = [
-                        "Content-Type": "application/json",
-                        "QISCUS_SDK_APP_ID": "\(QismoManager.shared.appID)",
-                        "QISCUS_SDK_TOKEN" : "\(token)"
-                    ]
+//                    let header: HTTPHeaders = [
+//                        "Content-Type": "application/json",
+//                        "QISCUS_SDK_APP_ID": "\(QismoManager.shared.appID)",
+//                        "QISCUS_SDK_TOKEN" : "\(token)"
+//                    ]
                     
                     let fileUploadModel = FileUploadModel()
                     fileUploadModel.name = fileName
