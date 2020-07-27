@@ -310,10 +310,7 @@ class UIChatPresenter: UIChatUserInteraction {
             for (group,c) in self.comments.enumerated() {
                 if let index = c.index(where: { $0.uniqueId == comment.uniqueId }) {
                     self.comments[group][index] = comment
-                    
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                        self.viewPresenter?.onUpdateComment(comment: comment, indexpath: IndexPath(row: index, section: group))
-                    }
+                    self.viewPresenter?.onUpdateComment(comment: comment, indexpath: IndexPath(row: index, section: group))
                 }
             }
             //by default, lastId is empty...and keep like that if you not update after send first msg :)
