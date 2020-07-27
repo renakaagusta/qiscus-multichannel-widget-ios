@@ -17,8 +17,7 @@ class QFileRightCell: UIBaseChatCell {
     @IBOutlet weak var lblFilename: UILabel!
     @IBOutlet weak var ivRightBubble: UIImageView!
     @IBOutlet weak var lblDate: UILabel!
-//    @IBOutlet weak var ivStatus: UIImageView!
-    @IBOutlet weak var lblStatus: UILabel!
+    @IBOutlet weak var ivStatus: UIImageView!
     
     var actionBlock: ((QMessage) -> Void)? = nil
     private var message: QMessage? = nil
@@ -88,42 +87,35 @@ class QFileRightCell: UIBaseChatCell {
         
         switch message.status {
         case .deleted:
-            //            ivStatus.image = UIImage(named: "ic_deleted", in: MultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
+//                        ivStatus.image = UIImage(named: "ic_deleted", in: MultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
             break
         case .sending, .pending:
             lblDate.textColor = ColorConfiguration.timeLabelTextColor
-            //            ivStatus.tintColor = ColorConfiguration.timeLabelTextColor
+                        ivStatus.tintColor = ColorConfiguration.timeLabelTextColor
             lblDate.text = TextConfiguration.sharedInstance.sendingText
-            //            ivStatus.image = UIImage(named: "ic_info_time", in: MultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
-            lblStatus.text = "Sending.."
-            lblStatus.textColor = .gray
+            ivStatus.image = UIImage(named: "ic_info_time", in: MultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
             break
         case .sent:
             lblDate.textColor = ColorConfiguration.timeLabelTextColor
-            //            ivStatus.tintColor = ColorConfiguration.timeLabelTextColor
-            //            ivStatus.image = UIImage(named: "ic_sending", in: MultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
-            lblStatus.text = "Sent"
-            lblStatus.textColor = .gray
+            ivStatus.tintColor = ColorConfiguration.timeLabelTextColor
+            ivStatus.image = UIImage(named: "ic_sending", in: MultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
+
             break
         case .delivered:
             lblDate.textColor = ColorConfiguration.timeLabelTextColor
-            //            ivStatus.tintColor = ColorConfiguration.timeLabelTextColor
-            //            ivStatus.image = UIImage(named: "ic_read", in: MultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
-            lblStatus.text = "delivered"
-            lblStatus.textColor = .gray
+            ivStatus.tintColor = ColorConfiguration.timeLabelTextColor
+            ivStatus.image = UIImage(named: "ic_read", in: MultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
             break
         case .read:
             lblDate.textColor = ColorConfiguration.timeLabelTextColor
-            //            ivStatus.tintColor = ColorConfiguration.readMessageColor
-            //            ivStatus.image = UIImage(named: "ic_read", in: MultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
-            lblStatus.text = "read"
-            lblStatus.textColor = .blue
+            ivStatus.tintColor = ColorConfiguration.readMessageColor
+            ivStatus.image = UIImage(named: "ic_read", in: MultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
             break
         case . failed:
             lblDate.textColor = ColorConfiguration.failToSendColor
             lblDate.text = TextConfiguration.sharedInstance.failedText
-            //            ivStatus.image = UIImage(named: "ic_warning", in: MultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
-            //            ivStatus.tintColor = ColorConfiguration.failToSendColor
+            ivStatus.image = UIImage(named: "ic_warning", in: MultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
+            ivStatus.tintColor = ColorConfiguration.failToSendColor
             break
         case .deleting:
             //            ivStatus.image = UIImage(named: "ic_deleted", in: MultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
