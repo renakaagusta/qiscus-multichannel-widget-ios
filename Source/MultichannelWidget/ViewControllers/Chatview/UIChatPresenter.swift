@@ -462,17 +462,19 @@ extension UIChatPresenter : QiscusCoreRoomDelegate {
                 return
             }
             
-            if SharedPreferences.getDeletedCommentUniqueId()?.contains(message.uniqueId) ?? false {
+            var updateMessage = message
+            
+            if SharedPreferences.getDeletedCommentUniqueId()?.contains(updateMessage.uniqueId) ?? false {
                 return
             }
             
             // check comment already exist in view
             for (group,c) in self.comments.enumerated() {
-                if let index = c.index(where: { $0.uniqueId == message.uniqueId }) {
-                    self.comments[group][index] = message
+                if let index = c.index(where: { $0.uniqueId == updateMessage.uniqueId }) {
+                    self.comments[group][index] = updateMessage
                     
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                        self.viewPresenter?.onUpdateComment(comment: message, indexpath: IndexPath(row: index, section: group))
+                        self.viewPresenter?.onUpdateComment(comment: updateMessage, indexpath: IndexPath(row: index, section: group))
                     }
                 }
             }
@@ -485,17 +487,19 @@ extension UIChatPresenter : QiscusCoreRoomDelegate {
                 return
             }
             
-            if SharedPreferences.getDeletedCommentUniqueId()?.contains(message.uniqueId) ?? false {
+            var updateMessage = message
+            
+            if SharedPreferences.getDeletedCommentUniqueId()?.contains(updateMessage.uniqueId) ?? false {
                 return
             }
             
             // check comment already exist in view
             for (group,c) in self.comments.enumerated() {
-                if let index = c.index(where: { $0.uniqueId == message.uniqueId }) {
-                    self.comments[group][index] = message
+                if let index = c.index(where: { $0.uniqueId == updateMessage.uniqueId }) {
+                    self.comments[group][index] = updateMessage
                     
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                      self.viewPresenter?.onUpdateComment(comment: message, indexpath: IndexPath(row: index, section: group))
+                      self.viewPresenter?.onUpdateComment(comment: updateMessage, indexpath: IndexPath(row: index, section: group))
                     }
                 }
             }
@@ -509,9 +513,11 @@ extension UIChatPresenter : QiscusCoreRoomDelegate {
                 return
             }
             
-            SharedPreferences.saveDeletedComment(uniqueId: message.uniqueId)
+            var updateMessage = message
+            
+            SharedPreferences.saveDeletedComment(uniqueId: updateMessage.uniqueId)
             for (_,var c) in self.comments.enumerated() {
-                if let index = c.index(where: { $0.uniqueId == message.uniqueId }) {
+                if let index = c.index(where: { $0.uniqueId == updateMessage.uniqueId }) {
                     c.remove(at: index)
                     self.comments = self.groupingComments(c)
                     self.lastIdToLoad = ""
