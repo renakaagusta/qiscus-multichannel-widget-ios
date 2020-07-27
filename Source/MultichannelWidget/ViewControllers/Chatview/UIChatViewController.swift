@@ -89,6 +89,7 @@ class UIChatViewController: UIViewController {
     var chatDelegate : UIChatView? = nil
     var isFromUploader = false
     var isResolved = false
+    var typingTimer: Timer?
     
     // UI Config
     var navigationOriginColor: UIColor?
@@ -561,7 +562,7 @@ extension UIChatViewController: UIChatViewDelegate {
     }
     func onUpdateComment(comment: QMessage, indexpath: IndexPath) {
         // reload cell in section and index path
-        if self.tableViewConversation.cellForRow(at: indexpath) != nil{
+        if self.tableViewConversation.cellForRow(at: indexpath) != nil {
             self.tableViewConversation.reloadRows(at: [indexpath], with: .none)
         }
     }
@@ -585,9 +586,20 @@ extension UIChatViewController: UIChatViewDelegate {
             }
         }else {
             if let room = self.presenter.room {
-                self.chatTitleView.labelSubtitle.text = "ready to serve"
+                self.chatTitleView.labelSubtitle.text = self.chatSubtitle
             }
         }
+        
+        
+        if typingTimer != nil {
+            typingTimer?.invalidate()
+        }
+        
+        typingTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(self.resetSubtitle), userInfo: nil, repeats: false)
+    }
+    
+    @objc func resetSubtitle() {
+        self.chatTitleView.labelSubtitle.text = self.chatSubtitle
     }
     
     func onSendingComment(comment: QMessage, newSection: Bool) {

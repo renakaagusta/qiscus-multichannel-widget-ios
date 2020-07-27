@@ -21,8 +21,7 @@ class QReplyRightCell: UIBaseChatCell {
     @IBOutlet weak var lbContent: UILabel!
     @IBOutlet weak var lbName: UILabel!
     @IBOutlet weak var ivBubble: UIImageView!
-//    @IBOutlet weak var ivStatus: UIImageView!
-    @IBOutlet weak var lblStatus: UILabel!
+    @IBOutlet weak var ivStatus: UIImageView!
     
     
     var menuConfig = enableMenuConfig()
@@ -166,38 +165,30 @@ class QReplyRightCell: UIBaseChatCell {
             break
         case .sending, .pending:
             lbTime.textColor = ColorConfiguration.timeLabelTextColor
-//            ivStatus.tintColor = ColorConfiguration.timeLabelTextColor
+            ivStatus.tintColor = ColorConfiguration.timeLabelTextColor
             lbTime.text = TextConfiguration.sharedInstance.sendingText
-//            ivStatus.image = UIImage(named: "ic_info_time", in: MultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
-            lblStatus.text = "Sending.."
-            lblStatus.textColor = .gray
+            ivStatus.image = UIImage(named: "ic_info_time", in: MultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
             break
         case .sent:
             lbTime.textColor = ColorConfiguration.timeLabelTextColor
-//            ivStatus.tintColor = ColorConfiguration.timeLabelTextColor
-//            ivStatus.image = UIImage(named: "ic_sending", in: MultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
-            lblStatus.text = "Sent"
-            lblStatus.textColor = .gray
+            ivStatus.tintColor = ColorConfiguration.timeLabelTextColor
+            ivStatus.image = UIImage(named: "ic_sending", in: MultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
             break
         case .delivered:
             lbTime.textColor = ColorConfiguration.timeLabelTextColor
-//            ivStatus.tintColor = ColorConfiguration.timeLabelTextColor
-//            ivStatus.image = UIImage(named: "ic_read", in: MultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
-            lblStatus.text = "delivered"
-            lblStatus.textColor = .gray
+            ivStatus.tintColor = ColorConfiguration.timeLabelTextColor
+            ivStatus.image = UIImage(named: "ic_read", in: MultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
             break
         case .read:
             lbTime.textColor = ColorConfiguration.timeLabelTextColor
-//            ivStatus.tintColor = ColorConfiguration.readMessageColor
-//            ivStatus.image = UIImage(named: "ic_read", in: MultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
-            lblStatus.text = "read"
-            lblStatus.textColor = .blue
+            ivStatus.tintColor = ColorConfiguration.readMessageColor
+            ivStatus.image = UIImage(named: "ic_read", in: MultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
             break
         case . failed:
             lbTime.textColor = ColorConfiguration.failToSendColor
             lbTime.text = TextConfiguration.sharedInstance.failedText
-//            ivStatus.image = UIImage(named: "ic_warning", in: MultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
-//            ivStatus.tintColor = ColorConfiguration.failToSendColor
+            ivStatus.image = UIImage(named: "ic_warning", in: MultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
+            ivStatus.tintColor = ColorConfiguration.failToSendColor
             break
         case .deleting:
 //            ivStatus.image = UIImage(named: "ic_deleted", in: MultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
