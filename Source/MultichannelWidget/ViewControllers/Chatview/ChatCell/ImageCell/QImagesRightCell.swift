@@ -9,6 +9,7 @@
 import UIKit
 #endif
 import QiscusCore
+import Alamofire
 
 class QImagesRightCell: UIBaseChatCell {
 
@@ -21,6 +22,7 @@ class QImagesRightCell: UIBaseChatCell {
     
     
     var actionBlock: ((QMessage) -> Void)? = nil
+    var imageRequest: DownloadRequest? = nil
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -43,6 +45,12 @@ class QImagesRightCell: UIBaseChatCell {
     
     override func update(message: QMessage) {
         self.bindData(message: message)
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.imageRequest?.cancel()
+        self.ivComment.image = nil
     }
     
     func setupBalon(){
@@ -76,9 +84,28 @@ class QImagesRightCell: UIBaseChatCell {
             
         self.lblCaption.text = caption
 
-        if let url = payload["url"] as? String {
-            if self.ivComment.image == nil {
-                self.ivComment.af.setImage(withURL: URL(string: url)!)
+        if let url = payload["url"] as? String, let imageUrl = URL(string: url) {
+            if let cachedImage = QismoManager.shared.imageCache.object(forKey: NSString(string: url)) {
+                self.ivComment.image = cachedImage
+            } else {
+                DispatchQueue.global(qos: .background).async { [weak self] in
+                    guard let self = self else {
+                        return
+                    }
+                    
+                    let request = URLRequest(url: imageUrl)
+                    
+                    self.imageRequest = AF.download(request).responseData { (response) in
+                        guard let imageData = response.value, let image = UIImage(data: imageData) else {
+                            return
+                        }
+                        
+                        DispatchQueue.main.async {
+                            self.ivComment.image = image
+                        }
+                        QismoManager.shared.imageCache.setObject(image, forKey: url as NSString)
+                    }
+                }
             }
         }
         
