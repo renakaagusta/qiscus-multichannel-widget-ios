@@ -28,7 +28,7 @@
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b58-f3-SDY" userLabel="Border">
                     <rect key="frame" x="0.0" y="0.0" width="649" height="1"/>
-                    <color key="backgroundColor" red="0.91761547330000004" green="0.91769045589999998" blue="0.91373318429999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <color key="backgroundColor" red="0.91764705882352937" green="0.91764705882352937" blue="0.9137254901960784" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="piO-a9-cOF"/>
                     </constraints>

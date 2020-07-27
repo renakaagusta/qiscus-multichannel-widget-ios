@@ -53,9 +53,10 @@ class CustomChatInput: UIChatInput {
         textView.text = TextConfiguration.sharedInstance.textPlaceholder
         textView.textColor = UIColor.lightGray
         textView.font = ChatConfig.chatFont
-        //self.textView.layer.cornerRadius = self.textView.frame.size.height / 2
-        //self.textView.clipsToBounds = true
-        self.textView.textContainerInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+        textView.layer.borderColor = #colorLiteral(red: 0.9176470588, green: 0.9176470588, blue: 0.9137254902, alpha: 1)
+        textView.layer.borderWidth = 1
+        textView.layer.cornerRadius = 8
+        textView.textContainerInset = UIEdgeInsets(top: 2, left: 2, bottom: 0, right: 2)
         
         self.sendButton.tintColor = ColorConfiguration.sendButtonColor
         self.attachButton.tintColor = ColorConfiguration.attachmentButtonColor
@@ -153,9 +154,9 @@ extension CustomChatInput : UITextViewDelegate {
         self.typing(true)
         let fixedWidth = textView.frame.size.width
         let newSize = textView.sizeThatFits(CGSize.init(width: fixedWidth, height: CGFloat(MAXFLOAT)))
-        if (newSize.height >= 35 && newSize.height <= 100) {
-            self.heightTextViewCons.constant = newSize.height
-            self.heightView.constant = newSize.height + 10.0
+        if (newSize.height <= 100) {
+            self.heightTextViewCons.constant = newSize.height + 10
+            self.heightView.constant = newSize.height + 25.0
             if self.replyComment != nil {
                 self.setHeight(self.heightView.constant + 50)
             } else {
@@ -165,6 +166,10 @@ extension CustomChatInput : UITextViewDelegate {
         
         if (newSize.height >= 100) {
             self.textView.isScrollEnabled = true
+        }
+        
+        if textView.text.isEmpty {
+            self.typing(false)
         }
     }
 }
