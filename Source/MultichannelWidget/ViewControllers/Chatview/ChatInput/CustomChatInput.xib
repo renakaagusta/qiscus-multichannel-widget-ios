@@ -197,7 +197,7 @@
     <resources>
         <image name="clear" catalog="system" width="128" height="114"/>
         <image name="ic_file_attachment" width="16" height="20"/>
-        <image name="ic_image_attachment" width="20" height="18"/>
+        <image name="ic_image_attachment" width="24" height="24"/>
         <image name="ic_send" width="18" height="18"/>
         <image name="link" catalog="system" width="128" height="116"/>
     </resources>
