@@ -18,6 +18,7 @@ import AlamofireImage
 
 protocol CustomChatInputDelegate {
     func sendAttachment()
+    func sendImageAttachment()
     func sendMessage(message: QMessage)
     func hideReply()
 }
@@ -35,6 +36,7 @@ class CustomChatInput: UIChatInput {
     @IBOutlet weak var viewReply: UIView!
     @IBOutlet weak var sendButton: UIButton!
     @IBOutlet weak var attachButton: UIButton!
+    @IBOutlet weak var imageAttachmentButton: UIButton!
     @IBOutlet weak var contraintTopReply: NSLayoutConstraint!
     @IBOutlet weak var tvReply: UILabel!
     @IBOutlet weak var heightTextViewCons: NSLayoutConstraint!
@@ -60,7 +62,9 @@ class CustomChatInput: UIChatInput {
         
         self.sendButton.tintColor = ColorConfiguration.sendButtonColor
         self.attachButton.tintColor = ColorConfiguration.attachmentButtonColor
-        self.attachButton.setImage(UIImage(named: "ic_attachment", in: MultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate), for: .normal)
+        self.attachButton.setImage(UIImage(named: "ic_file_attachment", in: MultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate), for: .normal)
+        self.imageAttachmentButton.tintColor = ColorConfiguration.attachmentButtonColor
+        self.imageAttachmentButton.setImage(UIImage(named: "ic_image_attachment", in: MultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate), for: .normal)
         self.sendButton.setImage(UIImage(named: "ic_send", in: MultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate), for: .normal)
     }
     
@@ -95,6 +99,9 @@ class CustomChatInput: UIChatInput {
         self.textView.text = ""
         self.setHeight(50)
         hideReply()
+    }
+    @IBAction func clickImageAttachment(_ sender: Any) {
+        self.chatInputDelegate?.sendImageAttachment()
     }
     
     @IBAction func clickAttachment(_ sender: Any) {
@@ -316,7 +323,7 @@ extension UIChatViewController : CustomChatInputDelegate {
         }
     }
     
-    func sendAttachment() {
+    func sendImageAttachment() {
         let optionMenu = UIAlertController()
         let cameraAction = UIAlertAction(title: "Take Camera", style: .default, handler: {
             (alert: UIAlertAction!) -> Void in
@@ -331,12 +338,6 @@ extension UIChatViewController : CustomChatInputDelegate {
         })
         optionMenu.addAction(galleryAction)
         
-        let fileAction = UIAlertAction(title: "File / Document", style: .default, handler: {
-            (alert: UIAlertAction!) -> Void in
-            self.uploadFile()
-        })
-        optionMenu.addAction(fileAction)
-        
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
             (alert: UIAlertAction!) -> Void in
             
@@ -346,6 +347,9 @@ extension UIChatViewController : CustomChatInputDelegate {
         self.present(optionMenu, animated: true, completion: nil)
     }
     
+    func sendAttachment() {
+        self.uploadFile()
+    }
     
 }
 
