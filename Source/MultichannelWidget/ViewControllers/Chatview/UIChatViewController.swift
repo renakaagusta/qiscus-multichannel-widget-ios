@@ -25,11 +25,11 @@ class DateHeaderLabel: UILabel {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = #colorLiteral(red: 0.3555911001, green: 0.7599821354, blue: 1, alpha: 0.7924068921)
-        textColor = .darkGray
+        backgroundColor = #colorLiteral(red: 0.7098039216, green: 0.7098039216, blue: 0.7098039216, alpha: 1)
+        textColor = .white
         textAlignment = .center
         translatesAutoresizingMaskIntoConstraints = false // enables auto layout
-        font = UIFont.boldSystemFont(ofSize: 9.5)
+        font = UIFont.boldSystemFont(ofSize: 14)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -39,7 +39,7 @@ class DateHeaderLabel: UILabel {
     override var intrinsicContentSize: CGSize {
         let originalContentSize = super.intrinsicContentSize
         let height = originalContentSize.height + 12
-        layer.cornerRadius = height / 2
+        layer.cornerRadius = 8
         layer.masksToBounds = true
         return CGSize(width: originalContentSize.width + 15, height: height)
     }
@@ -752,7 +752,7 @@ extension UIChatViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         if let firstMessageInSection = self.presenter.comments[section].first {
             let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "E, d MMM"
+            dateFormatter.dateFormat = "E, MMMM d, YYYY"
             let dateString = dateFormatter.string(from: firstMessageInSection.timestamp)
             
             let label = DateHeaderLabel()
@@ -764,6 +764,7 @@ extension UIChatViewController: UITableViewDataSource {
             label.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
             label.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 0).isActive = true
             label.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -8).isActive = true
+            label.widthAnchor.constraint(equalToConstant: 183).isActive = true
             
             return containerView
             

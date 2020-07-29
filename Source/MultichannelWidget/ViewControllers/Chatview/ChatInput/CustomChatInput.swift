@@ -18,6 +18,7 @@ import AlamofireImage
 
 protocol CustomChatInputDelegate {
     func sendAttachment()
+    func sendImageAttachment()
     func sendMessage(message: QMessage)
     func hideReply()
 }
@@ -35,6 +36,7 @@ class CustomChatInput: UIChatInput {
     @IBOutlet weak var viewReply: UIView!
     @IBOutlet weak var sendButton: UIButton!
     @IBOutlet weak var attachButton: UIButton!
+    @IBOutlet weak var imageAttachmentButton: UIButton!
     @IBOutlet weak var contraintTopReply: NSLayoutConstraint!
     @IBOutlet weak var tvReply: UILabel!
     @IBOutlet weak var heightTextViewCons: NSLayoutConstraint!
@@ -53,13 +55,16 @@ class CustomChatInput: UIChatInput {
         textView.text = TextConfiguration.sharedInstance.textPlaceholder
         textView.textColor = UIColor.lightGray
         textView.font = ChatConfig.chatFont
-        //self.textView.layer.cornerRadius = self.textView.frame.size.height / 2
-        //self.textView.clipsToBounds = true
-        self.textView.textContainerInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+        textView.layer.borderColor = #colorLiteral(red: 0.9176470588, green: 0.9176470588, blue: 0.9137254902, alpha: 1)
+        textView.layer.borderWidth = 1
+        textView.layer.cornerRadius = 8
+        textView.textContainerInset = UIEdgeInsets(top: 2, left: 2, bottom: 0, right: 2)
         
         self.sendButton.tintColor = ColorConfiguration.sendButtonColor
         self.attachButton.tintColor = ColorConfiguration.attachmentButtonColor
-        self.attachButton.setImage(UIImage(named: "ic_attachment", in: MultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate), for: .normal)
+        self.attachButton.setImage(UIImage(named: "ic_file_attachment", in: MultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate), for: .normal)
+        self.imageAttachmentButton.tintColor = ColorConfiguration.attachmentButtonColor
+        self.imageAttachmentButton.setImage(UIImage(named: "ic_image_attachment", in: MultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate), for: .normal)
         self.sendButton.setImage(UIImage(named: "ic_send", in: MultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate), for: .normal)
     }
     
@@ -94,6 +99,9 @@ class CustomChatInput: UIChatInput {
         self.textView.text = ""
         self.setHeight(50)
         hideReply()
+    }
+    @IBAction func clickImageAttachment(_ sender: Any) {
+        self.chatInputDelegate?.sendImageAttachment()
     }
     
     @IBAction func clickAttachment(_ sender: Any) {
@@ -153,9 +161,9 @@ extension CustomChatInput : UITextViewDelegate {
         self.typing(true)
         let fixedWidth = textView.frame.size.width
         let newSize = textView.sizeThatFits(CGSize.init(width: fixedWidth, height: CGFloat(MAXFLOAT)))
-        if (newSize.height >= 35 && newSize.height <= 100) {
-            self.heightTextViewCons.constant = newSize.height
-            self.heightView.constant = newSize.height + 10.0
+        if (newSize.height <= 100) {
+            self.heightTextViewCons.constant = newSize.height + 10
+            self.heightView.constant = newSize.height + 25.0
             if self.replyComment != nil {
                 self.setHeight(self.heightView.constant + 50)
             } else {
@@ -165,6 +173,10 @@ extension CustomChatInput : UITextViewDelegate {
         
         if (newSize.height >= 100) {
             self.textView.isScrollEnabled = true
+        }
+        
+        if textView.text.isEmpty {
+            self.typing(false)
         }
     }
 }
@@ -311,7 +323,7 @@ extension UIChatViewController : CustomChatInputDelegate {
         }
     }
     
-    func sendAttachment() {
+    func sendImageAttachment() {
         let optionMenu = UIAlertController()
         let cameraAction = UIAlertAction(title: "Take Camera", style: .default, handler: {
             (alert: UIAlertAction!) -> Void in
@@ -326,12 +338,6 @@ extension UIChatViewController : CustomChatInputDelegate {
         })
         optionMenu.addAction(galleryAction)
         
-        let fileAction = UIAlertAction(title: "File / Document", style: .default, handler: {
-            (alert: UIAlertAction!) -> Void in
-            self.uploadFile()
-        })
-        optionMenu.addAction(fileAction)
-        
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
             (alert: UIAlertAction!) -> Void in
             
@@ -341,6 +347,9 @@ extension UIChatViewController : CustomChatInputDelegate {
         self.present(optionMenu, animated: true, completion: nil)
     }
     
+    func sendAttachment() {
+        self.uploadFile()
+    }
     
 }
 

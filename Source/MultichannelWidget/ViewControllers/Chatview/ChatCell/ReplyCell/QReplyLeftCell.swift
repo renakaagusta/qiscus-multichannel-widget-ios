@@ -35,6 +35,7 @@ class QReplyLeftCell: UIBaseChatCell {
         
         viewReplyPreview.addGestureRecognizer(tap)
         viewReplyPreview.isUserInteractionEnabled = true
+        ivCommentImage.clipsToBounds = true
     }
     
     @objc func handleTap(_ sender: UITapGestureRecognizer) {
