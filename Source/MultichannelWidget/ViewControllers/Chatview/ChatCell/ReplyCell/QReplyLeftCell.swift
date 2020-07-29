@@ -113,7 +113,7 @@ class QReplyLeftCell: UIBaseChatCell {
             self.tvCommentContent.text = text
         case .document:
             //pdf
-            self.ivCommentImage.image = UIImage(named: "ic_file_black" , in: MultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
+            self.ivCommentImage.image = UIImage(named: "ic_file_white" , in: MultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
             self.ivCommentImage.contentMode = .scaleAspectFit
             self.ivCommentImage.tintColor   = #colorLiteral(red: 0.4077942371, green: 0.4078705907, blue: 0.4077951014, alpha: 1)
             let url = message.getAttachmentURL(message: text ?? "")
