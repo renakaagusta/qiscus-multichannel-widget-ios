@@ -76,6 +76,7 @@ class QReplyLeftCell: UIBaseChatCell {
         }
         let text = replyData["replied_comment_message"] as? String
         var replyType = message.replyType(message: text!)
+        lbCommentSender.text = replyData["replied_comment_sender_username"] as? String
         
         if replyType == .text  {
             switch replyData["replied_comment_type"] as? String {
