@@ -34,6 +34,7 @@ class QReplyRightCell: UIBaseChatCell {
         
         viewReplyPreview.addGestureRecognizer(tap)
         viewReplyPreview.isUserInteractionEnabled = true
+        ivCommentImage.clipsToBounds = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

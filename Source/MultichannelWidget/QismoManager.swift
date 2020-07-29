@@ -25,6 +25,7 @@ class QismoManager {
     var qiscus : QiscusCore!
     var qiscusServer = QiscusServer(url: URL(string: "https://api.qiscus.com")!, realtimeURL: "", realtimePort: 80)
     var deviceToken : String = "" // save device token for 1st time or before login
+    let imageCache = NSCache<NSString, UIImage>()
     
     
     func setUser(id: String, username: String, avatarUrl: String = "") {

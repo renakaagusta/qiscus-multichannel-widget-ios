@@ -303,9 +303,18 @@ class UIChatPresenter: UIChatUserInteraction {
     func sendMessage(withComment comment: QMessage, onSuccess: @escaping (QMessage) -> Void, onError: @escaping (String) -> Void) {
         addNewCommentUI(comment, isIncoming: false)
         QismoManager.shared.qiscus.shared.sendMessage(message: comment, onSuccess: { [weak self] (comment) in
-            self?.didComment(comment: comment, changeStatus: comment.status)
+            guard let self = self else {
+                return
+            }
+            
+            for (group,c) in self.comments.enumerated() {
+                if let index = c.index(where: { $0.uniqueId == comment.uniqueId }) {
+                    self.comments[group][index] = comment
+                    self.viewPresenter?.onUpdateComment(comment: comment, indexpath: IndexPath(row: index, section: group))
+                }
+            }
             //by default, lastId is empty...and keep like that if you not update after send first msg :)
-            self?.lastIdToSynch = comment.id
+            self.lastIdToSynch = comment.id
             onSuccess(comment)
         }) { (qError) in
             debugPrint(qError.message)
@@ -434,7 +443,6 @@ extension UIChatPresenter : QiscusCoreRoomDelegate {
                 return
             }
             
-            let uids = SharedPreferences.getDeletedCommentUniqueId()
             if SharedPreferences.getDeletedCommentUniqueId()?.contains(message.uniqueId) ?? false {
                 return
             }
@@ -454,17 +462,19 @@ extension UIChatPresenter : QiscusCoreRoomDelegate {
                 return
             }
             
-            if SharedPreferences.getDeletedCommentUniqueId()?.contains(message.uniqueId) ?? false {
+            var updateMessage = message
+            
+            if SharedPreferences.getDeletedCommentUniqueId()?.contains(updateMessage.uniqueId) ?? false {
                 return
             }
             
             // check comment already exist in view
             for (group,c) in self.comments.enumerated() {
-                if let index = c.index(where: { $0.uniqueId == message.uniqueId }) {
-                    self.comments[group][index] = message
+                if let index = c.index(where: { $0.uniqueId == updateMessage.uniqueId }) {
+                    self.comments[group][index] = updateMessage
                     
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                        self.viewPresenter?.onUpdateComment(comment: message, indexpath: IndexPath(row: index, section: group))
+                        self.viewPresenter?.onUpdateComment(comment: updateMessage, indexpath: IndexPath(row: index, section: group))
                     }
                 }
             }
@@ -477,17 +487,19 @@ extension UIChatPresenter : QiscusCoreRoomDelegate {
                 return
             }
             
-            if SharedPreferences.getDeletedCommentUniqueId()?.contains(message.uniqueId) ?? false {
+            var updateMessage = message
+            
+            if SharedPreferences.getDeletedCommentUniqueId()?.contains(updateMessage.uniqueId) ?? false {
                 return
             }
             
             // check comment already exist in view
             for (group,c) in self.comments.enumerated() {
-                if let index = c.index(where: { $0.uniqueId == message.uniqueId }) {
-                    self.comments[group][index] = message
+                if let index = c.index(where: { $0.uniqueId == updateMessage.uniqueId }) {
+                    self.comments[group][index] = updateMessage
                     
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                      self.viewPresenter?.onUpdateComment(comment: message, indexpath: IndexPath(row: index, section: group))
+                      self.viewPresenter?.onUpdateComment(comment: updateMessage, indexpath: IndexPath(row: index, section: group))
                     }
                 }
             }
@@ -501,9 +513,11 @@ extension UIChatPresenter : QiscusCoreRoomDelegate {
                 return
             }
             
-            SharedPreferences.saveDeletedComment(uniqueId: message.uniqueId)
+            var updateMessage = message
+            
+            SharedPreferences.saveDeletedComment(uniqueId: updateMessage.uniqueId)
             for (_,var c) in self.comments.enumerated() {
-                if let index = c.index(where: { $0.uniqueId == message.uniqueId }) {
+                if let index = c.index(where: { $0.uniqueId == updateMessage.uniqueId }) {
                     c.remove(at: index)
                     self.comments = self.groupingComments(c)
                     self.lastIdToLoad = ""
