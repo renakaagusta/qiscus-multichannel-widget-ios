@@ -132,20 +132,8 @@ class QismoManager {
             if removePreviousNotif {
                 self.removeNotification(withRoom: roomId)
             }
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(1)) {
-               self.redirectToChat(roomID: roomId)
-            }
         }
         // mybe for another notif
-    }
-    
-    @available(*, deprecated, message: "Not relevan, since user can config chat view with title and color")
-    private func redirectToChat(roomID id: Int) {
-        let current = UIApplication.currentViewController()
-        let target = UIChatViewController()
-        // MARK: TODO get qiscus room from local db
-        target.roomId = String(id)
-        current?.navigationController?.pushViewController(target, animated: true)
     }
     
     private func removeNotification(withRoom id: Int) {
