@@ -65,6 +65,11 @@ class QReplyLeftCell: UIBaseChatCell {
         
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.ivCommentImageWidhtCons.constant = 50
+    }
+    
     override func update(message: QMessage) {
         self.bindData(message: message)
     }
@@ -76,6 +81,7 @@ class QReplyLeftCell: UIBaseChatCell {
         }
         let text = replyData["replied_comment_message"] as? String
         var replyType = message.replyType(message: text!)
+        lbCommentSender.text = replyData["replied_comment_sender_username"] as? String
         
         if replyType == .text  {
             switch replyData["replied_comment_type"] as? String {

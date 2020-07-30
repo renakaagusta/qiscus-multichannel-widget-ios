@@ -48,7 +48,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eX8-dS-8SK">
-                    <rect key="frame" x="50" y="98.5" width="40" height="50"/>
+                    <rect key="frame" x="50" y="97.5" width="40" height="50"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="40" id="BWF-iV-nYy"/>
@@ -144,7 +144,7 @@
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MH0-kK-vkd">
-                    <rect key="frame" x="10" y="98.5" width="40" height="50"/>
+                    <rect key="frame" x="10" y="97.5" width="40" height="50"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="WTw-g4-88O"/>
@@ -163,16 +163,16 @@
                 <constraint firstItem="b58-f3-SDY" firstAttribute="top" secondItem="k7R-ZU-AZb" secondAttribute="top" id="0QE-hU-vX4"/>
                 <constraint firstItem="CZd-gi-xu1" firstAttribute="top" secondItem="k7R-ZU-AZb" secondAttribute="top" constant="-50" id="3jt-0Z-5EE" userLabel="contraintTopReplyView"/>
                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="9Gk-gy-9FX"/>
-                <constraint firstItem="MH0-kK-vkd" firstAttribute="centerY" secondItem="8Om-te-Qpk" secondAttribute="centerY" id="9Ww-er-ZIN"/>
                 <constraint firstItem="KIv-HR-J1D" firstAttribute="leading" secondItem="k7R-ZU-AZb" secondAttribute="trailing" constant="-50" id="I5H-7y-a33"/>
                 <constraint firstItem="KIv-HR-J1D" firstAttribute="leading" secondItem="Vuj-gV-0ov" secondAttribute="trailing" id="MqH-nR-qm0"/>
                 <constraint firstItem="eX8-dS-8SK" firstAttribute="leading" secondItem="MH0-kK-vkd" secondAttribute="trailing" id="NGt-g5-UXI"/>
                 <constraint firstItem="KIv-HR-J1D" firstAttribute="centerY" secondItem="Vuj-gV-0ov" secondAttribute="centerY" id="Okz-vH-BXh"/>
                 <constraint firstItem="8Om-te-Qpk" firstAttribute="trailing" secondItem="b58-f3-SDY" secondAttribute="trailing" symbolic="YES" id="QIq-m5-xc0"/>
                 <constraint firstItem="Vuj-gV-0ov" firstAttribute="top" secondItem="CZd-gi-xu1" secondAttribute="bottom" constant="8" id="ZRL-8e-F1T"/>
+                <constraint firstItem="MH0-kK-vkd" firstAttribute="centerY" secondItem="Vuj-gV-0ov" secondAttribute="centerY" id="aUf-EO-bKm"/>
                 <constraint firstItem="8Om-te-Qpk" firstAttribute="bottom" secondItem="Vuj-gV-0ov" secondAttribute="bottom" constant="10" id="bTd-G3-sYf"/>
                 <constraint firstItem="8Om-te-Qpk" firstAttribute="trailing" secondItem="CZd-gi-xu1" secondAttribute="trailing" id="c8B-Q4-1If"/>
-                <constraint firstItem="eX8-dS-8SK" firstAttribute="centerY" secondItem="8Om-te-Qpk" secondAttribute="centerY" id="ns1-Rk-UeP"/>
+                <constraint firstItem="eX8-dS-8SK" firstAttribute="centerY" secondItem="Vuj-gV-0ov" secondAttribute="centerY" id="kt6-Da-S9e"/>
                 <constraint firstItem="b58-f3-SDY" firstAttribute="leading" secondItem="8Om-te-Qpk" secondAttribute="leading" symbolic="YES" id="sbf-9B-Xc1"/>
                 <constraint firstItem="CZd-gi-xu1" firstAttribute="leading" secondItem="b58-f3-SDY" secondAttribute="leading" id="xbo-7r-8lD"/>
                 <constraint firstAttribute="trailing" secondItem="KIv-HR-J1D" secondAttribute="trailing" id="zAX-l7-ZVv"/>

@@ -200,11 +200,18 @@ class QiscusUploaderVC: UIViewController, UIScrollViewDelegate {
             }
             
             let _ = self.navigationController?.popViewController(animated: true)
-            chatView?.send(message: self.imageData.first!, onSuccess: { (comment) in
-                self.chatView?.setFromUploader(comment: comment)
-            }, onError: { (error) in
-                print("error send image \(error)")
-            })
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+                guard let self = self else {
+                    return
+                }
+                self.chatView?.send(message: self.imageData.first!, onSuccess: { (comment) in
+                    self.chatView?.setFromUploader(comment: comment)
+                }, onError: { (error) in
+                    print("error send image \(error)")
+                })
+            }
+        
         }
     }
     

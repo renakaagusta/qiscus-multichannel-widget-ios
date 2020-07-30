@@ -438,95 +438,61 @@ extension UIChatPresenter : QiscusCoreRoomDelegate {
     }
     
     func onMessageReceived(message: QMessage){
-        DispatchQueue.global(qos: .background).async { [weak self] in
-            guard let self = self else {
-                return
-            }
-            
-            if SharedPreferences.getDeletedCommentUniqueId()?.contains(message.uniqueId) ?? false {
-                return
-            }
-            
-            DispatchQueue.main.async {
-                // 2check comment already in ui?
-                if (self.getIndexPath(comment: message) == nil) {
-                    self.addNewCommentUI(message, isIncoming: true)
-                }
-            }
+        
+        if SharedPreferences.getDeletedCommentUniqueId()?.contains(message.uniqueId) ?? false {
+            return
+        }
+        
+        
+        // 2check comment already in ui?
+        if (self.getIndexPath(comment: message) == nil) {
+            self.addNewCommentUI(message, isIncoming: true)
         }
     }
 
     func onMessageDelivered(message : QMessage){
-        DispatchQueue.global(qos: .background).async { [weak self] in
-            guard let self = self else {
-                return
-            }
-            
-            var updateMessage = message
-            
-            if SharedPreferences.getDeletedCommentUniqueId()?.contains(updateMessage.uniqueId) ?? false {
-                return
-            }
-            
-            // check comment already exist in view
-            for (group,c) in self.comments.enumerated() {
-                if let index = c.index(where: { $0.uniqueId == updateMessage.uniqueId }) {
-                    self.comments[group][index] = updateMessage
-                    
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                        self.viewPresenter?.onUpdateComment(comment: updateMessage, indexpath: IndexPath(row: index, section: group))
-                    }
-                }
+        if SharedPreferences.getDeletedCommentUniqueId()?.contains(message.uniqueId) ?? false {
+            return
+        }
+        
+        // check comment already exist in view
+        for (group,c) in self.comments.enumerated() {
+            if let index = c.index(where: { $0.uniqueId == message.uniqueId }) {
+                self.comments[group][index] = message
+                
+                self.viewPresenter?.onUpdateComment(comment: message, indexpath: IndexPath(row: index, section: group))
             }
         }
     }
 
     func onMessageRead(message : QMessage){
-        DispatchQueue.global(qos: .background).async { [weak self] in
-            guard let self = self else {
-                return
-            }
-            
-            var updateMessage = message
-            
-            if SharedPreferences.getDeletedCommentUniqueId()?.contains(updateMessage.uniqueId) ?? false {
-                return
-            }
-            
-            // check comment already exist in view
-            for (group,c) in self.comments.enumerated() {
-                if let index = c.index(where: { $0.uniqueId == updateMessage.uniqueId }) {
-                    self.comments[group][index] = updateMessage
-                    
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                      self.viewPresenter?.onUpdateComment(comment: updateMessage, indexpath: IndexPath(row: index, section: group))
-                    }
-                }
+        if SharedPreferences.getDeletedCommentUniqueId()?.contains(message.uniqueId) ?? false {
+            return
+        }
+        
+        // check comment already exist in view
+        for (group,c) in self.comments.enumerated() {
+            if let index = c.index(where: { $0.uniqueId == message.uniqueId }) {
+                self.comments[group][index] = message
+                
+                self.viewPresenter?.onUpdateComment(comment: message, indexpath: IndexPath(row: index, section: group))
             }
         }
         
     }
 
     func onMessageDeleted(message: QMessage){
-        DispatchQueue.global(qos: .background).async { [weak self] in
-            guard let self = self else {
-                return
-            }
-            
-            var updateMessage = message
-            
-            SharedPreferences.saveDeletedComment(uniqueId: updateMessage.uniqueId)
-            for (_,var c) in self.comments.enumerated() {
-                if let index = c.index(where: { $0.uniqueId == updateMessage.uniqueId }) {
-                    c.remove(at: index)
-                    self.comments = self.groupingComments(c)
-                    self.lastIdToLoad = ""
-                    self.loadMoreAvailable = true
-                    
-                    DispatchQueue.main.async {
-                        self.viewPresenter?.onReloadComment()
-                    }
-                }
+        
+        SharedPreferences.saveDeletedComment(uniqueId: message.uniqueId)
+        for (_,var c) in self.comments.enumerated() {
+            if let index = c.index(where: { $0.uniqueId == message.uniqueId }) {
+                c.remove(at: index)
+                self.comments = self.groupingComments(c)
+                self.lastIdToLoad = ""
+                self.loadMoreAvailable = true
+
+                
+                self.viewPresenter?.onReloadComment()
             }
         }
     }
