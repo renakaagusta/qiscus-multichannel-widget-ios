@@ -48,6 +48,7 @@ class QismoNetworkManager {
                 self.setQismoSdkUser(identityToken: identityToken, onSuccess: { [weak self] user in
                     //success login sdk
                     self?.qiscusUser = user
+                    SharedPreferences.saveQiscusAccount(userEmail: user.id)
                     onSuccess(roomId)
                 }, onError: { qError in
                     debugPrint(qError.message)

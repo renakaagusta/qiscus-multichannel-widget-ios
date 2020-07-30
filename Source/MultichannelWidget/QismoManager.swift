@@ -41,6 +41,7 @@ class QismoManager {
             print("Qiscus clear user succeeded")
         }
         SharedPreferences.removeRoomId()
+        SharedPreferences.removeQiscusAccount()
     }
     
     func setup(appID: String, server : QiscusServer? = nil) {
@@ -55,11 +56,10 @@ class QismoManager {
     }
     
     func initiateChat(withTitle title: String, andSubtitle subtitle: String, userId: String? = nil, username: String? = nil,avatar: String? = nil, extras: String? = nil, userProperties: [[String:Any]]? = nil, callback: @escaping (UIViewController) -> Void)  {
-        let savedRoomId = SharedPreferences.getRoomId()
         
-        if savedRoomId != nil {
+        if let savedRoomId = SharedPreferences.getRoomId() {
             let ui = UIChatViewController()
-            ui.roomId = savedRoomId!
+            ui.roomId = savedRoomId
             ui.chatTitle = title
             ui.chatSubtitle = subtitle
             callback(ui)
@@ -77,7 +77,8 @@ class QismoManager {
             ] as [String : Any]
         
         self.network.initiateChat(param: param as [String : Any], onSuccess: { roomId in
-            
+            SharedPreferences.saveTitle(title: title)
+            SharedPreferences.saveSubtitle(subtitle: subtitle)
             SharedPreferences.saveParam(param: param)
             SharedPreferences.saveRoomId(id: roomId)
             let ui = UIChatViewController()
