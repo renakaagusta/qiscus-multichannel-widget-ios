@@ -136,6 +136,8 @@ class UIChatPresenter: UIChatUserInteraction {
             return
         }
         
+        SharedPreferences.saveExtras(extras: options)
+        
         let param = JSON(parseJSON: options)
         let isResolve = param["is_resolved"].boolValue
         viewPresenter?.onRoomResolved(isResolved: isResolve)
@@ -447,6 +449,10 @@ extension UIChatPresenter : QiscusCoreRoomDelegate {
         // 2check comment already in ui?
         if (self.getIndexPath(comment: message) == nil) {
             self.addNewCommentUI(message, isIncoming: true)
+        }
+        
+        if message.type == "system_event" && message.message.lowercased().contains("admin marked this conversation as resolved") {
+            viewPresenter?.onRoomResolved(isResolved: true)
         }
     }
 
