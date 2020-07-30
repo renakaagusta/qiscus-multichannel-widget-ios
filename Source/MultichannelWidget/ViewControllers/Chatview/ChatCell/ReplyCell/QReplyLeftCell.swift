@@ -65,6 +65,11 @@ class QReplyLeftCell: UIBaseChatCell {
         
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.ivCommentImageWidhtCons.constant = 50
+    }
+    
     override func update(message: QMessage) {
         self.bindData(message: message)
     }

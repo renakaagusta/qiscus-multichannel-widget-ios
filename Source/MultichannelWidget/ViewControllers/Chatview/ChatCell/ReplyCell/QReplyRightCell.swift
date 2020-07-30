@@ -57,6 +57,11 @@ class QReplyRightCell: UIBaseChatCell {
         self.bindData(message: message)
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.ivCommentImageWidhtCons.constant = 50
+    }
+    
     func bindData(message: QMessage){
         self.setupBalon()
         self.status(message: message)
