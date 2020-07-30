@@ -70,12 +70,13 @@ class UIChatNavigation: UIView {
     }
     
     private func setupUI() {
-        
+        self.ivAvatar.layer.cornerRadius = 43/2
+        self.ivAvatar.clipsToBounds = true
     }
     
     func present(room: QChatRoom) {
         
-        self.ivAvatar.af.setImage(withURL: room.avatarUrl!, filter: CircleFilter())
+        self.ivAvatar.af.setImage(withURL: URL(string: "https://d1edrlpyc25xu0.cloudfront.net/cee-8xj32ozyfbnka0arz/image/upload/XBOSht7_hR/bebi.jpeg")!)
         
         // title value
         //always check room localDB
