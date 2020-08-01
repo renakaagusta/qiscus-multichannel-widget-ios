@@ -17,8 +17,10 @@ class QFileLeftCell: UIBaseChatCell {
     @IBOutlet weak var lblDate: UILabel!
     @IBOutlet weak var ivIcon: UIImageView!
     @IBOutlet weak var lblFilename: UILabel!
+    @IBOutlet weak var viewDownloadButtonContainer: UIView!
     
     var actionBlock: ((QMessage) -> Void)? = nil
+    var downloadBlock: ((QMessage) -> Void)? = nil
     private var message: QMessage? = nil
     
     override func awakeFromNib() {
@@ -32,6 +34,10 @@ class QFileLeftCell: UIBaseChatCell {
 
         // Configure the view for the selected state
         self.setMenu()
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
     }
     
     override func present(message: QMessage) {
@@ -55,6 +61,13 @@ class QFileLeftCell: UIBaseChatCell {
         let url = payload["url"] as? String
         self.lblFilename.text = payload["file_name"] as? String
         self.lblExtension.text = ("\(message.fileExtension(fromURL: url!)) file")
+    }
+    
+    @IBAction func downloadDidTap(_ sender: Any) {
+        guard let message = self.message else {
+            return
+        }
+        downloadBlock?(message)
     }
     
     @objc private func didTap() {

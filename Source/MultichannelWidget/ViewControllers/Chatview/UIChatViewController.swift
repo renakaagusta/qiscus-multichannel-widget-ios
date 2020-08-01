@@ -74,6 +74,7 @@ class UIChatViewController: UIViewController {
     var chatInput : CustomChatInput = CustomChatInput()
     var disableInput: DisableInput = DisableInput()
     private var presenter: UIChatPresenter = UIChatPresenter()
+    private var isDownloading: Bool = false
     
     var heightAtIndexPath: [String: CGFloat] = [:]
     var roomId: String {
@@ -99,7 +100,7 @@ class UIChatViewController: UIViewController {
     var maxUploadSizeInKB:Double = Double(100) * Double(1024)
     var UTIs:[String]{
         get{
-            return ["public.jpeg", "public.png","com.compuserve.gif","public.text", "public.archive", "com.microsoft.word.doc", "com.microsoft.excel.xls", "com.microsoft.powerpoint.​ppt", "com.adobe.pdf","public.mpeg-4"]
+            return ["public.jpeg", "public.png","com.compuserve.gif","public.text", "public.archive", "com.microsoft.word.doc", "com.microsoft.excel.xls", "com.microsoft.powerpoint.​ppt", "com.adobe.pdf","public.mpeg-4", "mov"]
         }
     }
     var room : QChatRoom? {
@@ -461,19 +462,34 @@ class UIChatViewController: UIViewController {
                         let cell = tableView.dequeueReusableCell(withIdentifier: "qFileRightCell", for: indexPath) as! QFileRightCell
                         //                        cell.menuConfig = menuConfig
                         cell.cellMenu = self
-                        cell.actionBlock = { comment in
-                            let fileUrl = comment.getAttachmentURL(message: comment.message)
-                            
-                            if fileUrl.isPDF {
-                                let webFileViewController = WebFileViewController()
-                                webFileViewController.fileUrl = fileUrl
-                                self.navigationController?.pushViewController(webFileViewController, animated: true)
-                            } else {
-                                guard let url = URL(string: fileUrl) else { return }
-                                UIApplication.shared.open(url)
+                        cell.actionBlock = { [weak self] message in
+                            guard let self = self else {
+                                return
+                            }
+                            if self.isDownloading {
+                                return
                             }
                             
+                            message.download(downloadProgress: { (progress) in
+                                self.isDownloading = true
+                                print("progress \(progress)")
+                                if progress == 1 {
+                                    self.isDownloading = false
+                                    self.widthProgress.constant = 0
+                                    return
+                                }
+                                
+                                UIView.animate(withDuration: 0.5) {
+                                    self.widthProgress.constant = CGFloat(progress) * UIScreen.main.bounds.width
+                                    self.view.layoutIfNeeded()
+                                }
+                            }) { (localFileURL) in
+                                let webFileViewController = WebFileViewController()
+                                webFileViewController.localFileUrl = localFileURL
+                                self.navigationController?.pushViewController(webFileViewController, animated: true)
+                            }
                         }
+                        
                         return cell
                     } else {
                         let cell = tableView.dequeueReusableCell(withIdentifier: "qFileLeftCell", for: indexPath) as! QFileLeftCell
@@ -484,17 +500,57 @@ class UIChatViewController: UIViewController {
                         //                            cell.isPublic = false
                         //                        }
                         cell.cellMenu = self
-                        cell.actionBlock = { comment in
-                            let fileUrl = comment.getAttachmentURL(message: comment.message)
-                            
-                            if fileUrl.isPDF {
-                                let webFileViewController = WebFileViewController()
-                                webFileViewController.fileUrl = fileUrl
-                                self.navigationController?.pushViewController(webFileViewController, animated: true)
-                            } else {
-                                guard let url = URL(string: fileUrl) else { return }
-                                UIApplication.shared.open(url)
+                        cell.actionBlock = { [weak self] message in
+                            guard let self = self else {
+                                return
                             }
+                            if self.isDownloading {
+                                return
+                            }
+                            
+                            message.download(downloadProgress: { (progress) in
+                                self.isDownloading = true
+                                print("progress \(progress)")
+                                if progress == 1 {
+                                    self.isDownloading = false
+                                    self.widthProgress.constant = 0
+                                    return
+                                }
+                                
+                                UIView.animate(withDuration: 0.5) {
+                                    self.widthProgress.constant = CGFloat(progress) * UIScreen.main.bounds.width
+                                    self.view.layoutIfNeeded()
+                                }
+                            }) { (localFileURL) in
+                                let webFileViewController = WebFileViewController()
+                                webFileViewController.localFileUrl = localFileURL
+                                self.navigationController?.pushViewController(webFileViewController, animated: true)
+                            }
+                        }
+                        
+                        cell.downloadBlock = { [weak self] message in
+                            guard let self = self else {
+                                return
+                            }
+                            
+                            if self.isDownloading {
+                                return
+                            }
+                            message.download(from: self, downloadProgress: { (progress) in
+                                self.isDownloading = true
+                                print("progress \(progress)")
+                                if progress == 1 {
+                                    self.isDownloading = false
+                                    self.widthProgress.constant = 0
+                                    return
+                                }
+                                
+                                UIView.animate(withDuration: 0.5) {
+                                    self.widthProgress.constant = CGFloat(progress) * UIScreen.main.bounds.width
+                                    self.view.layoutIfNeeded()
+                                }
+                            })
+                            
                         }
                         return cell
                     }
