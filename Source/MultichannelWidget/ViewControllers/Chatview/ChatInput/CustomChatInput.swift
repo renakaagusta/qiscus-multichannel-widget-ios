@@ -119,8 +119,13 @@ class CustomChatInput: UIChatInput {
         self.replyComment = comment
         if comment.isAttachment(text: comment.message) {
             self.widthReplyImage.constant = 40
-            let url = URL(string: comment.getAttachmentURL(message: comment.message))
-            self.imageThumb.af.setImage(withURL: url!)
+            guard let url = URL(string: comment.getAttachmentURL(message: comment.message)) else { return }
+            let ext = comment.fileExtension(fromURL: url.absoluteString)
+            if(ext.contains("jpg") || ext.contains("png") || ext.contains("heic") || ext.contains("jpeg") || ext.contains("tif") || ext.contains("gif")) {
+                self.imageThumb.af.setImage(withURL: url)
+            }else {
+                self.imageThumb.image = UIImage(named: "ic_file_black", in: MultichannelWidget.bundle, compatibleWith: nil)
+            }
             
             if let payload = comment.payload, let caption = payload["caption"] as? String, !caption.isEmpty {
                 self.tvReply.text = caption
