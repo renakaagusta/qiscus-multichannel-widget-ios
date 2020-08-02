@@ -625,7 +625,7 @@ extension UIChatViewController: UIChatViewDelegate {
     }
     
     func onLoadMessageFailed(message: String) {
-        //
+        self.labelEmptyMessage.text = message
     }
     
     func onUser(name: String, isOnline: Bool, message: String) {
