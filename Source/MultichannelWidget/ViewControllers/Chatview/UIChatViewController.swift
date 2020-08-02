@@ -107,6 +107,7 @@ class UIChatViewController: UIViewController {
         set(newValue) {
             self.presenter.room = newValue
             self.refreshUI()
+            self.chatTitleView.room = newValue
         }
         get {
             return self.presenter.room
@@ -694,6 +695,7 @@ extension UIChatViewController: UIChatViewDelegate {
     }
     
     func onLoadRoomFinished(room: QChatRoom) {
+        self.room = room
         self.setupUI()
     }
     
@@ -933,6 +935,7 @@ extension UIChatViewController : ReplyChatInputDelegate {
 
 extension UIChatViewController : DisableChatInputDelegate {
     func startNewChat(vc: UIChatViewController) {
+        vc.chatTitleView = self.chatTitleView
         var vcArray = self.navigationController?.viewControllers
         if vcArray != nil {
             vcArray!.removeLast()

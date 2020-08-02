@@ -106,14 +106,14 @@ class UIChatPresenter: UIChatUserInteraction {
             instance.room = room
             self?.room = room
             self?.isResolvedRoom(room :room)
-            
+            instance.viewPresenter?.onLoadRoomFinished(room: room)
+          
             if comments.isEmpty {
                 instance.viewPresenter?.onLoadMessageFailed(message: "no message")
                 return
             }
             
             instance.loadComments(withID: room.id)
-            instance.viewPresenter?.onLoadRoomFinished(room: room)
             instance.comments = instance.groupingComments(comments)
             
             if let lastComment = room.lastComment {

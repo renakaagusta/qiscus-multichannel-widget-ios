@@ -76,19 +76,14 @@ class UIChatNavigation: UIView {
     
     func present(room: QChatRoom) {
         
-        self.ivAvatar.af.setImage(withURL: URL(string: "https://d1edrlpyc25xu0.cloudfront.net/cee-8xj32ozyfbnka0arz/image/upload/XBOSht7_hR/bebi.jpeg")!)
-        
-        // title value
-        //always check room localDB
-        
-        //load from rest
-        if room.type == .group {
-//            QiscusCoreAPI.shared.getParticipants(roomUniqueId: (self.room?.uniqueId)!, onSuccess: { (participants) in
-//                self.labelSubtitle.text = self.getParticipant(participants: participants)
-//            }, onError: { (error) in
-//                //error
-//            })
-        }
+        // change avatar room do admin avatar, you can set avatar on admin dashboard
+        room.participants?.forEach({ (p) in
+            if p.id.contains("admin@qismo.com") {
+                if let avatarURL = p.avatarUrl {
+                    self.ivAvatar.af.setImage(withURL: avatarURL)
+                }
+            }
+        })
     }
     
     override func layoutSubviews() {
