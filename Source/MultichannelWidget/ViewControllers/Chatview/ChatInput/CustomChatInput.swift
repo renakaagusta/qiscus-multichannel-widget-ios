@@ -174,6 +174,14 @@ extension CustomChatInput : UITextViewDelegate {
             } else {
                 self.setHeight(self.heightView.constant)
             }
+        } else {
+            self.heightTextViewCons.constant = 100 + 10
+            self.heightView.constant = 100   + 25.0
+            if self.replyComment != nil {
+                self.setHeight(self.heightView.constant + 50)
+            } else {
+                self.setHeight(self.heightView.constant)
+            }
         }
         
         if (newSize.height >= 100) {
