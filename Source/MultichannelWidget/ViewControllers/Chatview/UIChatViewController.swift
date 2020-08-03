@@ -618,6 +618,12 @@ extension UIChatViewController: UIChatViewDelegate {
     }
     func onUpdateComment(comment: QMessage, indexpath: IndexPath) {
         // reload cell in section and index path
+        if self.tableViewConversation.dataHasChanged {
+            self.tableViewConversation.reloadData()
+        } else {
+           self.tableViewConversation.reloadRows(at: [indexpath], with: .none)
+        }
+        
         if self.tableViewConversation.cellForRow(at: indexpath) != nil {
             self.tableViewConversation.reloadRows(at: [indexpath], with: .none)
         }
