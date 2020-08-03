@@ -814,11 +814,12 @@ extension UIChatViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         if let firstMessageInSection = self.presenter.comments[section].first {
             let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "E, MMMM d, YYYY"
+            dateFormatter.dateFormat = "EEEE, MMMM d, YYYY"
             let dateString = dateFormatter.string(from: firstMessageInSection.timestamp)
             
             let label = DateHeaderLabel()
             label.text = dateString
+            label.font = UIFont.systemFont(ofSize: 12)
             
             let containerView = UIView()
             containerView.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
