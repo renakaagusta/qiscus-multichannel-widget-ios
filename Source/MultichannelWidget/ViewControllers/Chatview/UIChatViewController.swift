@@ -427,7 +427,7 @@ class UIChatViewController: UIViewController {
             if let url = payload["url"] as? String {
                 let ext = message.fileExtension(fromURL:url)
                 if(ext.contains("jpg") || ext.contains("png") || ext.contains("heic") || ext.contains("jpeg") || ext.contains("tif") || ext.contains("gif")){
-                    if (message.isMyComment() == true){
+                    if (message.isMyComment() == true || message.userEmail.isEmpty){
                         let cell = tableView.dequeueReusableCell(withIdentifier: "qImagesRightCell", for: indexPath) as! QImagesRightCell
 //                        cell.menuConfig = menuConfig
                         cell.actionBlock = { comment in
@@ -458,7 +458,7 @@ class UIChatViewController: UIViewController {
                         return cell
                     }
                 } else {
-                    if (message.isMyComment() == true){
+                    if (message.isMyComment() == true || message.userEmail.isEmpty){
                         let cell = tableView.dequeueReusableCell(withIdentifier: "qFileRightCell", for: indexPath) as! QFileRightCell
                         //                        cell.menuConfig = menuConfig
                         cell.cellMenu = self
@@ -556,7 +556,7 @@ class UIChatViewController: UIViewController {
                     }
                 }
             } else {
-                if (message.isMyComment() == true){
+                if (message.isMyComment() == true || message.userEmail.isEmpty){
                     let cell = tableView.dequeueReusableCell(withIdentifier: "qTextRightCell", for: indexPath) as! QTextRightCell
                     cell.menuConfig = menuConfig
                     cell.cellMenu = self
@@ -574,7 +574,7 @@ class UIChatViewController: UIViewController {
                 }
             }
         } else if message.type == "reply" {
-            if message.isMyComment() == true {
+            if message.isMyComment() == true || message.userEmail.isEmpty {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "qReplyRightCell", for: indexPath) as! QReplyRightCell
                 cell.cellMenu = self
                 return cell
@@ -602,8 +602,8 @@ class UIChatViewController: UIViewController {
             return cell
             
         }
-            let cell = tableView.dequeueReusableCell(withIdentifier: "emptyCell", for: indexPath) as! EmptyCell
-            return cell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "emptyCell", for: indexPath) as! EmptyCell
+        return cell
     }
 }
 
