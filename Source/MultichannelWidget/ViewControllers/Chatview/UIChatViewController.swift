@@ -736,16 +736,26 @@ extension UIChatViewController: UIChatViewDelegate {
         
         if Thread.isMainThread {
             if newSection {
-                self.tableViewConversation.beginUpdates()
-                self.tableViewConversation.insertSections(IndexSet(integer: 0), with: .right)
-                self.tableViewConversation.scrollToRow(at: IndexPath(row: 0, section: 0), at: .bottom, animated: true)
-                self.tableViewConversation.endUpdates()
+                if self.tableViewConversation.dataHasChanged {
+                    self.tableViewConversation.reloadData()
+                } else {
+                   self.tableViewConversation.beginUpdates()
+                   self.tableViewConversation.insertSections(IndexSet(integer: 0), with: .right)
+                   self.tableViewConversation.scrollToRow(at: IndexPath(row: 0, section: 0), at: .bottom, animated: true)
+                   self.tableViewConversation.endUpdates()
+                }
             } else {
-                let indexPath = IndexPath(row: 0, section: 0)
-                self.tableViewConversation.beginUpdates()
-                self.tableViewConversation.insertRows(at: [indexPath], with: .right)
-                self.tableViewConversation.scrollToRow(at: IndexPath(row: 0, section: 0), at: .bottom, animated: true)
-                self.tableViewConversation.endUpdates()
+                if self.tableViewConversation.dataHasChanged {
+                    self.tableViewConversation.reloadData()
+                } else {
+                    let indexPath = IndexPath(row: 0, section: 0)
+                    let previousIndexPath = IndexPath(row: 1, section: 0)
+                    self.tableViewConversation.beginUpdates()
+                    self.tableViewConversation.insertRows(at: [indexPath], with: .right)
+                    self.tableViewConversation.scrollToRow(at: IndexPath(row: 0, section: 0), at: .bottom, animated: true)
+                    self.tableViewConversation.endUpdates()
+                    self.tableViewConversation.reloadRows(at: [previousIndexPath], with: .none)
+                }
             }
         }
     }

@@ -346,11 +346,7 @@ class UIChatPresenter: UIChatUserInteraction {
     
     private func addNewCommentUI(_ message: QMessage, isIncoming: Bool) {
         // Check first, if the message already deleted
-        DispatchQueue.global(qos: .background).async { [weak self] in
-            guard let self = self else {
-                return
-            }
-            
+
             if SharedPreferences.getDeletedCommentUniqueId()?.contains(message.uniqueId) ?? false {
                 return
             }
@@ -378,15 +374,12 @@ class UIChatPresenter: UIChatUserInteraction {
             }
             
             // choose uidelegate
-            DispatchQueue.main.async {
-                if isIncoming {
-                    QismoManager.shared.qiscus.shared.markAsRead(roomId: message.chatRoomId, commentId: message.id)
-                    self.viewPresenter?.onGotNewComment(newSection: section)
-                } else {
-                    self.viewPresenter?.onSendingComment(comment: message, newSection: section)
-                }
+            if isIncoming {
+                QismoManager.shared.qiscus.shared.markAsRead(roomId: message.chatRoomId, commentId: message.id)
+                self.viewPresenter?.onGotNewComment(newSection: section)
+            } else {
+                self.viewPresenter?.onSendingComment(comment: message, newSection: section)
             }
-        }
     }
     
     func getAvatarImage(section: Int, imageView: UIImageView) {
