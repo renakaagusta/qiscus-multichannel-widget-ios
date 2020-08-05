@@ -484,17 +484,19 @@ extension UIChatPresenter : QiscusCoreRoomDelegate {
     func onMessageDeleted(message: QMessage){
         
         SharedPreferences.saveDeletedComment(uniqueId: message.uniqueId)
+        var tempComment = [QMessage]()
         for (_,var c) in self.comments.enumerated() {
             if let index = c.index(where: { $0.uniqueId == message.uniqueId }) {
                 c.remove(at: index)
-                self.comments = self.groupingComments(c)
                 self.lastIdToLoad = ""
                 self.loadMoreAvailable = true
-
-                
-                self.viewPresenter?.onReloadComment()
             }
+            
+            tempComment.append(contentsOf: c)
         }
+        
+        self.comments = self.groupingComments(tempComment)
+        self.viewPresenter?.onReloadComment()
     }
 
     func onUserTyping(userId : String, roomId : String, typing: Bool){
