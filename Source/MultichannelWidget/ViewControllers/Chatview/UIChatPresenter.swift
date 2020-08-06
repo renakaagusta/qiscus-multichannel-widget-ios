@@ -375,7 +375,10 @@ class UIChatPresenter: UIChatUserInteraction {
             
             // choose uidelegate
             if isIncoming {
-                QismoManager.shared.qiscus.shared.markAsRead(roomId: message.chatRoomId, commentId: message.id)
+                if self.viewPresenter != nil {
+                    QismoManager.shared.qiscus.shared.markAsRead(roomId: message.chatRoomId, commentId: message.id)
+                }
+                
                 self.viewPresenter?.onGotNewComment(newSection: section)
             } else {
                 self.viewPresenter?.onSendingComment(comment: message, newSection: section)
