@@ -284,6 +284,11 @@ extension UIChatViewController : CustomChatInputDelegate {
     
     func goToGaleryPicker(){
         DispatchQueue.main.async(execute: {
+            if #available(iOS 11.0, *) {
+                self.latestNavbarTint = self.currentNavbarTint
+                UINavigationBar.appearance().tintColor = UIColor.blue
+            }
+            
             let picker = UIImagePickerController()
             picker.delegate = self
             picker.allowsEditing = false
