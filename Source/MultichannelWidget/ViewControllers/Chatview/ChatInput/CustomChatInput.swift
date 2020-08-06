@@ -790,10 +790,17 @@ extension UIChatViewController : UIImagePickerControllerDelegate, UINavigationCo
                 print("error creating thumb image")
             }
         }
-        
+        if #available(iOS 11.0, *) {
+            UINavigationBar.appearance().tintColor = self.latestNavbarTint
+            self.navigationController?.navigationBar.tintColor = self.latestNavbarTint
+        }
     }
     
     public func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        if #available(iOS 11.0, *) {
+            UINavigationBar.appearance().tintColor = self.latestNavbarTint
+            self.navigationController?.navigationBar.tintColor = self.latestNavbarTint
+        }
         dismiss(animated: true, completion: nil)
     }
 }
