@@ -487,6 +487,7 @@ class UIChatViewController: UIViewController {
                             }) { (localFileURL) in
                                 let webFileViewController = WebFileViewController()
                                 webFileViewController.localFileUrl = localFileURL
+                                webFileViewController.fileName = message.fileName(text: localFileURL.absoluteString)
                                 self.navigationController?.pushViewController(webFileViewController, animated: true)
                             }
                         }
@@ -525,6 +526,7 @@ class UIChatViewController: UIViewController {
                             }) { (localFileURL) in
                                 let webFileViewController = WebFileViewController()
                                 webFileViewController.localFileUrl = localFileURL
+                                webFileViewController.fileName = message.fileName(text: localFileURL.absoluteString)
                                 self.navigationController?.pushViewController(webFileViewController, animated: true)
                             }
                         }
