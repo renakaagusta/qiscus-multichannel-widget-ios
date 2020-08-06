@@ -187,6 +187,7 @@ class UIChatViewController: UIViewController {
     // MARK: View Event Listener
     private func setupUI() {
         // config navBar
+        self.currentNavbarTint = self.navigationController?.navigationBar.tintColor
         self.emptyMessageView.backgroundColor = ColorConfiguration.emptyChatBackgroundColor
         self.labelEmptyMessage.textColor = ColorConfiguration.emptyChatTextColor
         self.labelEmptyNotes.textColor = ColorConfiguration.emptyChatTextColor

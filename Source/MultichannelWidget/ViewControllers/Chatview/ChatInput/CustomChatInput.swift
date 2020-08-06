@@ -277,7 +277,8 @@ extension UIChatViewController : CustomChatInputDelegate {
         
         let documentPicker = UIDocumentPickerViewController(documentTypes: self.UTIs, in: UIDocumentPickerMode.import)
         documentPicker.delegate = self
-        documentPicker.modalPresentationStyle = UIModalPresentationStyle.fullScreen
+        documentPicker.modalPresentationStyle = .fullScreen
+        
         self.present(documentPicker, animated: true, completion: nil)
     }
     
