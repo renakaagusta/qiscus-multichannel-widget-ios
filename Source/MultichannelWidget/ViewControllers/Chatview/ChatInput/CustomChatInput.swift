@@ -200,6 +200,11 @@ extension UIChatViewController : CustomChatInputDelegate {
         if AVCaptureDevice.authorizationStatus(for: AVMediaType.video) ==  AVAuthorizationStatus.authorized
         {
             DispatchQueue.main.async(execute: {
+                if #available(iOS 11.0, *) {
+                    self.latestNavbarTint = self.currentNavbarTint
+                    UINavigationBar.appearance().tintColor = UIColor.blue
+                }
+                
                 let picker = UIImagePickerController()
                 picker.delegate = self
                 picker.allowsEditing = false
@@ -215,13 +220,19 @@ extension UIChatViewController : CustomChatInputDelegate {
                         PHPhotoLibrary.requestAuthorization({(status:PHAuthorizationStatus) in
                             switch status{
                             case .authorized:
-                                let picker = UIImagePickerController()
-                                picker.delegate = self
-                                picker.allowsEditing = false
-                                picker.mediaTypes = [(kUTTypeImage as String),(kUTTypeMovie as String)]
-                                
-                                picker.sourceType = UIImagePickerController.SourceType.camera
-                                self.present(picker, animated: true, completion: nil)
+                                DispatchQueue.main.async(execute: {
+                                    if #available(iOS 11.0, *) {
+                                        self.latestNavbarTint = self.currentNavbarTint
+                                        UINavigationBar.appearance().tintColor = UIColor.blue
+                                    }
+                                    let picker = UIImagePickerController()
+                                    picker.delegate = self
+                                    picker.allowsEditing = false
+                                    picker.mediaTypes = [(kUTTypeImage as String),(kUTTypeMovie as String)]
+                                    
+                                    picker.sourceType = UIImagePickerController.SourceType.camera
+                                    self.present(picker, animated: true, completion: nil)
+                                })
                                 break
                             case .denied:
                                 self.showPhotoAccessAlert()
@@ -640,6 +651,11 @@ extension UIChatViewController : UIImagePickerControllerDelegate, UINavigationCo
     
     public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
+        if #available(iOS 11.0, *) {
+            UINavigationBar.appearance().tintColor = self.latestNavbarTint
+            self.navigationController?.navigationBar.tintColor = self.latestNavbarTint
+        }
+        
         let fileType:String = info[.mediaType] as! String
         let time = Double(Date().timeIntervalSince1970)
         let timeToken = UInt64(time * 10000)
@@ -765,6 +781,8 @@ extension UIChatViewController : UIImagePickerControllerDelegate, UINavigationCo
                                         let file = FileUploadModel()
                                         file.data = mediaData!
                                         file.name = fileName
+                                        
+                                        
                                         //                                        QiscusCoreAPI.shared.upload(file: file, onSuccess: { (file) in
                                         //                                            let message = CommentModel()
                                         //                                            message.type = "file_attachment"
@@ -786,6 +804,7 @@ extension UIChatViewController : UIImagePickerControllerDelegate, UINavigationCo
                                         //                                            print("progress =\(progress)")
                                         //                                        })
                                         
+                                        
                 },
                                      cancelAction: {
                                         //cancel upload
@@ -795,10 +814,7 @@ extension UIChatViewController : UIImagePickerControllerDelegate, UINavigationCo
                 print("error creating thumb image")
             }
         }
-        if #available(iOS 11.0, *) {
-            UINavigationBar.appearance().tintColor = self.latestNavbarTint
-            self.navigationController?.navigationBar.tintColor = self.latestNavbarTint
-        }
+        
     }
     
     public func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
