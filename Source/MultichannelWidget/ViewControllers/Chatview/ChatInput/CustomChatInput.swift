@@ -208,9 +208,9 @@ extension UIChatViewController : CustomChatInputDelegate {
                 let picker = UIImagePickerController()
                 picker.delegate = self
                 picker.allowsEditing = false
-                picker.mediaTypes = [(kUTTypeImage as String),(kUTTypeMovie as String)]
+                picker.mediaTypes = [(kUTTypeImage as String)]
                 
-                picker.sourceType = UIImagePickerController.SourceType.camera
+                picker.sourceType = .camera
                 self.present(picker, animated: true, completion: nil)
             })
         }else{
@@ -228,9 +228,9 @@ extension UIChatViewController : CustomChatInputDelegate {
                                     let picker = UIImagePickerController()
                                     picker.delegate = self
                                     picker.allowsEditing = false
-                                    picker.mediaTypes = [(kUTTypeImage as String),(kUTTypeMovie as String)]
+                                    picker.mediaTypes = [(kUTTypeImage as String)]
                                     
-                                    picker.sourceType = UIImagePickerController.SourceType.camera
+                                    picker.sourceType = .camera
                                     self.present(picker, animated: true, completion: nil)
                                 })
                                 break
