@@ -64,14 +64,14 @@ class UIChatPresenter: UIChatUserInteraction {
         viewPresenter = view
         if let room = self.room {
             
-            self.qiscus.roomDelegate = self
-            self.qiscus.activeChatRoom = room
-            self.qiscus.shared.subscribeChatRoom(room)
-            
-            guard let participants = room.participants else { return }
-            for u in participants {
-                self.qiscus.shared.subscribeUserOnlinePresence(userId: u.id)
-            }
+//            self.qiscus.roomDelegate = self
+//            self.qiscus.activeChatRoom = room
+//            self.qiscus.shared.subscribeChatRoom(room)
+//
+//            guard let participants = room.participants else { return }
+//            for u in participants {
+//                self.qiscus.shared.subscribeUserOnlinePresence(userId: u.id)
+//            }
             
             self.loadRoom()
             self.loadComments(withID: room.id)
@@ -103,7 +103,8 @@ class UIChatPresenter: UIChatUserInteraction {
             instance.qiscus.roomDelegate = self
             instance.qiscus.activeChatRoom = room
             instance.qiscus.shared.subscribeChatRoom(room)
-            
+            instance.qiscus.connect(delegate: self)
+            instance.qiscus.connectionDelegate = self
             guard let participants = room.participants else { return }
             for u in participants {
                 instance.qiscus.shared.subscribeUserOnlinePresence(userId: u.id)
@@ -527,3 +528,21 @@ extension UIChatPresenter : QiscusCoreRoomDelegate {
     }
 }
 
+extension UIChatPresenter : QiscusConnectionDelegate {
+    public func connectionState(change state: QiscusConnectionState) {
+        print("::realtime connection state \(state)")
+    }
+    
+    public func onConnected() {
+        print("::realtime connected")
+    }
+    
+    public func onReconnecting() {
+        print("::realtime reconnecting")
+    }
+    
+    public func onDisconnected(withError err: QError?) {
+        guard let error = err else { return }
+        print("::realtime disconnected \(error.message)")
+    }
+}
