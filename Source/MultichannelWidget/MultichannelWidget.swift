@@ -65,6 +65,16 @@ public class MultichannelWidget {
         }
     }
     
+    public func remove(deviceToken token: String, onSuccess: @escaping (Bool) -> Void, onError: @escaping (String) -> Void){
+        self.manager.deviceToken = token
+        manager.qiscus.shared.removeDeviceToken(token: token, isDevelopment: false, onSuccess: { (success) in
+            if success { self.manager.deviceToken = "" }
+            onSuccess(success)
+        }) { (error) in
+            onError(error.message)
+        }
+    }
+    
     public func isLoggedIn() -> Bool {
         return manager.qiscus.isLogined
     }
