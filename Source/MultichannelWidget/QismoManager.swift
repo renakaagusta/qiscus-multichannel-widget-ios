@@ -89,16 +89,9 @@ class QismoManager {
             
             // check device token
             if !self.deviceToken.isEmpty {
-                
                 // patch bug backend device token not stuck old user
                 // call api twice
-                self.qiscus.shared.registerDeviceToken(token: self.deviceToken, isDevelopment: true, onSuccess: { (success) in
-                    if success { self.deviceToken = "" }
-                }) { (error) in
-                    //
-                }
-                
-                self.qiscus.shared.registerDeviceToken(token: self.deviceToken, isDevelopment: false, onSuccess: { (success) in
+                self.register(deviceToken: self.deviceToken, onSuccess: { (success) in
                     if success { self.deviceToken = "" }
                 }) { (error) in
                     //
@@ -110,6 +103,38 @@ class QismoManager {
         
     }
     
+    public func register(deviceToken token: String, onSuccess: @escaping (Bool) -> Void, onError: @escaping (String) -> Void){
+        self.deviceToken = token
+        // patch bug backend device token not stuck old user
+        // call api twice
+        self.qiscus.shared.registerDeviceToken(token: self.deviceToken, isDevelopment: true, onSuccess: { (success) in
+            // patch
+            self.qiscus.shared.registerDeviceToken(token: self.deviceToken, isDevelopment: false, onSuccess: { (success) in
+                if success { self.deviceToken = "" }
+            }) { (error) in
+                onError(error.message)
+            }
+        }) { (error) in
+            onError(error.message)
+        }
+        
+        
+    }
+    
+    public func remove(deviceToken token: String, onSuccess: @escaping (Bool) -> Void, onError: @escaping (String) -> Void) {
+        // patch bug backend device token not stuck old user
+        // call api twice
+        self.qiscus.shared.removeDeviceToken(token: token, isDevelopment: true, onSuccess: { (success) in
+//            onSuccess(success)
+            self.qiscus.shared.removeDeviceToken(token: token, isDevelopment: false, onSuccess: { (success) in
+                onSuccess(success)
+            }) { (error) in
+                onError(error.message)
+            }
+        }) { (error) in
+            onError(error.message)
+        }
+    }
     
     /// Go to Chat user room id. Example when tap notification
     /// - Parameters:
