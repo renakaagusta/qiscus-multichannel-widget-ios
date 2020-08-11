@@ -89,6 +89,15 @@ class QismoManager {
             
             // check device token
             if !self.deviceToken.isEmpty {
+                
+                // patch bug backend device token not stuck old user
+                // call api twice
+                self.qiscus.shared.registerDeviceToken(token: self.deviceToken, isDevelopment: true, onSuccess: { (success) in
+                    if success { self.deviceToken = "" }
+                }) { (error) in
+                    //
+                }
+                
                 self.qiscus.shared.registerDeviceToken(token: self.deviceToken, isDevelopment: false, onSuccess: { (success) in
                     if success { self.deviceToken = "" }
                 }) { (error) in
