@@ -29,7 +29,6 @@ class QismoManager {
     var deviceToken : String = "" // save device token for 1st time or before login
     let imageCache = NSCache<NSString, UIImage>()
     
-    
     func setUser(id: String, username: String, avatarUrl: String = "") {
         self.userID = id
         self.username = username
@@ -37,6 +36,12 @@ class QismoManager {
     }
     
     func clear() {
+        self.remove(deviceToken: self.deviceToken, onSuccess: { (success) in
+            //
+        }) { (error) in
+            //
+        }
+        
         self.userID = ""
         self.username = ""
         self.qiscus.clearUser { (error) in
@@ -63,50 +68,52 @@ class QismoManager {
     }
     
     func initiateChat(withTitle title: String, andSubtitle subtitle: String, userId: String? = nil, username: String? = nil,avatar: String? = nil, extras: String? = nil, userProperties: [[String:Any]]? = nil, callback: @escaping (UIViewController) -> Void)  {
-        
+        // chat session is exist
         if let savedRoomId = SharedPreferences.getRoomId() {
+            self.updateDeviceToken()
+            
             let ui = UIChatViewController()
             ui.roomId = savedRoomId
             ui.chatTitle = title
             ui.chatSubtitle = subtitle
             callback(ui)
-            return
-        }
-        
-        let param = [
-            "app_id"            : appID,
-            "user_id"           : userId ?? self.userID,
-            "name"              : username ?? self.username,
-            "avatar"            : avatar ?? self.avatarUrl,
-            "extras"            : extras ?? "{}",
-            "user_properties"   : userProperties != nil ? userProperties ?? [] : [],
-            "nonce"             : ""
-            ] as [String : Any]
-        
-        self.network.initiateChat(param: param as [String : Any], onSuccess: { roomId in
-            SharedPreferences.saveTitle(title: title)
-            SharedPreferences.saveSubtitle(subtitle: subtitle)
-            SharedPreferences.saveParam(param: param)
-            SharedPreferences.saveRoomId(id: roomId)
-            let ui = UIChatViewController()
-            ui.roomId = roomId
-            ui.chatTitle = title
-            ui.chatSubtitle = subtitle
-            callback(ui)
+        }else {
+            let param = [
+                "app_id"            : appID,
+                "user_id"           : userId ?? self.userID,
+                "name"              : username ?? self.username,
+                "avatar"            : avatar ?? self.avatarUrl,
+                "extras"            : extras ?? "{}",
+                "user_properties"   : userProperties != nil ? userProperties ?? [] : [],
+                "nonce"             : ""
+                ] as [String : Any]
             
-            // check device token
-            if !self.deviceToken.isEmpty {
-                // patch bug backend device token not stuck old user
-                // call api twice
-                self.register(deviceToken: self.deviceToken, onSuccess: { (success) in
-                    if success { self.deviceToken = "" }
-                }) { (error) in
-                    //
-                }
-            }
-        }, onError: { error in
-            debugPrint("failed initiate chat, \(error)")
-        })
+            self.network.initiateChat(param: param as [String : Any], onSuccess: { roomId in
+                SharedPreferences.saveTitle(title: title)
+                SharedPreferences.saveSubtitle(subtitle: subtitle)
+                SharedPreferences.saveParam(param: param)
+                SharedPreferences.saveRoomId(id: roomId)
+                self.updateDeviceToken()
+                
+                // prepare UI
+                let ui = UIChatViewController()
+                ui.roomId = roomId
+                ui.chatTitle = title
+                ui.chatSubtitle = subtitle
+                callback(ui)
+            }, onError: { error in
+                debugPrint("failed initiate chat, \(error)")
+            })
+        }
+    }
+    
+    /// Update device token when initiate chat and relogin
+    private func updateDeviceToken() {
+        self.register(deviceToken: self.deviceToken, onSuccess: { (success) in
+            //
+        }) { (error) in
+            //
+        }
     }
     
     public func register(deviceToken token: String, onSuccess: @escaping (Bool) -> Void, onError: @escaping (String) -> Void){
@@ -114,7 +121,7 @@ class QismoManager {
         // patch bug backend device token not stuck old user
         // call api twice
         self.qiscus.shared.registerDeviceToken(token: self.deviceToken, isDevelopment: true, onSuccess: { (success) in
-            if success { self.deviceToken = "" }
+            onSuccess(success)
         }) { (error) in
             onError(error.message)
         }
