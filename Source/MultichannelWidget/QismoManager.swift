@@ -100,7 +100,6 @@ class QismoManager {
         }, onError: { error in
             debugPrint("failed initiate chat, \(error)")
         })
-        
     }
     
     public func register(deviceToken token: String, onSuccess: @escaping (Bool) -> Void, onError: @escaping (String) -> Void){
@@ -108,29 +107,17 @@ class QismoManager {
         // patch bug backend device token not stuck old user
         // call api twice
         self.qiscus.shared.registerDeviceToken(token: self.deviceToken, isDevelopment: true, onSuccess: { (success) in
-            // patch
-            self.qiscus.shared.registerDeviceToken(token: self.deviceToken, isDevelopment: false, onSuccess: { (success) in
-                if success { self.deviceToken = "" }
-            }) { (error) in
-                onError(error.message)
-            }
+            if success { self.deviceToken = "" }
         }) { (error) in
             onError(error.message)
         }
-        
-        
     }
     
     public func remove(deviceToken token: String, onSuccess: @escaping (Bool) -> Void, onError: @escaping (String) -> Void) {
         // patch bug backend device token not stuck old user
         // call api twice
         self.qiscus.shared.removeDeviceToken(token: token, isDevelopment: true, onSuccess: { (success) in
-//            onSuccess(success)
-            self.qiscus.shared.removeDeviceToken(token: token, isDevelopment: false, onSuccess: { (success) in
-                onSuccess(success)
-            }) { (error) in
-                onError(error.message)
-            }
+            onSuccess(success)
         }) { (error) in
             onError(error.message)
         }
@@ -187,8 +174,6 @@ class QismoManager {
             }
         }
     }
-    
-    
 }
 
 extension QismoManager : QiscusConnectionDelegate {
@@ -207,6 +192,5 @@ extension QismoManager : QiscusConnectionDelegate {
     public func onDisconnected(withError err: QError?) {
         print("::realtime disconnected \(err?.message)")
     }
-    
     
 }
