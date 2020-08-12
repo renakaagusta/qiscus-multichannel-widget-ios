@@ -21,6 +21,8 @@ class QismoManager {
     private var userID : String = ""
     private var username : String = ""
     private var avatarUrl: String = ""
+    
+    
     var network : QismoNetworkManager!
     var qiscus : QiscusCore!
     var qiscusServer = QiscusServer(url: URL(string: "https://api.qiscus.com")!, realtimeURL: "", realtimePort: 80)
@@ -48,10 +50,15 @@ class QismoManager {
         self.appID = appID
         self.qiscus = QiscusCore()
         self.qiscus.setup(AppID: appID)
-        _ = self.qiscus.connect(delegate: self)
+        
         self.network = QismoNetworkManager(qiscusCore: self.qiscus)
         if let _server = server {
             self.qiscusServer = _server
+        }
+        
+        if let user = self.qiscus.getUserData() {
+            _ = self.qiscus.connect(delegate: self)
+            self.setUser(id: user.id, username: user.name, avatarUrl: user.avatarUrl.absoluteString)
         }
     }
     
