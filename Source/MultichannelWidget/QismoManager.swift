@@ -120,7 +120,7 @@ class QismoManager {
         self.deviceToken = token
         // patch bug backend device token not stuck old user
         // call api twice
-        self.qiscus.shared.registerDeviceToken(token: self.deviceToken, isDevelopment: true, onSuccess: { (success) in
+        self.qiscus.shared.registerDeviceToken(token: self.deviceToken, isDevelopment: false, onSuccess: { (success) in
             onSuccess(success)
         }) { (error) in
             onError(error.message)
@@ -129,6 +129,13 @@ class QismoManager {
     
     public func remove(deviceToken token: String, onSuccess: @escaping (Bool) -> Void, onError: @escaping (String) -> Void) {
         // patch bug backend device token not stuck old user
+        // call api twice
+        self.qiscus.shared.removeDeviceToken(token: token, isDevelopment: false, onSuccess: { (success) in
+            onSuccess(success)
+        }) { (error) in
+            onError(error.message)
+        }
+        
         // call api twice
         self.qiscus.shared.removeDeviceToken(token: token, isDevelopment: true, onSuccess: { (success) in
             onSuccess(success)
