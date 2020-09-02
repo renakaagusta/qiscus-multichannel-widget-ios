@@ -396,11 +396,38 @@ class UIChatViewController: UIViewController {
         
         if message.type == "text" {
             if (message.isMyComment() == true || message.userEmail.isEmpty){
+                
+                if message.message.contains("[file]") && message.message.contains("[/file]") {
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "qImagesRightCell", for: indexPath) as! QImagesRightCell
+                    cell.actionBlock = { comment in
+                        
+                        let fullImage = FullImageViewController(nibName: "FullImageViewController", bundle: MultichannelWidget.bundle)
+                        fullImage.message = comment
+                        self.navigationController?.pushViewController(fullImage, animated: true)
+                    }
+                    
+                    cell.cellMenu = self
+                    return cell
+                }
+                
                 let cell = tableView.dequeueReusableCell(withIdentifier: "qTextRightCell", for: indexPath) as! QTextRightCell
                 cell.menuConfig = menuConfig
                 cell.cellMenu = self
                 return cell
             }else{
+                if message.message.contains("[file]") && message.message.contains("[/file]") {
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "qImagesLeftCell", for: indexPath) as! QImagesLeftCell
+                    cell.actionBlock = { comment in
+                        
+                        let fullImage = FullImageViewController(nibName: "FullImageViewController", bundle: MultichannelWidget.bundle)
+                        fullImage.message = comment
+                        self.navigationController?.pushViewController(fullImage, animated: true)
+                    }
+                    
+                    cell.cellMenu = self
+                    return cell
+                }
+                
                 let cell = tableView.dequeueReusableCell(withIdentifier: "qTextLeftCell", for: indexPath) as! QTextLeftCell
                 if self.room?.type == .group {
                     cell.colorName = colorName
