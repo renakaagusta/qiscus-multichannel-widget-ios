@@ -116,6 +116,7 @@ class UIChatViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupUI()
+        self.viewChatInput.isHidden = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -204,7 +205,7 @@ class UIChatViewController: UIViewController {
         } else {
             self.setupInputBar(self.chatInput)
         }
-        
+        self.viewChatInput.isHidden = false
     }
     
     private func setupInputBar(_ inputchatview: UIChatInput) {
