@@ -120,8 +120,13 @@ class UIChatPresenter: UIChatUserInteraction {
                 return
             }
             
+            var mutableComments = comments
+            if let syncedLocalComment = self?.qiscus.database.message.find(roomId: room.id) {
+                mutableComments = syncedLocalComment
+            }
+            
             instance.loadComments(withID: room.id)
-            instance.comments = instance.groupingComments(comments)
+            instance.comments = instance.groupingComments(mutableComments)
             
             if let lastComment = room.lastComment {
                 instance.qiscus.shared.markAsRead(roomId: lastComment.chatRoomId, commentId: lastComment.id)
@@ -311,8 +316,11 @@ class UIChatPresenter: UIChatUserInteraction {
     }
     
     func sendMessage(withComment comment: QMessage, onSuccess: @escaping (QMessage) -> Void, onError: @escaping (String) -> Void) {
-        addNewCommentUI(comment, isIncoming: false)
-        self.qiscus.shared.sendMessage(message: comment, onSuccess: { [weak self] (comment) in
+        let pendingComment = comment
+        pendingComment.status = .pending
+        addNewCommentUI(pendingComment, isIncoming: false)
+        self.qiscus.database.message.save([pendingComment])
+        self.qiscus.shared.sendMessage(message: pendingComment, onSuccess: { [weak self] (comment) in
             guard let self = self else {
                 return
             }
