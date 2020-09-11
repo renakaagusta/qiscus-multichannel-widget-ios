@@ -95,6 +95,7 @@ class UIChatPresenter: UIChatUserInteraction {
     }
     
     func resendPendingComment() {
+        self.qiscus.connect()
         guard let comments = self.qiscus.database.message.find(status: .pending) else { return }
         comments.reversed().forEach { (c) in
             // validation comment prevent id
