@@ -94,6 +94,19 @@ class UIChatPresenter: UIChatUserInteraction {
         return comment
     }
     
+    func resendPendingComment() {
+        guard let comments = self.qiscus.database.message.find(status: .pending) else { return }
+        comments.reversed().forEach { (c) in
+            // validation comment prevent id
+            if c.uniqueId.isEmpty { self.qiscus.database.message.evaluate(); return }
+            self.qiscus.shared.sendMessage(message: c, onSuccess: { (response) in
+                
+            }, onError: { (error) in
+                
+            })
+        }
+    }
+    
     func loadRoom(withId roomId: String) {
         // Show Loading
         self.viewPresenter?.onLoading(message: "Load Message...")
@@ -120,13 +133,12 @@ class UIChatPresenter: UIChatUserInteraction {
                 return
             }
             
-            var mutableComments = comments
-            if let syncedLocalComment = self?.qiscus.database.message.find(roomId: room.id) {
-                mutableComments = syncedLocalComment
-            }
-            
             instance.loadComments(withID: room.id)
-            instance.comments = instance.groupingComments(mutableComments)
+            if let localComments = self?.qiscus.database.message.find(roomId: room.id) {
+                instance.comments = instance.groupingComments(localComments)
+            } else {
+                instance.comments = instance.groupingComments(comments)
+            }
             
             if let lastComment = room.lastComment {
                 instance.qiscus.shared.markAsRead(roomId: lastComment.chatRoomId, commentId: lastComment.id)
@@ -315,12 +327,10 @@ class UIChatPresenter: UIChatUserInteraction {
         }
     }
     
-    func sendMessage(withComment comment: QMessage, onSuccess: @escaping (QMessage) -> Void, onError: @escaping (String) -> Void) {
-        let pendingComment = comment
-        pendingComment.status = .pending
-        addNewCommentUI(pendingComment, isIncoming: false)
-        self.qiscus.database.message.save([pendingComment])
-        self.qiscus.shared.sendMessage(message: pendingComment, onSuccess: { [weak self] (comment) in
+   func sendMessage(withComment comment: QMessage, onSuccess: @escaping (QMessage) -> Void, onError: @escaping (String) -> Void) {
+        addNewCommentUI(comment, isIncoming: false)
+        self.qiscus.database.message.save([comment])
+        self.qiscus.shared.sendMessage(message: comment, onSuccess: { [weak self] (comment) in
             guard let self = self else {
                 return
             }

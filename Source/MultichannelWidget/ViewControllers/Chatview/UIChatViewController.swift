@@ -134,7 +134,12 @@ class UIChatViewController: UIViewController {
         center.addObserver(self, selector: #selector(UIChatViewController.keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         center.addObserver(self, selector: #selector(UIChatViewController.keyboardChange(_:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         center.addObserver(self,selector: #selector(reSubscribeRoom(_:)), name: Notification.Name(rawValue: "reSubscribeRoom"),object: nil)
+        center.addObserver(self,selector: #selector(resendPendingMessage), name: WidgetReachabilityConnect, object: nil)
         view.endEditing(true)
+    }
+    
+    @objc func resendPendingMessage() {
+        presenter.resendPendingComment()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -145,6 +150,7 @@ class UIChatViewController: UIViewController {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name(rawValue: "reSubscribeRoom"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: WidgetReachabilityConnect, object: nil)
         view.endEditing(true)
         
         if let customNavigationColor = ColorConfiguration.navigationColor {
