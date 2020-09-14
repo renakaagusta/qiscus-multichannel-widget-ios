@@ -54,6 +54,7 @@ class QismoManager {
     func setup(appID: String, server : QiscusServer? = nil) {
         self.appID = appID
         self.qiscus = QiscusCore()
+        self.qiscus.connectionDelegate = self
         self.qiscus.setup(AppID: appID)
         
         self.network = QismoNetworkManager(qiscusCore: self.qiscus)
@@ -71,7 +72,7 @@ class QismoManager {
         // chat session is exist
         if let savedRoomId = SharedPreferences.getRoomId() {
             self.updateDeviceToken()
-            
+            self.qiscus.connect()
             let ui = UIChatViewController()
             ui.roomId = savedRoomId
             ui.chatTitle = title
