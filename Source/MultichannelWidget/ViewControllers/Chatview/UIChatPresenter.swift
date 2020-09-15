@@ -158,7 +158,14 @@ class UIChatPresenter: UIChatUserInteraction {
             
             instance.loadComments(withID: room.id)
             if let localComments = self?.qiscus.database.message.find(roomId: room.id) {
-                instance.comments = instance.groupingComments(localComments)
+                let nonDeletedComments = localComments.filter { (message) -> Bool in
+                    if SharedPreferences.getDeletedCommentUniqueId()?.contains(message.uniqueId) ?? false {
+                        return false
+                    }
+                    
+                    return true
+                }
+                instance.comments = instance.groupingComments(nonDeletedComments)
             } else {
                 instance.comments = instance.groupingComments(comments)
             }
