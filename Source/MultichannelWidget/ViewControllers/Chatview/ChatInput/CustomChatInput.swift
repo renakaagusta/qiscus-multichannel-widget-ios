@@ -546,6 +546,8 @@ extension UIChatViewController: UIDocumentPickerDelegate{
                                                 ]
                                                 
                                                 message.message = "Send Attachment"
+                                                message.status = .pending
+                                                message.userEmail = SharedPreferences.getQiscusAccount() ?? ""
                                                 self?.send(message: message, onSuccess: { (comment) in
                                                     debugPrint(message)
                                                 }, onError: { (error) in
@@ -590,6 +592,8 @@ extension UIChatViewController: UIDocumentPickerDelegate{
                         ]
                         
                         message.message = "Send Attachment"
+                        message.status = .pending
+                        message.userEmail = SharedPreferences.getQiscusAccount() ?? ""
                         self?.send(message: message, onSuccess: { (comment) in
                             debugPrint(message)
                         }, onError: { (error) in
@@ -781,6 +785,8 @@ extension UIChatViewController : UIImagePickerControllerDelegate, UINavigationCo
                                             ]
                                             
                                             message.message = "Send Attachment"
+                                            message.status = .pending
+                                            message.userEmail = SharedPreferences.getQiscusAccount() ?? ""
                                             self?.send(message: message, onSuccess: { (comment) in
                                                 debugPrint(message)
                                             }, onError: { (error) in

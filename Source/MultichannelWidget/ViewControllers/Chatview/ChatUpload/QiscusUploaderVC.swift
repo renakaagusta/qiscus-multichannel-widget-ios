@@ -82,6 +82,8 @@ class QiscusUploaderVC: UIViewController, UIScrollViewDelegate {
                     "caption"   : ""
                 ]
                 message.message = "Send Image"
+                message.status = .pending
+                message.userEmail = SharedPreferences.getQiscusAccount() ?? ""
                 self.imageData.append(message)
             }, onError: { (error) in
                 //error
