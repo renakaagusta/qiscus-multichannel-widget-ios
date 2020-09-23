@@ -193,7 +193,7 @@ extension QMessage {
             let url = getAttachmentURL(message: message)
             
             switch self.fileExtension(fromURL: url) {
-            case "jpg","jpg_","png","png_","gif","gif_":
+            case "jpg","jpg_","png","png_","gif","gif_", "jpeg":
                 return .image
             case "m4a","m4a_","aac","aac_","mp3","mp3_":
                 return .audio

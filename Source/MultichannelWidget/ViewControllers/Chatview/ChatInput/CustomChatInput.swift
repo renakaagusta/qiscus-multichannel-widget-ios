@@ -132,7 +132,7 @@ class CustomChatInput: UIChatInput {
             if let payload = comment.payload, let caption = payload["caption"] as? String, !caption.isEmpty {
                 self.tvReply.text = caption
             }else {
-                self.tvReply.text = "File Attachment"
+                self.tvReply.text = comment.fileName(text: comment.message)
             }
         }else {
             self.widthReplyImage.constant = 0
