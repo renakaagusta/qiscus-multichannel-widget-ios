@@ -886,7 +886,6 @@ extension UIChatViewController: UITableViewDataSource {
             label.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
             label.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 0).isActive = true
             label.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -8).isActive = true
-            label.widthAnchor.constraint(equalToConstant: 183).isActive = true
             
             return containerView
             
