@@ -21,7 +21,7 @@
                         <rect key="frame" x="20" y="0.0" width="228.5" height="227"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rXz-FS-aHg" userLabel="lblDate">
-                        <rect key="frame" x="256.5" y="0.0" width="38.5" height="14"/>
+                        <rect key="frame" x="256.5" y="0.0" width="28.5" height="14"/>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -50,7 +50,6 @@
                     <constraint firstItem="vmb-eu-5Ts" firstAttribute="centerX" secondItem="e3U-nm-dkv" secondAttribute="centerX" id="ULk-Ki-Lzy"/>
                     <constraint firstItem="YJe-iK-bzn" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="eu1-6U-37q" secondAttribute="trailing" id="ZcK-yw-0OH"/>
                     <constraint firstItem="YJe-iK-bzn" firstAttribute="top" secondItem="e3U-nm-dkv" secondAttribute="bottom" constant="7" id="Zel-t1-xVa"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="rXz-FS-aHg" secondAttribute="trailing" constant="9" id="bU2-Qh-35i"/>
                     <constraint firstItem="rXz-FS-aHg" firstAttribute="top" secondItem="eu1-6U-37q" secondAttribute="top" id="cEL-t2-hTJ"/>
                     <constraint firstItem="rXz-FS-aHg" firstAttribute="leading" secondItem="eu1-6U-37q" secondAttribute="trailing" constant="8" id="cfh-4z-uGN"/>
                     <constraint firstItem="vmb-eu-5Ts" firstAttribute="centerY" secondItem="e3U-nm-dkv" secondAttribute="centerY" id="d9D-nu-Kq7"/>
