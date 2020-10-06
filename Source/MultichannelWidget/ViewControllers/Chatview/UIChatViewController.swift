@@ -641,7 +641,39 @@ class UIChatViewController: UIViewController {
             
             return cell
             
+        } else if message.type.contains("image/") {
+            if (message.isMyComment() == true || message.userEmail.isEmpty){
+                                    let cell = tableView.dequeueReusableCell(withIdentifier: "qImagesRightCell", for: indexPath) as! QImagesRightCell
+            //                        cell.menuConfig = menuConfig
+                                    cell.actionBlock = { comment in
+                                     
+                                      let fullImage = FullImageViewController(nibName: "FullImageViewController", bundle: MultichannelWidget.bundle)
+                                      fullImage.message = comment
+                                      self.navigationController?.pushViewController(fullImage, animated: true)
+                                    }
+
+                                    cell.cellMenu = self
+                                    return cell
+                                }else{
+                                    let cell = tableView.dequeueReusableCell(withIdentifier: "qImagesLeftCell", for: indexPath) as! QImagesLeftCell
+            //                        if self.room?.type == .group {
+            //                            cell.colorName = colorName
+            //                            cell.isPublic = true
+            //                        }else {
+            //                            cell.isPublic = false
+            //                        }
+                                    cell.actionBlock = { comment in
+                                       
+                                        let fullImage = FullImageViewController(nibName: "FullImageViewController", bundle: MultichannelWidget.bundle)
+                                        fullImage.message = comment
+                                        self.navigationController?.pushViewController(fullImage, animated: true)
+                                      }
+
+                                    cell.cellMenu = self
+                                    return cell
+                                }
         }
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "emptyCell", for: indexPath) as! EmptyCell
         return cell
     }
