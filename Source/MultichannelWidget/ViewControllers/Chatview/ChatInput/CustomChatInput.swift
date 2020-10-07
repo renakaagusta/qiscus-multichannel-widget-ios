@@ -545,6 +545,18 @@ extension UIChatViewController: UIDocumentPickerDelegate{
                                                     "caption"   : ""
                                                 ]
                                                 
+                                                if isImage {
+                                                    message.payload = [
+                                                        "type"      : "image/\(message.fileExtension(fromURL: fileModel.url.absoluteString))",
+                                                        "content"   : [
+                                                            "url"       : fileModel.url.absoluteString,
+                                                            "file_name" : fileModel.name,
+                                                            "size"      : fileModel.size,
+                                                            "caption"   : ""
+                                                        ]
+                                                    ]
+                                                }
+                                                
                                                 message.message = "Send Attachment"
                                                 message.status = .pending
                                                 message.userEmail = SharedPreferences.getQiscusAccount() ?? ""
@@ -769,7 +781,7 @@ extension UIChatViewController : UIImagePickerControllerDelegate, UINavigationCo
                 
                 QPopUpView.showAlert(withTarget: self, image: thumbImage, message:"Are you sure to send this video?", isVideoImage: true,
                                      doneAction: {
-
+                                        
                                         let fileModel = FileUploadModel()
                                         fileModel.name = fileName
                                         fileModel.data = mediaData!

@@ -74,12 +74,15 @@ class QiscusUploaderVC: UIViewController, UIScrollViewDelegate {
                 self.hiddenProgress()
                 
                 let message = QMessage()
-                message.type = "file_attachment"
+                message.type = "custom"
                 message.payload = [
-                    "url"       : file.url.absoluteString,
-                    "file_name" : file.name,
-                    "size"      : file.size,
-                    "caption"   : ""
+                    "type"      : "image/\(message.fileExtension(fromURL: file.url.absoluteString))",
+                    "content"   : [
+                        "url"       : file.url.absoluteString,
+                        "file_name" : file.name,
+                        "size"      : file.size,
+                        "caption"   : ""
+                    ]
                 ]
                 message.message = "Send Image"
                 message.status = .pending
@@ -198,7 +201,9 @@ class QiscusUploaderVC: UIViewController, UIScrollViewDelegate {
         if type == .image {
             
             if (mediaCaption.text != TextConfiguration.sharedInstance.captionPlaceholder ){
-                self.imageData.first?.payload![ "caption" ] = mediaCaption.text
+                var content = self.imageData.first?.payload!["content"] as? [String: Any]
+                content?["caption"] = mediaCaption.text
+                self.imageData.first?.payload!["content"] = content
             }
             
             let _ = self.navigationController?.popViewController(animated: true)
