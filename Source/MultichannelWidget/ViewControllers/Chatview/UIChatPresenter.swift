@@ -163,6 +163,10 @@ class UIChatPresenter: UIChatUserInteraction {
                         return false
                     }
                     
+                    if message.typeMessage == .system {
+                        return false
+                    }
+                    
                     return true
                 }
                 instance.comments = instance.groupingComments(nonDeletedComments)
@@ -401,6 +405,9 @@ class UIChatPresenter: UIChatUserInteraction {
     
     private func addNewCommentUI(_ message: QMessage, isIncoming: Bool) {
         // Check first, if the message already deleted
+        if message.typeMessage == .system {
+            return
+        }
         
         if SharedPreferences.getDeletedCommentUniqueId()?.contains(message.uniqueId) ?? false {
             return
