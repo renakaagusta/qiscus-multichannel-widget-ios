@@ -164,7 +164,7 @@ class UIChatPresenter: UIChatUserInteraction {
                     }
                     
                     if message.typeMessage == .system {
-                        return false
+                        return ChatConfig.showSystemMessage
                     }
                     
                     return true
@@ -405,7 +405,7 @@ class UIChatPresenter: UIChatUserInteraction {
     
     private func addNewCommentUI(_ message: QMessage, isIncoming: Bool) {
         // Check first, if the message already deleted
-        if message.typeMessage == .system {
+        if message.typeMessage == .system && !ChatConfig.showSystemMessage {
             return
         }
         

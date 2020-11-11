@@ -454,7 +454,8 @@ class UIChatViewController: UIViewController {
                 return cell
             }
         } else if message.type == "system_event" {
-            return EmptyCell()
+            let cell = tableView.dequeueReusableCell(withIdentifier: "qSystemCell", for: indexPath) as! QSystemCell
+            return cell
         } else if  message.type == "file_attachment" {
             guard let payload = message.payload else {
                     let cell = tableView.dequeueReusableCell(withIdentifier: "emptyCell", for: indexPath) as! EmptyCell
