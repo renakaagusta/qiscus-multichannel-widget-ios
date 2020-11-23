@@ -269,6 +269,8 @@ class UIChatViewController: UIViewController {
         self.chatTitleView = UIChatNavigation(frame: self.navigationController?.navigationBar.frame ?? CGRect.zero)
         self.chatTitleView.labelTitle.text = self.chatTitle
         self.chatTitleView.labelSubtitle.text = self.chatSubtitle
+        SharedPreferences.saveTitle(title: self.chatTitleView.labelTitle.text ?? "")
+        SharedPreferences.saveSubtitle(subtitle: self.chatTitleView.labelSubtitle.text ?? "")
         self.chatTitleView.labelTitle.textColor = ColorConfiguration.navigationTitleColor
         self.chatTitleView.labelSubtitle.textColor = ColorConfiguration.navigationTitleColor
         self.navigationItem.titleView = chatTitleView

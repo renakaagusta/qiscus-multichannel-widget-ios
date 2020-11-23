@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import MultichannelWidget
 import QiscusCore
+import Localize_Swift
 
 enum ChatTransitionType {
     case push(animated: Bool)
@@ -37,7 +38,7 @@ final class ChatManager {
     
     func startChat(from viewController: UIViewController, extras: String = "", userProperties: [[String: String]] = [], transition: ChatTransitionType = .push(animated: true)) {
         
-        widget.prepareChat(withTitle: "Customer Care", andSubtitle: "ready to serve")
+        widget.prepareChat(withTitle: "TITLE".localized(), andSubtitle: "SUBTITLE".localized())
 //            .setNavigationColor(color: #colorLiteral(red: 0.2202146215, green: 0.6294460518, blue: 0.9050356218, alpha: 1))
 //            .setNavigationTitleColor(color: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0))
 //            .setRightBubbleColor(color: #colorLiteral(red: 0.2202146215, green: 0.6294460518, blue: 0.9050356218, alpha: 1))
