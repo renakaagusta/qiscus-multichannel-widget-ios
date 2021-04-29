@@ -694,7 +694,7 @@ extension UIChatViewController : UIImagePickerControllerDelegate, UINavigationCo
                 }else{
                     let result = PHAsset.fetchAssets(withALAssetURLs: [imageURL], options: nil)
                     let asset = result.firstObject
-                    imageName = "\((asset?.value(forKey: "filename"))!)"
+                    imageName = "\((asset?.value(forKey: "filename")) ?? "asset")"
                     imageName = imageName.replacingOccurrences(of: "HEIC", with: "jpg")
                     let imageSize = image.size
                     var bigPart = CGFloat(0)
