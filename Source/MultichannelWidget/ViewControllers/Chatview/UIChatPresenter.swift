@@ -493,6 +493,10 @@ class UIChatPresenter: UIChatUserInteraction {
 
 // MARK: Core Delegate
 extension UIChatPresenter : QiscusCoreRoomDelegate {
+    func onMessageUpdated(message: QMessage) {
+        
+    }
+    
     func onUserOnlinePresence(userId: String, isOnline: Bool, lastSeen: Date) {
         debugPrint(userId)
     }
