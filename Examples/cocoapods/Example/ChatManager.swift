@@ -19,13 +19,16 @@ enum ChatTransitionType {
 
 final class ChatManager {
     static let shared: ChatManager = ChatManager()
-    
     lazy var widget: MultichannelWidget = {
-       return MultichannelWidget(appID: "karm-gzu41e4e4dv9fu3f")
+       return MultichannelWidget(appID: "hat-ppxmocchbbcbhopzk")
     }()
     
     func setUser(id: String, displayName: String, avatarUrl: String = "") {
         widget.setUser(id: id, displayName: displayName, avatarUrl: avatarUrl)
+    }
+    
+    func getUser() ->QAccount?{
+        return widget.getUser()
     }
     
     func signOut() {
@@ -36,20 +39,24 @@ final class ChatManager {
         return widget.isLoggedIn()
     }
     
-    func startChat(from viewController: UIViewController, extras: String = "", userProperties: [[String: String]] = [], transition: ChatTransitionType = .push(animated: true)) {
+    func startChat(from viewController: UIViewController, extras: String = "", userProperties: [[String: String]], transition: ChatTransitionType = .push(animated: true)) {
         
-        widget.prepareChat(withTitle: "TITLE".localized(), andSubtitle: "SUBTITLE".localized())
-//            .setNavigationColor(color: #colorLiteral(red: 0.2202146215, green: 0.6294460518, blue: 0.9050356218, alpha: 1))
+        widget.initiateChat(withTitle: "TITLE".localized(), andSubtitle: "SUBTITLE".localized())
+//            .setNavigationColor(color: #colorLiteral(red: 0.1529411765, green: 0.6941176471, blue: 0.6, alpha: 1))
 //            .setNavigationTitleColor(color: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0))
-//            .setRightBubbleColor(color: #colorLiteral(red: 0.2202146215, green: 0.6294460518, blue: 0.9050356218, alpha: 1))
-//            .setLeftBubbleColor(color: #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1))
+//            .setRightBubbleColor(color: #colorLiteral(red: 0.1529411765, green: 0.6941176471, blue: 0.6, alpha: 1))
+//            .setLeftBubbleColor(color: #colorLiteral(red: 0.957, green: 0.957, blue: 0.957, alpha: 1))
 //            .setRightBubblTextColor(color: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0))
-//            .setLeftBubblTextColor(color: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0))
+//            .setLeftBubblTextColor(color: #colorLiteral(red: 0.4, green: 0.4, blue: 0.4, alpha: 1))
 //            .setTimeLabelTextColor(color: #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1))
-//            .setBaseColor(color: #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1))
+//            .setBaseColor(color: #colorLiteral(red: 0.9782221503, green: 0.9782221503, blue: 0.9782221503, alpha: 1))
 //            .setEmptyTextColor(color: #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1))
 //            .setEmptyBackgroundColor(color: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0))
-            .setShowSystemMessage(isShowing: false)
+            .setShowSystemMessage(isShowing: true)
+            .setShowAvatarSender(isShowing: false)
+            .setShowUsernameSender(isShowing: false)
+            .setUserProperties(properties: userProperties)
+            .setExtras(extras: extras)
             .startChat { (chatViewController) in
                 viewController.navigationController?.setViewControllers([viewController, chatViewController], animated: true)
         }

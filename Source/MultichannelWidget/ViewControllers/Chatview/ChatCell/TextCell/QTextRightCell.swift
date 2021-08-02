@@ -54,7 +54,7 @@ class QTextRightCell: UIBaseChatCell {
         self.status(message: message)
         
         self.lbName.text = "You"
-        self.lbTime.text = self.hour(date: message.timestamp)
+        self.lbTime.text = AppUtil.dateToHour(date: message.date())
         self.tvContent.text = message.message
         self.tvContent.textColor = ColorConfiguration.rightBubbleTextColor
         self.lbNameHeight.constant = 0

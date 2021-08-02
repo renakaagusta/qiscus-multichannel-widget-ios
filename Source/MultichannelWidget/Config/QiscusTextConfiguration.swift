@@ -45,10 +45,10 @@ class TextConfiguration: NSObject {
     var confirmationTitle = "CONFIRMATION"//.getLocalize()
     
     /// Your text to show as content confirmation when you want to upload image, Default value : "Are you sure to send this image?"
-    var confirmationImageUploadText = "UPLOAD_IMAGE_CONFIRMATION"//.getLocalize()
+    var confirmationImageUploadText = "Upload Image Confirmation"
     
     /// Your text to show as content confirmation when you want to upload file, Default value : "Are you sure to send"
-    var confirmationFileUploadText = "UPLOAD_FILE_CONFIRMATION"//.getLocalize()
+    var confirmationFileUploadText = "Upload File Confirmation"
     
     /// Your text in back action, Default value : ""
     var backText = ""

@@ -125,21 +125,14 @@ class UIChatViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if let customNavigationColor = ColorConfiguration.navigationColor {
-            self.navigationOriginColor = self.navigationController?.navigationBar.barTintColor
-            self.navigationController?.navigationBar.barTintColor = customNavigationColor
-        }
+        self.navigationOriginColor = self.navigationController?.navigationBar.barTintColor
+        self.navigationController?.navigationBar.barTintColor =  ColorConfiguration.navigationColor
         self.presenter.attachView(view: self)
         let center: NotificationCenter = NotificationCenter.default
         center.addObserver(self, selector: #selector(UIChatViewController.keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         center.addObserver(self, selector: #selector(UIChatViewController.keyboardChange(_:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         center.addObserver(self,selector: #selector(reSubscribeRoom(_:)), name: Notification.Name(rawValue: "reSubscribeRoom"),object: nil)
-        center.addObserver(self,selector: #selector(resendPendingMessage), name: WidgetReachabilityConnect, object: nil)
         view.endEditing(true)
-    }
-    
-    @objc func resendPendingMessage() {
-        presenter.resendPendingComment()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -150,12 +143,9 @@ class UIChatViewController: UIViewController {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name(rawValue: "reSubscribeRoom"), object: nil)
-        NotificationCenter.default.removeObserver(self, name: WidgetReachabilityConnect, object: nil)
         view.endEditing(true)
         
-        if let customNavigationColor = ColorConfiguration.navigationColor {
-            self.navigationController?.navigationBar.barTintColor = self.navigationOriginColor
-        }
+        self.navigationController?.navigationBar.barTintColor = self.navigationOriginColor
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -289,9 +279,9 @@ class UIChatViewController: UIViewController {
         backIcon.tintColor = ColorConfiguration.navigationTitleColor
         backIcon.contentMode = .scaleAspectFit
         if UIApplication.shared.userInterfaceLayoutDirection == .leftToRight {
-            backIcon.frame = CGRect(x: 0,y: 11,width: 20,height: 20)
+            backIcon.frame = CGRect(x: 0,y: 11,width: 30,height: 25)
         }else{
-            backIcon.frame = CGRect(x: 22,y: 11,width: 20,height: 20)
+            backIcon.frame = CGRect(x: 22,y: 11,width: 30,height: 25)
         }
         
         let backButton = UIButton(frame:CGRect(x: 0,y: 0,width: 30,height: 44))
@@ -319,17 +309,20 @@ class UIChatViewController: UIViewController {
         self.registerClass(nib: UINib(nibName: "QFileRightCell", bundle:MultichannelWidget.bundle), forMessageCellWithReuseIdentifier: "qFileRightCell")
          self.registerClass(nib: UINib(nibName: "QFileLeftCell", bundle:MultichannelWidget.bundle), forMessageCellWithReuseIdentifier: "qFileLeftCell")
         self.registerClass(nib: UINib(nibName: "QImagesLeftCell", bundle:MultichannelWidget.bundle), forMessageCellWithReuseIdentifier: "qImagesLeftCell")
-        self.registerClass(nib: UINib(nibName: "QLocationLeftViewCell", bundle:MultichannelWidget.bundle), forMessageCellWithReuseIdentifier: "qLocationLeftCell")
+        self.registerClass(nib: UINib(nibName: "QLocationLeftCell", bundle:MultichannelWidget.bundle), forMessageCellWithReuseIdentifier: "qLocationLeftCell")
         self.registerClass(nib: UINib(nibName: "QLocationRightCell", bundle:MultichannelWidget.bundle), forMessageCellWithReuseIdentifier: "qLocationRightCell")
-        self.registerClass(nib: UINib(nibName: "QFileLeftCell", bundle:MultichannelWidget.bundle), forMessageCellWithReuseIdentifier: "qFileLeftCell")
-        self.registerClass(nib: UINib(nibName: "QFileRightCell", bundle:MultichannelWidget.bundle), forMessageCellWithReuseIdentifier: "qFileRightCell")
         self.registerClass(nib: UINib(nibName: "QReplyLeftCell", bundle:MultichannelWidget.bundle), forMessageCellWithReuseIdentifier: "qReplyLeftCell")
         self.registerClass(nib: UINib(nibName: "QReplyRightCell", bundle:MultichannelWidget.bundle), forMessageCellWithReuseIdentifier: "qReplyRightCell")
         self.registerClass(nib: UINib(nibName: "EmptyCell", bundle:MultichannelWidget.bundle), forMessageCellWithReuseIdentifier: "emptyCell")
         self.registerClass(nib: UINib(nibName: "QCardLeftCell", bundle: MultichannelWidget.bundle), forMessageCellWithReuseIdentifier: "qCardLeftCell")
+        self.registerClass(nib: UINib(nibName: "QPostbackLeftCell", bundle: MultichannelWidget.bundle), forMessageCellWithReuseIdentifier: "qPostBackLeftCell")
+        self.registerClass(nib: UINib(nibName: "QPostbackRightCell", bundle: MultichannelWidget.bundle), forMessageCellWithReuseIdentifier: "qPostBackRightCell")
         self.registerClass(nib: UINib(nibName: "QSystemCell", bundle:MultichannelWidget.bundle), forMessageCellWithReuseIdentifier: "qSystemCell")
-        
-        
+        self.registerClass(nib: UINib(nibName: "QCarouselCell", bundle: MultichannelWidget.bundle), forMessageCellWithReuseIdentifier: "qCarouselCell")
+        self.registerClass(nib: UINib(nibName: "QVideoRightCell", bundle:MultichannelWidget.bundle), forMessageCellWithReuseIdentifier: "qVideoRightCell")
+        self.registerClass(nib: UINib(nibName: "QVideoLeftCell", bundle:MultichannelWidget.bundle), forMessageCellWithReuseIdentifier: "qVideoLeftCell")
+        self.registerClass(nib: UINib(nibName: "QReplyImageRightCell", bundle:MultichannelWidget.bundle), forMessageCellWithReuseIdentifier: "qReplyImageRightCell")
+        self.registerClass(nib: UINib(nibName: "QReplyImageLeftCell", bundle:MultichannelWidget.bundle), forMessageCellWithReuseIdentifier: "qReplyImageLeftCell")
     }
     
     @objc func goBack() {
@@ -429,6 +422,12 @@ class UIChatViewController: UIViewController {
             }else{
                 if message.message.contains("[file]") && message.message.contains("[/file]") {
                     let cell = tableView.dequeueReusableCell(withIdentifier: "qImagesLeftCell", for: indexPath) as! QImagesLeftCell
+                    if self.room?.type == .group {
+                        cell.colorName = colorName
+                        cell.isPublic = true
+                    }else {
+                        cell.isPublic = false
+                    }
                     cell.actionBlock = { comment in
                         
                         let fullImage = FullImageViewController(nibName: "FullImageViewController", bundle: MultichannelWidget.bundle)
@@ -460,141 +459,74 @@ class UIChatViewController: UIViewController {
             return cell
         } else if  message.type == "file_attachment" {
             guard let payload = message.payload else {
-                    let cell = tableView.dequeueReusableCell(withIdentifier: "emptyCell", for: indexPath) as! EmptyCell
-                    return cell
+                let cell = tableView.dequeueReusableCell(withIdentifier: "emptyCell", for: indexPath) as! EmptyCell
+                return cell
             }
-                
+            
             if let url = payload["url"] as? String {
                 let ext = message.fileExtension(fromURL:url)
+                let urlFile = URL(string: url) ?? URL(string: "https://")
                 if(ext.contains("jpg") || ext.contains("png") || ext.contains("heic") || ext.contains("jpeg") || ext.contains("tif") || ext.contains("gif")){
                     if (message.isMyComment() == true || message.userEmail.isEmpty){
                         let cell = tableView.dequeueReusableCell(withIdentifier: "qImagesRightCell", for: indexPath) as! QImagesRightCell
-//                        cell.menuConfig = menuConfig
                         cell.actionBlock = { comment in
-                         
-                          let fullImage = FullImageViewController(nibName: "FullImageViewController", bundle: MultichannelWidget.bundle)
-                          fullImage.message = comment
-                          self.navigationController?.pushViewController(fullImage, animated: true)
+                            
+                            let fullImage = FullImageViewController(nibName: "FullImageViewController", bundle: MultichannelWidget.bundle)
+                            fullImage.message = comment
+                            self.navigationController?.pushViewController(fullImage, animated: true)
                         }
-
+                        
                         cell.cellMenu = self
                         return cell
                     }else{
                         let cell = tableView.dequeueReusableCell(withIdentifier: "qImagesLeftCell", for: indexPath) as! QImagesLeftCell
-//                        if self.room?.type == .group {
-//                            cell.colorName = colorName
-//                            cell.isPublic = true
-//                        }else {
-//                            cell.isPublic = false
-//                        }
+                        if self.room?.type == .group {
+                            cell.colorName = colorName
+                            cell.isPublic = true
+                        }else {
+                            cell.isPublic = false
+                        }
                         cell.actionBlock = { comment in
-                           
+                            
                             let fullImage = FullImageViewController(nibName: "FullImageViewController", bundle: MultichannelWidget.bundle)
                             fullImage.message = comment
                             self.navigationController?.pushViewController(fullImage, animated: true)
-                          }
-
+                        }
+                        
                         cell.cellMenu = self
                         return cell
                     }
-                } else {
-                    if (message.isMyComment() == true || message.userEmail.isEmpty){
-                        let cell = tableView.dequeueReusableCell(withIdentifier: "qFileRightCell", for: indexPath) as! QFileRightCell
-                        //                        cell.menuConfig = menuConfig
+                } else if(urlFile?.containsVideo == true) {
+                    if (message.isMyComment() == true ){
+                        let cell = tableView.dequeueReusableCell(withIdentifier: "qVideoRightCell", for: indexPath) as! QVideoRightCell
+                        cell.menuConfig = menuConfig
                         cell.cellMenu = self
-                        cell.actionBlock = { [weak self] message in
-                            guard let self = self else {
-                                return
-                            }
-                            if self.isDownloading {
-                                return
-                            }
-                            
-                            message.download(downloadProgress: { (progress) in
-                                self.isDownloading = true
-                                print("progress \(progress)")
-                                if progress == 1 {
-                                    self.isDownloading = false
-                                    self.widthProgress.constant = 0
-                                    return
-                                }
-                                
-                                UIView.animate(withDuration: 0.5) {
-                                    self.widthProgress.constant = CGFloat(progress) * UIScreen.main.bounds.width
-                                    self.view.layoutIfNeeded()
-                                }
-                            }) { (localFileURL) in
-                                let webFileViewController = WebFileViewController()
-                                webFileViewController.localFileUrl = localFileURL
-                                webFileViewController.fileName = message.fileName(text: localFileURL.absoluteString)
-                                self.navigationController?.pushViewController(webFileViewController, animated: true)
-                            }
+                        cell.vc = self
+                        return cell
+                    }
+                    else{
+                        let cell = tableView.dequeueReusableCell(withIdentifier: "qVideoLeftCell", for: indexPath) as! QVideoLeftCell
+                        if self.room?.type == .group {
+                            cell.colorName = colorName
+                            cell.isPublic = true
+                        }else {
+                            cell.isPublic = false
                         }
+                        cell.cellMenu = self
+                        cell.vc = self
+                        return cell
+                    }
+                } else {
+                    if (message.isMyComment() == true){
+                        let cell = tableView.dequeueReusableCell(withIdentifier: "qFileRightCell", for: indexPath) as! QFileRightCell
+                        cell.cellMenu = self
                         
                         return cell
                     } else {
                         let cell = tableView.dequeueReusableCell(withIdentifier: "qFileLeftCell", for: indexPath) as! QFileLeftCell
-                        //                        if self.room?.type == .group {
-                        //                            cell.colorName = colorName
-                        //                            cell.isPublic = true
-                        //                        }else {
-                        //                            cell.isPublic = false
-                        //                        }
                         cell.cellMenu = self
-                        cell.actionBlock = { [weak self] message in
-                            guard let self = self else {
-                                return
-                            }
-                            if self.isDownloading {
-                                return
-                            }
-                            
-                            message.download(downloadProgress: { (progress) in
-                                self.isDownloading = true
-                                print("progress \(progress)")
-                                if progress == 1 {
-                                    self.isDownloading = false
-                                    self.widthProgress.constant = 0
-                                    return
-                                }
-                                
-                                UIView.animate(withDuration: 0.5) {
-                                    self.widthProgress.constant = CGFloat(progress) * UIScreen.main.bounds.width
-                                    self.view.layoutIfNeeded()
-                                }
-                            }) { (localFileURL) in
-                                let webFileViewController = WebFileViewController()
-                                webFileViewController.localFileUrl = localFileURL
-                                webFileViewController.fileName = message.fileName(text: localFileURL.absoluteString)
-                                self.navigationController?.pushViewController(webFileViewController, animated: true)
-                            }
-                        }
-                        
-                        cell.downloadBlock = { [weak self] message in
-                            guard let self = self else {
-                                return
-                            }
-                            
-                            if self.isDownloading {
-                                return
-                            }
-                            message.download(from: self, downloadProgress: { (progress) in
-                                self.isDownloading = true
-                                print("progress \(progress)")
-                                if progress == 1 {
-                                    self.isDownloading = false
-                                    self.widthProgress.constant = 0
-                                    return
-                                }
-                                
-                                UIView.animate(withDuration: 0.5) {
-                                    self.widthProgress.constant = CGFloat(progress) * UIScreen.main.bounds.width
-                                    self.view.layoutIfNeeded()
-                                }
-                            })
-                            
-                        }
-                        return cell
+                        cell.colorName = colorName
+                       return cell
                     }
                 }
             } else {
@@ -615,7 +547,116 @@ class UIChatViewController: UIViewController {
                     return cell
                 }
             }
-        } else if message.type == "reply" {
+        } else if message.type == "location" {
+            if (message.isMyComment() == true){
+                let cell =  tableView.dequeueReusableCell(withIdentifier: "qLocationRightCell", for: indexPath) as! QLocationRightCell
+                return cell
+            }else{
+                let cell = tableView.dequeueReusableCell(withIdentifier: "qLocationLeftCell", for: indexPath) as! QLocationLeftCell
+                if self.room?.type == .group {
+                    cell.isPublic = true
+                    cell.colorName = colorName
+                }else {
+                    cell.isPublic = false
+                }
+                return cell
+            }
+            
+        } else if message.type == "account_linking" {
+            if (message.isMyComment() == true){
+                let cell = tableView.dequeueReusableCell(withIdentifier: "qPostBackRightCell", for: indexPath) as! QPostbackRightCell
+                cell.delegateChat = self
+                return cell
+            } else {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "qPostBackLeftCell", for: indexPath) as! QPostbackLeftCell
+                cell.colorName = colorName
+                cell.delegateChat = self
+                return cell
+            }
+        } else if message.type == "buttons" {
+            if (message.isMyComment() == true){
+                let cell = tableView.dequeueReusableCell(withIdentifier: "qPostBackRightCell", for: indexPath) as! QPostbackRightCell
+                cell.delegateChat = self
+                return cell
+            } else {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "qPostBackLeftCell", for: indexPath) as! QPostbackLeftCell
+                cell.colorName = colorName
+                cell.delegateChat = self
+                return cell
+            }
+        } else if message.type == "button_postback_response" {
+            if (message.isMyComment() == true){
+                let cell = tableView.dequeueReusableCell(withIdentifier: "qTextRightCell", for: indexPath) as! QTextRightCell
+                cell.menuConfig = menuConfig
+                cell.cellMenu = self
+                return cell
+            }else{
+                let cell = tableView.dequeueReusableCell(withIdentifier: "qTextLeftCell", for: indexPath) as! QTextLeftCell
+                if self.room?.type == .group {
+                    cell.colorName = colorName
+                    cell.isPublic = true
+                }else {
+                    cell.isPublic = false
+                }
+                cell.cellMenu = self
+                return cell
+            }
+        } else if message.type == "carousel"{
+            let cell =  tableView.dequeueReusableCell(withIdentifier: "qCarouselCell", for: indexPath) as! QCarouselCell
+            cell.delegateChat = self
+            if self.room?.type == .group {
+                cell.colorName = colorName
+                cell.isPublic = true
+            }else {
+                cell.isPublic = false
+            }
+            return cell
+        }else if message.type == "reply" {
+            guard let payload = message.payload else {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "emptyCell", for: indexPath) as! EmptyCell
+                return cell
+            }
+            
+            if let url = payload["replied_comment_payload"] as? [String:Any] {
+                if let url = url["url"] as? String {
+                    let ext = message.fileExtension(fromURL:url)
+                    if(ext.contains("jpg") || ext.contains("png") || ext.contains("heic") || ext.contains("jpeg") || ext.contains("tif") || ext.contains("gif")){
+                        if (message.isMyComment() == true){
+                            let cell = tableView.dequeueReusableCell(withIdentifier: "qReplyImageRightCell", for: indexPath) as! QReplyImageRightCell
+                            cell.menuConfig = menuConfig
+                            cell.cellMenu = self
+                            return cell
+                        }else{
+                            let cell = tableView.dequeueReusableCell(withIdentifier: "qReplyImageLeftCell", for: indexPath) as! QReplyImageLeftCell
+                            if self.room?.type == .group {
+                                cell.colorName = colorName
+                                cell.isPublic = true
+                            }else {
+                                cell.isPublic = false
+                            }
+                            cell.cellMenu = self
+                            return cell
+                        }
+                    }else{
+                        if message.isMyComment() == true || message.userEmail.isEmpty {
+                            let cell = tableView.dequeueReusableCell(withIdentifier: "qReplyRightCell", for: indexPath) as! QReplyRightCell
+                            cell.cellMenu = self
+                            return cell
+                        } else {
+                            let cell = tableView.dequeueReusableCell(withIdentifier: "qReplyLeftCell", for: indexPath) as! QReplyLeftCell
+                            if self.room?.type == .group {
+                                cell.colorName = colorName
+                                cell.isPublic = true
+                            }else {
+                                cell.isPublic = false
+                            }
+                            cell.cellMenu = self
+                            return cell
+                        }
+                    }
+                }
+            }
+            
             if message.isMyComment() == true || message.userEmail.isEmpty {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "qReplyRightCell", for: indexPath) as! QReplyRightCell
                 cell.cellMenu = self
@@ -634,46 +675,41 @@ class UIChatViewController: UIViewController {
         } else if message.type == "card" {
             let cell = tableView.dequeueReusableCell(withIdentifier: "qCardLeftCell", for: indexPath) as! QCardLeftCell
             cell.menuConfig = menuConfig
-            cell.actionBlock = { customButton in
-                let webView = WebViewController()
-                webView.url = customButton.url
-                self.navigationController?.pushViewController(webView, animated: true)
-            }
+            cell.colorName = colorName
             cell.cellMenu = self
             
             return cell
             
         } else if message.type.contains("image/") {
             if (message.isMyComment() == true || message.userEmail.isEmpty){
-                                    let cell = tableView.dequeueReusableCell(withIdentifier: "qImagesRightCell", for: indexPath) as! QImagesRightCell
-            //                        cell.menuConfig = menuConfig
-                                    cell.actionBlock = { comment in
-                                     
-                                      let fullImage = FullImageViewController(nibName: "FullImageViewController", bundle: MultichannelWidget.bundle)
-                                      fullImage.message = comment
-                                      self.navigationController?.pushViewController(fullImage, animated: true)
-                                    }
-
-                                    cell.cellMenu = self
-                                    return cell
-                                }else{
-                                    let cell = tableView.dequeueReusableCell(withIdentifier: "qImagesLeftCell", for: indexPath) as! QImagesLeftCell
-            //                        if self.room?.type == .group {
-            //                            cell.colorName = colorName
-            //                            cell.isPublic = true
-            //                        }else {
-            //                            cell.isPublic = false
-            //                        }
-                                    cell.actionBlock = { comment in
-                                       
-                                        let fullImage = FullImageViewController(nibName: "FullImageViewController", bundle: MultichannelWidget.bundle)
-                                        fullImage.message = comment
-                                        self.navigationController?.pushViewController(fullImage, animated: true)
-                                      }
-
-                                    cell.cellMenu = self
-                                    return cell
-                                }
+                let cell = tableView.dequeueReusableCell(withIdentifier: "qImagesRightCell", for: indexPath) as! QImagesRightCell
+                cell.actionBlock = { comment in
+                    
+                    let fullImage = FullImageViewController(nibName: "FullImageViewController", bundle: MultichannelWidget.bundle)
+                    fullImage.message = comment
+                    self.navigationController?.pushViewController(fullImage, animated: true)
+                }
+                
+                cell.cellMenu = self
+                return cell
+            }else{
+                let cell = tableView.dequeueReusableCell(withIdentifier: "qImagesLeftCell", for: indexPath) as! QImagesLeftCell
+                if self.room?.type == .group {
+                    cell.colorName = colorName
+                    cell.isPublic = true
+                }else {
+                    cell.isPublic = false
+                }
+                cell.actionBlock = { comment in
+                    
+                    let fullImage = FullImageViewController(nibName: "FullImageViewController", bundle: MultichannelWidget.bundle)
+                    fullImage.message = comment
+                    self.navigationController?.pushViewController(fullImage, animated: true)
+                }
+                
+                cell.cellMenu = self
+                return cell
+            }
         }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "emptyCell", for: indexPath) as! EmptyCell
@@ -845,8 +881,15 @@ extension UIChatViewController: UIChatViewDelegate {
     
     func onRoomResolved(isResolved: Bool) {
         if isResolved {
-            self.isResolved = isResolved
-            self.setupDisableInput(self.disableInput)
+            QismoManager.shared.getSessionChat { (isSession) in
+                if isSession == true {
+                    self.isResolved = isResolved
+                    self.setupDisableInput(self.disableInput)
+                }
+            } onError: { (error) in
+                self.isResolved = isResolved
+                self.setupDisableInput(self.disableInput)
+            }
         }
     }
     

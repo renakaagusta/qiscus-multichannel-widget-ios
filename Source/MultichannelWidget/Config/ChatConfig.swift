@@ -32,6 +32,8 @@ class ChatConfig: NSObject {
     }
     
     static var showSystemMessage: Bool = true
+    static var showAvatarSender: Bool = true
+    static var showUserNameSender: Bool = true
 
     static var chatTextMaxWidth:CGFloat = 0.7 * UIScreen.main.bounds.size.width
     static var baseColor:UIColor{

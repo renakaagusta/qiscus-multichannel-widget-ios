@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 #endif
 import Alamofire
+import QiscusCore
 
 public class MultichannelWidget {
     
@@ -38,6 +39,11 @@ public class MultichannelWidget {
     public func setUser(id: String, displayName: String, avatarUrl: String = "") {
         self.manager.setUser(id: id, username: displayName, avatarUrl: avatarUrl)
     }
+    
+    public func getUser() -> QAccount?{
+        return self.manager.getUser()
+    }
+    
     
     /// Clear all user data or logout
     public func clearUser() {
@@ -82,38 +88,5 @@ public class MultichannelWidget {
         manager.handleNotification(userInfo: userInfo, removePreviousNotif: removePreviousNotif)
     }
     
-    func setupReachability(){
-        self.reachability = WidgetReachability()
-        
-        
-        self.reachability?.whenReachable = { reachability in
-            DispatchQueue.main.async {
-                if reachability.isReachableViaWiFi {
-                    print("connected via wifi")
-                } else {
-                    print("connected via cellular data")
-                }
-                
-                if let reachable = self.reachability {
-                    if reachable.isReachable {
-                        
-                        DispatchQueue.main.asyncAfter(deadline: .now()+1, execute: {
-                            NotificationCenter.default.post(name: WidgetReachabilityConnect, object: nil)
-                        })
-                    }
-                }
-               
-            }
-            
-        }
-        self.reachability?.whenUnreachable = { reachability in
-            print("no internet connection")
-        }
-        do {
-            try  self.reachability?.startNotifier()
-        } catch {
-            print("Unable to start network notifier")
-        }
-    }
     
 }

@@ -12,13 +12,13 @@ import Foundation
 
 open class MultichannelWidgetConfig {
     private var avatar: String = ""
-    private var extras: String = ""
+    private var extras: String = "" //string json
     var title: String = ""
     var subtitle: String = ""
-    private var userProperties: [[String : String]] = []
+    private var userProperties: [[String : String]]? = nil
     private var rightBubblColor: UIColor = ColorConfiguration.rightBubbleColor
     private var leftBubblColor: UIColor = ColorConfiguration.leftBubbleColor
-    private var navigationColor: UIColor? = nil
+    private var navigationColor: UIColor = ColorConfiguration.navigationColor
     private var navigationTitleColor: UIColor = ColorConfiguration.navigationTitleColor
     private var systemBalloonColor: UIColor = ColorConfiguration.systemBubbleColor
     private var systemBalloonTextColor: UIColor = ColorConfiguration.systemBubbleTextColor
@@ -29,6 +29,10 @@ open class MultichannelWidgetConfig {
     private var emptyChatBackgroundColor: UIColor = ColorConfiguration.emptyChatBackgroundColor
     private var emptyChatTextColor: UIColor = ColorConfiguration.emptyChatTextColor
     private var showSystemMessage: Bool = ChatConfig.showSystemMessage
+    
+    //config for avatar bubble and sender
+    private var showAvatarSender = true
+    private var showUsernameSender = true
     
     public func setExtras(extras: String) -> MultichannelWidgetConfig {
         self.extras = extras
@@ -116,6 +120,16 @@ open class MultichannelWidgetConfig {
         return self
     }
     
+    public func setShowAvatarSender(isShowing: Bool) -> MultichannelWidgetConfig {
+        self.showAvatarSender = isShowing
+        return self
+    }
+    
+    public func setShowUsernameSender(isShowing: Bool) -> MultichannelWidgetConfig {
+        self.showUsernameSender = isShowing
+        return self
+    }
+    
     public func startChat(callback: @escaping (UIViewController) -> Void) {
         ColorConfiguration.navigationColor = self.navigationColor
         ColorConfiguration.navigationTitleColor = self.navigationTitleColor
@@ -130,7 +144,10 @@ open class MultichannelWidgetConfig {
         ColorConfiguration.emptyChatTextColor = self.emptyChatTextColor
         ColorConfiguration.emptyChatBackgroundColor = self.emptyChatBackgroundColor
         ChatConfig.showSystemMessage = self.showSystemMessage
+        ChatConfig.showAvatarSender = self.showAvatarSender
+        ChatConfig.showUserNameSender = self.showUsernameSender
         
+        SharedPreferences.saveExtrasMultichannelConfig(extras: self.extras)
         QismoManager.shared.initiateChat(withTitle: self.title, andSubtitle: self.subtitle, extras: self.extras, userProperties: self.userProperties, callback: callback)
     }
     
@@ -148,6 +165,9 @@ open class MultichannelWidgetConfig {
         ColorConfiguration.emptyChatTextColor = self.emptyChatTextColor
         ColorConfiguration.emptyChatBackgroundColor = self.emptyChatBackgroundColor
         
+        ChatConfig.showAvatarSender = self.showAvatarSender
+        ChatConfig.showUserNameSender = self.showUsernameSender
+        SharedPreferences.saveExtrasMultichannelConfig(extras: self.extras)
         QismoManager.shared.chatViewController(withRoomId: id, Title: self.title, andSubtitle: self.subtitle) { (chatview) in
             callback(chatview)
         }

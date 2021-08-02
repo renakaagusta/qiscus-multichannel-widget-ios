@@ -49,8 +49,6 @@ class UIChatPresenter: UIChatUserInteraction {
     var loadMoreDispatchGroup: DispatchGroup = DispatchGroup()
     var lastIdToLoad: String = ""
     var lastIdToSynch: String = ""
-    var connectionCheckTimer: Timer?
-    var isDisconnected = false
     
     var qiscus : QiscusCore {
         get {
@@ -63,8 +61,6 @@ class UIChatPresenter: UIChatUserInteraction {
     }
     
     func attachView(view : UIChatViewDelegate){
-        connectionCheckTimer?.invalidate()
-        connectionCheckTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(checkConnection), userInfo: nil, repeats: true)
         viewPresenter = view
         if let room = self.room {
             
@@ -86,25 +82,7 @@ class UIChatPresenter: UIChatUserInteraction {
         }
     }
     
-    @objc func checkConnection() {
-       if Connectivity.isInternetConnected {
-            if isDisconnected {
-               print("INTERNET CONNECTED")
-                isDisconnected = false
-                self.qiscus.connect()
-                self.resendPendingComment()
-            }
-        } else {
-           if !isDisconnected {
-               isDisconnected = true
-               print("NO INTERNET")
-           }
-        }
-    }
-    
     func detachView() {
-        connectionCheckTimer?.invalidate()
-        connectionCheckTimer = nil
         viewPresenter = nil
         //        if let room = self.room {
         //            room.delegate = nil
@@ -116,20 +94,6 @@ class UIChatPresenter: UIChatUserInteraction {
         return comment
     }
     
-    func resendPendingComment() {
-        self.qiscus.connect()
-        guard let comments = self.qiscus.database.message.find(status: .pending) else { return }
-        comments.reversed().forEach { (c) in
-            // validation comment prevent id
-            if c.uniqueId.isEmpty { self.qiscus.database.message.evaluate(); return }
-            self.qiscus.shared.sendMessage(message: c, onSuccess: { (response) in
-                
-            }, onError: { (error) in
-                
-            })
-        }
-    }
-    
     func loadRoom(withId roomId: String) {
         // Show Loading
         self.viewPresenter?.onLoading(message: "Load Message...")
@@ -139,8 +103,6 @@ class UIChatPresenter: UIChatUserInteraction {
             instance.qiscus.roomDelegate = self
             instance.qiscus.activeChatRoom = room
             instance.qiscus.shared.subscribeChatRoom(room)
-            instance.qiscus.connect(delegate: self)
-            instance.qiscus.connectionDelegate = self
             guard let participants = room.participants else { return }
             for u in participants {
                 instance.qiscus.shared.subscribeUserOnlinePresence(userId: u.id)
@@ -586,24 +548,5 @@ extension UIChatPresenter : QiscusCoreRoomDelegate {
     //this func was deprecated
     func didComment(comment: QMessage, changeStatus status: QMessageStatus) {
         //
-    }
-}
-
-extension UIChatPresenter : QiscusConnectionDelegate {
-    public func connectionState(change state: QiscusConnectionState) {
-        print("::realtime connection state \(state)")
-    }
-    
-    public func onConnected() {
-        print("::realtime connected")
-    }
-    
-    public func onReconnecting() {
-        print("::realtime reconnecting")
-    }
-    
-    public func onDisconnected(withError err: QError?) {
-        guard let error = err else { return }
-        print("::realtime disconnected \(error.message)")
     }
 }

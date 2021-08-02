@@ -7,6 +7,7 @@
 
 #if os(iOS)
 import UIKit
+import SwiftyJSON
 #endif
 
 protocol DisableChatInputDelegate {
@@ -16,6 +17,7 @@ protocol DisableChatInputDelegate {
 
 class DisableInput: UIView {
 
+    @IBOutlet weak var btStartNewChat: UIButton!
     var contentsView: UIView!
     var disableInputDelegate: DisableChatInputDelegate? = nil
     
@@ -40,17 +42,23 @@ class DisableInput: UIView {
         let title = SharedPreferences.getTitle()
         let subtitle = SharedPreferences.getSubtitle()
         
-        let userId = param["user_id"] as! String
-        let username = param["name"] as! String
-        let avatar = param["avatar"] as! String
-        let userProperties = param["user_properties"] as! [[String: Any]]
+        let data = JSON(param)
+        let userId = data["user_id"].string ?? ""
+        let username = data["name"].string ?? ""
+        let avatar = data["avatar"].string ?? "https://"
         
-        let extras = SharedPreferences.getExtras().replacingOccurrences(of: "\"is_resolved\": true", with: "\"is_resolved\": false")
+
+        var userProp: [[String: Any]]? = nil
+        if let userProperties = param["user_properties"] as? [[String: Any]] {
+            userProp = userProperties
+        }
+        
+        let extras = SharedPreferences.getExtrasMultichannelConfig()
         debugPrint(userId)
 
         SharedPreferences.removeRoomId()
 
-        QismoManager.shared.initiateChat(withTitle: title, andSubtitle: subtitle, userId: userId, username: username, avatar: avatar, extras: extras, userProperties: userProperties, callback: { roomId in
+        QismoManager.shared.initiateChat(withTitle: title, andSubtitle: subtitle, userId: userId, username: username, avatar: avatar, extras: extras, userProperties: userProp, callback: { roomId in
             self.disableInputDelegate?.startNewChat(vc: roomId as! UIChatViewController)
         })
        
@@ -73,6 +81,8 @@ class DisableInput: UIView {
         contentsView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
         
         self.autoresizingMask  = (UIView.AutoresizingMask.flexibleWidth)
+        self.contentsView.backgroundColor = ColorConfiguration.navigationColor
+        self.btStartNewChat.setTitleColor(ColorConfiguration.buttonStartNewChat, for: .normal)
     }
 
 }

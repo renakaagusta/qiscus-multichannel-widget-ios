@@ -25,7 +25,7 @@ class QismoManager {
     
     var network : QismoNetworkManager!
     var qiscus : QiscusCore!
-    var qiscusServer = QiscusServer(url: URL(string: "https://api.qiscus.com")!, realtimeURL: "", realtimePort: 80)
+    var qiscusServer = QiscusServer(url: URL(string: "https://api3.qiscus.com")!, realtimeURL: "", realtimePort: 80)
     var deviceToken : String = "" // save device token for 1st time or before login
     let imageCache = NSCache<NSString, UIImage>()
     
@@ -33,6 +33,10 @@ class QismoManager {
         self.userID = id
         self.username = username
         self.avatarUrl = avatarUrl
+    }
+    
+    func getUser() -> QAccount?{
+        return self.qiscus.getUserData()
     }
     
     func clear() {
@@ -49,11 +53,14 @@ class QismoManager {
         }
         SharedPreferences.removeRoomId()
         SharedPreferences.removeQiscusAccount()
+        SharedPreferences.removeChannelId()
+        SharedPreferences.removeExtrasMultichannelConfig()
     }
     
     func setup(appID: String, server : QiscusServer? = nil) {
         self.appID = appID
         self.qiscus = QiscusCore()
+        self.qiscus.enableDebugMode(value: true)
         self.qiscus.connectionDelegate = self
         self.qiscus.setup(AppID: appID)
         
@@ -63,7 +70,7 @@ class QismoManager {
         }
         
         if let user = self.qiscus.getUserData() {
-            _ = self.qiscus.connect(delegate: self)
+           // _ = self.qiscus.connect(delegate: self)
             self.setUser(id: user.id, username: user.name, avatarUrl: user.avatarUrl.absoluteString)
         }
     }
@@ -71,27 +78,42 @@ class QismoManager {
     func initiateChat(withTitle title: String, andSubtitle subtitle: String, userId: String? = nil, username: String? = nil,avatar: String? = nil, extras: String? = nil, userProperties: [[String:Any]]? = nil, callback: @escaping (UIViewController) -> Void)  {
         // chat session is exist
         if let savedRoomId = SharedPreferences.getRoomId() {
+            _ = self.qiscus.connect(delegate: self)
             self.updateDeviceToken()
-            self.qiscus.connect()
             let ui = UIChatViewController()
             ui.roomId = savedRoomId
             ui.chatTitle = title
             ui.chatSubtitle = subtitle
             callback(ui)
         }else {
-            let param = [
+            var param = [
                 "app_id"            : appID,
                 "user_id"           : userId ?? self.userID,
                 "name"              : username ?? self.username,
                 "avatar"            : avatar ?? self.avatarUrl,
-                "extras"            : extras ?? "{}",
-                "user_properties"   : userProperties != nil ? userProperties ?? [] : [],
-                "nonce"             : ""
+                "nonce"             : "",
                 ] as [String : Any]
+            
+            if let userProperties = userProperties {
+                param["user_properties"] = userProperties
+            }
+            
+            if let extras = extras {
+                if !extras.isEmpty{
+                    param["extras"] = extras
+                }
+            }
+            
+            if let channelId = SharedPreferences.getChannelId() {
+                if channelId != 0{
+                    param["channel_id"] = channelId
+                }
+            }
             
             self.network.initiateChat(param: param as [String : Any], onSuccess: { roomId in
                 SharedPreferences.saveParam(param: param)
                 SharedPreferences.saveRoomId(id: roomId)
+                _ = self.qiscus.connect(delegate: self)
                 self.updateDeviceToken()
                 
                 // prepare UI
@@ -108,17 +130,19 @@ class QismoManager {
     
     /// Update device token when initiate chat and relogin
     private func updateDeviceToken() {
-        self.register(deviceToken: self.deviceToken, onSuccess: { (success) in
-            //
-        }) { (error) in
-            //
+        if !self.deviceToken.isEmpty {
+            self.register(deviceToken: self.deviceToken, onSuccess: { (success) in
+                //
+            }) { (error) in
+                //
+            }
         }
+       
     }
     
     public func register(deviceToken token: String, onSuccess: @escaping (Bool) -> Void, onError: @escaping (String) -> Void){
         self.deviceToken = token
-        // patch bug backend device token not stuck old user
-        // call api twice
+        
         self.qiscus.shared.registerDeviceToken(token: self.deviceToken, isDevelopment: false, onSuccess: { (success) in
             onSuccess(success)
         }) { (error) in
@@ -194,6 +218,14 @@ class QismoManager {
             }
         }
     }
+    
+    func getSessionChat(onSuccess: @escaping(Bool) -> Void, onError: @escaping(String) -> Void){
+        self.network.getSessionChat { (session) in
+            onSuccess(session)
+        } onError: { (error) in
+            onError(error)
+        }
+    }
 }
 
 extension QismoManager : QiscusConnectionDelegate {
@@ -203,6 +235,7 @@ extension QismoManager : QiscusConnectionDelegate {
     
     public func onConnected() {
         print("::realtime connected")
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "reSubscribeRoom"), object: nil)
     }
     
     public func onReconnecting() {
@@ -211,6 +244,16 @@ extension QismoManager : QiscusConnectionDelegate {
     
     public func onDisconnected(withError err: QError?) {
         print("::realtime disconnected \(err?.message)")
+        
+        if qiscus.isLogined == true {
+            if let roomId = SharedPreferences.getRoomId() {
+                qiscus.shared.getChatRoomWithMessages(roomId: roomId) { (chatRoom, message) in
+                    
+                } onError: { (error) in
+                    print("error = \(error.message)")
+                }
+            }
+        }
     }
     
 }

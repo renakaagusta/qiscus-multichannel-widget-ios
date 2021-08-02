@@ -15,6 +15,8 @@ import QiscusCore
 import SwiftyJSON
 import Alamofire
 import AlamofireImage
+import AVFoundation
+import PhotosUI
 
 protocol CustomChatInputDelegate {
     func sendAttachment()
@@ -257,28 +259,46 @@ extension UIChatViewController : CustomChatInputDelegate {
         }
     }
     
-    func uploadGalery() {
+    func uploadGalery(isFoto : Bool = true) {
+        self.view.endEditing(true)
+        if #available(iOS 11.0, *) {
+            //self.latestNavbarTint = self.currentNavbarTint
+            UINavigationBar.appearance().tintColor = UIColor.blue
+        }
+        
         self.view.endEditing(true)
         let photoPermissions = PHPhotoLibrary.authorizationStatus()
         
         if(photoPermissions == PHAuthorizationStatus.authorized){
-            self.goToGaleryPicker()
+            self.goToGaleryPicker(isFoto : isFoto)
         }else if(photoPermissions == PHAuthorizationStatus.notDetermined){
             PHPhotoLibrary.requestAuthorization({(status:PHAuthorizationStatus) in
                 switch status{
                 case .authorized:
-                    self.goToGaleryPicker()
+                    self.goToGaleryPicker(isFoto: isFoto)
                     break
                 case .denied:
                     self.showPhotoAccessAlert()
+                    if #available(iOS 11.0, *) {
+                        UINavigationBar.appearance().tintColor = self.latestNavbarTint
+                        self.navigationController?.navigationBar.tintColor = self.latestNavbarTint
+                    }
                     break
                 default:
                     self.showPhotoAccessAlert()
+                    if #available(iOS 11.0, *) {
+                        UINavigationBar.appearance().tintColor = self.latestNavbarTint
+                        self.navigationController?.navigationBar.tintColor = self.latestNavbarTint
+                    }
                     break
                 }
             })
         }else{
             self.showPhotoAccessAlert()
+            if #available(iOS 11.0, *) {
+                UINavigationBar.appearance().tintColor = self.latestNavbarTint
+                self.navigationController?.navigationBar.tintColor = self.latestNavbarTint
+            }
         }
     }
     
@@ -288,26 +308,39 @@ extension UIChatViewController : CustomChatInputDelegate {
             UINavigationBar.appearance().tintColor = UIColor.blue
         }
         
-        let documentPicker = UIDocumentPickerViewController(documentTypes: self.UTIs, in: UIDocumentPickerMode.import)
+        let documentPicker = UIDocumentPickerViewController(documentTypes: ["public.item"], in: UIDocumentPickerMode.import)
         documentPicker.delegate = self
         documentPicker.modalPresentationStyle = .fullScreen
         
         self.present(documentPicker, animated: true, completion: nil)
     }
     
-    func goToGaleryPicker(){
+    func goToGaleryPicker(isFoto : Bool = true){
         DispatchQueue.main.async(execute: {
-            if #available(iOS 11.0, *) {
-                self.latestNavbarTint = self.currentNavbarTint
-                UINavigationBar.appearance().tintColor = UIColor.blue
+            if isFoto == false {
+                let picker = UIImagePickerController()
+                picker.delegate = self
+                picker.allowsEditing = false
+                picker.sourceType = UIImagePickerController.SourceType.photoLibrary
+                picker.mediaTypes = [kUTTypeMovie as String]
+                self.present(picker, animated: true, completion: nil)
+            } else {
+                if #available(iOS 14, *) {
+                    var configuration = PHPickerConfiguration()
+                    configuration.selectionLimit = 1
+                    configuration.filter = .images
+                    let picker = PHPickerViewController(configuration: configuration)
+                    picker.delegate = self
+                    self.present(picker, animated: true, completion: nil)
+                } else {
+                    let picker = UIImagePickerController()
+                    picker.delegate = self
+                    picker.allowsEditing = false
+                    picker.sourceType = UIImagePickerController.SourceType.photoLibrary
+                    picker.mediaTypes = [kUTTypeImage as String]
+                    self.present(picker, animated: true, completion: nil)
+                }
             }
-            
-            let picker = UIImagePickerController()
-            picker.delegate = self
-            picker.allowsEditing = false
-            picker.sourceType = UIImagePickerController.SourceType.photoLibrary
-            picker.mediaTypes = [kUTTypeMovie as String, kUTTypeImage as String]
-            self.present(picker, animated: true, completion: nil)
         })
     }
     
@@ -370,6 +403,12 @@ extension UIChatViewController : CustomChatInputDelegate {
         })
         optionMenu.addAction(galleryAction)
         
+        let galleryVideoAction = UIAlertAction(title: "Video from Gallery", style: .default, handler: {
+            (alert: UIAlertAction!) -> Void in
+            self.uploadGalery(isFoto : false)
+        })
+        optionMenu.addAction(galleryVideoAction)
+        
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
             (alert: UIAlertAction!) -> Void in
             
@@ -403,14 +442,13 @@ extension UIChatViewController: UIDocumentPickerDelegate{
     }
     
     public func postReceivedFile(fileUrl: URL) {
-        // guard let token = QismoManager.shared.network.qiscusUser?.token else { return }
-        var contentPayload: [String: Any] = [:]
         let coordinator = NSFileCoordinator()
         coordinator.coordinate(readingItemAt: fileUrl, options: NSFileCoordinator.ReadingOptions.forUploading, error: nil) { (dataURL) in
             do{
                 var data:Data = try Data(contentsOf: dataURL, options: NSData.ReadingOptions.mappedIfSafe)
                 let mediaSize = Double(data.count) / 1024.0
-                
+                var hiddenIconFileAttachment = true
+                var skip = false
                 if mediaSize > self.maxUploadSizeInKB {
                     self.showFileTooBigAlert()
                     return
@@ -458,6 +496,7 @@ extension UIChatViewController: UIDocumentPickerDelegate{
                     }
                     data = image.jpegData(compressionQuality:compressVal)!
                     thumb = UIImage(data: data)
+                    usePopup = false
                 }else if isPDF{
                     usePopup = true
                     popupText = "Are you sure to send this document?"
@@ -477,6 +516,7 @@ extension UIChatViewController: UIDocumentPickerDelegate{
                                     context.restoreGState()
                                     if let pdfImage:UIImage = UIGraphicsGetImageFromCurrentImageContext() {
                                         thumb = pdfImage
+                                        hiddenIconFileAttachment = true
                                     }
                                 }
                                 UIGraphicsEndImageContext()
@@ -502,6 +542,127 @@ extension UIChatViewController: UIDocumentPickerDelegate{
                 }else if video {
                     fileType = .video
                     
+                    if ext == ".mov" || ext == "mov" || ext == "mov_" {
+                        skip = true
+                        
+                        let date = Date()
+                        let formatter = DateFormatter.init()
+                        formatter.dateFormat = "yyyyMMddHHmmss"
+                        let fileName3 = formatter.string(from: date) + ".mp4"
+                        
+                        let docPath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0] as NSString
+                        let videoSandBoxPath = (docPath as String) + "/albumVideo" + fileName3
+                        
+                        
+                        // Transcoding configuration
+                        let avAsset = AVURLAsset.init(url: fileUrl, options: nil)
+                        
+                        let startDate = Date()
+                        
+                        //Create Export session
+                        guard let exportSession = AVAssetExportSession(asset: avAsset, presetName: AVAssetExportPresetPassthrough) else {
+                            return
+                        }
+                        
+                        
+                        exportSession.outputURL = URL.init(fileURLWithPath: videoSandBoxPath)
+                        exportSession.outputFileType = AVFileType.mp4
+                        exportSession.shouldOptimizeForNetworkUse = true
+                        let start = CMTimeMakeWithSeconds(0.0, preferredTimescale: 0)
+                        let range = CMTimeRangeMake(start: start, duration: avAsset.duration)
+                        exportSession.timeRange = range
+                        
+                        exportSession.exportAsynchronously(completionHandler: {() -> Void in
+                            switch exportSession.status {
+                            case .failed:
+                                print(exportSession.error ?? "NO ERROR")
+                            case .cancelled:
+                                print("Export canceled")
+                            case .completed:
+                                //Video conversion finished
+                                let endDate = Date()
+                                
+                                let time = endDate.timeIntervalSince(startDate)
+                                print(time)
+                                print("Successful!")
+                                
+                                let dataurl = URL.init(fileURLWithPath: videoSandBoxPath)
+                                
+                                do {
+                                    let video = try Data(contentsOf: dataurl, options: .mappedIfSafe)
+                                    
+                                    var message = QMessage()
+                                    
+                                    DispatchQueue.main.sync(execute: {
+                                        QPopUpView.showAlert(withTarget: self, image: thumb, message:"Are you sure to send this video?", isVideoImage: true,
+                                                             doneAction: {
+                                                                self.send(message: message, onSuccess: { (comment) in
+                                                                    //success
+                                                                }, onError: { (error) in
+                                                                    //error
+                                                                })
+                                                             },
+                                                             cancelAction: {
+                                                                //cancel upload
+                                                             }, retryAction: {
+                                                                //retry upload
+                                                                QismoManager.shared.qiscus.shared.upload(data: video, filename: fileName3, onSuccess: { (file) in
+                                                                    message.type = "file_attachment"
+                                                                    message.payload = [
+                                                                        "url"       : file.url.absoluteString,
+                                                                        "file_name" : file.name,
+                                                                        "size"      : file.size,
+                                                                        "caption"   : ""
+                                                                    ]
+                                                                    message.message = "Send Attachment"
+                                                                    
+                                                                    QPopUpView.sharedInstance.hiddenProgress()
+                                                                    
+                                                                }, onError: { (error) in
+                                                                    
+                                                                    let defaults = UserDefaults.standard
+                                                                    defaults.set(false, forKey: "hasInternet")
+                                                                    NotificationCenter.default.post(name: NSNotification.Name.init(rawValue: "unStableConnection"), object: nil)
+                                                                    QPopUpView.sharedInstance.showRetry()
+                                                                }) { (progress) in
+                                                                    print("progress =\(progress)")
+                                                                    QPopUpView.sharedInstance.showProgress(progress: progress)
+                                                                }
+                                                             })
+                                        
+                                        QismoManager.shared.qiscus.shared.upload(data: video, filename: fileName3, onSuccess: { (file) in
+                                            message.type = "file_attachment"
+                                            message.payload = [
+                                                "url"       : file.url.absoluteString,
+                                                "file_name" : file.name,
+                                                "size"      : file.size,
+                                                "caption"   : ""
+                                            ]
+                                            message.message = "Send Attachment"
+                                            
+                                            QPopUpView.sharedInstance.hiddenProgress()
+                                            
+                                        }, onError: { (error) in
+                                            let defaults = UserDefaults.standard
+                                            defaults.set(false, forKey: "hasInternet")
+                                            NotificationCenter.default.post(name: NSNotification.Name.init(rawValue: "unStableConnection"), object: nil)
+                                            QPopUpView.sharedInstance.showRetry()
+                                        }) { (progress) in
+                                            print("progress =\(progress)")
+                                            QPopUpView.sharedInstance.showProgress(progress: progress)
+                                        }
+                                    })
+                                } catch {
+                                    print(error)
+                                    return
+                                }
+                                
+                            default: break
+                            }
+                            
+                        })
+                    }
+                    
                     let assetMedia = AVURLAsset(url: dataURL)
                     let thumbGenerator = AVAssetImageGenerator(asset: assetMedia)
                     thumbGenerator.appliesPreferredTrackTransform = true
@@ -518,124 +679,165 @@ extension UIChatViewController: UIDocumentPickerDelegate{
                         print("error creating thumb image")
                     }
                     usePopup = true
+                    hiddenIconFileAttachment = true
                 }else{
+                    hiddenIconFileAttachment = false
                     usePopup = true
-                    let textFirst = TextConfiguration.sharedInstance.confirmationFileUploadText
+                    let textFirst = "Are you sure to send this file?"
                     let textMiddle = "\(fileName as String)"
                     let textLast = TextConfiguration.sharedInstance.questionMark
-                    popupText = "\(textFirst) \(textMiddle) \(textLast)"
+                    popupText = "\(textFirst) \(textMiddle)"
                     fileType = QiscusFileType.file
+                    thumb = nil
                 }
                 
-                if usePopup {
-                    QPopUpView.showAlert(withTarget: self, image: thumb, message:popupText, isVideoImage: video,
-                                         doneAction: {
-                                            
-                                            let fileModel = FileUploadModel()
-                                            fileModel.name = fileName
-                                            fileModel.data = data
-                                            QismoManager.shared.qiscus.shared.upload(file: fileModel, onSuccess: { [weak self] (fileModel) in
-                                                
-                                                let message = QMessage()
-                                                message.type = "file_attachment"
-                                                message.payload = [
-                                                    "url"       : fileModel.url.absoluteString,
-                                                    "file_name" : fileModel.name,
-                                                    "size"      : fileModel.size,
-                                                    "caption"   : ""
-                                                ]
-                                                
-                                                if isImage {
-                                                    message.payload = [
-                                                        "type"      : "image/\(message.fileExtension(fromURL: fileModel.url.absoluteString))",
-                                                        "content"   : [
-                                                            "url"       : fileModel.url.absoluteString,
-                                                            "file_name" : fileModel.name,
-                                                            "size"      : fileModel.size,
-                                                            "caption"   : ""
-                                                        ]
-                                                    ]
-                                                }
-                                                
-                                                message.message = "Send Attachment"
-                                                message.status = .pending
-                                                message.userEmail = SharedPreferences.getQiscusAccount() ?? ""
-                                                self?.send(message: message, onSuccess: { (comment) in
-                                                    debugPrint(message)
-                                                }, onError: { (error) in
-                                                    self?.heightProgressBar.constant = 0
-                                                    self?.widthProgress.constant = 0
-                                                })
-                                                }, onError: { (error) in
-                                                    print(error)
-                                            }) { [weak self] (progress) in
-                                                guard let self = self else {
-                                                    return
-                                                }
-                                                self.heightProgressBar.constant = 10
-                                                self.widthProgress.constant = CGFloat(progress) * UIScreen.main.bounds.width
-                                                print("upload progress :\(progress) isMainThread \(Thread.isMainThread)")
-                                                
-                                                if(progress == 1) {
-                                                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                                                        self.heightProgressBar.constant = 0
-                                                        self.widthProgress.constant = 0
-                                                    }
-                                                }
-                                            }
-                                            
-                    },
-                                         cancelAction: {
-                                            
-                    })
-                } else {
-                    let fileUploadModel = FileUploadModel()
-                    fileUploadModel.name = fileName
-                    fileUploadModel.data = data
-                    
-                    QismoManager.shared.qiscus.shared.upload(file: fileUploadModel, onSuccess: { [weak self] (fileModel) in
-                        let message = QMessage()
-                        message.type = "file_attachment"
-                        message.payload = [
-                            "url"       : fileModel.url.absoluteString,
-                            "file_name" : fileModel.name,
-                            "size"      : fileModel.size,
-                            "caption"   : ""
-                        ]
+                if skip == false {
+                    if usePopup {
                         
-                        message.message = "Send Attachment"
-                        message.status = .pending
-                        message.userEmail = SharedPreferences.getQiscusAccount() ?? ""
-                        self?.send(message: message, onSuccess: { (comment) in
-                            debugPrint(message)
+                        var message = QMessage()
+                        
+                        QPopUpView.showAlert(withTarget: self, image: thumb, message:popupText, isVideoImage: video, hiddenIconFileAttachment: hiddenIconFileAttachment,
+                        doneAction: {
+                            self.send(message: message, onSuccess: { (comment) in
+                            //success
                         }, onError: { (error) in
-                            self?.heightProgressBar.constant = 0
-                            self?.widthProgress.constant = 0
+                            //error
                         })
-                        }, onError: { (error) in
-                            print(error)
-                    }) { [weak self] (progress) in
-                        guard let self = self else {
-                            return
-                        }
-                        print("upload progress :\(progress)")
-                        self.heightProgressBar.constant = 10
-                        self.widthProgress.constant = CGFloat(progress) * UIScreen.main.bounds.width
-                        print("upload progress :\(progress) isMainThread \(Thread.isMainThread)")
+                        },
+                        cancelAction: {
+                            //cancel upload
+                        },
+                        retryAction: {
+                            //retry upload
+                            QismoManager.shared.qiscus.shared.upload(data: data, filename: fileName, onSuccess: { (file) in
+                                message.type = "file_attachment"
+                                message.payload = [
+                                    "url"       : file.url.absoluteString,
+                                    "file_name" : file.name,
+                                    "size"      : file.size,
+                                    "caption"   : ""
+                                ]
+                                message.message = "Send Attachment"
+                                
+                                QPopUpView.sharedInstance.hiddenProgress()
+                                
+                            }, onError: { (error) in
+                                let defaults = UserDefaults.standard
+                                defaults.set(false, forKey: "hasInternet")
+                                NotificationCenter.default.post(name: NSNotification.Name.init(rawValue: "unStableConnection"), object: nil)
+                                QPopUpView.sharedInstance.showRetry()
+                            }) { (progress) in
+                                print("progress =\(progress)")
+                                QPopUpView.sharedInstance.showProgress(progress: progress)
+                            }
+                        })
                         
-                        if(progress == 1) {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                                self.heightProgressBar.constant = 0
-                                self.widthProgress.constant = 0
+                        QismoManager.shared.qiscus.shared.upload(data: data, filename: fileName, onSuccess: { (file) in
+                            message.type = "file_attachment"
+                            message.payload = [
+                                "url"       : file.url.absoluteString,
+                                "file_name" : file.name,
+                                "size"      : file.size,
+                                "caption"   : ""
+                            ]
+                            message.message = "Send Attachment"
+                            
+                            QPopUpView.sharedInstance.hiddenProgress()
+                            
+                        }, onError: { (error) in
+                            let defaults = UserDefaults.standard
+                            defaults.set(false, forKey: "hasInternet")
+                            NotificationCenter.default.post(name: NSNotification.Name.init(rawValue: "unStableConnection"), object: nil)
+                            QPopUpView.sharedInstance.showRetry()
+                        }) { (progress) in
+                            print("progress =\(progress)")
+                            QPopUpView.sharedInstance.showProgress(progress: progress)
+                        }
+                    }else{
+                        let uploader = QiscusUploaderVC()
+                        uploader.chatView = self
+                        uploader.data = data
+                        uploader.fileName = fileName
+                        self.navigationController?.pushViewController(uploader, animated: true)
+                    }
+                }
+            }catch _{
+                //finish loading
+                //self.dismissLoading()
+            }
+        }
+    }
+}
+
+extension UIChatViewController: PHPickerViewControllerDelegate {
+    
+    @available(iOS 14, *)
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        if #available(iOS 11.0, *) {
+            UINavigationBar.appearance().tintColor = self.latestNavbarTint
+            self.navigationController?.navigationBar.tintColor = self.latestNavbarTint
+        }
+        
+        guard !results.isEmpty else {
+            self.dismiss(animated:true, completion: nil)
+            return
+        }
+        
+        var imageName:String = "\(NSDate().timeIntervalSince1970 * 1000).jpg"
+        
+        let itemProviders = results.map(\.itemProvider)
+        
+        if itemProviders.count == 0{
+            self.dismiss(animated:true, completion: nil)
+            return
+        }
+        
+        for item in itemProviders {
+            if item.canLoadObject(ofClass: UIImage.self) {
+                item.loadObject(ofClass: UIImage.self) { (image, error) in
+                    DispatchQueue.main.async {
+                        if let image = image as? UIImage {
+                            var data = image.pngData()
+                            
+                            let imageSize = image.size
+                            var bigPart = CGFloat(0)
+                            if(imageSize.width > imageSize.height){
+                                bigPart = imageSize.width
+                            }else{
+                                bigPart = imageSize.height
+                            }
+                            
+                            var compressVal = CGFloat(1)
+                            if(bigPart > 2000){
+                                compressVal = 2000 / bigPart
+                            }
+                            
+                            data = image.jpegData(compressionQuality:compressVal)
+                            
+                            if data != nil {
+                                let mediaSize = Double(data!.count) / 1024.0
+                                if mediaSize > self.maxUploadSizeInKB {
+                                    picker.dismiss(animated: true, completion: {
+                                        self.showFileTooBigAlert()
+                                    })
+                                    return
+                                } else {
+                                    self.dismiss(animated:true, completion: nil)
+                                    
+                                    picker.dismiss(animated: true, completion: {
+                                        
+                                    })
+                                    
+                                    let uploader = QiscusUploaderVC()
+                                    uploader.chatView = self
+                                    uploader.data = data
+                                    uploader.fileName = imageName
+                                    self.navigationController?.pushViewController(uploader, animated: true)
+                                }
                             }
                         }
                     }
                 }
-                
-            } catch _{
-                //finish loading
-                //self.dismissLoading()
-                
             }
         }
     }
@@ -653,11 +855,6 @@ extension UIChatViewController : UIImagePickerControllerDelegate, UINavigationCo
     
     
     public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        
-        if #available(iOS 11.0, *) {
-            UINavigationBar.appearance().tintColor = self.latestNavbarTint
-            self.navigationController?.navigationBar.tintColor = self.latestNavbarTint
-        }
         
         let fileType:String = info[.mediaType] as! String
         let time = Double(Date().timeIntervalSince1970)
@@ -694,7 +891,7 @@ extension UIChatViewController : UIImagePickerControllerDelegate, UINavigationCo
                 }else{
                     let result = PHAsset.fetchAssets(withALAssetURLs: [imageURL], options: nil)
                     let asset = result.firstObject
-                    imageName = "\((asset?.value(forKey: "filename")) ?? "asset")"
+                    imageName = "\((asset?.value(forKey: "filename"))!)"
                     imageName = imageName.replacingOccurrences(of: "HEIC", with: "jpg")
                     let imageSize = image.size
                     var bigPart = CGFloat(0)
@@ -775,58 +972,199 @@ extension UIChatViewController : UIImagePickerControllerDelegate, UINavigationCo
             picker.dismiss(animated: true, completion: {
                 
             })
+            
+            
             do{
                 let thumbRef = try thumbGenerator.copyCGImage(at: thumbTime, actualTime: nil)
                 let thumbImage = UIImage(cgImage: thumbRef)
                 
-                QPopUpView.showAlert(withTarget: self, image: thumbImage, message:"Are you sure to send this video?", isVideoImage: true,
-                                     doneAction: {
+                
+                var checkFileName = fileName.replacingOccurrences(of: "%20", with: "_")
+                checkFileName = fileName.replacingOccurrences(of: " ", with: "_")
+                
+                let fileNameArr = (checkFileName as String).split(separator: ".")
+                let ext = String(fileNameArr.last!).lowercased()
+                
+                if (ext == ".mov" || ext == "mov" || ext == "mov_") {
+                    let date = Date()
+                    let formatter = DateFormatter.init()
+                    formatter.dateFormat = "yyyyMMddHHmmss"
+                    let fileName3 = formatter.string(from: date) + ".mp4"
+                    
+                    let docPath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0] as NSString
+                    let videoSandBoxPath = (docPath as String) + "/albumVideo" + fileName3
+                    
+                    
+                    // Transcoding configuration
+                    let avAsset = AVURLAsset.init(url: mediaURL, options: nil)
+                    
+                    let startDate = Date()
+                    
+                    //Create Export session
+                    guard let exportSession = AVAssetExportSession(asset: avAsset, presetName: AVAssetExportPresetPassthrough) else {
+                        return
+                    }
+                    
+                    
+                    exportSession.outputURL = URL.init(fileURLWithPath: videoSandBoxPath)
+                    exportSession.outputFileType = AVFileType.mp4
+                    exportSession.shouldOptimizeForNetworkUse = true
+                    let start = CMTimeMakeWithSeconds(0.0, preferredTimescale: 0)
+                    let range = CMTimeRangeMake(start: start, duration: avAsset.duration)
+                    exportSession.timeRange = range
+                    
+                    exportSession.exportAsynchronously(completionHandler: {() -> Void in
+                        switch exportSession.status {
+                        case .failed:
+                            print(exportSession.error ?? "NO ERROR")
+                        case .cancelled:
+                            print("Export canceled")
+                        case .completed:
+                            //Video conversion finished
+                            let endDate = Date()
+                            
+                            let time = endDate.timeIntervalSince(startDate)
+                            print(time)
+                            print("Successful!")
+                            
+                            let dataurl = URL.init(fileURLWithPath: videoSandBoxPath)
+                            
+                            do {
+                                let video = try Data(contentsOf: dataurl, options: .mappedIfSafe)
+                                
+                                var message = QMessage()
+                                
+                                DispatchQueue.main.sync(execute: {
+                                    QPopUpView.showAlert(withTarget: self, image: thumbImage, message:"Are you sure to send this video?", isVideoImage: true,
+                                                         doneAction: {
+                                                            self.send(message: message, onSuccess: { (comment) in
+                                                                //success
+                                                            }, onError: { (error) in
+                                                                //error
+                                                            })
+                                                         },
+                                                         cancelAction: {
+                                                            //cancel upload
+                                                         }, retryAction: {
+                                                            //retry upload
+                                                            QismoManager.shared.qiscus.shared.upload(data: video, filename: fileName3, onSuccess: { (file) in
+                                                                message.type = "file_attachment"
+                                                                message.payload = [
+                                                                    "url"       : file.url.absoluteString,
+                                                                    "file_name" : file.name,
+                                                                    "size"      : file.size,
+                                                                    "caption"   : ""
+                                                                ]
+                                                                message.message = "Send Attachment"
+                                                                
+                                                                QPopUpView.sharedInstance.hiddenProgress()
+                                                                
+                                                            }, onError: { (error) in
+                                                                
+                                                                let defaults = UserDefaults.standard
+                                                                defaults.set(false, forKey: "hasInternet")
+                                                                NotificationCenter.default.post(name: NSNotification.Name.init(rawValue: "unStableConnection"), object: nil)
+                                                                QPopUpView.sharedInstance.showRetry()
+                                                            }) { (progress) in
+                                                                print("progress =\(progress)")
+                                                                QPopUpView.sharedInstance.showProgress(progress: progress)
+                                                            }
+                                                         })
+                                    
+                                    QismoManager.shared.qiscus.shared.upload(data: video, filename: fileName3, onSuccess: { (file) in
+                                        message.type = "file_attachment"
+                                        message.payload = [
+                                            "url"       : file.url.absoluteString,
+                                            "file_name" : file.name,
+                                            "size"      : file.size,
+                                            "caption"   : ""
+                                        ]
+                                        message.message = "Send Attachment"
                                         
-                                        let fileModel = FileUploadModel()
-                                        fileModel.name = fileName
-                                        fileModel.data = mediaData!
-                                        QismoManager.shared.qiscus.shared.upload(file: fileModel, onSuccess: { [weak self] (fileModel) in
-                                            
-                                            let message = QMessage()
-                                            message.type = "file_attachment"
-                                            message.payload = [
-                                                "url"       : fileModel.url.absoluteString,
-                                                "file_name" : fileModel.name,
-                                                "size"      : fileModel.size,
-                                                "caption"   : ""
-                                            ]
-                                            
-                                            message.message = "Send Attachment"
-                                            message.status = .pending
-                                            message.userEmail = SharedPreferences.getQiscusAccount() ?? ""
-                                            self?.send(message: message, onSuccess: { (comment) in
-                                                debugPrint(message)
+                                        QPopUpView.sharedInstance.hiddenProgress()
+                                        
+                                    }, onError: { (error) in
+                                        let defaults = UserDefaults.standard
+                                        defaults.set(false, forKey: "hasInternet")
+                                        NotificationCenter.default.post(name: NSNotification.Name.init(rawValue: "unStableConnection"), object: nil)
+                                        QPopUpView.sharedInstance.showRetry()
+                                    }) { (progress) in
+                                        print("progress =\(progress)")
+                                        QPopUpView.sharedInstance.showProgress(progress: progress)
+                                    }
+                                })
+                            } catch {
+                                print(error)
+                                return
+                            }
+                            
+                        default: break
+                        }
+                        
+                    })
+                }else{
+                    var message = QMessage()
+                    
+                    
+                    QPopUpView.showAlert(withTarget: self, image: thumbImage, message:"Are you sure to send this video?", isVideoImage: true,
+                                         doneAction: {
+                                            self.send(message: message, onSuccess: { (comment) in
+                                                //success
                                             }, onError: { (error) in
-                                                self?.heightProgressBar.constant = 0
-                                                self?.widthProgress.constant = 0
+                                                //error
                                             })
+                                         },
+                                         cancelAction: {
+                                            //cancel upload
+                                         }, retryAction: {
+                                            //retry upload
+                                            QismoManager.shared.qiscus.shared.upload(data: mediaData!, filename: fileName, onSuccess: { (file) in
+                                                message.type = "file_attachment"
+                                                message.payload = [
+                                                    "url"       : file.url.absoluteString,
+                                                    "file_name" : file.name,
+                                                    "size"      : file.size,
+                                                    "caption"   : ""
+                                                ]
+                                                message.message = "Send Attachment"
+                                                
+                                                QPopUpView.sharedInstance.hiddenProgress()
+                                                
                                             }, onError: { (error) in
-                                                print(error)
-                                        }) { [weak self] (progress) in
-                                            guard let self = self else {
-                                                return
+                                                
+                                                let defaults = UserDefaults.standard
+                                                defaults.set(false, forKey: "hasInternet")
+                                                NotificationCenter.default.post(name: NSNotification.Name.init(rawValue: "unStableConnection"), object: nil)
+                                                QPopUpView.sharedInstance.showRetry()
+                                            }) { (progress) in
+                                                print("progress =\(progress)")
+                                                QPopUpView.sharedInstance.showProgress(progress: progress)
                                             }
-                                            self.heightProgressBar.constant = 10
-                                            self.widthProgress.constant = CGFloat(progress) * UIScreen.main.bounds.width
-                                            print("upload progress :\(progress) isMainThread \(Thread.isMainThread)")
-                                            
-                                            if(progress == 1) {
-                                                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                                                    self.heightProgressBar.constant = 0
-                                                    self.widthProgress.constant = 0
-                                                }
-                                            }
-                                        }
-                },
-                                     cancelAction: {
-                                        //cancel upload
+                                         })
+                    
+                    QismoManager.shared.qiscus.shared.upload(data: mediaData!, filename: fileName, onSuccess: { (file) in
+                        message.type = "file_attachment"
+                        message.payload = [
+                            "url"       : file.url.absoluteString,
+                            "file_name" : file.name,
+                            "size"      : file.size,
+                            "caption"   : ""
+                        ]
+                        message.message = "Send Attachment"
+                        
+                        QPopUpView.sharedInstance.hiddenProgress()
+                        
+                    }, onError: { (error) in
+                        
+                        let defaults = UserDefaults.standard
+                        defaults.set(false, forKey: "hasInternet")
+                        NotificationCenter.default.post(name: NSNotification.Name.init(rawValue: "unStableConnection"), object: nil)
+                        QPopUpView.sharedInstance.showRetry()
+                    }) { (progress) in
+                        print("progress =\(progress)")
+                        QPopUpView.sharedInstance.showProgress(progress: progress)
+                    }
                 }
-                )
             }catch{
                 print("error creating thumb image")
             }
@@ -835,10 +1173,6 @@ extension UIChatViewController : UIImagePickerControllerDelegate, UINavigationCo
     }
     
     public func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        if #available(iOS 11.0, *) {
-            UINavigationBar.appearance().tintColor = self.latestNavbarTint
-            self.navigationController?.navigationBar.tintColor = self.latestNavbarTint
-        }
         dismiss(animated: true, completion: nil)
     }
 }

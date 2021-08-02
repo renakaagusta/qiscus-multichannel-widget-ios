@@ -10,14 +10,38 @@ import UIKit
 #endif
 
 import QiscusCore
+import SwiftyJSON
 
 class QSystemCell:  UIBaseChatCell {
     
+    @IBOutlet weak var viewBackground: UIView!
     @IBOutlet weak var lbComment: UILabel!
-    @IBOutlet weak var ivBackground: UIView!
+    var message: QMessage? = nil
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        self.viewBackground.layer.cornerRadius = 8
+        self.viewBackground.clipsToBounds = true
+        self.viewBackground.layer.borderWidth = 1
+        self.viewBackground.layer.borderColor = UIColor(red:222/255, green:225/255, blue:227/255, alpha: 1).cgColor
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(handleMassage(_:)),
+                                               name: Notification.Name("selectedCell"),
+                                               object: nil)
+    }
+    
+    @objc func handleMassage(_ notification: Notification) {
+        if let userInfo = notification.userInfo {
+            let json = JSON(userInfo)
+            let commentId = json["commentId"].string ?? "0"
+            if let message = self.message {
+                if message.id == commentId {
+                    self.contentView.backgroundColor = UIColor(red:39/255, green:177/255, blue:153/255, alpha: 0.1)
+                }
+            }
+        }
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -37,14 +61,19 @@ class QSystemCell:  UIBaseChatCell {
     }
     
     func bindData(message: QMessage){
-        setupBalon()
-        lbComment.text = message.message
+        self.message = message
+        lbComment.text = "\(self.hour(date: message.date())) - \(message.message)"
     }
     
-    func setupBalon() {
-        self.ivBackground.layer.cornerRadius = 5.0
-        self.ivBackground.clipsToBounds = true
+    func hour(date: Date?) -> String {
+        guard let date = date else {
+            return "-"
+        }
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+        formatter.timeZone      = TimeZone.current
+        let defaultTimeZoneStr = formatter.string(from: date);
+        return defaultTimeZoneStr
     }
-    
     
 }

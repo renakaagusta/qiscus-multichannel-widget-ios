@@ -12,5 +12,4 @@ target 'Example' do
   pod 'QiscusCore', :git => 'https://github.com/qiscus/QiscusCore-iOS', :branch => 'carthage-support-v3'
   pod 'MultichannelWidget', :path => '../../'
   pod 'Localize-Swift', '~> 3.2'
-
 end

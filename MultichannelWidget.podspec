@@ -30,5 +30,5 @@ s.dependency 'AlamofireImage'
 s.dependency 'SwiftyJSON'
 s.dependency 'QiscusCore'
 s.dependency 'SDWebImage'
-
+s.dependency 'SDWebImageWebPCoder'
 end

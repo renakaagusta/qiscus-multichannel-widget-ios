@@ -21,20 +21,21 @@ enum QUploaderType {
     case video
 }
 
-class QiscusUploaderVC: UIViewController, UIScrollViewDelegate {
+class QiscusUploaderVC: UIViewController, UIScrollViewDelegate, UITextViewDelegate {
 
-    @IBOutlet weak var viewProgressContainer: UIView!
+    @IBOutlet weak var labelTitle: UILabel!
+    @IBOutlet weak var heightProgressViewCons: NSLayoutConstraint!
     @IBOutlet weak var labelProgress: UILabel!
-    @IBOutlet weak var viewProgress: UIView!
+    @IBOutlet weak var progressView: UIView!
+    @IBOutlet weak var containerProgressView: UIView!
+    @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var sendButton: UIButton!
-    @IBOutlet weak var constraintProgressWidth: NSLayoutConstraint!
-    
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var inputBottom: NSLayoutConstraint!
     @IBOutlet weak var mediaCaption: UITextView!
     @IBOutlet weak var minInputHeight: NSLayoutConstraint!
-    
+    @IBOutlet weak var mediaBottomMargin: NSLayoutConstraint!
     
     var chatView:UIChatViewController?
     var type = QUploaderType.image
@@ -43,12 +44,16 @@ class QiscusUploaderVC: UIViewController, UIScrollViewDelegate {
     var imageData: [QMessage] = []
     var selectedImageIndex: Int = 0
     let maxProgressHeight:Double = 40.0
-    var content: [String: Any] = [:]
     /**
      Setup maximum size when you send attachment inside chat view, example send video/image from galery. By default maximum size is unlimited.
      */
     var maxUploadSizeInKB:Double = Double(100) * Double(1024)
     
+    //UnStableConnection
+    @IBOutlet weak var viewUnstableConnection: UIView!
+    @IBOutlet weak var heightViewUnstableConnectionConst: NSLayoutConstraint!
+    
+    @IBOutlet weak var btRetry: UIButton!
     init() {
           super.init(nibName: "QiscusUploaderVC", bundle: MultichannelWidget.bundle)
       }
@@ -61,14 +66,17 @@ class QiscusUploaderVC: UIViewController, UIScrollViewDelegate {
        
         self.setupUI()
         
+        self.upload()
+       
+    }
+    
+    func upload(){
+        self.btRetry.isHidden = true
+        self.btRetry.layer.cornerRadius = self.btRetry.frame.size.width / 2
+        
         if self.fileName != nil && self.data != nil && self.imageData.count == 0 {
-            self.title = self.fileName!
-            
-            let file = FileUploadModel()
-            file.data = data!
-            file.name = fileName!
-            
-            QismoManager.shared.qiscus.shared.upload(file: file, onSuccess: { (file) in
+            self.labelTitle.text = self.fileName!
+            QismoManager.shared.qiscus.shared.upload(data: data!, filename: fileName!, onSuccess: { (file) in
                 self.sendButton.isEnabled = true
                 self.sendButton.isHidden = false
                 self.hiddenProgress()
@@ -82,21 +90,24 @@ class QiscusUploaderVC: UIViewController, UIScrollViewDelegate {
                     "caption"   : ""
                 ]
                 message.message = "Send Image"
-                message.status = .pending
-                message.userEmail = SharedPreferences.getQiscusAccount() ?? ""
                 self.imageData.append(message)
             }, onError: { (error) in
-                //error
-            }, progressListener: { (progress) in
+                let defaults = UserDefaults.standard
+                defaults.set(false, forKey: "hasInternet")
+                NotificationCenter.default.post(name: NSNotification.Name.init(rawValue: "unStableConnection"), object: nil)
+                self.btRetry.isHidden = false
+                self.hiddenProgress()
+            }) { (progress) in
                 print("upload progress: \(progress)")
                 self.showProgress()
                 self.labelProgress.text = "\(Int(progress * 100)) %"
                 
-                self.constraintProgressWidth.constant = UIScreen.main.bounds.width * CGFloat(progress)
+                let newHeight = progress * self.maxProgressHeight
+                self.heightProgressViewCons.constant = CGFloat(newHeight)
                 UIView.animate(withDuration: 0.65, animations: {
-                    self.viewProgressContainer.layoutIfNeeded()
+                    self.progressView.layoutIfNeeded()
                 })
-            })
+            }
             
         }
         
@@ -105,9 +116,43 @@ class QiscusUploaderVC: UIViewController, UIScrollViewDelegate {
         }
     }
     
+    @IBAction func retry(_ sender: Any) {
+        self.upload()
+    }
+    
+    
+    func setupReachability(){
+        let defaults = UserDefaults.standard
+        let hasInternet = defaults.bool(forKey: "hasInternet")
+        if hasInternet == true {
+            self.stableConnection()
+        }else{
+            self.unStableConnection()
+        }
+    }
+    
+    @objc func showUnstableConnection(_ notification: Notification){
+        self.unStableConnection()
+    }
+    
+    func unStableConnection(){
+        self.viewUnstableConnection.alpha = 1
+        self.heightViewUnstableConnectionConst.constant = 45
+    }
+    
+    @objc func hideUnstableConnection(_ notification: Notification){
+        self.stableConnection()
+    }
+    
+    func stableConnection(){
+        self.viewUnstableConnection.alpha = 0
+        self.heightViewUnstableConnectionConst.constant = 0
+    }
+    
     func setupUI(){
-        self.title = "Image"
+        self.labelTitle.text = "Image"
         self.hiddenProgress()
+        self.containerProgressView.layer.cornerRadius = self.containerProgressView.frame.height / 2
         
         let keyboardToolBar = UIToolbar()
         keyboardToolBar.sizeToFit()
@@ -129,21 +174,29 @@ class QiscusUploaderVC: UIViewController, UIScrollViewDelegate {
         self.scrollView.delegate = self
         self.scrollView.minimumZoomScale = 1.0
         self.scrollView.maximumZoomScale = 4.0
-        self.sendButton.tintColor = ColorConfiguration.topColor
+        self.cancelButton.setTitle("Cancel", for: .normal)
         self.mediaCaption.font = ChatConfig.chatFont
         
-        self.sendButton.setImage(UIImage(named: "ic_send", in: MultichannelWidget.bundle, compatibleWith: nil), for: .normal)
-        self.sendButton.setImage(UIImage(named: "ic_uploading", in: MultichannelWidget.bundle, compatibleWith: nil), for: .disabled)
         self.sendButton.isEnabled = false
-
+        self.sendButton.isHidden = true
+        
+        self.sendButton.tintColor = ColorConfiguration.sendButtonColor
+        self.sendButton.setImage(UIImage(named: "ic_send", in: MultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate), for: .normal)
+        
+        self.cancelButton.tintColor = ColorConfiguration.sendButtonColor
+        self.cancelButton.setImage(UIImage(named: "ic_arrow_back", in: MultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate), for: .normal)
     }
     
     func hiddenProgress(){
-        viewProgressContainer.isHidden = true
+        self.containerProgressView.isHidden = true
+        self.labelProgress.isHidden = true
+        self.progressView.isHidden = true
     }
     
     func showProgress(){
-        viewProgressContainer.isHidden = false
+        self.labelProgress.isHidden = false
+        self.containerProgressView.isHidden = false
+        self.progressView.isHidden = false
     }
     
     @objc func doneClicked() {
@@ -170,7 +223,6 @@ class QiscusUploaderVC: UIViewController, UIScrollViewDelegate {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.topItem?.title = ""
         if self.data != nil {
             if type == .image {
                 self.imageView.image = UIImage(data: self.data!)
@@ -180,6 +232,9 @@ class QiscusUploaderVC: UIViewController, UIScrollViewDelegate {
         let center: NotificationCenter = NotificationCenter.default
         center.addObserver(self, selector: #selector(QiscusUploaderVC.keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         center.addObserver(self, selector: #selector(QiscusUploaderVC.keyboardChange(_:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+        self.navigationController?.isNavigationBarHidden = true
+        
+        self.setupReachability()
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -188,6 +243,7 @@ class QiscusUploaderVC: UIViewController, UIScrollViewDelegate {
     override func viewWillDisappear(_ animated: Bool) {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+        self.navigationController?.isNavigationBarHidden = false
     }
     
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
@@ -198,22 +254,16 @@ class QiscusUploaderVC: UIViewController, UIScrollViewDelegate {
         if type == .image {
             
             if (mediaCaption.text != TextConfiguration.sharedInstance.captionPlaceholder ){
-                self.imageData.first?.payload!["caption"] = mediaCaption.text
+                
+                self.imageData.first?.payload![ "caption" ] = mediaCaption.text
+                
             }
             
-            let _ = self.navigationController?.popViewController(animated: true)
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
-                guard let self = self else {
-                    return
-                }
-                self.chatView?.send(message: self.imageData.first!, onSuccess: { (comment) in
-                    self.chatView?.setFromUploader(comment: comment)
-                }, onError: { (error) in
-                    print("error send image \(error)")
-                })
-            }
-        
+            chatView?.send(message: self.imageData.first!, onSuccess: { (comment) in
+                 let _ = self.navigationController?.popViewController(animated: true)
+            }, onError: { (error) in
+                 let _ = self.navigationController?.popViewController(animated: true)
+            })
         }
     }
     
@@ -223,7 +273,7 @@ class QiscusUploaderVC: UIViewController, UIScrollViewDelegate {
         
         let animateDuration = info[UIResponder.keyboardAnimationDurationUserInfoKey] as! Double
         self.inputBottom.constant = 0
-        self.minInputHeight.constant = 32
+        self.mediaBottomMargin.constant = 8
         UIView.animate(withDuration: animateDuration, delay: 0, options: UIView.AnimationOptions(), animations: {
             self.view.layoutIfNeeded()
             
@@ -237,7 +287,7 @@ class QiscusUploaderVC: UIViewController, UIScrollViewDelegate {
         let animateDuration = info[UIResponder.keyboardAnimationDurationUserInfoKey] as! Double
         
         self.inputBottom.constant = keyboardHeight
-//        self.minInputHeight.constant = 32 * 3
+        self.mediaBottomMargin.constant = -(self.mediaCaption.frame.height + 8)
         UIView.animate(withDuration: animateDuration, delay: 0, options: UIView.AnimationOptions(), animations: {
             self.view.layoutIfNeeded()
         }, completion: nil)
@@ -248,23 +298,3 @@ class QiscusUploaderVC: UIViewController, UIScrollViewDelegate {
     }
 }
 
-extension QiscusUploaderVC : UITextViewDelegate {
-    func textViewDidChange(_ textView: UITextView) {
-        chatView?.typing(true)
-        let fixedWidth = textView.frame.size.width
-        let newSize = textView.sizeThatFits(CGSize.init(width: fixedWidth, height: CGFloat(MAXFLOAT)))
-        if (newSize.height >= 35 && newSize.height <= 100) {
-            self.minInputHeight.constant = newSize.height
-//            self.heightView.constant = newSize.height + 10.0
-//            if self.replyComment != nil {
-//                self.setHeight(self.heightView.constant + 50)
-//            } else {
-//                self.setHeight(self.heightView.constant)
-//            }
-        }
-        
-        if (newSize.height >= 100) {
-            textView.isScrollEnabled = true
-        }
-    }
-}

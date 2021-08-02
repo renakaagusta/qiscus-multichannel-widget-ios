@@ -10,28 +10,59 @@ import UIKit
 #endif
 import QiscusCore
 import Alamofire
+import SwiftyJSON
+import AlamofireImage
+import SDWebImage
 
 class QImagesRightCell: UIBaseChatCell {
     
-    @IBOutlet weak var ivRightBubble: UIImageView!
-    @IBOutlet weak var lblCaption: UILabel!
-    @IBOutlet weak var ivComment: UIImageView!
-    @IBOutlet weak var lblDate: UILabel!
-    @IBOutlet weak var marginLblComment: NSLayoutConstraint!
+    @IBOutlet weak var lbName: UILabel!
+    @IBOutlet weak var tvContent: UILabel!
+    @IBOutlet weak var ivBaloonLeft: UIImageView!
+    @IBOutlet weak var lbTime: UILabel!
+    @IBOutlet weak var viewContainer: UIView!
     @IBOutlet weak var ivStatus: UIImageView!
-    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var ivComment: UIImageView!
     
+    @IBOutlet weak var lbNameHeight: NSLayoutConstraint!
+    @IBOutlet weak var lbNameTrailing: NSLayoutConstraint!
+    @IBOutlet weak var rightConstraint: NSLayoutConstraint!
+    var menuConfig = enableMenuConfig()
+    @IBOutlet weak var ivLoading: UIImageView!
+    @IBOutlet weak var lbLoading: UILabel!
+    var isQiscus : Bool = false
+    var message: QMessage? = nil
     
     var actionBlock: ((QMessage) -> Void)? = nil
-    var imageRequest: DownloadRequest? = nil
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         self.setMenu()
+        self.ivComment.contentMode = .scaleAspectFill
+        self.ivComment.clipsToBounds = true
+        self.ivComment.backgroundColor = UIColor.black
+        self.ivComment.layer.cornerRadius = 8
         self.ivComment.isUserInteractionEnabled = true
         let imgTouchEvent = UITapGestureRecognizer(target: self, action: #selector(QImagesRightCell.imageDidTap))
         self.ivComment.addGestureRecognizer(imgTouchEvent)
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(handleMassage(_:)),
+                                               name: Notification.Name("selectedCell"),
+                                               object: nil)
+    }
+    
+    @objc func handleMassage(_ notification: Notification) {
+        if let userInfo = notification.userInfo {
+            let json = JSON(userInfo)
+            let commentId = json["commentId"].string ?? "0"
+            if let message = self.message {
+                if message.id == commentId {
+                    self.contentView.backgroundColor = UIColor(red:39/255, green:177/255, blue:153/255, alpha: 0.1)
+                }
+            }
+        }
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -50,25 +81,16 @@ class QImagesRightCell: UIBaseChatCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        self.imageRequest?.cancel()
-        self.ivComment.image = nil
-        self.marginLblComment.constant = 7
-        self.loadingIndicator.isHidden = false
-        self.loadingIndicator.startAnimating()
+        ivComment.image = nil
     }
     
     func setupBalon(){
-        
-        self.ivRightBubble.image = self.getBallon()
-        self.ivRightBubble.tintColor = ColorConfiguration.rightBubbleColor
-        self.ivRightBubble.backgroundColor = ColorConfiguration.rightBubbleColor
-        
-        self.lblCaption.textColor = ColorConfiguration.rightBubbleTextColor
-        self.lblDate.textColor = ColorConfiguration.timeLabelTextColor
-        
-        self.ivRightBubble.layer.cornerRadius = 5.0
-        self.ivRightBubble.clipsToBounds = true
-        
+        self.lbNameHeight.constant = 20
+        self.ivBaloonLeft.tintColor = ColorConfiguration.rightBubbleColor
+        self.ivBaloonLeft.backgroundColor = ColorConfiguration.rightBubbleColor
+        self.ivBaloonLeft.layer.cornerRadius = 5.0
+        self.lbName.textColor = ColorConfiguration.rightBubbleColor
+        self.ivBaloonLeft.image = self.getBallon()
         self.ivComment.layer.cornerRadius = 5.0
         self.ivComment.clipsToBounds = true
         self.ivComment.contentMode = .scaleAspectFill
@@ -83,60 +105,56 @@ class QImagesRightCell: UIBaseChatCell {
     }
     
     func bindData(message: QMessage) {
-        setupBalon()
-        status(message: message)
-        self.ivComment.image = nil
-        self.lblCaption.isHidden = false
+        self.message = message
+        self.contentView.backgroundColor = UIColor.clear
+        self.setupBalon()
+        self.status(message: message)
+        // get image
+        self.lbTime.text = AppUtil.dateToHour(date: message.timestamp)
         guard let payload = message.payload else { return }
+        let caption = payload["caption"] as? String
         
-        var caption = payload["caption"] as? String
-        
-        if caption == nil {
-            caption = (payload["content"] as? [String : Any])?["caption"] as? String
+        if let caption = caption {
+            self.tvContent.text = caption
+        }else{
+            self.tvContent.text = ""
         }
         
-        if (caption ?? "").isEmpty {
-            self.marginLblComment.constant = -8
-        }
-        
-        self.lblCaption.text = caption
-        
-        var url = message.payload?["url"] as? String
-        
-        if url == nil {
-            url = getUrlFromMessage(message: message.message)?.absoluteString
-        }
-        
-        if let imageUrl = URL(string: url ?? "") {
-            if let cachedImage = QismoManager.shared.imageCache.object(forKey: NSString(string: url ?? "")) {
-                self.ivComment.image = cachedImage
-                self.loadingIndicator.isHidden = true
-                self.loadingIndicator.stopAnimating()
-            } else {
-                DispatchQueue.global(qos: .background).async { [weak self] in
-                    guard let self = self else {
-                        return
+        self.tvContent.textColor = ColorConfiguration.rightBubbleTextColor
+        if let url = payload["url"] as? String {
+            if let url = payload["url"] as? String {
+                //self.showLoading()
+                var fileImage = url
+                if fileImage.isEmpty {
+                    fileImage = "https://"
+                }
+                
+                self.ivComment.backgroundColor = #colorLiteral(red: 0.9764705882, green: 0.9764705882, blue: 0.9764705882, alpha: 1)
+                self.ivComment.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
+                self.ivComment.sd_setImage(with: URL(string: url) ?? URL(string: "https://"), placeholderImage: nil, options: .highPriority) { (uiImage, error, cache, urlPath) in
+                    if urlPath != nil && uiImage != nil{
+                        self.ivComment.af_setImage(withURL: urlPath!)
                     }
-                    
-                    let request = URLRequest(url: imageUrl)
-                    
-                    self.imageRequest = AF.download(request).responseData { (response) in
-                        guard let imageData = response.value, let image = UIImage(data: imageData) else {
-                            return
-                        }
-                        
-                        DispatchQueue.main.async {
-                            self.ivComment.image = image
-                            self.loadingIndicator.isHidden = true
-                            self.loadingIndicator.stopAnimating()
-                        }
-                        QismoManager.shared.imageCache.setObject(image, forKey: (url as NSString?) ?? "")
-                    }
+                }
+            }
+        }else{
+            var fileImage = message.getAttachmentURL(message: message.message)
+            
+            if fileImage.isEmpty {
+                fileImage = "https://"
+            }
+            self.ivComment.backgroundColor = #colorLiteral(red: 0.9764705882, green: 0.9764705882, blue: 0.9764705882, alpha: 1)
+            
+            self.ivComment.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
+            self.ivComment.sd_setImage(with: URL(string: fileImage) ?? URL(string: "https://"), placeholderImage: nil, options: .highPriority) { (uiImage, error, cache, urlPath) in
+                if urlPath != nil && uiImage != nil{
+                    self.ivComment.af_setImage(withURL: urlPath!)
                 }
             }
         }
         
-        self.lblDate.text = AppUtil.dateToHour(date: message.timestamp)
+        self.lbNameHeight.constant = 0 
+        
     }
     
     func status(message: QMessage){
@@ -146,31 +164,30 @@ class QImagesRightCell: UIBaseChatCell {
             //            ivStatus.image = UIImage(named: "ic_deleted", in: MultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
             break
         case .sending, .pending:
-            lblDate.textColor = ColorConfiguration.timeLabelTextColor
+            lbTime.textColor = ColorConfiguration.timeLabelTextColor
             ivStatus.tintColor = ColorConfiguration.timeLabelTextColor
-            lblDate.text = TextConfiguration.sharedInstance.sendingText
             ivStatus.image = UIImage(named: "ic_info_time", in: MultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
             break
         case .sent:
-            lblDate.textColor = ColorConfiguration.timeLabelTextColor
+            lbTime.textColor = ColorConfiguration.timeLabelTextColor
             ivStatus.tintColor = ColorConfiguration.timeLabelTextColor
             ivStatus.image = UIImage(named: "ic_sending", in: MultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
             break
         case .delivered:
-            lblDate.textColor = ColorConfiguration.timeLabelTextColor
+            lbTime.textColor = ColorConfiguration.timeLabelTextColor
             ivStatus.tintColor = ColorConfiguration.timeLabelTextColor
             ivStatus.image = UIImage(named: "ic_read", in: MultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
             
             break
         case .read:
-            lblDate.textColor = ColorConfiguration.timeLabelTextColor
+            lbTime.textColor = ColorConfiguration.timeLabelTextColor
             ivStatus.tintColor = ColorConfiguration.readMessageColor
             ivStatus.image = UIImage(named: "ic_read", in: MultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
             
             break
         case . failed:
-            lblDate.textColor = ColorConfiguration.failToSendColor
-            lblDate.text = TextConfiguration.sharedInstance.failedText
+            lbTime.textColor = ColorConfiguration.failToSendColor
+            lbTime.text = TextConfiguration.sharedInstance.failedText
             ivStatus.image = UIImage(named: "ic_warning", in: MultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
             ivStatus.tintColor = ColorConfiguration.failToSendColor
             break
@@ -186,16 +203,4 @@ class QImagesRightCell: UIBaseChatCell {
         }
     }
     
-}
-
-extension UIImageView {
-    public func roundCorners(_ corners: UIRectCorner, radius: CGFloat) {
-        let maskPath = UIBezierPath(roundedRect: bounds,
-                                    byRoundingCorners: corners,
-                                    cornerRadii: CGSize(width: radius, height: radius))
-        let shape = CAShapeLayer()
-        shape.frame = bounds
-        shape.path = maskPath.cgPath
-        layer.mask = shape
-    }
 }

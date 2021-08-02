@@ -26,6 +26,14 @@ class SharedPreferences {
         defaults.set(id, forKey: "multichannel_room_id")
     }
     
+    static func saveChannelId(id: Int) {
+        defaults.set(id, forKey: "multichannel_channel_id")
+    }
+    
+    static func getChannelId() -> Int? {
+        return defaults.integer(forKey: "multichannel_channel_id")
+    }
+    
     static func getDeletedCommentUniqueId() -> [String]? {
         return defaults.array(forKey: "deleted_comment_uniqueid") as? [String]
     }
@@ -58,6 +66,14 @@ class SharedPreferences {
         return defaults.string(forKey: "multichannel_extras") ?? ""
     }
     
+    static func saveExtrasMultichannelConfig(extras: String) {
+        defaults.set(extras, forKey: "multichannel_extras_config")
+    }
+    
+    static func getExtrasMultichannelConfig() -> String {
+        return defaults.string(forKey: "multichannel_extras_config") ?? ""
+    }
+    
     static func saveParam(param: [String:Any]) {
         defaults.set(param, forKey: "multichannel_param")
     }
@@ -76,6 +92,14 @@ class SharedPreferences {
     
     static func removeRoomId() {
         defaults.set(nil, forKey: "multichannel_room_id")
+    }
+    
+    static func removeChannelId() {
+        defaults.set(nil, forKey: "multichannel_channel_id")
+    }
+    
+    static func removeExtrasMultichannelConfig() {
+        defaults.set("", forKey: "multichannel_extras_config")
     }
     
     static func removeQiscusAccount() {

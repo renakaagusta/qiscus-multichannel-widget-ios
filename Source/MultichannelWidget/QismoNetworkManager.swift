@@ -14,7 +14,8 @@ class QismoNetworkManager {
     
     var qiscus: QiscusCore
     var qiscusUser: QAccount?
-    let urlInitiateChat = "https://multichannel.qiscus.com/api/v1/qiscus/initiate_chat"
+    let urlInitiateChat = "https://qismo.qiscus.com/api/v2/qiscus/initiate_chat"
+    let urlSessionChat = "https://qismo.qiscus.com"
     
     public init(qiscusCore : QiscusCore) {
         self.qiscus = qiscusCore
@@ -23,42 +24,41 @@ class QismoNetworkManager {
     public func initiateChat(param: [String:Any], onSuccess: @escaping(String) -> Void, onError: @escaping(String) -> Void) {
         var mParam = param
         self.qiscus.getJWTNonce(onSuccess: { nonce in
-//            mParam = ["nonce" : nonce.nonce]
             mParam.updateValue(nonce.nonce, forKey: "nonce")
-            //self.callInitiateChat(param: mParam, onSuccess: onSuccess, onError: onError)
+            print("check param ini =\(mParam)")
             let request = AF.request(self.urlInitiateChat, method: .post, parameters: mParam, encoding: JSONEncoding.default)
             .validate()
             .responseJSON { response in
                 print("network result \(response.result)")
-                guard let value = response.value as? [String: Any],
-                let chat = value["data"] as? [String: Any] else {
-                  return
+                
+                let json = JSON(response.value)
+                let identityToken = json["data"]["identity_token"].string ?? ""
+                let roomId = json["data"]["customer_room"]["room_id"].string ?? ""
+                let channelId = json["data"]["customer_room"]["channel_id"].int ?? 0
+                
+                if channelId > 0 {
+                    SharedPreferences.saveChannelId(id: channelId)
                 }
-                //get identityToken
-                guard let identityToken = chat["identity_token"] as? String else {
-                    onError("Failed to parsing token")
+                
+                
+                if identityToken.isEmpty || roomId.isEmpty {
                     return
                 }
                 
-                guard let roomId = chat["room_id"] as? String else {
-                    onError("failed to parsing room id")
-                    return
-                }
                 //login sdk
                 self.setQismoSdkUser(identityToken: identityToken, onSuccess: { [weak self] user in
                     //success login sdk
                     self?.qiscusUser = user
                     SharedPreferences.saveQiscusAccount(userEmail: user.id)
-                    self?.qiscus.connect()
                     onSuccess(roomId)
                 }, onError: { qError in
                     debugPrint(qError.message)
                 })
-                
+
             }.cURLDescription { curl in
                 print("initiate chat \(curl)")
             }
-            
+
         }, onError: { error in
             print(error.message)
             onError(error.message)
@@ -88,6 +88,26 @@ class QismoNetworkManager {
             
         }
         
+    }
+    
+    public func getSessionChat(onSuccess: @escaping(Bool) -> Void, onError: @escaping(String) -> Void) {
+        let request = AF.request("\(self.urlSessionChat)/\(self.qiscus.appID)/get_session", method: .get, parameters: nil, encoding: JSONEncoding.default)
+        .validate()
+        .responseJSON { response in
+            print("network result \(response.result)")
+            
+            if response.response?.statusCode == 200 {
+                let json = JSON(response.value)
+                let session = json["data"]["is_sessional"].bool ?? false
+                
+                onSuccess(session)
+            }else{
+                onError("Something when wrong")
+            }
+           
+        }.cURLDescription { curl in
+            print("initiate chat \(curl)")
+        }
     }
     
 }

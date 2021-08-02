@@ -16,10 +16,10 @@ class ColorConfiguration: NSObject {
     static var leftBubbleColor: UIColor = UIColor(red: 0.957, green: 0.957, blue: 0.957, alpha: 1)
     
     /// Your right bubble color, using UIColor class, Default value : UIColor(red: 165/255.0, green: 226/255.0, blue: 221/255.0, alpha: 1.0)
-    static var rightBubbleColor: UIColor = UIColor(red: 0, green: 0.443, blue: 0.733, alpha: 1)
+    static var rightBubbleColor: UIColor = #colorLiteral(red: 0.1529411765, green: 0.6941176471, blue: 0.6, alpha: 1)
     
     /// Your navigation color, using UIColor class, Default value : nil
-    static var navigationColor: UIColor?
+    static var navigationColor: UIColor = #colorLiteral(red: 0.1529411765, green: 0.6941176471, blue: 0.6, alpha: 1)
     
     static var navigationTitleColor: UIColor = .white
     
@@ -36,18 +36,18 @@ class ColorConfiguration: NSObject {
     static var rightBubbleTextColor: UIColor = .white
     
     /// Your text color of time label, using UIColor class, Default value : UIColor(red: 114/255.0, green: 114/255.0, blue: 114/255.0, alpha: 1)
-    static var timeLabelTextColor: UIColor = UIColor(red: 133/255.0, green: 133/255.0, blue: 133/255.0, alpha: 1)
+    static var timeLabelTextColor: UIColor = #colorLiteral(red: 133/255.0, green: 133/255.0, blue: 133/255.0, alpha: 1)
     
     /// Your failed text color if the message fail to send, using UIColor class, Default value : UIColor(red: 1, green: 19/255.0, blue: 0, alpha: 1)
     static var failToSendColor: UIColor = UIColor(red: 1, green: 19/255.0, blue: 0, alpha: 1)
     
-    static var readMessageColor: UIColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
+    static var readMessageColor: UIColor = #colorLiteral(red: 0.1529411765, green: 0.6941176471, blue: 0.6, alpha: 1)
     
-    static var sentOrDeliveredColor: UIColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+    static var sentOrDeliveredColor: UIColor = #colorLiteral(red: 133/255.0, green: 133/255.0, blue: 133/255.0, alpha: 1)
     
-    static var sendButtonColor: UIColor = UIColor(red: 0, green: 0.443, blue: 0.733, alpha: 1)
+    static var sendButtonColor: UIColor = #colorLiteral(red: 0.1529411765, green: 0.6941176471, blue: 0.6, alpha: 1)
     
-    static var attachmentButtonColor: UIColor = UIColor(red: 0, green: 0.443, blue: 0.733, alpha: 1)
+    static var attachmentButtonColor: UIColor = #colorLiteral(red: 0.1529411765, green: 0.6941176471, blue: 0.6, alpha: 1)
     
     /// Your link color of left bubble chat, using UIColor class, Default value : UIColor.whiteColor()
     static var leftBubbleLinkColor: UIColor = UIColor.white
@@ -66,6 +66,10 @@ class ColorConfiguration: NSObject {
     static var bottomColor: UIColor = UIColor(red: 23/255.0, green: 177/255.0, blue: 149/255.0, alpha: 1)
     
     static var tintColor: UIColor = UIColor.white
+    
+    static var alertPopUpConfirmationColor: UIColor = #colorLiteral(red: 0.1529411765, green: 0.6941176471, blue: 0.6, alpha: 1)
+    
+    static var buttonStartNewChat: UIColor = UIColor.white
     
     fileprivate override init(){}
 }

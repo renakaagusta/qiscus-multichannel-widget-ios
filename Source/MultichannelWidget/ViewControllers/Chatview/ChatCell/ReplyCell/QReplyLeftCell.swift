@@ -24,6 +24,9 @@ class QReplyLeftCell: UIBaseChatCell {
     @IBOutlet weak var lbContent: UILabel!
     @IBOutlet weak var lbName: UILabel!
     @IBOutlet weak var ivBubble: UIImageView!
+    @IBOutlet weak var leftWidthConstUsername: NSLayoutConstraint!
+    @IBOutlet weak var ivAvatarUser: UIImageView!
+    
     var menuConfig = enableMenuConfig()
     var isPublic: Bool = false
     var colorName : UIColor = UIColor.black
@@ -160,6 +163,46 @@ class QReplyLeftCell: UIBaseChatCell {
         }
         
         self.lbCommentSender.text = username
+        
+        if(isPublic == true){
+            self.lbName.text = message.sender.name
+            self.lbName.textColor = colorName
+            self.lbName.isHidden = false
+            self.lblNameHeightCons.constant = 21
+        }else{
+            self.lbName.text = ""
+            self.lbName.isHidden = true
+            self.lblNameHeightCons.constant = 0
+        }
+        
+        if ChatConfig.showAvatarSender == true{
+            self.leftWidthConstUsername.constant = 65
+            self.ivAvatarUser.isHidden = false
+        }else{
+            self.leftWidthConstUsername.constant = 20
+            self.ivAvatarUser.isHidden = true
+        }
+        
+        if ChatConfig.showUserNameSender == true {
+            self.lbName.isHidden = false
+            self.lblNameHeightCons.constant = 21
+        }else{
+            self.lbName.isHidden = true
+            self.lblNameHeightCons.constant = 0
+        }
+        
+        self.ivAvatarUser.layer.cornerRadius = self.ivAvatarUser.frame.size.width / 2
+        self.ivAvatarUser.clipsToBounds = true
+        
+        if let avatar = message.userAvatarUrl {
+            if avatar.absoluteString.contains("https://image.flaticon.com/icons/svg/145/145867.svg") == true{
+                self.ivAvatarUser.af_setImage(withURL: URL(string:"https://d1edrlpyc25xu0.cloudfront.net/ziv-nqsjtf0zdqf6kfk7s/image/upload/w_320,h_320,c_limit/r7byw7m9e4/default-wa.png")!)
+            }else{
+                self.ivAvatarUser.af_setImage(withURL: message.userAvatarUrl ?? URL(string: "http://")!)
+            }
+        }else{
+            self.ivAvatarUser.af_setImage(withURL: message.userAvatarUrl ?? URL(string: "http://")!)
+        }
     }
     
     func getThumbUrl(_ value: String) -> URL? {

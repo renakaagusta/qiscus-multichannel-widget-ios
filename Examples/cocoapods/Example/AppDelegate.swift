@@ -28,10 +28,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UIUserNotificationSettings(types: [.alert, .badge, .sound],  categories:  nil)
             application.registerUserNotificationSettings(settings)
         }
+        
+        
+        
           
         // MARK : register the app for remote notifications
         application.registerForRemoteNotifications()
-        application.unregisterForRemoteNotifications()
+        //application.unregisterForRemoteNotifications()
         Localize.setCurrentLanguage("en")
         // Override point for customization after application launch.
         return true
