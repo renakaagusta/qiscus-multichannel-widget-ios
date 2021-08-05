@@ -18,15 +18,15 @@
 
 ### CocoaPods
 
-[CocoaPods](https://cocoapods.org) is a dependency manager for Cocoa projects. For usage and installation instructions, visit their website. To integrate MultichannelWidget into your Xcode project using CocoaPods, specify it in your `Podfile`:
+[CocoaPods](https://cocoapods.org) is a dependency manager for Cocoa projects. For usage and installation instructions, visit their website. To integrate QiscusMultichannelWidget into your Xcode project using CocoaPods, specify it in your `Podfile`:
 
 ```ruby
-pod 'MultichannelWidget', '~> 1.1.6'
+pod 'QiscusMultichannelWidget', '~> 1.1.6'
 ```
 
 ### Carthage
 
-[Carthage](https://github.com/Carthage/Carthage) is a decentralized dependency manager that builds your dependencies and provides you with binary frameworks. To integrate MultichannelWidget into your Xcode project using Carthage, specify it in your `Cartfile`:
+[Carthage](https://github.com/Carthage/Carthage) is a decentralized dependency manager that builds your dependencies and provides you with binary frameworks. To integrate QiscusMultichannelWidget into your Xcode project using Carthage, specify it in your `Cartfile`:
 
 ```ogdl
 github "Qiscus-Integration/ios-multichannel-widget"
@@ -35,9 +35,9 @@ github "Qiscus-Integration/ios-multichannel-widget"
 ## How to use
 
 ### Initialization
-To use the widget you will need to initialize MultichannelWidget, in order to do this you will need APP_ID.
+To use the widget you will need to initialize QiscusMultichannelWidget, in order to do this you will need APP_ID.
 ```swift
-let widget = MultichannelWidget(appID: YOUR_APP_ID)
+let widget = QiscusMultichannelWidget(appID: YOUR_APP_ID)
 ```
 after the initialization, you can access all the widget's function.
 ### Set the user
@@ -143,14 +143,14 @@ finally you just need to click submit.
 
 #### Step Push Notification 4: Register A Device Token In Multichannel Widget.   
 
-create a class to hold the Widget (in this example we will use a Singleton Object class called ChatManager that will wrap the MultichannelWidget functionalities, in this step we will highlight the deviceToken registration and notification tap handling).
+create a class to hold the Widget (in this example we will use a Singleton Object class called ChatManager that will wrap the QiscusMultichannelWidget functionalities, in this step we will highlight the deviceToken registration and notification tap handling).
 ```swift
 final  class  ChatManager {
 
     static let shared: ChatManager = ChatManager()
 
-    lazy  var  widget: MultichannelWidget = {
-        return MultichannelWidget(appID: "YOUR_APP_ID")
+    lazy  var  widget: QiscusMultichannelWidget = {
+        return QiscusMultichannelWidget(appID: "YOUR_APP_ID")
     }()
     
     ...
@@ -275,8 +275,8 @@ This will install all cocoapods dependencies needed by the Example
 ### Step 4 : Set Your APP ID in Example
 Set the example Qiscus Multichannel APP ID you got from step 1. Open Example/ChatManager.swift, replace the appId at line 21 with your APP ID.
 ```swift
-lazy  var  widget: MultichannelWidget = {
-    return  MultichannelWidget(appID: "YOUR_APP_ID_FROM_STEP_1")
+lazy  var  widget: QiscusMultichannelWidget = {
+    return  QiscusMultichannelWidget(appID: "YOUR_APP_ID_FROM_STEP_1")
 }()
 ```
 

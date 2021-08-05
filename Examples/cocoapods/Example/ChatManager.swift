@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-import MultichannelWidget
+import QiscusMultichannelWidget
 import QiscusCore
 import Localize_Swift
 
@@ -19,8 +19,8 @@ enum ChatTransitionType {
 
 final class ChatManager {
     static let shared: ChatManager = ChatManager()
-    lazy var widget: MultichannelWidget = {
-       return MultichannelWidget(appID: "hat-ppxmocchbbcbhopzk")
+    lazy var widget: QiscusMultichannelWidget = {
+       return QiscusMultichannelWidget(appID: "hat-ppxmocchbbcbhopzk")
     }()
     
     func setUser(id: String, displayName: String, avatarUrl: String = "") {
