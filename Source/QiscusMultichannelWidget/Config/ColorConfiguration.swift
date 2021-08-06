@@ -13,7 +13,7 @@ import UIKit
 class ColorConfiguration: NSObject {
     
     /// Your left bubble color, using UIColor class, Default value : UIColor(red: 0/255.0, green: 187/255.0, blue: 150/255.0, alpha: 1.0)
-    static var leftBubbleColor: UIColor = UIColor(red: 0.957, green: 0.957, blue: 0.957, alpha: 1)
+    static var leftBubbleColor: UIColor = #colorLiteral(red: 0.957, green: 0.957, blue: 0.957, alpha: 1)
     
     /// Your right bubble color, using UIColor class, Default value : UIColor(red: 165/255.0, green: 226/255.0, blue: 221/255.0, alpha: 1.0)
     static var rightBubbleColor: UIColor = #colorLiteral(red: 0.1529411765, green: 0.6941176471, blue: 0.6, alpha: 1)

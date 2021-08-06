@@ -34,6 +34,14 @@ class SharedPreferences {
         return defaults.integer(forKey: "multichannel_channel_id")
     }
     
+    static func saveNewChat(isNew: Bool) {
+        defaults.set(isNew, forKey: "multichannel_is_new_chat")
+    }
+    
+    static func getNewChat() -> Bool {
+        return defaults.bool(forKey: "multichannel_is_new_chat")
+    }
+    
     static func getDeletedCommentUniqueId() -> [String]? {
         return defaults.array(forKey: "deleted_comment_uniqueid") as? [String]
     }

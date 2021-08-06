@@ -157,10 +157,19 @@ class UIChatPresenter: UIChatUserInteraction {
             return
         }
         
-        SharedPreferences.saveExtras(extras: options)
+        var isResolve = false
         
-        let param = JSON(parseJSON: options)
-        let isResolve = param["is_resolved"].boolValue
+        if SharedPreferences.getNewChat() == true {
+            let extras = SharedPreferences.getExtras().replacingOccurrences(of: "\"is_resolved\": true", with: "\"is_resolved\": false")
+            SharedPreferences.saveExtras(extras: extras)
+            isResolve = false
+            SharedPreferences.saveNewChat(isNew: false)
+        }else{
+            SharedPreferences.saveExtras(extras: options)
+            let param = JSON(parseJSON: options)
+            isResolve = param["is_resolved"].boolValue
+        }
+        
         viewPresenter?.onRoomResolved(isResolved: isResolve)
     }
     

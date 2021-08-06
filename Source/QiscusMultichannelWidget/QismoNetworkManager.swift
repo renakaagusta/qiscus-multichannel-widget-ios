@@ -35,6 +35,9 @@ class QismoNetworkManager {
                 let identityToken = json["data"]["identity_token"].string ?? ""
                 let roomId = json["data"]["customer_room"]["room_id"].string ?? ""
                 let channelId = json["data"]["customer_room"]["channel_id"].int ?? 0
+                let isResolved = json["data"]["customer_room"]["is_resolved"].bool ?? false
+                
+                SharedPreferences.saveNewChat(isNew: true)
                 
                 if channelId > 0 {
                     SharedPreferences.saveChannelId(id: channelId)

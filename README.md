@@ -21,16 +21,9 @@
 [CocoaPods](https://cocoapods.org) is a dependency manager for Cocoa projects. For usage and installation instructions, visit their website. To integrate QiscusMultichannelWidget into your Xcode project using CocoaPods, specify it in your `Podfile`:
 
 ```ruby
-pod 'QiscusMultichannelWidget', '~> 1.1.6'
+pod 'QiscusMultichannelWidget', '~> 2.0.0'
 ```
 
-### Carthage
-
-[Carthage](https://github.com/Carthage/Carthage) is a decentralized dependency manager that builds your dependencies and provides you with binary frameworks. To integrate QiscusMultichannelWidget into your Xcode project using Carthage, specify it in your `Cartfile`:
-
-```ogdl
-github "Qiscus-Integration/ios-multichannel-widget"
-```
 
 ## How to use
 
