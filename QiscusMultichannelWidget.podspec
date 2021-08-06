@@ -19,7 +19,7 @@ s.source_files  = "QiscusMultichannelWidget", "Source/QiscusMultichannelWidget/*
 
 s.resources = "Source/QiscusMultichannelWidget/**/*.xcassets"
 s.resource_bundles = {
-    'MultichannelWidget' => ['Source/QiscusMultichannelWidget/**/*.{lproj,xib,xcassets,imageset,png}']
+    'QiscusMultichannelWidget' => ['Source/QiscusMultichannelWidget/**/*.{lproj,xib,xcassets,imageset,png}']
 }
 
 s.framework		= 'UIKit', 'AVFoundation'
