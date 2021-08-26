@@ -30,25 +30,27 @@ pod 'QiscusMultichannelWidget', '~> 2.0.0'
 ### Initialization
 To use the widget you will need to initialize QiscusMultichannelWidget, in order to do this you will need APP_ID.
 ```swift
-let widget = QiscusMultichannelWidget(appID: YOUR_APP_ID)
+let qiscusWidget = QiscusMultichannelWidget(appID: YOUR_APP_ID)
 ```
 after the initialization, you can access all the widget's function.
 ### Set the user
 set the widget's user (this is mandatory before you can start to chat).
 ```swift
-widget.setUser(id: "user01", displayName: "Cus Tom R", avatarUrl: "https://customer.avatar-url.com")
+qiscusWidget.setUser(id: "user01", displayName: "Cus Tom R", avatarUrl: "https://customer.avatar-url.com")
 ```
 ### Get login status
 you can check whether the user has already logged in.
 ```swift
-widget.isLoggedIn()
+qiscusWidget.isLoggedIn()
 ```
 ### Start Chatting
 Before start chatting, please don't for get to set the user. After the user has been set you can start chatting using this function.
 ```swift
-widget.prepareChat(withTitle: "Customer Care", andSubtitle: "ready to serve").startChat { (chatViewController) in
-
-    someViewController.navigationController?.pushViewController(chatViewController, animated: true)
+qiscusWidget.initiateChat()
+    .setRoomTitle(title: "TITLE".localized())
+    .setRoomSubTitle(enableSubtitle: RoomSubtitle.enable, subTitle: "SUBTITLE".localized())
+    .startChat { (chatViewController) in
+        viewController.navigationController?.setViewControllers([viewController, chatViewController], animated: true)
 }
 ```
 ### Color Customization
@@ -58,13 +60,13 @@ You can customize widget components color befor start chatting.
 ### Clear User
 You will need to call this function to clear logged in user.
 ```swift
-widget.clearUser()
+qiscusWidget.clearUser()
 ``` 
 
 ### Hide system message
 configure system message visibility by calling setShowSystemMessage(isShowing: Bool).
 ```swift
- widget.prepareChat(withTitle: "Customer Care", andSubtitle: "ready to serve")
+qiscusWidget.initiateChat()
             ...
             .setShowSystemMessage(isShowing: false)
             ...
@@ -142,7 +144,7 @@ final  class  ChatManager {
 
     static let shared: ChatManager = ChatManager()
 
-    lazy  var  widget: QiscusMultichannelWidget = {
+    lazy  var  qiscusWidget: QiscusMultichannelWidget = {
         return QiscusMultichannelWidget(appID: "YOUR_APP_ID")
     }()
     
@@ -156,7 +158,7 @@ final  class  ChatManager {
                 tokenString += String(format: "%02.2hhx", deviceToken[i] as CVarArg)
             }
             
-            self.widget.register(deviceToken: tokenString, isDevelopment: false, onSuccess: { (response) in
+            self.qiscusWidget.register(deviceToken: tokenString, isDevelopment: false, onSuccess: { (response) in
                 print("Multichannel widget success to register device token")
             }) { (error) in
                 print("Multichannel widget failed to register device token")
@@ -167,7 +169,7 @@ final  class  ChatManager {
 
     func userTapNotification(userInfo : [AnyHashable : Any]) {
 
-        self.widget.tapNotification(userInfo: userInfo)
+        self.qiscusWidget.tapNotification(userInfo: userInfo)
     }
 
     ...
@@ -268,7 +270,7 @@ This will install all cocoapods dependencies needed by the Example
 ### Step 4 : Set Your APP ID in Example
 Set the example Qiscus Multichannel APP ID you got from step 1. Open Example/ChatManager.swift, replace the appId at line 21 with your APP ID.
 ```swift
-lazy  var  widget: QiscusMultichannelWidget = {
+lazy  var  qiscusWidget: QiscusMultichannelWidget = {
     return  QiscusMultichannelWidget(appID: "YOUR_APP_ID_FROM_STEP_1")
 }()
 ```

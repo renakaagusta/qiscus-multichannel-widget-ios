@@ -57,9 +57,7 @@ public class QiscusMultichannelWidget {
         return widgetConfig
     }
     
-    public func initiateChat(withTitle title: String, andSubtitle subtitle: String) -> MultichannelWidgetConfig {
-        widgetConfig.title = title
-        widgetConfig.subtitle = subtitle
+    public func initiateChat() -> MultichannelWidgetConfig {
         return widgetConfig
     }
     

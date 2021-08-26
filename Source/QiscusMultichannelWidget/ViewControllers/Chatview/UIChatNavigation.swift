@@ -70,8 +70,13 @@ class UIChatNavigation: UIView {
     }
     
     private func setupUI() {
-        self.ivAvatar.layer.cornerRadius = 43/2
-        self.ivAvatar.clipsToBounds = true
+        if self.ivAvatar != nil {
+            self.ivAvatar.widthAnchor.constraint(equalToConstant: 30).isActive = true
+            self.ivAvatar.heightAnchor.constraint(equalToConstant: 30).isActive = true
+            self.ivAvatar.frame.size.width = 30
+            self.ivAvatar.frame.size.height = 30
+            self.ivAvatar.layer.cornerRadius = self.ivAvatar.frame.height/2
+        }
     }
     
     func present(room: QChatRoom) {

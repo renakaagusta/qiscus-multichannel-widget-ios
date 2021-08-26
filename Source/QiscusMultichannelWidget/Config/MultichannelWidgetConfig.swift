@@ -10,11 +10,17 @@ import UIKit
 #endif
 import Foundation
 
+public enum RoomSubtitle: CaseIterable {
+    case enable, disable
+}
+
 open class MultichannelWidgetConfig {
+   
     private var avatar: String = ""
     private var extras: String = "" //string json
-    var title: String = ""
+    var title: String = "Customer Service"
     var subtitle: String = ""
+    var enableSubtitle : Bool = ChatConfig.enableSubtitle
     private var userProperties: [[String : String]]? = nil
     private var rightBubblColor: UIColor = ColorConfiguration.rightBubbleColor
     private var leftBubblColor: UIColor = ColorConfiguration.leftBubbleColor
@@ -22,9 +28,13 @@ open class MultichannelWidgetConfig {
     private var navigationTitleColor: UIColor = ColorConfiguration.navigationTitleColor
     private var systemBalloonColor: UIColor = ColorConfiguration.systemBubbleColor
     private var systemBalloonTextColor: UIColor = ColorConfiguration.systemBubbleTextColor
+    private var timeBackgroundColor:UIColor = ColorConfiguration.timeBackgroundColor
     private var leftBubblTextColor: UIColor = ColorConfiguration.leftBubbleTextColor
     private var rightBubblTextColor: UIColor = ColorConfiguration.rightBubbleTextColor
     private var timeLabelTextColor: UIColor = ColorConfiguration.timeLabelTextColor
+    private var sendContainerColor: UIColor = ColorConfiguration.sendContainerColor
+    private var fieldChatBorderColor : UIColor = ColorConfiguration.fieldChatBorderColor
+    private var sendContainerBackgroundColor: UIColor = ColorConfiguration.sendContainerBackgroundColor
     private var baseColor: UIColor = ColorConfiguration.baseColor
     private var emptyChatBackgroundColor: UIColor = ColorConfiguration.emptyChatBackgroundColor
     private var emptyChatTextColor: UIColor = ColorConfiguration.emptyChatTextColor
@@ -34,14 +44,14 @@ open class MultichannelWidgetConfig {
     private var showAvatarSender = true
     private var showUsernameSender = true
     
+    //config for avatarRoom
+    private var avatarRoom: String = ChatConfig.avatarRoom
+    
+    //config for notification
+    private var enableNotification : Bool = ChatConfig.enableNotification
+    
     public func setExtras(extras: String) -> MultichannelWidgetConfig {
         self.extras = extras
-        return self
-    }
-    
-    public func setNavigation(title: String, subtitle: String) -> MultichannelWidgetConfig {
-        self.title = title
-        self.subtitle = subtitle
         return self
     }
     
@@ -60,7 +70,7 @@ open class MultichannelWidgetConfig {
         return self
     }
     
-    public func setRightBubblTextColor(color: UIColor) -> MultichannelWidgetConfig {
+    public func setRightBubbleTextColor(color: UIColor) -> MultichannelWidgetConfig {
         self.rightBubblTextColor = color
         return self
     }
@@ -70,18 +80,8 @@ open class MultichannelWidgetConfig {
         return self
     }
     
-    public func setLeftBubblTextColor(color: UIColor) -> MultichannelWidgetConfig {
+    public func setLeftBubbleTextColor(color: UIColor) -> MultichannelWidgetConfig {
         self.leftBubblTextColor = color
-        return self
-    }
-    
-    public func setSystemBubblColor(color: UIColor) -> MultichannelWidgetConfig {
-        self.systemBalloonColor = color
-        return self
-    }
-    
-    public func setSystemBubblTextColor(color: UIColor) -> MultichannelWidgetConfig {
-        self.systemBalloonTextColor = color
         return self
     }
     
@@ -90,8 +90,58 @@ open class MultichannelWidgetConfig {
         return self
     }
     
+    public func setTimeBackgroundColor(color: UIColor) -> MultichannelWidgetConfig {
+        self.timeBackgroundColor = color
+        return self
+    }
+    
+    public func setSystemEventTextColor(color: UIColor) -> MultichannelWidgetConfig {
+        self.systemBalloonTextColor = color
+        return self
+    }
+    
+    
     public func setNavigationColor(color: UIColor) -> MultichannelWidgetConfig {
         self.navigationColor = color
+        return self
+    }
+    
+    public func setEnableNotification(enableNotification : Bool) -> MultichannelWidgetConfig{
+        self.enableNotification = enableNotification
+        
+        if !QismoManager.shared.deviceToken.isEmpty{
+            if self.enableNotification == true {
+                QismoManager.shared.register(deviceToken: QismoManager.shared.deviceToken) { (isSuccess) in
+                    
+                } onError: { (error) in
+                    
+                }
+            }else{
+                QismoManager.shared.remove(deviceToken: QismoManager.shared.deviceToken) { (isSuccess) in
+                    
+                } onError: { (error) in
+                    
+                }
+
+            }
+        }
+        
+        return self
+    }
+    
+    public func setRoomTitle(title: String) -> MultichannelWidgetConfig {
+        self.title = title
+        return self
+    }
+    
+    public func setRoomSubTitle(enableSubtitle : RoomSubtitle = RoomSubtitle.enable, subTitle : String) -> MultichannelWidgetConfig {
+        self.subtitle = subTitle
+        if enableSubtitle == .enable {
+            self.enableSubtitle = true
+        }else{
+            self.enableSubtitle = false
+        }
+        
         return self
     }
     
@@ -115,8 +165,19 @@ open class MultichannelWidgetConfig {
         return self
     }
     
+    @available(*, deprecated, message: "Please replace with setHideUIEvent")
     public func setShowSystemMessage(isShowing: Bool) -> MultichannelWidgetConfig {
         self.showSystemMessage = isShowing
+        return self
+    }
+    
+    public func setHideUIEvent(showSystemEvent: Bool) -> MultichannelWidgetConfig {
+        self.showSystemMessage = showSystemEvent
+        return self
+    }
+    
+    public func setAvatar(isShowing: Bool) -> MultichannelWidgetConfig {
+        self.showAvatarSender = isShowing
         return self
     }
     
@@ -130,6 +191,23 @@ open class MultichannelWidgetConfig {
         return self
     }
     
+    public func setSendContainerColor(color: UIColor) -> MultichannelWidgetConfig {
+        self.sendContainerColor = color
+        return self
+    }
+    
+    public func setFieldChatBorderColor(color: UIColor) -> MultichannelWidgetConfig {
+        self.fieldChatBorderColor = color
+        return self
+    }
+    
+    public func setSendContainerBackgroundColor(color: UIColor) -> MultichannelWidgetConfig {
+        self.sendContainerBackgroundColor = color
+        return self
+    }
+    
+    
+    
     public func startChat(callback: @escaping (UIViewController) -> Void) {
         ColorConfiguration.navigationColor = self.navigationColor
         ColorConfiguration.navigationTitleColor = self.navigationTitleColor
@@ -140,9 +218,14 @@ open class MultichannelWidgetConfig {
         ColorConfiguration.leftBubbleTextColor = self.leftBubblTextColor
         ColorConfiguration.rightBubbleTextColor = self.rightBubblTextColor
         ColorConfiguration.timeLabelTextColor = self.timeLabelTextColor
+        ColorConfiguration.sendContainerColor = self.sendContainerColor
+        ColorConfiguration.fieldChatBorderColor = self.fieldChatBorderColor
+        ColorConfiguration.timeBackgroundColor = self.timeBackgroundColor
         ColorConfiguration.baseColor = self.baseColor
         ColorConfiguration.emptyChatTextColor = self.emptyChatTextColor
         ColorConfiguration.emptyChatBackgroundColor = self.emptyChatBackgroundColor
+        ColorConfiguration.sendContainerBackgroundColor = self.sendContainerBackgroundColor
+        
         ChatConfig.showSystemMessage = self.showSystemMessage
         ChatConfig.showAvatarSender = self.showAvatarSender
         ChatConfig.showUserNameSender = self.showUsernameSender
@@ -161,9 +244,17 @@ open class MultichannelWidgetConfig {
         ColorConfiguration.leftBubbleTextColor = self.leftBubblTextColor
         ColorConfiguration.rightBubbleTextColor = self.rightBubblTextColor
         ColorConfiguration.timeLabelTextColor = self.timeLabelTextColor
+        ColorConfiguration.sendContainerColor = self.sendContainerColor
+        ColorConfiguration.fieldChatBorderColor = self.fieldChatBorderColor
+        ColorConfiguration.timeBackgroundColor = self.timeBackgroundColor
         ColorConfiguration.baseColor = self.baseColor
         ColorConfiguration.emptyChatTextColor = self.emptyChatTextColor
         ColorConfiguration.emptyChatBackgroundColor = self.emptyChatBackgroundColor
+        ColorConfiguration.sendContainerBackgroundColor = self.sendContainerBackgroundColor
+        
+        ChatConfig.showSystemMessage = self.showSystemMessage
+        ChatConfig.showAvatarSender = self.showAvatarSender
+        ChatConfig.showUserNameSender = self.showUsernameSender
         
         ChatConfig.showAvatarSender = self.showAvatarSender
         ChatConfig.showUserNameSender = self.showUsernameSender

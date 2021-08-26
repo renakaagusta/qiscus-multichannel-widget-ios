@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CustomChatInput" customModule="MultichannelWidget" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CustomChatInput" customModule="QiscusMultichannelWidget" customModuleProvider="target">
             <connections>
-                <outlet property="attachButton" destination="eX8-dS-8SK" id="Hfi-oJ-JQY"/>
+                <outlet property="attachButton" destination="MH0-kK-vkd" id="JZb-8g-oge"/>
                 <outlet property="contraintTopReply" destination="3jt-0Z-5EE" id="Vdp-J5-m6K"/>
                 <outlet property="heightTextViewCons" destination="1uw-f4-jxK" id="eTz-FI-LeA"/>
                 <outlet property="heightView" destination="9Gk-gy-9FX" id="2ND-F2-rHB"/>
-                <outlet property="imageAttachmentButton" destination="MH0-kK-vkd" id="hZh-9Y-LZe"/>
+                <outlet property="imageAttachmentButton" destination="eX8-dS-8SK" id="BB4-eG-LPd"/>
                 <outlet property="imageThumb" destination="9ko-Wy-TkQ" id="oHr-6K-IJq"/>
                 <outlet property="sendButton" destination="KIv-HR-J1D" id="zYB-tv-zsb"/>
                 <outlet property="textView" destination="Vuj-gV-0ov" id="3wf-0l-RDP"/>
@@ -55,9 +55,9 @@
                         <constraint firstAttribute="height" constant="50" id="IuH-vd-Pvb"/>
                     </constraints>
                     <color key="tintColor" red="0.51764705879999995" green="0.76078431369999999" blue="0.3803921569" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <state key="normal" image="ic_file_attachment"/>
+                    <state key="normal" image="ic_image_attachment"/>
                     <connections>
-                        <action selector="clickAttachment:" destination="-1" eventType="touchUpInside" id="kun-jy-4MV"/>
+                        <action selector="clickImageAttachment:" destination="-1" eventType="touchUpInside" id="HzE-rB-MMg"/>
                     </connections>
                 </button>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Vuj-gV-0ov">
@@ -87,9 +87,6 @@
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="number" keyPath="bottomBorderWidth">
                             <real key="value" value="1"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                            <color key="value" red="0.82533193010000006" green="0.82533193010000006" blue="0.82533193010000006" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </textView>
@@ -151,9 +148,9 @@
                         <constraint firstAttribute="width" constant="40" id="dtm-WI-gaL"/>
                     </constraints>
                     <color key="tintColor" red="0.51764705879999995" green="0.76078431369999999" blue="0.3803921569" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <state key="normal" image="ic_image_attachment"/>
+                    <state key="normal" image="ic_file_attachment"/>
                     <connections>
-                        <action selector="clickImageAttachment:" destination="-1" eventType="touchUpInside" id="gqQ-b6-d5U"/>
+                        <action selector="clickAttachment:" destination="-1" eventType="touchUpInside" id="SGk-rP-mnF"/>
                     </connections>
                 </button>
             </subviews>

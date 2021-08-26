@@ -24,7 +24,7 @@ class QSystemCell:  UIBaseChatCell {
         self.viewBackground.layer.cornerRadius = 8
         self.viewBackground.clipsToBounds = true
         self.viewBackground.layer.borderWidth = 1
-        self.viewBackground.layer.borderColor = UIColor(red:222/255, green:225/255, blue:227/255, alpha: 1).cgColor
+        self.viewBackground.layer.borderColor = ColorConfiguration.systemBubbleTextColor.cgColor
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(handleMassage(_:)),
@@ -63,6 +63,7 @@ class QSystemCell:  UIBaseChatCell {
     func bindData(message: QMessage){
         self.message = message
         lbComment.text = "\(self.hour(date: message.date())) - \(message.message)"
+        lbComment.textColor = ColorConfiguration.systemBubbleTextColor
     }
     
     func hour(date: Date?) -> String {

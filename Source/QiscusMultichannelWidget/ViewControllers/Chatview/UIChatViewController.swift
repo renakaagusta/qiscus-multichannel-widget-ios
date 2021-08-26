@@ -115,6 +115,8 @@ class UIChatViewController: UIViewController {
         }
     }
     
+    var uploadBanner: UploadProgressBanner?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupUI()
@@ -205,6 +207,9 @@ class UIChatViewController: UIViewController {
             self.setupInputBar(self.chatInput)
         }
         self.viewChatInput.isHidden = false
+        
+        self.uploadBanner = UploadProgressBanner(host: self)
+        
     }
     
     private func setupInputBar(_ inputchatview: UIChatInput) {
@@ -257,8 +262,18 @@ class UIChatViewController: UIViewController {
         self.navigationItem.leftBarButtonItems = [backButton]
         
         self.chatTitleView = UIChatNavigation(frame: self.navigationController?.navigationBar.frame ?? CGRect.zero)
+       
         self.chatTitleView.labelTitle.text = self.chatTitle
-        self.chatTitleView.labelSubtitle.text = self.chatSubtitle
+        if ChatConfig.enableSubtitle == true{
+            if self.chatSubtitle.isEmpty == true{
+                self.chatTitleView.labelSubtitle.text = self.getParticipant()
+            }else{
+                self.chatTitleView.labelSubtitle.text = self.chatSubtitle
+            }
+        }else{
+            self.chatTitleView.labelSubtitle.text = ""
+        }
+       
         SharedPreferences.saveTitle(title: self.chatTitleView.labelTitle.text ?? "")
         SharedPreferences.saveSubtitle(subtitle: self.chatTitleView.labelSubtitle.text ?? "")
         self.chatTitleView.labelTitle.textColor = ColorConfiguration.navigationTitleColor
@@ -329,6 +344,10 @@ class UIChatViewController: UIViewController {
         view.endEditing(true)
         self.navigationController?.popViewController(animated: true)
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    func uploadImageMessage(comment: QMessage, file: FileUploadModel, assetIdentifier: String, caption: String, totalAssets: Int, onComplete: @escaping () -> Void) {
+        self.presenter.uploadMediaMessage(withComment: comment, file: file, assetIdentifier: assetIdentifier, caption: caption, totalAssets: totalAssets, onComplete: onComplete)
     }
     
     @objc func call() {
@@ -719,6 +738,19 @@ class UIChatViewController: UIViewController {
 
 // MARK: UIChatDelegate
 extension UIChatViewController: UIChatViewDelegate {
+    func updateUploadProgress(progress: CGFloat) {
+        uploadBanner?.progress.progress = Float(progress)
+        uploadBanner?.uploadingLabel.text = ""
+        
+        if progress == 1 {
+            uploadBanner?.dismiss()
+        }
+    }
+    
+    func showUploadBanner() {
+        uploadBanner?.showBannerInfo()
+    }
+    
     func onLoading(message: String) {
         self.labelEmptyMessage.text = message
     }
@@ -964,6 +996,10 @@ extension UIChatViewController: UITableViewDataSource {
             label.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 0).isActive = true
             label.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -8).isActive = true
             
+            label.layer.borderColor = ColorConfiguration.timeLabelTextColor.cgColor
+            label.backgroundColor = ColorConfiguration.timeBackgroundColor
+            label.textColor = ColorConfiguration.timeLabelTextColor
+            
             return containerView
             
         }
@@ -1034,6 +1070,11 @@ extension UIChatViewController : UIChatView {
 extension UIChatViewController : UIChatInputDelegate {
     func onHeightChanged(height: CGFloat) {
         self.constraintViewInputHeight.constant = height
+        
+        self.chatInput.textView.layer.borderColor = UIColor.red.cgColor
+        self.chatInput.sendButton.tintColor = ColorConfiguration.sendContainerColor
+        self.chatInput.attachButton.tintColor = ColorConfiguration.sendContainerColor
+        self.chatInput.imageAttachmentButton.tintColor = ColorConfiguration.sendContainerColor
     }
     
     func typing(_ value: Bool) {

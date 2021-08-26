@@ -57,15 +57,17 @@ class CustomChatInput: UIChatInput {
         textView.text = TextConfiguration.sharedInstance.textPlaceholder
         textView.textColor = UIColor.lightGray
         textView.font = ChatConfig.chatFont
-        textView.layer.borderColor = #colorLiteral(red: 0.9176470588, green: 0.9176470588, blue: 0.9137254902, alpha: 1)
+        textView.layer.borderColor = ColorConfiguration.fieldChatBorderColor.cgColor
         textView.layer.borderWidth = 1
         textView.layer.cornerRadius = 8
         textView.textContainerInset = UIEdgeInsets(top: 2, left: 2, bottom: 0, right: 2)
         
-        self.sendButton.tintColor = ColorConfiguration.sendButtonColor
-        self.attachButton.tintColor = ColorConfiguration.attachmentButtonColor
+        self.contentsView.backgroundColor = ColorConfiguration.sendContainerBackgroundColor
+        
+        self.sendButton.tintColor = ColorConfiguration.sendContainerColor
+        self.attachButton.tintColor = ColorConfiguration.sendContainerColor
         self.attachButton.setImage(UIImage(named: "ic_file_attachment", in: QiscusMultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate), for: .normal)
-        self.imageAttachmentButton.tintColor = ColorConfiguration.attachmentButtonColor
+        self.imageAttachmentButton.tintColor = ColorConfiguration.sendContainerColor
         self.imageAttachmentButton.setImage(UIImage(named: "ic_image_attachment", in: QiscusMultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate), for: .normal)
         self.sendButton.setImage(UIImage(named: "ic_send", in: QiscusMultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate), for: .normal)
     }
@@ -754,7 +756,7 @@ extension UIChatViewController: UIDocumentPickerDelegate{
                             QPopUpView.sharedInstance.showProgress(progress: progress)
                         }
                     }else{
-                        let uploader = QiscusUploaderVC()
+                        let uploader = NewQiscusUploaderVC()
                         uploader.chatView = self
                         uploader.data = data
                         uploader.fileName = fileName
@@ -782,23 +784,23 @@ extension UIChatViewController: PHPickerViewControllerDelegate {
             self.dismiss(animated:true, completion: nil)
             return
         }
-        
+       
         var imageName:String = "\(NSDate().timeIntervalSince1970 * 1000).jpg"
-        
+
         let itemProviders = results.map(\.itemProvider)
-        
+
         if itemProviders.count == 0{
             self.dismiss(animated:true, completion: nil)
             return
         }
-        
+
         for item in itemProviders {
             if item.canLoadObject(ofClass: UIImage.self) {
                 item.loadObject(ofClass: UIImage.self) { (image, error) in
                     DispatchQueue.main.async {
                         if let image = image as? UIImage {
                             var data = image.pngData()
-                            
+
                             let imageSize = image.size
                             var bigPart = CGFloat(0)
                             if(imageSize.width > imageSize.height){
@@ -806,14 +808,14 @@ extension UIChatViewController: PHPickerViewControllerDelegate {
                             }else{
                                 bigPart = imageSize.height
                             }
-                            
+
                             var compressVal = CGFloat(1)
                             if(bigPart > 2000){
                                 compressVal = 2000 / bigPart
                             }
-                            
+
                             data = image.jpegData(compressionQuality:compressVal)
-                            
+
                             if data != nil {
                                 let mediaSize = Double(data!.count) / 1024.0
                                 if mediaSize > self.maxUploadSizeInKB {
@@ -823,12 +825,11 @@ extension UIChatViewController: PHPickerViewControllerDelegate {
                                     return
                                 } else {
                                     self.dismiss(animated:true, completion: nil)
-                                    
+
                                     picker.dismiss(animated: true, completion: {
-                                        
+
                                     })
-                                    
-                                    let uploader = QiscusUploaderVC()
+                                    let uploader = NewQiscusUploaderVC()
                                     uploader.chatView = self
                                     uploader.data = data
                                     uploader.fileName = imageName
@@ -936,7 +937,7 @@ extension UIChatViewController : UIImagePickerControllerDelegate, UINavigationCo
                 
                 dismiss(animated:true, completion: nil)
                 
-                let uploader = QiscusUploaderVC()
+                let uploader = NewQiscusUploaderVC()
                 uploader.chatView = self
                 uploader.data = data
                 uploader.fileName = imageName

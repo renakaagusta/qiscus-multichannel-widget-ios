@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
 s.name         = "QiscusMultichannelWidget"
-s.version      = "2.0.0-beta.1"
+s.version      = "2.0.0-beta.2"
 s.summary      = "Customer Chat integration."
 
 s.homepage     = "http://qiscus.com"
@@ -13,7 +13,7 @@ s.author       = { "arief@qiscus.co" => "arief@qiscus.co" }
 
 s.platform     = :ios, "10.0"
 s.swift_version = '4.2'
-s.source       = { :git => "https://github.com/qiscus/qiscus-multichannel-widget-ios" }
+s.source       = { :git => "https://github.com/qiscus/qiscus-multichannel-widget-ios", :tag => "#{s.version}" }
 
 s.source_files  = "QiscusMultichannelWidget", "Source/QiscusMultichannelWidget/**/*.{h,m,swift,xib}"
 
@@ -31,4 +31,5 @@ s.dependency 'SwiftyJSON'
 s.dependency 'QiscusCore', '3.0.0-beta.10'
 s.dependency 'SDWebImage'
 s.dependency 'SDWebImageWebPCoder'
+s.dependency 'CropViewController'
 end

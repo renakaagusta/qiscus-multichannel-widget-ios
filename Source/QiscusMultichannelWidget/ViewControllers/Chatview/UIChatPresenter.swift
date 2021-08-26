@@ -38,6 +38,8 @@ protocol UIChatViewDelegate {
     func onUser(name: String, isOnline: Bool, message: String)
     func onRoomResolved(isResolved: Bool)
     func onClosingMessageReceived(url: String)
+    func showUploadBanner()
+    func updateUploadProgress(progress: CGFloat)
 }
 
 class UIChatPresenter: UIChatUserInteraction {
@@ -49,7 +51,7 @@ class UIChatPresenter: UIChatUserInteraction {
     var loadMoreDispatchGroup: DispatchGroup = DispatchGroup()
     var lastIdToLoad: String = ""
     var lastIdToSynch: String = ""
-    
+    var uploadCompleteCount: CGFloat = 0
     var qiscus : QiscusCore {
         get {
             return QismoManager.shared.qiscus
@@ -373,6 +375,55 @@ class UIChatPresenter: UIChatUserInteraction {
         //            //
         //        }
     }
+    
+    func uploadMediaMessage(withComment comment: QMessage, file: FileUploadModel, assetIdentifier: String, caption: String, totalAssets: Int, onComplete: @escaping () -> Void) {
+            viewPresenter?.showUploadBanner()
+            let mutableComment = comment
+            mutableComment.type = "file_attachment"
+            mutableComment.payload = [
+                "file_name": "placeholder.png",
+                "url": "placeholder.png",
+                "caption": caption
+            ]
+        
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                onComplete()
+            }
+        QismoManager.shared.qiscus.shared.upload(file: file, onSuccess: { [weak self] (file) in
+                guard let self = self else {
+                    return
+                }
+                self.uploadCompleteCount += 1
+                let progress = self.uploadCompleteCount / CGFloat(totalAssets)
+                self.viewPresenter?.updateUploadProgress(progress: progress)
+                
+                if progress == 1 {
+                    self.uploadCompleteCount = 0
+                }
+                
+                mutableComment.payload = [
+                   // "asset_identifier": assetIdentifier,
+                    "url"       : file.url.absoluteString,
+                    "file_name" : file.name,
+                    "size"      : file.size,
+                    "caption"   : caption
+                ]
+            
+            
+                mutableComment.message = "Send Image"
+                //QiscusCore.database.comment.save([mutableComment])
+                
+            QismoManager.shared.qiscus.shared.sendMessage(message: mutableComment, onSuccess: { (comment) in
+                    self.didComment(comment: comment, changeStatus: comment.status)
+                }) { (error) in
+                    print("error send message \(error.message)")
+                }
+            }, onError: { (error) in
+                //error
+            }, progressListener: { [weak self] (progress) in
+                
+            })
+        }
     
     private func addNewCommentUI(_ message: QMessage, isIncoming: Bool) {
         // Check first, if the message already deleted

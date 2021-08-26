@@ -36,6 +36,14 @@ extension UIViewController {
     func dismissLoading() {
         dismiss(animated: false, completion: nil)
     }
+      
+    func showError(withText text: String) {
+        let alert = UIAlertController(title: nil, message: text, preferredStyle: .alert)
+        let closeButton = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+        alert.addAction(closeButton)
+        
+        present(alert, animated: true, completion: nil)
+    }
     
 }
 
