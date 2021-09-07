@@ -44,7 +44,7 @@ class ColorConfiguration: NSObject {
     /// Your text color of time label, using UIColor class
     static var timeLabelTextColor: UIColor = #colorLiteral(red: 133/255.0, green: 133/255.0, blue: 133/255.0, alpha: 1)
     
-    static var timeBackgroundColor : UIColor = #colorLiteral(red: 0.9782221503, green: 0.9782221503, blue: 0.9782221503, alpha: 1)
+    static var timeBackgroundColor : UIColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
     
     /// Your failed text color if the message fail to send, using UIColor class
     static var failToSendColor: UIColor = UIColor(red: 1, green: 19/255.0, blue: 0, alpha: 1)

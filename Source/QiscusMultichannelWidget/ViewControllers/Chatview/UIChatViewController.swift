@@ -998,7 +998,7 @@ extension UIChatViewController: UITableViewDataSource {
             
             label.layer.borderColor = ColorConfiguration.timeLabelTextColor.cgColor
             label.backgroundColor = ColorConfiguration.timeBackgroundColor
-            label.textColor = ColorConfiguration.timeLabelTextColor
+            label.textColor = UIColor.white
             
             return containerView
             

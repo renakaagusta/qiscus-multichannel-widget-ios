@@ -51,7 +51,7 @@ final class ChatManager {
             .setRightBubbleTextColor(color: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0))
             .setLeftBubbleTextColor(color: #colorLiteral(red: 0.4, green: 0.4, blue: 0.4, alpha: 1))
             .setTimeLabelTextColor(color: #colorLiteral(red: 133/255.0, green: 133/255.0, blue: 133/255.0, alpha: 1))
-            .setTimeBackgroundColor(color: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0))
+            .setTimeBackgroundColor(color: #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1))
             .setBaseColor(color: #colorLiteral(red: 0.9782221503, green: 0.9782221503, blue: 0.9782221503, alpha: 1))
             .setEmptyTextColor(color: #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1))
             .setEmptyBackgroundColor(color: #colorLiteral(red: 0.9782221503, green: 0.9782221503, blue: 0.9782221503, alpha: 1))
