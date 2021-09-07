@@ -25,7 +25,7 @@ class ColorConfiguration: NSObject {
     
     static var fieldChatBorderColor: UIColor = #colorLiteral(red: 0.9176470588, green: 0.9176470588, blue: 0.9137254902, alpha: 1)
     
-    static var sendContainerBackgroundColor: UIColor = #colorLiteral(red: 0.89, green: 0.89, blue: 0.89, alpha: 1)
+    static var sendContainerBackgroundColor: UIColor = #colorLiteral(red: 0.9844431281, green: 0.9844661355, blue: 0.9844536185, alpha: 1)
     
     static var navigationTitleColor: UIColor = .white
     

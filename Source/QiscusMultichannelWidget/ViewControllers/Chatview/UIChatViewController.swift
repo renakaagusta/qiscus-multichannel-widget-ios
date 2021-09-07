@@ -1071,7 +1071,7 @@ extension UIChatViewController : UIChatInputDelegate {
     func onHeightChanged(height: CGFloat) {
         self.constraintViewInputHeight.constant = height
         
-        self.chatInput.textView.layer.borderColor = UIColor.red.cgColor
+        self.chatInput.textView.layer.borderColor = ColorConfiguration.fieldChatBorderColor.cgColor
         self.chatInput.sendButton.tintColor = ColorConfiguration.sendContainerColor
         self.chatInput.attachButton.tintColor = ColorConfiguration.sendContainerColor
         self.chatInput.imageAttachmentButton.tintColor = ColorConfiguration.sendContainerColor

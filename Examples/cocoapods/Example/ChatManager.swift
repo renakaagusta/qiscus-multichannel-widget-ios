@@ -61,7 +61,7 @@ final class ChatManager {
             .setShowUsernameSender(isShowing: false)
             .setSendContainerColor(color: #colorLiteral(red: 0.1529411765, green: 0.6941176471, blue: 0.6, alpha: 1))
             .setFieldChatBorderColor(color: #colorLiteral(red: 0.9176470588, green: 0.9176470588, blue: 0.9137254902, alpha: 1))
-            .setSendContainerBackgroundColor(color: #colorLiteral(red: 0.89, green: 0.89, blue: 0.89, alpha: 1))
+            .setSendContainerBackgroundColor(color: #colorLiteral(red: 0.9844431281, green: 0.9844661355, blue: 0.9844536185, alpha: 1))
             .startChat { (chatViewController) in
                 viewController.navigationController?.setViewControllers([viewController, chatViewController], animated: true)
         }
