@@ -1,10 +1,10 @@
-# ios-multichannel-widget
+# [Widget] Documentation iOS
 
 ## Requirements
 
-- iOS 10.0+
-- minimum Xcode 11.4
-- Swift 5
+* iOS 10.0+
+* minimum Xcode 11.4
+* Swift 5
 
 ## Dependency
 
@@ -18,34 +18,45 @@
 
 ### CocoaPods
 
-[CocoaPods](https://cocoapods.org) is a dependency manager for Cocoa projects. For usage and installation instructions, visit their website. To integrate QiscusMultichannelWidget into your Xcode project using CocoaPods, specify it in your `Podfile`:
+[CocoaPods](https://cocoapods.org/) is a dependency manager for Cocoa projects. For usage and installation instructions, visit their website. To integrate QiscusMultichannelWidget into your Xcode project using CocoaPods, specify it in your `Podfile`:
 
-```ruby
+```
 pod 'QiscusMultichannelWidget', '~> 2.0.0'
 ```
 
-
-## How to use
+## How To Use
 
 ### Initialization
-To use the widget you will need to initialize QiscusMultichannelWidget, in order to do this you will need APP_ID.
-```swift
+
+In order to use `QiscusMultichannelWidge`t, you need to initialize it with your AppID (`YOUR_APP_ID`). Get more information to get AppID from [Qiscus Multichannel Chat page](https://multichannel.qiscus.com/)
+
+```
 let qiscusWidget = QiscusMultichannelWidget(appID: YOUR_APP_ID)
 ```
-after the initialization, you can access all the widget's function.
-### Set the user
-set the widget's user (this is mandatory before you can start to chat).
-```swift
-qiscusWidget.setUser(id: "user01", displayName: "Cus Tom R", avatarUrl: "https://customer.avatar-url.com")
+
+After the initialization, you can access all the widget's functions.
+
+### Set The User
+
+Set UserId before start the chat, this is mandatory.
+
 ```
-### Get login status
-you can check whether the user has already logged in.
-```swift
+qiscusWidget.setUser(id: "UserId", displayName: "Cus Tom R", avatarUrl: "[https://customer.avatar-url.com](https://customer.avatar-url.com/)")
+```
+
+### Get Login Status
+
+User this function to check whether the user has already logged in.
+
+```
 qiscusWidget.isLoggedIn()
 ```
-### Start Chatting
-Before start chatting, please don't for get to set the user. After the user has been set you can start chatting using this function.
-```swift
+
+### Start Chat
+
+Use this function to start a chat.
+
+```
 qiscusWidget.initiateChat()
     .setRoomTitle(title: "TITLE".localized())
     .setRoomSubTitle(enableSubtitle: RoomSubtitle.enable, subTitle: "SUBTITLE".localized())
@@ -53,19 +64,20 @@ qiscusWidget.initiateChat()
         viewController.navigationController?.setViewControllers([viewController, chatViewController], animated: true)
 }
 ```
-### Color Customization
-You can customize widget components color befor start chatting.
-![Color Customization Image](/Readme/color_config_example.png)
 
 ### Clear User
-You will need to call this function to clear logged in user.
-```swift
-qiscusWidget.clearUser()
-``` 
 
-### Hide system message
+Use this function to clear the logged-in users.
+
+```
+qiscusWidget.clearUser()
+```
+
+### Hide system message 
+
 configure system message visibility by calling setShowSystemMessage(isShowing: Bool).
-```swift
+
+```
 qiscusWidget.initiateChat()
             ...
             .setShowSystemMessage(isShowing: false)
@@ -75,71 +87,108 @@ qiscusWidget.initiateChat()
             }
 ```
 
+## Customization
 
+We provide several functions to customize the User Interface.
 
+### Config
+
+|Title	|Description	|
+|---	|---	|
+|setRoomTitle	|Set room name base on customer's name or static default.	|
+|setRoomSubTitle	|	|
+|	|setRoomSubTitle(RoomSubtitle.Enabled)	|Set enable room sub name by the system.	|
+|	|setRoomSubTitle(RoomSubtitle.Disabled)	|Set disable room sub name.	|
+|	|setRoomSubTitle(RoomSubtitle.Editable, "Custom subtitle")	|Set enable room sub name base on static default.	|
+|setHideUIEvent	|Show/hide system event.	|
+|setAvatar	|	|
+|	|setAvatar(Avatar.Enable)	|Set enable avatar and name	|
+|	|setAvatar(Avatar.Disabled)	|Set disable avatar and name	|
+|setEnableNotification	|Set enable app notification.	|
+
+### Color
+
+|No	|Title	|Description	|
+|---	|---	|---	|
+|1	|setNavigationColor	|Set navigation color.	|
+|2	|setSendContainerColor	|Set icon send border-color.	|
+|3	|setFieldChatBorderColor	|Set field chat border-color.	|
+|4	|setSendContainerBackgroundColor	|Set send container background-color.	|
+|5	|setNavigationTitleColor	|Set room title, room subtitle, and back button border color.	|
+|6	|setSystemEventTextColor	|Set system event text and border color.	|
+|7	|setLeftBubbleColor	|Set left bubble chat color (for: Admin, Supervisor, Agent).	|
+|8	|setRightBubbleColor	|Set right bubble chat color (Customer).	|
+|9	|setLeftBubbleTextColor	|Set left bubble text color (for: Admin, Supervisor, Agent).	|
+|10	|setRightBubbleTextColor	|Set right bubble text color (Customer).	|
+|11	|setTimeLabelTextColor	|Set time text color.	|
+|12	|setTimeBackgroundColor	|Set time background color.	|
+|13	|setBaseColor	|Set background color of the room chat.	|
+|14	|setEmptyTextColor	|Set empty state text color.	|
+|15	|setEmptyBackgroundColor	|Set empty state background color.	|
+
+![Color Customization Image](/Readme/colorConfig.png)
 ## Push Notification
-In order to have push notification working in your apps, you will need to follow these steps below.
 
-1. Create a Certificate Signing Request(CSR).
-2. Create a Push Notification SSL certificate in Apple Developer site.
-3. Export a p12 file and upload it to https://support.qiscus.com/hc/en-us/requests/new.
-4. Register a device token in Multichannel Widget and handle incoming notification.
+Follow these steps to set push notifications on your application
 
-#### Step Push Notification 1:  Create A Certificate Signing Request(CSR)
+1. **Create the Certificate Signing Request (CSR)**
 
-Open **Keychain Access** on your Mac (Applications -> Utilities -> Keychain Access). Select **Request a Certificate From a Certificate Authority**.
-<p align="center"><br/><img src="https://d3p8ijl4igpb16.cloudfront.net/docs/assets/apns1.png" width="100%" /><br/></p>
+* Open **Keychain Access** on your Mac (Applications -> Utilities -> Keychain Access)
+* Select **Request a Certificate From a Certificate Authority**
 
-In the **Certificate Information** window, do the following:
+![Push Notification Image](/Readme/pn01.png)
 
-* In the **User Email Address** field, enter your email address.
-* In the **Common Name** field, create a name for your private key (for example, John Doe Dev Key).
-* The **CA Email Address** field must be left empty.
-* In the **Request is** group, select the **Saved to disk** option.
+* Fill **User Email Address, Common Name** (Example: John Doe Dev Key), and select the **Saved to disk** on **Request is** group
 
-<p align="center"><br/><img src="https://d3p8ijl4igpb16.cloudfront.net/docs/assets/apns2.png" width="100%" /><br/></p>
+![Push Notification Image](/Readme/pn01b.png)
 
-#### Step Push Notification 2: Create A Push Notification SSL Certificate In Apple Developer Site.
+2. **Create the Push Notification SSL certificate in Apple Developer site**
 
-Log in to the [Apple Developer Member Center](https://developer.apple.com/) and find the **Certificates, Identifiers & Profiles** menu. Select **App IDs**, find your target application, and click the **Edit** button.
-<p align="center"><br/><img src="https://d3p8ijl4igpb16.cloudfront.net/docs/assets/apns3.png" width="100%" /><br/></p>
+* Log in to the [Apple Developer Member Center](https://developer.apple.com/)
+* Go to the **Certificates, Identifiers & Profiles menu**
+* Select Certificates**, **then click the Plus (+) button 
 
-<p align="center"><br/><img src="https://d3p8ijl4igpb16.cloudfront.net/docs/assets/apns4.png" width="100%" /><br/></p>
+![Push Notification Image](/Readme/pn02.png)
 
-Turn on **Push Notifications** and create a development or production certificate to fit your purpose. 
-<p align="center"><br/><img src="https://d3p8ijl4igpb16.cloudfront.net/docs/assets/apns5.png" width="100%" /><br/></p>
-Upload the **CSR file** that you created in section (1) to complete this process. After doing so, download a **SSL certificate**.
-Double-click the file and register it to your **login keychain.**
+* Select Apple Push Notification service SSL (Sandbox & Production) and click continue.
 
+![Push Notification Image](/Readme/pn02b.png)
 
-#### Step Push Notification 3: Export A p12 File and Upload It To Qiscus Dashboard
+* Select AppID then click continue
+* Upload the CSR file (step 1) to complete this process
+* Download an SSL certificate
+* Double-click the file and register it to your login Keychain
 
-Under the Keychain Access, click the Certificates category from the left menu. Find the Push SSL certificate you just registered and right-click it without expanding the certificate. Then select Export to save the file to your disk.
+3. **Upload the p12 file to Qiscus dashboard**
 
-<p align="center"><br/><img src="https://d3p8ijl4igpb16.cloudfront.net/docs/assets/apns6.png" width="100%" /><br/></p>
+* Click the *Certificates* category from the left menu, under the *Keychain Access*
+* Select the Push SSL certificate that you registered before
+* Right-click the certificate
 
-<p align="center"><br/><img src="https://d3p8ijl4igpb16.cloudfront.net/docs/assets/apns7.png" width="100%" /><br/></p>
+![Push Notification Image](/Readme/pn03.png)
 
-<p align="center"><br/><img src="https://d3p8ijl4igpb16.cloudfront.net/docs/assets/apns8.png" width="100%" /><br/></p>
+* Select export to save the file to your disk
 
-Then, open this submit request [page](https://support.qiscus.com/hc/en-us/requests/new).
+![Push Notification Image](/Readme/pn03b.png)
 
-fill in your email and subject.
-![Submit Request Form 1](/Readme/submit_apns_1.png)
+* Go to [Qiscus Help page](https://support.qiscus.com/hc/en-us/requests/new) to submit your request
+* Full fill the requirements below:
+    * Email, Subject, and Description
+    * Select *Multichannel CS Chat *in Product Associated
+    * Select *Multichannel Customer Service Chat* in Category of Query
+    * Fill `YOUR_APP_ID` in Application ID
+* Click Submit
 
-write the description, choose Product Associated (Multichannel CS Chat), choose Category of Query (Multichannel Customer Service Chat), your APP_ID, and the most important is don't forget to attach the .p12 certificate for the APNS push notification.
-![Submit Request Form 2](/Readme/submit_apns_2.png)
+![Push Notification Image](/Readme/pn03c.png)
 
-finally you just need to click submit.
-![Submit Request Form 3](/Readme/submit_apns_3.png)
+> Note:
+This example is a production push notification certificate. You need to create a development push notification certificate and p12 file, then submit it as an attachment for Xcode users.
 
-> **Note:  
-**Example of this certificate for production, you need create cert Push Notification for development, and Export A p12 File and Attach It To Sbumit Request attachment if you run from Xcode
+4. **Register the device token to Multichannel Widget.**
 
-#### Step Push Notification 4: Register A Device Token In Multichannel Widget.   
+* Create a class to hold the Widget. In this example, we will use a Singleton Object class called ChatManager that will wrap the QiscusMultichannelWidget functionalities. In this step, we will highlight the deviceToken registration and notification tap handling.
 
-create a class to hold the Widget (in this example we will use a Singleton Object class called ChatManager that will wrap the QiscusMultichannelWidget functionalities, in this step we will highlight the deviceToken registration and notification tap handling).
-```swift
+```
 final  class  ChatManager {
 
     static let shared: ChatManager = ChatManager()
@@ -175,9 +224,10 @@ final  class  ChatManager {
     ...
 }
 ```
-In your app's AppDelegate, store your device token as a variable.
 
-```swift
+* In your app's AppDelegate, store your device token as a variable.
+
+```
 import  UserNotifications
 
 @UIApplicationMain
@@ -236,48 +286,51 @@ extension  AppDelegate  :  UNUserNotificationCenterDelegate {
 // [END ios_10_message_handling]
 ```
 
-#### Step Push Notification 6: Test PN from third party
+5. **Test the push notification from third party**
 
-for example using tool Easy APNs Provider :
+Use the Easy APNs Provider tools
 
-<p align="center"><br/><img src="https://d1edrlpyc25xu0.cloudfront.net/kiwari-prod/image/upload/MZukRQrLqf/Screen+Shot+2019-03-20+at+11.02.14.png" width="100%"/><br/></p>
+![Push Notification Image](/Readme/pn05.png)
 
-> **Note:  
-**Follow step 1 - 6 tools to test push notification.
-**We test using cert Apple Development IOS Push Service
+> Note:
 
+> Follow steps 1 - 5 tools to test push notification. We use cert Apple Development IOS Push Service to test it
 
-## How to run the Example
+## How to Run the Example
 
-### Step 1 : Get Your APP ID
+1. **Get your APPID**
 
-Firstly, you need to register to Qiscus Multichannel, by accessing this [link](https://multichannel.qiscus.com). The APP ID can be retrieved from setting section.
-![Qiscus Widget Integration](/Readme/multichannel_setting.png)
+* Go to [Qiscus Multichannel Chat page](https://multichannel.qiscus.com/) to register your email
+* Log in to Qiscus Multichannel Chat with yout email and password
+* Go to ‘Setting’ menu on the left bar
+* Look for ‘App Information’
+* You can find APPID in the App Info 
 
-### Step 2 : Activate Qiscus Widget Integration
+2. **Activate Qiscus Widget Integration**
 
-In your Qiscus Multichannel, activate Qiscus Widget Integration.
-![Qiscus Widget Integration](/Readme/multichannel_integration.png)
+* Go to ‘Integration’ menu on the left bar
+* Look for ‘Qiscus Widget’
+* Slide the toggle to activate the Qiscus widget
 
-### Step 3 : Run pod install
+3. **Run pod install**
 
-After cloned the example, you will need to run
+After cloning the example, you need to run this code to install all C*ocoapods* dependencies needed by the Example
+
 ```
 pod install
 ```
-This will install all cocoapods dependencies needed by the Example
 
-### Step 4 : Set Your APP ID in Example
-Set the example Qiscus Multichannel APP ID you got from step 1. Open Example/ChatManager.swift, replace the appId at line 21 with your APP ID.
-```swift
+4. **Set YOUR_APP_ID in the Example**
+
+* Open Example/ChatManager.swift
+* Replace the appId at line 21 with YOUR_ APP_ID (step 1)
+
+```
 lazy  var  qiscusWidget: QiscusMultichannelWidget = {
-    return  QiscusMultichannelWidget(appID: "YOUR_APP_ID_FROM_STEP_1")
+    return  QiscusMultichannelWidget(appID: "YOUR_APP_ID")
 }()
 ```
 
-### Step 5: Start Chatting
-The Example is ready to use. You can start chatting with your customer service.
-![Ready to Chat Image](/Readme/ready_to_chat.png)
+5. **Start Chat**
 
-## Contribution
-ios-multichannel-widget is fully open-source. All contributions and suggestions are welcome!
+The Example is ready to use. You can start to chat with your agent from the Qiscus Multichannel Chat dashboard.
