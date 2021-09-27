@@ -28,8 +28,8 @@ class ViewController: UIViewController {
         
         if ChatManager.shared.isLoggedIn() {
             if let user =  ChatManager.shared.getUser(){
-                ChatManager.shared.setUser(id: user.id, displayName: user.id, avatarUrl: user.avatarUrl.absoluteString)
-                ChatManager.shared.startChat(from: self, extras: ext, userProperties: userProp, transition: .push(animated: true))
+                ChatManager.shared.setUser(id: user.id, displayName: user.id, avatarUrl: user.avatarUrl.absoluteString, userProperties: userProp)
+                ChatManager.shared.startChat(from: self, extras: ext, transition: .push(animated: true))
             }
         }
         
@@ -53,8 +53,8 @@ class ViewController: UIViewController {
                 return
             }
             
-            ChatManager.shared.setUser(id: userId, displayName: username, avatarUrl: ava)
-            ChatManager.shared.startChat(from: self, extras: ext, userProperties: userProp, transition: .push(animated: true))
+            ChatManager.shared.setUser(id: userId, displayName: username, avatarUrl: ava, userProperties: self.userProp)
+            ChatManager.shared.startChat(from: self, extras: ext, transition: .push(animated: true))
         }
         
        

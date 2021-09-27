@@ -47,18 +47,13 @@ class DisableInput: UIView {
         let username = data["name"].string ?? ""
         let avatar = data["avatar"].string ?? "https://"
         
-
-        var userProp: [[String: Any]]? = nil
-        if let userProperties = param["user_properties"] as? [[String: Any]] {
-            userProp = userProperties
-        }
         
         let extras = SharedPreferences.getExtrasMultichannelConfig()
         debugPrint(userId)
 
         SharedPreferences.removeRoomId()
 
-        QismoManager.shared.initiateChat(withTitle: title, andSubtitle: subtitle, userId: userId, username: username, avatar: avatar, extras: extras, userProperties: userProp, callback: { roomId in
+        QismoManager.shared.initiateChat(withTitle: title, andSubtitle: subtitle, userId: userId, username: username, avatar: avatar, extras: extras, callback: { roomId in
             self.disableInputDelegate?.startNewChat(vc: roomId as! UIChatViewController)
         })
        

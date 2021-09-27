@@ -21,18 +21,20 @@ class QismoManager {
     private var userID : String = ""
     private var username : String = ""
     private var avatarUrl: String = ""
-    
+    private var userProperties : [[String:Any]]? = nil
     
     var network : QismoNetworkManager!
     var qiscus : QiscusCore!
     var qiscusServer = QiscusServer(url: URL(string: "https://api3.qiscus.com")!, realtimeURL: "", realtimePort: 80)
     var deviceToken : String = "" // save device token for 1st time or before login
+    var isDevelopment : Bool = false
     let imageCache = NSCache<NSString, UIImage>()
     
-    func setUser(id: String, username: String, avatarUrl: String = "") {
+    func setUser(id: String, username: String, avatarUrl: String = "", userProperties :  [[String:Any]]? = nil) {
         self.userID = id
         self.username = username
         self.avatarUrl = avatarUrl
+        self.userProperties = userProperties
     }
     
     func getUser() -> QAccount?{
@@ -40,7 +42,7 @@ class QismoManager {
     }
     
     func clear() {
-        self.remove(deviceToken: self.deviceToken, onSuccess: { (success) in
+        self.remove(deviceToken: self.deviceToken, isDevelopment: self.isDevelopment, onSuccess: { (success) in
             //
         }) { (error) in
             //
@@ -48,6 +50,7 @@ class QismoManager {
         
         self.userID = ""
         self.username = ""
+        self.userProperties = nil
         self.qiscus.clearUser { (error) in
             print("Qiscus clear user succeeded")
         }
@@ -71,11 +74,11 @@ class QismoManager {
         
         if let user = self.qiscus.getUserData() {
            // _ = self.qiscus.connect(delegate: self)
-            self.setUser(id: user.id, username: user.name, avatarUrl: user.avatarUrl.absoluteString)
+            self.setUser(id: user.id, username: user.name, avatarUrl: user.avatarUrl.absoluteString, userProperties: self.userProperties)
         }
     }
     
-    func initiateChat(withTitle title: String, andSubtitle subtitle: String, userId: String? = nil, username: String? = nil,avatar: String? = nil, extras: String? = nil, userProperties: [[String:Any]]? = nil, callback: @escaping (UIViewController) -> Void)  {
+    func initiateChat(withTitle title: String, andSubtitle subtitle: String, userId: String? = nil, username: String? = nil,avatar: String? = nil, extras: String? = nil, callback: @escaping (UIViewController) -> Void)  {
         // chat session is exist
         if let savedRoomId = SharedPreferences.getRoomId() {
             _ = self.qiscus.connect(delegate: self)
@@ -94,7 +97,7 @@ class QismoManager {
                 "nonce"             : "",
                 ] as [String : Any]
             
-            if let userProperties = userProperties {
+            if let userProperties = self.userProperties {
                 param["user_properties"] = userProperties
             }
             
@@ -131,7 +134,7 @@ class QismoManager {
     /// Update device token when initiate chat and relogin
     private func updateDeviceToken() {
         if !self.deviceToken.isEmpty {
-            self.register(deviceToken: self.deviceToken, onSuccess: { (success) in
+            self.register(deviceToken: self.deviceToken, isDevelopment: self.isDevelopment, onSuccess: { (success) in
                 //
             }) { (error) in
                 //
@@ -140,27 +143,20 @@ class QismoManager {
        
     }
     
-    public func register(deviceToken token: String, onSuccess: @escaping (Bool) -> Void, onError: @escaping (String) -> Void){
+    public func register(deviceToken token: String, isDevelopment: Bool = false, onSuccess: @escaping (Bool) -> Void, onError: @escaping (String) -> Void){
         self.deviceToken = token
+        self.isDevelopment = isDevelopment
         
-        self.qiscus.shared.registerDeviceToken(token: self.deviceToken, isDevelopment: false, onSuccess: { (success) in
+        self.qiscus.shared.registerDeviceToken(token: self.deviceToken, isDevelopment: isDevelopment, onSuccess: { (success) in
             onSuccess(success)
         }) { (error) in
             onError(error.message)
         }
     }
     
-    public func remove(deviceToken token: String, onSuccess: @escaping (Bool) -> Void, onError: @escaping (String) -> Void) {
-        // patch bug backend device token not stuck old user
-        // call api twice
-        self.qiscus.shared.removeDeviceToken(token: token, isDevelopment: false, onSuccess: { (success) in
-            onSuccess(success)
-        }) { (error) in
-            onError(error.message)
-        }
-        
-        // call api twice
-        self.qiscus.shared.removeDeviceToken(token: token, isDevelopment: true, onSuccess: { (success) in
+    public func remove(deviceToken token: String, isDevelopment: Bool = false, onSuccess: @escaping (Bool) -> Void, onError: @escaping (String) -> Void) {
+        // call api
+        self.qiscus.shared.removeDeviceToken(token: token, isDevelopment: isDevelopment, onSuccess: { (success) in
             onSuccess(success)
         }) { (error) in
             onError(error.message)

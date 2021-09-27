@@ -20,8 +20,8 @@ open class MultichannelWidgetConfig {
     private var extras: String = "" //string json
     var title: String = "Customer Service"
     var subtitle: String = ""
+    var channelId: Int? = nil
     var enableSubtitle : Bool = ChatConfig.enableSubtitle
-    private var userProperties: [[String : String]]? = nil
     private var rightBubblColor: UIColor = ColorConfiguration.rightBubbleColor
     private var leftBubblColor: UIColor = ColorConfiguration.leftBubbleColor
     private var navigationColor: UIColor = ColorConfiguration.navigationColor
@@ -52,11 +52,6 @@ open class MultichannelWidgetConfig {
     
     public func setExtras(extras: String) -> MultichannelWidgetConfig {
         self.extras = extras
-        return self
-    }
-    
-    public func setUserProperties(properties: [[String : String]]) -> MultichannelWidgetConfig {
-        self.userProperties = properties
         return self
     }
     
@@ -111,13 +106,13 @@ open class MultichannelWidgetConfig {
         
         if !QismoManager.shared.deviceToken.isEmpty{
             if self.enableNotification == true {
-                QismoManager.shared.register(deviceToken: QismoManager.shared.deviceToken) { (isSuccess) in
+                QismoManager.shared.register(deviceToken: QismoManager.shared.deviceToken, isDevelopment: QismoManager.shared.isDevelopment) { (isSuccess) in
                     
                 } onError: { (error) in
                     
                 }
             }else{
-                QismoManager.shared.remove(deviceToken: QismoManager.shared.deviceToken) { (isSuccess) in
+                QismoManager.shared.remove(deviceToken: QismoManager.shared.deviceToken, isDevelopment: QismoManager.shared.isDevelopment) { (isSuccess) in
                     
                 } onError: { (error) in
                     
@@ -131,6 +126,11 @@ open class MultichannelWidgetConfig {
     
     public func setRoomTitle(title: String) -> MultichannelWidgetConfig {
         self.title = title
+        return self
+    }
+    
+    public func setChannelId(channelId: Int) -> MultichannelWidgetConfig {
+        self.channelId = channelId
         return self
     }
     
@@ -231,7 +231,11 @@ open class MultichannelWidgetConfig {
         ChatConfig.showUserNameSender = self.showUsernameSender
         
         SharedPreferences.saveExtrasMultichannelConfig(extras: self.extras)
-        QismoManager.shared.initiateChat(withTitle: self.title, andSubtitle: self.subtitle, extras: self.extras, userProperties: self.userProperties, callback: callback)
+        if let channelId = self.channelId {
+            SharedPreferences.saveChannelId(id: channelId)
+        }
+        
+        QismoManager.shared.initiateChat(withTitle: self.title, andSubtitle: self.subtitle, extras: self.extras, callback: callback)
     }
     
     public func startChat(withRoomId id: String, callback: @escaping (UIViewController) -> Void) {
@@ -259,6 +263,10 @@ open class MultichannelWidgetConfig {
         ChatConfig.showAvatarSender = self.showAvatarSender
         ChatConfig.showUserNameSender = self.showUsernameSender
         SharedPreferences.saveExtrasMultichannelConfig(extras: self.extras)
+        if let channelId = self.channelId {
+            SharedPreferences.saveChannelId(id: channelId)
+        }
+       
         QismoManager.shared.chatViewController(withRoomId: id, Title: self.title, andSubtitle: self.subtitle) { (chatview) in
             callback(chatview)
         }

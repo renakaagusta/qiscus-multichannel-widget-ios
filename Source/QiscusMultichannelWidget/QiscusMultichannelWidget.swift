@@ -36,8 +36,8 @@ public class QiscusMultichannelWidget {
         self.widgetConfig = MultichannelWidgetConfig()
     }
     
-    public func setUser(id: String, displayName: String, avatarUrl: String = "") {
-        self.manager.setUser(id: id, username: displayName, avatarUrl: avatarUrl)
+    public func setUser(id: String, displayName: String, avatarUrl: String = "", userProperties :  [[String:Any]]? = nil) {
+        self.manager.setUser(id: id, username: displayName, avatarUrl: avatarUrl, userProperties: userProperties)
     }
     
     public func getUser() -> QAccount?{
@@ -61,12 +61,12 @@ public class QiscusMultichannelWidget {
         return widgetConfig
     }
     
-    public func register(deviceToken token: String, onSuccess: @escaping (Bool) -> Void, onError: @escaping (String) -> Void){
-        manager.register(deviceToken: token, onSuccess: onSuccess, onError: onError)
+    public func register(deviceToken token: String, isDevelopment : Bool = false, onSuccess: @escaping (Bool) -> Void, onError: @escaping (String) -> Void){
+        manager.register(deviceToken: token, isDevelopment: isDevelopment, onSuccess: onSuccess, onError: onError)
     }
     
-    public func remove(deviceToken token: String, onSuccess: @escaping (Bool) -> Void, onError: @escaping (String) -> Void){
-        manager.remove(deviceToken: token, onSuccess: onSuccess, onError: onError)
+    public func remove(deviceToken token: String, isDevelopment : Bool = false, onSuccess: @escaping (Bool) -> Void, onError: @escaping (String) -> Void){
+        manager.remove(deviceToken: token, isDevelopment: isDevelopment, onSuccess: onSuccess, onError: onError)
     }
     
     public func isLoggedIn() -> Bool {

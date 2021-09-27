@@ -23,8 +23,8 @@ final class ChatManager {
        return QiscusMultichannelWidget(appID: "hat-ppxmocchbbcbhopzk")
     }()
     
-    func setUser(id: String, displayName: String, avatarUrl: String = "") {
-        qiscusWidget.setUser(id: id, displayName: displayName, avatarUrl: avatarUrl)
+    func setUser(id: String, displayName: String, avatarUrl: String = "", userProperties :  [[String:Any]]? = nil) {
+        qiscusWidget.setUser(id: id, displayName: displayName, avatarUrl: avatarUrl, userProperties: userProperties)
     }
     
     func getUser() ->QAccount?{
@@ -39,29 +39,11 @@ final class ChatManager {
         return qiscusWidget.isLoggedIn()
     }
     
-    func startChat(from viewController: UIViewController, extras: String = "", userProperties: [[String: String]], transition: ChatTransitionType = .push(animated: true)) {
+    func startChat(from viewController: UIViewController, extras: String = "", transition: ChatTransitionType = .push(animated: true)) {
         
         qiscusWidget.initiateChat()
             .setRoomTitle(title: "TITLE".localized())
             .setRoomSubTitle(enableSubtitle: RoomSubtitle.enable, subTitle: "SUBTITLE".localized())
-            .setNavigationColor(color: #colorLiteral(red: 0.1529411765, green: 0.6941176471, blue: 0.6, alpha: 1))
-            .setNavigationTitleColor(color: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0))
-            .setRightBubbleColor(color: #colorLiteral(red: 0.1529411765, green: 0.6941176471, blue: 0.6, alpha: 1))
-            .setLeftBubbleColor(color: #colorLiteral(red: 0.957, green: 0.957, blue: 0.957, alpha: 1))
-            .setRightBubbleTextColor(color: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0))
-            .setLeftBubbleTextColor(color: #colorLiteral(red: 0.4, green: 0.4, blue: 0.4, alpha: 1))
-            .setTimeLabelTextColor(color: #colorLiteral(red: 133/255.0, green: 133/255.0, blue: 133/255.0, alpha: 1))
-            .setTimeBackgroundColor(color: #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1))
-            .setBaseColor(color: #colorLiteral(red: 0.9782221503, green: 0.9782221503, blue: 0.9782221503, alpha: 1))
-            .setEmptyTextColor(color: #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1))
-            .setEmptyBackgroundColor(color: #colorLiteral(red: 0.9782221503, green: 0.9782221503, blue: 0.9782221503, alpha: 1))
-            .setHideUIEvent(showSystemEvent: true)
-            .setSystemEventTextColor(color: #colorLiteral(red: 0.4, green: 0.4, blue: 0.4, alpha: 1))
-            .setShowAvatarSender(isShowing: false)
-            .setShowUsernameSender(isShowing: false)
-            .setSendContainerColor(color: #colorLiteral(red: 0.1529411765, green: 0.6941176471, blue: 0.6, alpha: 1))
-            .setFieldChatBorderColor(color: #colorLiteral(red: 0.9176470588, green: 0.9176470588, blue: 0.9137254902, alpha: 1))
-            .setSendContainerBackgroundColor(color: #colorLiteral(red: 0.9844431281, green: 0.9844661355, blue: 0.9844536185, alpha: 1))
             .startChat { (chatViewController) in
                 viewController.navigationController?.setViewControllers([viewController, chatViewController], animated: true)
         }
@@ -75,7 +57,10 @@ final class ChatManager {
                 tokenString += String(format: "%02.2hhx", deviceToken[i] as CVarArg)
             }
             print("token = \(tokenString)")
-            self.qiscusWidget.register(deviceToken: tokenString, onSuccess: { (response) in
+            //isDevelopment = true : for development or running from XCode
+            //isDevelopment = false : release mode TestFlight or appStore
+            
+            self.qiscusWidget.register(deviceToken: tokenString, isDevelopment : false, onSuccess: { (response) in
                 print("Multichannel widget success to register device token")
             }) { (error) in
                 print("Multichannel widget failed to register device token")
