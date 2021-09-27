@@ -92,6 +92,51 @@ qiscusWidget.initiateChat()
 We provide several functions to customize the User Interface.
 
 ### Config
+Use this method to configure the widget properties.
+Channel Id is an identity for each widget channel. If you have a specific widget channel that you want to integrate into the mobile in-app widget, you can add your channel_id when you do initiateChat. You can get your list of channel id for widget from:
+
+URL:
+
+```
+[GET] https://multichannel.qiscus.com/api/v2/channels
+```
+
+Please follow this [page](https://documentation.qiscus.com/multichannel-customer-service/whatsapp-business-api#glossary) to get your App ID, Qiscus Secret Key.
+Header:
+
+```
+Qiscus-App-Id : YOUR_`APP_ID`
+Qiscus-Secret-Key : `Secret Key`
+```
+
+Example:
+
+```
+curl --location -g --request GET 'https://multichannel.qiscus.com/api/v2/channels' \ 
+--header 'Qiscus-App-Id: {{YOUR_APP_ID}}'\ 
+--header 'Qiscus-Secret-Key: {{`Secret Key`}}'
+
+```
+
+Example Response:
+Get id from qiscus_channels.
+
+```
+{
+       "data":{
+              "qiscus_channels":
+                      [{"id":590,
+                        "is_active":true,
+                        "app_code":"raxx-xxxxxxxxxepppk",
+                        "secret_key":"ef1fc10xxxxxxxxxxxx88e455a2",
+                        "name":"Trenex Auto",
+                        "badge_url":null,
+                        "app_id":424,
+                        "use_channel_responder":false
+                      }]
+          }
+}
+```
 
 |Title	|Description	|
 |---	|---	|
@@ -105,6 +150,8 @@ We provide several functions to customize the User Interface.
 |	|setAvatar(Avatar.Enable)	|Set enable avatar and name	|
 |	|setAvatar(Avatar.Disabled)	|Set disable avatar and name	|
 |setEnableNotification	|Set enable app notification.	|
+|setUserProperties(properties: dataUserProperties)	|Set user properties that you need for your system	|
+|setChannelId(channelId: channel_id)	|Use this method to set your widget channel Id 	|
 
 ### Color
 
