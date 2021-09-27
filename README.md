@@ -260,7 +260,8 @@ final  class  ChatManager {
             for i in 0..<deviceToken.count {
                 tokenString += String(format: "%02.2hhx", deviceToken[i] as CVarArg)
             }
-            
+             //isDevelopment = true : for development or running from XCode
+            //isDevelopment = false : release mode TestFlight or appStore
             self.qiscusWidget.register(deviceToken: tokenString, isDevelopment: false, onSuccess: { (response) in
                 print("Multichannel widget success to register device token")
             }) { (error) in
