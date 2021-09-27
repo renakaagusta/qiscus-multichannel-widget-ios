@@ -44,6 +44,14 @@ Set UserId before start the chat, this is mandatory.
 qiscusWidget.setUser(id: "UserId", displayName: "Cus Tom R", avatarUrl: "[https://customer.avatar-url.com](https://customer.avatar-url.com/)")
 ```
 
+If you want to set user properties, you can set them by using this function, for example:
+
+```
+let userProp = [["key":"job","value":"development"],["key":"Location","value":"Yogyakarta"]]
+
+qiscusWidget.setUser(id: "UserId", displayName: "Cus Tom R", avatarUrl: "[https://customer.avatar-url.com](https://customer.avatar-url.com/)", userProperties : userProp)
+```
+
 ### Get Login Status
 
 User this function to check whether the user has already logged in.
@@ -150,8 +158,7 @@ Get id from qiscus_channels.
 |	|setAvatar(Avatar.Enable)	|Set enable avatar and name	|
 |	|setAvatar(Avatar.Disabled)	|Set disable avatar and name	|
 |setEnableNotification	|Set enable app notification.	|
-|setUserProperties(properties: dataUserProperties)	|Set user properties that you need for your system	|
-|setChannelId(channelId: channel_id)	|Use this method to set your widget channel Id 	|
+|setChannelId(channelId: channel_id)	|Use this function to set your widget channel Id 	|
 
 ### Color
 
