@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
 s.name         = "QiscusMultichannelWidget"
-s.version      = "2.0.0-beta.3"
+s.version      = "2.0.0-beta.4"
 s.summary      = "Customer Chat integration."
 
 s.homepage     = "http://qiscus.com"
@@ -28,7 +28,7 @@ s.requires_arc	= false
 s.dependency 'Alamofire', '5.2'
 s.dependency 'AlamofireImage'
 s.dependency 'SwiftyJSON'
-s.dependency 'QiscusCore', '3.0.0-beta.10'
+s.dependency 'QiscusCore', '3.0.0-beta.12'
 s.dependency 'SDWebImage'
 s.dependency 'SDWebImageWebPCoder'
 s.dependency 'CropViewController'
