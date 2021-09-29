@@ -20,7 +20,7 @@ enum ChatTransitionType {
 final class ChatManager {
     static let shared: ChatManager = ChatManager()
     lazy var qiscusWidget: QiscusMultichannelWidget = {
-       return QiscusMultichannelWidget(appID: "hat-ppxmocchbbcbhopzk")
+       return QiscusMultichannelWidget(appID: Your_AppID)
     }()
     
     func setUser(id: String, displayName: String, avatarUrl: String = "", userProperties :  [[String:Any]]? = nil) {
