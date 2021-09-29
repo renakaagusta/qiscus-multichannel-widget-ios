@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
 s.name         = "QiscusMultichannelWidget"
-s.version      = "2.0.0-beta.4"
+s.version      = "2.0.0"
 s.summary      = "Customer Chat integration."
 
 s.homepage     = "http://qiscus.com"
