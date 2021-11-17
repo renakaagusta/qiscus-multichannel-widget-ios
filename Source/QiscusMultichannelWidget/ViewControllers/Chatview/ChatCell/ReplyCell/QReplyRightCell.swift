@@ -23,7 +23,7 @@ class QReplyRightCell: UIBaseChatCell {
     @IBOutlet weak var ivBubble: UIImageView!
     @IBOutlet weak var ivStatus: UIImageView!
     
-    
+    var delegateChat : UIChatViewController? = nil
     var menuConfig = enableMenuConfig()
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -44,7 +44,19 @@ class QReplyRightCell: UIBaseChatCell {
     }
     
     @objc func handleTap(_ sender: UITapGestureRecognizer) {
-        
+        if let delegate = delegateChat {
+            guard let replyData = self.comment?.payload else {
+                return
+            }
+            let json = JSON(replyData)
+            var commentID = json["replied_comment_id"].int ?? 0
+            if commentID != 0 {
+                if let comment = QismoManager.shared.qiscus.database.message.find(id: "\(commentID)"){
+                    delegate.scrollToComment = self.comment
+                    delegate.scrollToComment(comment: comment)
+                }
+            }
+        }
     }
     
     override func present(message: QMessage) {
@@ -64,6 +76,7 @@ class QReplyRightCell: UIBaseChatCell {
     
     func bindData(message: QMessage){
         self.setupBalon()
+        self.contentView.backgroundColor = UIColor.clear
         self.status(message: message)
         
         guard let replyData = message.payload else {

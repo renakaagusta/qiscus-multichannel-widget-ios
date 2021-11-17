@@ -35,6 +35,21 @@ class WebFileViewController: UIViewController {
         self.activityIndicator.isHidden = false
         self.activityIndicator.startAnimating()
         self.title = fileName
+        if #available(iOS 13.0, *) {
+            let appearance = UINavigationBarAppearance()
+            appearance.configureWithOpaqueBackground()
+            appearance.backgroundColor = ColorConfiguration.navigationColor
+            appearance.titleTextAttributes = [.font: UIFont.boldSystemFont(ofSize: 18.0),
+                                              .foregroundColor: UIColor.white]
+
+            // Customizing our navigation bar
+            navigationController?.navigationBar.tintColor =  ColorConfiguration.navigationColor
+            navigationController?.navigationBar.standardAppearance = appearance
+            navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        } else {
+            // Fallback on earlier versions
+        }
+        
         if #available(iOS 11.0, *) {
             NSLayoutConstraint.activate([
                 self.webView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
@@ -67,7 +82,37 @@ class WebFileViewController: UIViewController {
         
         webView.loadFileURL(localFileUrl, allowingReadAccessTo: localFileUrl)
         
+        let backButton = self.backButton(self, action: #selector(WebFileViewController.goBack))
+        self.navigationItem.setHidesBackButton(true, animated: false)
+        self.navigationItem.leftBarButtonItems = [backButton]
     }
+    
+    // MARK: - Navigation
+    @objc func goBack(_ sender: AnyObject) {
+        let _ = self.navigationController?.popViewController(animated: true)
+    }
+    
+    // MARK: - Custom Component
+    func backButton(_ target: UIViewController, action: Selector) -> UIBarButtonItem{
+        let backIcon = UIImageView()
+        backIcon.contentMode = .scaleAspectFit
+        
+        let image = UIImage(named: "ic_arrow_back", in: QiscusMultichannelWidget.bundle, compatibleWith: nil)?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
+        backIcon.image = image
+        backIcon.tintColor = ColorConfiguration.navigationTitleColor
+        backIcon.contentMode = .scaleAspectFit
+        if UIApplication.shared.userInterfaceLayoutDirection == .leftToRight {
+            backIcon.frame = CGRect(x: 0,y: 11,width: 30,height: 25)
+        }else{
+            backIcon.frame = CGRect(x: 22,y: 11,width: 30,height: 25)
+        }
+        
+        let backButton = UIButton(frame:CGRect(x: 0,y: 0,width: 30,height: 44))
+        backButton.addSubview(backIcon)
+        backButton.addTarget(target, action: action, for: UIControl.Event.touchUpInside)
+        return UIBarButtonItem(customView: backButton)
+    }
+
 
 }
 

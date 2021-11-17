@@ -31,6 +31,7 @@ class QReplyImageLeftCell: UIBaseChatCell {
     var menuConfig = enableMenuConfig()
     var colorName : UIColor = UIColor.black
     var message: QMessage? = nil
+    var actionBlock: ((QMessage) -> Void)? = nil
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -56,6 +57,8 @@ class QReplyImageLeftCell: UIBaseChatCell {
             if let message = self.message {
                 if message.id == commentId {
                     self.contentView.backgroundColor = UIColor(red:39/255, green:177/255, blue:153/255, alpha: 0.1)
+                }else{
+                    self.contentView.backgroundColor = UIColor.clear
                 }
             }
         }
@@ -107,11 +110,14 @@ class QReplyImageLeftCell: UIBaseChatCell {
                 }
                 self.ivComment.backgroundColor = #colorLiteral(red: 0.9764705882, green: 0.9764705882, blue: 0.9764705882, alpha: 1)
                 self.ivComment.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
-                self.ivComment.sd_setImage(with: URL(string: fileImage) ?? URL(string: "https://"), placeholderImage: nil, options: .highPriority) { (uiImage, error, cache, urlPath) in
-                    if urlPath != nil && uiImage != nil{
-                        self.ivComment.af_setImage(withURL: urlPath!)
+                DispatchQueue.global(qos: .background).sync {
+                    self.ivComment.sd_setImage(with: URL(string: fileImage) ?? URL(string: "https://"), placeholderImage: nil, options: .highPriority) { (uiImage, error, cache, urlPath) in
+                        if urlPath != nil && uiImage != nil{
+                            self.ivComment.af_setImage(withURL: urlPath!)
+                        }
                     }
                 }
+                
             }
         }else{
             var fileImage = message.getAttachmentURL(message: message.message)
@@ -121,11 +127,14 @@ class QReplyImageLeftCell: UIBaseChatCell {
             self.ivComment.backgroundColor = #colorLiteral(red: 0.9764705882, green: 0.9764705882, blue: 0.9764705882, alpha: 1)
             
             self.ivComment.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
-            self.ivComment.sd_setImage(with: URL(string: fileImage) ?? URL(string: "https://"), placeholderImage: nil, options: .highPriority) { (uiImage, error, cache, urlPath) in
-                if urlPath != nil && uiImage != nil{
-                    self.ivComment.af_setImage(withURL: urlPath!)
+            DispatchQueue.global(qos: .background).sync {
+                self.ivComment.sd_setImage(with: URL(string: fileImage) ?? URL(string: "https://"), placeholderImage: nil, options: .highPriority) { (uiImage, error, cache, urlPath) in
+                    if urlPath != nil && uiImage != nil{
+                        self.ivComment.af_setImage(withURL: urlPath!)
+                    }
                 }
             }
+            
         }
         
         self.ivAvatarUser.layer.cornerRadius = self.ivAvatarUser.frame.size.width / 2
@@ -185,8 +194,9 @@ class QReplyImageLeftCell: UIBaseChatCell {
             print("Image not found!")
             return
         }
-        //active this code for detail image
-        
+        if self.comment != nil && self.actionBlock != nil {
+            self.actionBlock!(comment!)
+        }
     }
     
     //MARK: - Add image to Library

@@ -56,6 +56,8 @@ class QFileLeftCell: UIBaseChatCell {
             if let message = self.message {
                 if message.id == commentId {
                     self.contentView.backgroundColor = UIColor(red:39/255, green:177/255, blue:153/255, alpha: 0.1)
+                }else{
+                    self.contentView.backgroundColor = UIColor.clear
                 }
             }
         }
@@ -235,18 +237,12 @@ class QFileLeftCell: UIBaseChatCell {
                     preview.fileName = fileName
                     preview.url = url
                     preview.roomName = "Document Preview"
-                    let backButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-
-                    self.currentViewController()?.navigationItem.backBarButtonItem = backButton
                     self.currentViewController()?.navigationController?.pushViewController(preview, animated: true)
                 } else {
                     let preview = ChatPreviewDocVC()
                     preview.fileName = fileName
                     preview.url = url
                     preview.roomName = "Document Preview"
-                    let backButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-                    
-                    self.currentViewController()?.navigationItem.backBarButtonItem = backButton
                     self.currentViewController()?.navigationController?.pushViewController(preview, animated: true)
                 }
                 

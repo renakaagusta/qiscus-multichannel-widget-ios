@@ -30,6 +30,7 @@ class QReplyLeftCell: UIBaseChatCell {
     var menuConfig = enableMenuConfig()
     var isPublic: Bool = false
     var colorName : UIColor = UIColor.black
+    var delegateChat : UIChatViewController? = nil
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -42,18 +43,19 @@ class QReplyLeftCell: UIBaseChatCell {
     }
     
     @objc func handleTap(_ sender: UITapGestureRecognizer) {
-//        if let delegate = delegateChat {
-//            guard let replyData = self.comment?.payload else {
-//                return
-//            }
-//            let json = JSON(replyData)
-//            var commentID = json["replied_comment_id"].int ?? 0
-//            if commentID != 0 {
-//                if let comment = QiscusCore.database.comment.find(id: "\(commentID)"){
-//                    delegate.scrollToComment(comment: comment)
-//                }
-//            }
-//        }
+        if let delegate = delegateChat {
+            guard let replyData = self.comment?.payload else {
+                return
+            }
+            let json = JSON(replyData)
+            var commentID = json["replied_comment_id"].int ?? 0
+            if commentID != 0 {
+                if let comment = QismoManager.shared.qiscus.database.message.find(id: "\(commentID)"){
+                    delegate.scrollToComment = self.comment
+                    delegate.scrollToComment(comment: comment)
+                }
+            }
+        }
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -78,6 +80,7 @@ class QReplyLeftCell: UIBaseChatCell {
     }
     
     func bindData(message: QMessage){
+        self.contentView.backgroundColor = UIColor.clear
         self.setupBalon()
         guard let replyData = message.payload else {
            return

@@ -96,7 +96,7 @@ extension UIBaseChatCell {
         menuItems.append(reply)
         if let myComment = self.comment?.isMyComment() {
             if(myComment){
-                menuItems.append(delete)
+                //menuItems.append(delete)
                 UIMenuController.shared.menuItems = menuItems
             }else{
                 //UIMenuController.shared.menuItems = [reply,share,forwardMessage,deleteForMe]

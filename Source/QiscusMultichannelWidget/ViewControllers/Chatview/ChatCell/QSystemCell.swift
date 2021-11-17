@@ -39,6 +39,8 @@ class QSystemCell:  UIBaseChatCell {
             if let message = self.message {
                 if message.id == commentId {
                     self.contentView.backgroundColor = UIColor(red:39/255, green:177/255, blue:153/255, alpha: 0.1)
+                }else{
+                    self.contentView.backgroundColor = UIColor.clear
                 }
             }
         }

@@ -59,6 +59,8 @@ class QVideoLeftCell: UIBaseChatCell {
             if let message = self.message {
                 if message.id == commentId {
                     self.contentView.backgroundColor = UIColor(red:39/255, green:177/255, blue:153/255, alpha: 0.1)
+                }else{
+                    self.contentView.backgroundColor = UIColor.clear
                 }
             }
         }
@@ -142,16 +144,21 @@ class QVideoLeftCell: UIBaseChatCell {
             
             QismoManager.shared.qiscus.shared.getThumbnailURL(url: fileImage) { (thumbURL) in
                 self.ivComment.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
-                self.ivComment.sd_setImage(with: URL(string: thumbURL) ?? URL(string: "https://"), placeholderImage: nil, options: .highPriority) { (uiImage, error, cache, urlPath) in
-                    if urlPath != nil && uiImage != nil{
-                        self.ivComment.af_setImage(withURL: urlPath!)
+                DispatchQueue.global(qos: .background).sync {
+                    self.ivComment.sd_setImage(with: URL(string: thumbURL) ?? URL(string: "https://"), placeholderImage: nil, options: .highPriority) { (uiImage, error, cache, urlPath) in
+                        if urlPath != nil && uiImage != nil{
+                            self.ivComment.af_setImage(withURL: urlPath!)
+                        }
                     }
                 }
+               
             } onError: { (error) in
                 self.ivComment.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
-                self.ivComment.sd_setImage(with: URL(string: url) ?? URL(string: "https://"), placeholderImage: nil, options: .highPriority) { (uiImage, error, cache, urlPath) in
-                    if urlPath != nil && uiImage != nil{
-                        self.ivComment.af_setImage(withURL: urlPath!)
+                DispatchQueue.global(qos: .background).sync {
+                    self.ivComment.sd_setImage(with: URL(string: url) ?? URL(string: "https://"), placeholderImage: nil, options: .highPriority) { (uiImage, error, cache, urlPath) in
+                        if urlPath != nil && uiImage != nil{
+                            self.ivComment.af_setImage(withURL: urlPath!)
+                        }
                     }
                 }
             }
@@ -165,19 +172,25 @@ class QVideoLeftCell: UIBaseChatCell {
             QismoManager.shared.qiscus.shared.getThumbnailURL(url: fileImage) { (thumbURL) in
                 self.ivComment.backgroundColor = #colorLiteral(red: 0.9764705882, green: 0.9764705882, blue: 0.9764705882, alpha: 1)
                 self.ivComment.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
-                self.ivComment.sd_setImage(with: URL(string: thumbURL) ?? URL(string: "https://"), placeholderImage: nil, options: .highPriority) { (uiImage, error, cache, urlPath) in
-                    if urlPath != nil && uiImage != nil{
-                        self.ivComment.af_setImage(withURL: urlPath!)
+                DispatchQueue.global(qos: .background).sync {
+                    self.ivComment.sd_setImage(with: URL(string: thumbURL) ?? URL(string: "https://"), placeholderImage: nil, options: .highPriority) { (uiImage, error, cache, urlPath) in
+                        if urlPath != nil && uiImage != nil{
+                            self.ivComment.af_setImage(withURL: urlPath!)
+                        }
                     }
                 }
+                
             } onError: { (error) in
                 self.ivComment.backgroundColor = #colorLiteral(red: 0.9764705882, green: 0.9764705882, blue: 0.9764705882, alpha: 1)
                 self.ivComment.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
-                self.ivComment.sd_setImage(with: URL(string: fileImage) ?? URL(string: "https://"), placeholderImage: nil, options: .highPriority) { (uiImage, error, cache, urlPath) in
-                    if urlPath != nil && uiImage != nil{
-                        self.ivComment.af_setImage(withURL: urlPath!)
+                DispatchQueue.global(qos: .background).sync {
+                    self.ivComment.sd_setImage(with: URL(string: fileImage) ?? URL(string: "https://"), placeholderImage: nil, options: .highPriority) { (uiImage, error, cache, urlPath) in
+                        if urlPath != nil && uiImage != nil{
+                            self.ivComment.af_setImage(withURL: urlPath!)
+                        }
                     }
                 }
+                
             }
         }
         
@@ -229,9 +242,6 @@ class QVideoLeftCell: UIBaseChatCell {
                 preview.fileName = fileName
                 preview.url = url
                 preview.roomName = "Video Preview"
-                let backButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-                
-                self.currentViewController()?.navigationItem.backBarButtonItem = backButton
                 self.currentViewController()?.navigationController?.pushViewController(preview, animated: true)
             }
         }

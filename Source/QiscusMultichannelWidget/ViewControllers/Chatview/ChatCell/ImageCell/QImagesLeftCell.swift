@@ -64,6 +64,8 @@ class QImagesLeftCell: UIBaseChatCell {
             if let message = self.message {
                 if message.id == commentId {
                     self.contentView.backgroundColor = UIColor(red:39/255, green:177/255, blue:153/255, alpha: 0.1)
+                }else{
+                    self.contentView.backgroundColor = UIColor.clear
                 }
             }
         }
@@ -129,13 +131,13 @@ class QImagesLeftCell: UIBaseChatCell {
                 self.ivComment.backgroundColor = ColorConfiguration.leftBubbleColor
                 
                 self.ivComment.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
-                self.ivComment.sd_setImage(with: URL(string: fileImage) ?? URL(string: "https://"), placeholderImage: nil, options: .highPriority) { (uiImage, error, cache, urlPath) in
-                    if urlPath != nil && uiImage != nil{
-                        self.ivComment.af_setImage(withURL: urlPath!)
+                DispatchQueue.global(qos: .background).sync {
+                    self.ivComment.sd_setImage(with: URL(string: fileImage) ?? URL(string: "https://"), placeholderImage: nil, options: .highPriority) { (uiImage, error, cache, urlPath) in
+                        if urlPath != nil && uiImage != nil{
+                            self.ivComment.af_setImage(withURL: urlPath!)
+                        }
                     }
                 }
-                
-                self.ivComment.af_setImage(withURL:  URL(string: url) ?? URL(string: "http://")!)
             }
         }else{
             var fileImage = message.getAttachmentURL(message: message.message)
@@ -147,9 +149,11 @@ class QImagesLeftCell: UIBaseChatCell {
             self.ivComment.backgroundColor = ColorConfiguration.leftBubbleColor
             
             self.ivComment.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
-            self.ivComment.sd_setImage(with: URL(string: fileImage) ?? URL(string: "https://"), placeholderImage: nil, options: .highPriority) { (uiImage, error, cache, urlPath) in
-                if urlPath != nil && uiImage != nil{
-                    self.ivComment.af_setImage(withURL: urlPath!)
+            DispatchQueue.global(qos: .background).sync {
+                self.ivComment.sd_setImage(with: URL(string: fileImage) ?? URL(string: "https://"), placeholderImage: nil, options: .highPriority) { (uiImage, error, cache, urlPath) in
+                    if urlPath != nil && uiImage != nil{
+                        self.ivComment.af_setImage(withURL: urlPath!)
+                    }
                 }
             }
         }

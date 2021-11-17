@@ -74,6 +74,8 @@ class QCardLeftCell: UIBaseChatCell {
             if let message = self.message {
                 if message.id == commentId {
                     self.contentView.backgroundColor = UIColor(red:39/255, green:177/255, blue:153/255, alpha: 0.1)
+                }else{
+                    self.contentView.backgroundColor = UIColor.clear
                 }
             }
         }
@@ -95,6 +97,7 @@ class QCardLeftCell: UIBaseChatCell {
     
     func bindData(message: QMessage){
         self.message = message
+        self.contentView.backgroundColor = UIColor.clear
         self.setupBalon()
         
         self.lbTime.text = AppUtil.dateToHour(date: message.date())
@@ -139,11 +142,15 @@ class QCardLeftCell: UIBaseChatCell {
         
         if imageURL != "" {
             self.displayImageView.sd_imageIndicator = SDWebImageActivityIndicator.whiteLarge
-            self.displayImageView.sd_setImage(with: URL(string: imageURL) ?? URL(string: "https://"), placeholderImage: nil, options: .highPriority) { (uiImage, error, cache, urlPath) in
-                if urlPath != nil && uiImage != nil{
-                    self.displayImageView.af_setImage(withURL: urlPath!)
+            
+            DispatchQueue.global(qos: .background).sync {
+                self.displayImageView.sd_setImage(with: URL(string: imageURL) ?? URL(string: "https://"), placeholderImage: nil, options: .highPriority) { (uiImage, error, cache, urlPath) in
+                    if urlPath != nil && uiImage != nil{
+                        self.displayImageView.af_setImage(withURL: urlPath!)
+                    }
                 }
             }
+            
         }else{
             self.displayImageView.image = nil
         }

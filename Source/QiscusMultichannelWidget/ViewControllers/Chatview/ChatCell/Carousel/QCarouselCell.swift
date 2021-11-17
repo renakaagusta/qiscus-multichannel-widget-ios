@@ -68,6 +68,8 @@ class QCarouselCell: UIBaseChatCell {
             if let message = self.message {
                 if message.id == commentId {
                     self.contentView.backgroundColor = UIColor(red:39/255, green:177/255, blue:153/255, alpha: 0.1)
+                }else{
+                    self.contentView.backgroundColor = UIColor.clear
                 }
             }
         }
@@ -84,6 +86,7 @@ class QCarouselCell: UIBaseChatCell {
     
     func bindData(message: QMessage){
         self.message = message
+        self.contentView.backgroundColor = UIColor.clear
         self.status(message: message)
         
         if message.isMyComment() {

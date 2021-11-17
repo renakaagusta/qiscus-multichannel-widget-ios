@@ -117,6 +117,9 @@ class UIChatViewController: UIViewController {
     
     var uploadBanner: UploadProgressBanner?
     
+    //scroll to commentId
+    var scrollToComment : QMessage? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupUI()
@@ -129,6 +132,22 @@ class UIChatViewController: UIViewController {
         
         self.navigationOriginColor = self.navigationController?.navigationBar.barTintColor
         self.navigationController?.navigationBar.barTintColor =  ColorConfiguration.navigationColor
+        if #available(iOS 13.0, *) {
+            let appearance = UINavigationBarAppearance()
+            appearance.configureWithOpaqueBackground()
+            appearance.backgroundColor = ColorConfiguration.navigationColor
+            appearance.titleTextAttributes = [.font: UIFont.boldSystemFont(ofSize: 18.0),
+                                              .foregroundColor: UIColor.white]
+
+            // Customizing our navigation bar
+            navigationController?.navigationBar.tintColor =  ColorConfiguration.navigationColor
+            navigationController?.navigationBar.standardAppearance = appearance
+            navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        } else {
+            // Fallback on earlier versions
+        }
+
+        
         self.presenter.attachView(view: self)
         let center: NotificationCenter = NotificationCenter.default
         center.addObserver(self, selector: #selector(UIChatViewController.keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -410,7 +429,18 @@ class UIChatViewController: UIViewController {
     
     func scrollToComment(comment: QMessage) {
         if let indexPath = self.presenter.getIndexPath(comment: comment) {
-            self.tableViewConversation.scrollToRow(at: indexPath, at: .bottom, animated: true)
+            
+            self.tableViewConversation.allowsSelection = true
+            if self.scrollToComment != nil {
+                self.scrollToComment = nil
+                self.tableViewConversation.scrollToRow(at: indexPath, at: .middle, animated: true)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    let userInfo = ["commentId": comment.id]
+                    NotificationCenter.default.post(name: Notification.Name("selectedCell"), object: nil, userInfo : userInfo )
+                }
+            }
+        }else{
+            self.presenter.loadMore()
         }
     }
     
@@ -644,6 +674,12 @@ class UIChatViewController: UIViewController {
                             let cell = tableView.dequeueReusableCell(withIdentifier: "qReplyImageRightCell", for: indexPath) as! QReplyImageRightCell
                             cell.menuConfig = menuConfig
                             cell.cellMenu = self
+                            cell.actionBlock = { comment in
+                                
+                                let fullImage = FullImageViewController(nibName: "FullImageViewController", bundle: QiscusMultichannelWidget.bundle)
+                                fullImage.message = comment
+                                self.navigationController?.pushViewController(fullImage, animated: true)
+                            }
                             return cell
                         }else{
                             let cell = tableView.dequeueReusableCell(withIdentifier: "qReplyImageLeftCell", for: indexPath) as! QReplyImageLeftCell
@@ -654,12 +690,19 @@ class UIChatViewController: UIViewController {
                                 cell.isPublic = false
                             }
                             cell.cellMenu = self
+                            cell.actionBlock = { comment in
+                                
+                                let fullImage = FullImageViewController(nibName: "FullImageViewController", bundle: QiscusMultichannelWidget.bundle)
+                                fullImage.message = comment
+                                self.navigationController?.pushViewController(fullImage, animated: true)
+                            }
                             return cell
                         }
                     }else{
                         if message.isMyComment() == true || message.userEmail.isEmpty {
                             let cell = tableView.dequeueReusableCell(withIdentifier: "qReplyRightCell", for: indexPath) as! QReplyRightCell
                             cell.cellMenu = self
+                            cell.delegateChat = self
                             return cell
                         } else {
                             let cell = tableView.dequeueReusableCell(withIdentifier: "qReplyLeftCell", for: indexPath) as! QReplyLeftCell
@@ -670,6 +713,7 @@ class UIChatViewController: UIViewController {
                                 cell.isPublic = false
                             }
                             cell.cellMenu = self
+                            cell.delegateChat = self
                             return cell
                         }
                     }
@@ -856,6 +900,10 @@ extension UIChatViewController: UIChatViewDelegate {
     
     func onLoadMoreMesageFinished() {
         self.tableViewConversation.reloadData()
+        
+        if let searchComment = scrollToComment{
+            self.scrollToComment(comment: searchComment)
+        }
     }
     
     func onLoadMessageFinished() {
@@ -868,6 +916,10 @@ extension UIChatViewController: UIChatViewDelegate {
         }
         
         self.tableViewConversation.reloadData()
+        
+        if let searchComment = scrollToComment{
+            self.scrollToComment(comment: searchComment)
+        }
     }
     
     func onSendMessageFinished(comment: QMessage) {
