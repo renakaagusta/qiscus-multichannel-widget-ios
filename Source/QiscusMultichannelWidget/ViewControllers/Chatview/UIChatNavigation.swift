@@ -85,7 +85,11 @@ class UIChatNavigation: UIView {
         room.participants?.forEach({ (p) in
             if p.id.contains("admin@qismo.com") {
                 if let avatarURL = p.avatarUrl {
-                    self.ivAvatar.af.setImage(withURL: avatarURL)
+                    if avatarURL.absoluteString == "https://image.flaticon.com/icons/svg/145/145867.svg"{
+                        self.ivAvatar.af_setImage(withURL: URL(string: "https://d1edrlpyc25xu0.cloudfront.net/kiwari-prod/image/upload/Ri-pxHv6e1/default_avatar.png" )!)
+                    }else{
+                        self.ivAvatar.af.setImage(withURL: avatarURL)
+                    }
                 }
             }
         })

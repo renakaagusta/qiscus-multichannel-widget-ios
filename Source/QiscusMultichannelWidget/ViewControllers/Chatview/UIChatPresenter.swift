@@ -78,9 +78,6 @@ class UIChatPresenter: UIChatUserInteraction {
             self.loadRoom()
             self.loadComments(withID: room.id)
             viewPresenter?.onLoadRoomFinished(roomName: room.name, roomAvatarURL: room.avatarUrl)
-            if let p = room.participants {
-                self.participants = p
-            }
         }
     }
     
@@ -108,6 +105,10 @@ class UIChatPresenter: UIChatUserInteraction {
             guard let participants = room.participants else { return }
             for u in participants {
                 instance.qiscus.shared.subscribeUserOnlinePresence(userId: u.id)
+            }
+            
+            if let p = room.participants {
+                self?.participants = p
             }
             
             instance.room = room
