@@ -120,6 +120,7 @@ class UIChatViewController: UIViewController {
     //scroll to commentId
     var scrollToComment : QMessage? = nil
     
+    public var vcIsPresentModal : Bool = false
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupUI()
@@ -129,6 +130,12 @@ class UIChatViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        if self.isModal == true {
+            self.vcIsPresentModal = true
+        }else {
+            self.vcIsPresentModal = false
+        }
         
         self.navigationOriginColor = self.navigationController?.navigationBar.barTintColor
         self.navigationController?.navigationBar.barTintColor =  ColorConfiguration.navigationColor

@@ -351,7 +351,7 @@ extension UIChatViewController : CustomChatInputDelegate {
             let text = TextConfiguration.sharedInstance.galeryAccessAlertText
             let cancelTxt = TextConfiguration.sharedInstance.alertCancelText
             let settingTxt = TextConfiguration.sharedInstance.alertSettingText
-            QPopUpView.showAlert(withTarget: self, message: text, firstActionTitle: settingTxt, secondActionTitle: cancelTxt,
+            QPopUpView.showAlert(withTarget: self, vc: self, message: text, firstActionTitle: settingTxt, secondActionTitle: cancelTxt,
                                  doneAction: {
                                     self.goToIPhoneSetting()
             },
@@ -371,7 +371,7 @@ extension UIChatViewController : CustomChatInputDelegate {
             let text = TextConfiguration.sharedInstance.cameraAccessAlertText
             let cancelTxt = TextConfiguration.sharedInstance.alertCancelText
             let settingTxt = TextConfiguration.sharedInstance.alertSettingText
-            QPopUpView.showAlert(withTarget: self, message: text, firstActionTitle: settingTxt, secondActionTitle: cancelTxt,
+            QPopUpView.showAlert(withTarget: self, vc: self, message: text, firstActionTitle: settingTxt, secondActionTitle: cancelTxt,
                                  doneAction: {
                                     self.goToIPhoneSetting()
             },
@@ -596,7 +596,7 @@ extension UIChatViewController: UIDocumentPickerDelegate{
                                     var message = QMessage()
                                     
                                     DispatchQueue.main.sync(execute: {
-                                        QPopUpView.showAlert(withTarget: self, image: thumb, message:"Are you sure to send this video?", isVideoImage: true,
+                                        QPopUpView.showAlert(withTarget: self, vc: self, image: thumb, message:"Are you sure to send this video?", isVideoImage: true,
                                                              doneAction: {
                                                                 self.send(message: message, onSuccess: { (comment) in
                                                                     //success
@@ -698,7 +698,7 @@ extension UIChatViewController: UIDocumentPickerDelegate{
                         
                         var message = QMessage()
                         
-                        QPopUpView.showAlert(withTarget: self, image: thumb, message:popupText, isVideoImage: video, hiddenIconFileAttachment: hiddenIconFileAttachment,
+                        QPopUpView.showAlert(withTarget: self, vc: self, image: thumb, message:popupText, isVideoImage: video, hiddenIconFileAttachment: hiddenIconFileAttachment,
                         doneAction: {
                             self.send(message: message, onSuccess: { (comment) in
                             //success
@@ -1036,7 +1036,7 @@ extension UIChatViewController : UIImagePickerControllerDelegate, UINavigationCo
                                 var message = QMessage()
                                 
                                 DispatchQueue.main.sync(execute: {
-                                    QPopUpView.showAlert(withTarget: self, image: thumbImage, message:"Are you sure to send this video?", isVideoImage: true,
+                                    QPopUpView.showAlert(withTarget: self, vc: self, image: thumbImage, message:"Are you sure to send this video?", isVideoImage: true,
                                                          doneAction: {
                                                             self.send(message: message, onSuccess: { (comment) in
                                                                 //success
@@ -1107,7 +1107,7 @@ extension UIChatViewController : UIImagePickerControllerDelegate, UINavigationCo
                     var message = QMessage()
                     
                     
-                    QPopUpView.showAlert(withTarget: self, image: thumbImage, message:"Are you sure to send this video?", isVideoImage: true,
+                    QPopUpView.showAlert(withTarget: self, vc: self, image: thumbImage, message:"Are you sure to send this video?", isVideoImage: true,
                                          doneAction: {
                                             self.send(message: message, onSuccess: { (comment) in
                                                 //success

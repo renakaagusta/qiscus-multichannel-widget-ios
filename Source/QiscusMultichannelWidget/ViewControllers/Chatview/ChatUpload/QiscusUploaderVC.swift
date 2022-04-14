@@ -466,7 +466,7 @@ class QiscusUploaderVC: UIViewController, UIScrollViewDelegate,UITextViewDelegat
             let text = TextConfiguration.sharedInstance.galeryAccessAlertText
             let cancelTxt = TextConfiguration.sharedInstance.alertCancelText
             let settingTxt = TextConfiguration.sharedInstance.alertSettingText
-            QPopUpView.showAlert(withTarget: self, message: text, firstActionTitle: settingTxt, secondActionTitle: cancelTxt,doneAction: {
+            QPopUpView.showAlert(withTarget: self, vc: self.chatView, message: text, firstActionTitle: settingTxt, secondActionTitle: cancelTxt,doneAction: {
                 self.goToIPhoneSetting()
             }, cancelAction: {
                 
@@ -485,7 +485,7 @@ class QiscusUploaderVC: UIViewController, UIScrollViewDelegate,UITextViewDelegat
             let text = TextConfiguration.sharedInstance.cameraAccessAlertText
             let cancelTxt = TextConfiguration.sharedInstance.alertCancelText
             let settingTxt = TextConfiguration.sharedInstance.alertSettingText
-            QPopUpView.showAlert(withTarget: self, message: text, firstActionTitle: settingTxt, secondActionTitle: cancelTxt,
+            QPopUpView.showAlert(withTarget: self, vc: self.chatView, message: text, firstActionTitle: settingTxt, secondActionTitle: cancelTxt,
                                  doneAction: {
                                     self.goToIPhoneSetting()
             },

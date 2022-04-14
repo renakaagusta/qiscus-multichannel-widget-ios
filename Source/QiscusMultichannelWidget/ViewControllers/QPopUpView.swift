@@ -178,7 +178,7 @@ class QPopUpView: UIViewController {
     }
     
     // MARK: - Class methode to show popUp
-    class func showAlert(withTarget target:UIViewController,image:UIImage? = nil,message:String = "", attributedText:NSMutableAttributedString? = nil, firstActionTitle:String = "OK", secondActionTitle:String = "CANCEL",isVideoImage:Bool = false, hiddenIconFileAttachment : Bool = true, isAlert : Bool = false, doneAction:@escaping ()->Void = { }, cancelAction:@escaping ()->Void = {},  retryAction:@escaping ()->Void = { }){
+    class func showAlert(withTarget target:UIViewController, vc : UIChatViewController? = nil, image:UIImage? = nil,message:String = "", attributedText:NSMutableAttributedString? = nil, firstActionTitle:String = "OK", secondActionTitle:String = "CANCEL",isVideoImage:Bool = false, hiddenIconFileAttachment : Bool = true, isAlert : Bool = false, doneAction:@escaping ()->Void = { }, cancelAction:@escaping ()->Void = {},  retryAction:@escaping ()->Void = { }){
         let alert = QPopUpView.sharedInstance
         if alert.isPresent{
             alert.dismiss(animated: false, completion: nil)
@@ -206,7 +206,23 @@ class QPopUpView: UIViewController {
         alert.modalTransitionStyle = .crossDissolve
         alert.modalPresentationStyle = .overCurrentContext
         alert.view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.4)
-        UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: {})
+        
+        if let vc = vc {
+            if vc.vcIsPresentModal == true {
+                vc.present(alert, animated: true, completion: nil)
+            }else{
+                UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: {})
+            }
+        }else{
+            let vc = UIApplication.currentViewController()
+
+            if vc != nil  && vc is UIChatViewController {
+                vc?.present(alert, animated: true, completion: nil)
+            }else{
+                UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: {})
+            }
+        }
+        
     }
 
     func hiddenProgress(){
