@@ -1177,6 +1177,7 @@ extension UIChatViewController : DisableChatInputDelegate {
     func startNewChat(vc: UIChatViewController) {
         vc.chatTitleView = self.chatTitleView
         var vcArray = self.navigationController?.viewControllers
+        vc.hidesBottomBarWhenPushed = true
         if vcArray != nil {
             vcArray!.removeLast()
             vcArray!.append(vc)

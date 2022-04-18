@@ -53,8 +53,8 @@ class DisableInput: UIView {
 
         SharedPreferences.removeRoomId()
 
-        QismoManager.shared.initiateChat(withTitle: title, andSubtitle: subtitle, userId: userId, username: username, avatar: avatar, extras: extras, callback: { roomId in
-            self.disableInputDelegate?.startNewChat(vc: roomId as! UIChatViewController)
+        QismoManager.shared.initiateChat(withTitle: title, andSubtitle: subtitle, userId: userId, username: username, avatar: avatar, extras: extras, callback: { vc in
+            self.disableInputDelegate?.startNewChat(vc: vc as! UIChatViewController)
         })
        
         return
