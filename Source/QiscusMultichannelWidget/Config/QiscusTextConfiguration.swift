@@ -39,6 +39,7 @@ class TextConfiguration: NSObject {
     var galeryAccessAlertText = "We need photos access to upload image.\nPlease allow photos access in your iPhone Setting"
     var locationAccessAlertText = "We need location access to share your current location.\nPlease allow location access in your iPhone Setting"
     var cameraAccessAlertText = "We need camera access to upload image from camera.\nPlease allow camera access in your iPhone Setting"
+    var noCameraAlertText = "This device does not have a camera"
     var microphoneAccessAlertText = "We need microphone access to upload recorded audio.\nPlease allow mictophone access in your iPhone Setting"
     
     /// Your text to show as title confirmation when you want to upload image/file, Default value : "CONFIRMATION"

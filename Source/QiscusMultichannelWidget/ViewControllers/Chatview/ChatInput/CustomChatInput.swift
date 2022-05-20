@@ -205,20 +205,34 @@ extension UIChatViewController : CustomChatInputDelegate {
         self.view.endEditing(true)
         if AVCaptureDevice.authorizationStatus(for: AVMediaType.video) ==  AVAuthorizationStatus.authorized
         {
-            DispatchQueue.main.async(execute: {
-                if #available(iOS 11.0, *) {
-                    self.latestNavbarTint = self.currentNavbarTint
-                    UINavigationBar.appearance().tintColor = UIColor.blue
-                }
-                
-                let picker = UIImagePickerController()
-                picker.delegate = self
-                picker.allowsEditing = false
-                picker.mediaTypes = [(kUTTypeImage as String)]
-                
-                picker.sourceType = .camera
-                self.present(picker, animated: true, completion: nil)
-            })
+            if UIImagePickerController.isSourceTypeAvailable(.camera) {
+                DispatchQueue.main.async(execute: {
+                    if #available(iOS 11.0, *) {
+                        self.latestNavbarTint = self.currentNavbarTint
+                        UINavigationBar.appearance().tintColor = UIColor.blue
+                    }
+                    
+                    let picker = UIImagePickerController()
+                    picker.delegate = self
+                    picker.allowsEditing = false
+                    picker.mediaTypes = [(kUTTypeImage as String)]
+                    
+                    picker.sourceType = .camera
+                    self.present(picker, animated: true, completion: nil)
+                })
+            }else{
+                DispatchQueue.main.async(execute: {
+                    let text = TextConfiguration.sharedInstance.noCameraAlertText
+                    let cancelTxt = TextConfiguration.sharedInstance.alertCancelText
+                    
+                    QPopUpView.showAlert(withTarget: self, vc: self, message: text, firstActionTitle: "ok", secondActionTitle: cancelTxt,
+                                         doneAction: {
+                        
+                    },
+                                         cancelAction: {}
+                    )
+                })
+            }
         }else{
             AVCaptureDevice.requestAccess(for: AVMediaType.video, completionHandler: { (granted :Bool) -> Void in
                 if UIImagePickerController.isSourceTypeAvailable(.camera) {
@@ -417,6 +431,12 @@ extension UIChatViewController : CustomChatInputDelegate {
         })
         
         optionMenu.addAction(cancelAction)
+        
+        if let presenter = optionMenu.popoverPresentationController {
+            presenter.sourceView = self.chatInput.imageAttachmentButton
+            presenter.sourceRect = self.chatInput.imageAttachmentButton.bounds
+        }
+        
         self.present(optionMenu, animated: true, completion: nil)
     }
     
