@@ -464,10 +464,8 @@ class QiscusUploaderVC: UIViewController, UIScrollViewDelegate,UITextViewDelegat
     func showPhotoAccessAlert(){
         DispatchQueue.main.async(execute: {
             let text = TextConfiguration.sharedInstance.galeryAccessAlertText
-            let cancelTxt = TextConfiguration.sharedInstance.alertCancelText
-            let settingTxt = TextConfiguration.sharedInstance.alertSettingText
-            QPopUpView.showAlert(withTarget: self, vc: self.chatView, message: text, firstActionTitle: settingTxt, secondActionTitle: cancelTxt,doneAction: {
-                self.goToIPhoneSetting()
+            QPopUpView.showAlert(withTarget: self, vc: self.chatView, message: text, doneAction: {
+                
             }, cancelAction: {
                 
             })

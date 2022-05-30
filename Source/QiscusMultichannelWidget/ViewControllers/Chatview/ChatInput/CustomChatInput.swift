@@ -363,11 +363,9 @@ extension UIChatViewController : CustomChatInputDelegate {
     func showPhotoAccessAlert(){
         DispatchQueue.main.async(execute: {
             let text = TextConfiguration.sharedInstance.galeryAccessAlertText
-            let cancelTxt = TextConfiguration.sharedInstance.alertCancelText
-            let settingTxt = TextConfiguration.sharedInstance.alertSettingText
-            QPopUpView.showAlert(withTarget: self, vc: self, message: text, firstActionTitle: settingTxt, secondActionTitle: cancelTxt,
+            QPopUpView.showAlert(withTarget: self, vc: self, message: text,
                                  doneAction: {
-                                    self.goToIPhoneSetting()
+                                    
             },
                                  cancelAction: {}
             )
@@ -383,11 +381,8 @@ extension UIChatViewController : CustomChatInputDelegate {
     func showCameraAccessAlert(){
         DispatchQueue.main.async(execute: {
             let text = TextConfiguration.sharedInstance.cameraAccessAlertText
-            let cancelTxt = TextConfiguration.sharedInstance.alertCancelText
-            let settingTxt = TextConfiguration.sharedInstance.alertSettingText
-            QPopUpView.showAlert(withTarget: self, vc: self, message: text, firstActionTitle: settingTxt, secondActionTitle: cancelTxt,
+            QPopUpView.showAlert(withTarget: self, vc: self, message: text,
                                  doneAction: {
-                                    self.goToIPhoneSetting()
             },
                                  cancelAction: {}
             )
