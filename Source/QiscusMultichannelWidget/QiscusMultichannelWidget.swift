@@ -86,5 +86,20 @@ public class QiscusMultichannelWidget {
         manager.handleNotification(userInfo: userInfo, removePreviousNotif: removePreviousNotif)
     }
     
+    public func automaticSendMessage(qMessage : QMessage){
+        //kirim message
+        manager.automaticSendMessageModel = qMessage
+    }
+    
+    
+    public func automaticSendMessage(textMessage : String){
+        //kirim message
+        manager.automaticSendMessage = textMessage
+    }
+    
+    public func manualSendMessage(textMessage : String){
+        //message
+        manager.manualSendMessage = textMessage
+    }
     
 }

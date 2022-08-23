@@ -29,6 +29,9 @@ class QismoManager {
     var deviceToken : String = "" // save device token for 1st time or before login
     var isDevelopment : Bool = false
     let imageCache = NSCache<NSString, UIImage>()
+    var automaticSendMessage : String = ""
+    var automaticSendMessageModel : QMessage? = nil
+    var manualSendMessage : String = ""
     
     func setUser(id: String, username: String, avatarUrl: String = "", userProperties :  [[String:Any]]? = nil) {
         self.userID = id
@@ -87,6 +90,24 @@ class QismoManager {
             ui.roomId = savedRoomId
             ui.chatTitle = title
             ui.chatSubtitle = subtitle
+            
+            
+            if !automaticSendMessage.isEmpty {
+                ui.automaticSendMessage = self.automaticSendMessage
+                self.automaticSendMessage = ""
+            }
+            
+            if automaticSendMessageModel != nil {
+                ui.automaticSendMessageModel = self.automaticSendMessageModel
+                self.automaticSendMessageModel = nil
+            }
+            
+            if !manualSendMessage.isEmpty {
+                ui.manualSendMessage = self.manualSendMessage
+                
+                self.manualSendMessage = ""
+            }
+            
             callback(ui)
         }else {
             var param = [
@@ -124,6 +145,22 @@ class QismoManager {
                 ui.roomId = roomId
                 ui.chatTitle = title
                 ui.chatSubtitle = subtitle
+               
+                if !self.automaticSendMessage.isEmpty{
+                    ui.automaticSendMessage = self.automaticSendMessage
+                    self.automaticSendMessage = ""
+                }
+                
+                if self.automaticSendMessageModel != nil {
+                    ui.automaticSendMessageModel = self.automaticSendMessageModel
+                    self.automaticSendMessageModel = nil
+                }
+                
+                if !self.manualSendMessage.isEmpty {
+                    ui.manualSendMessage = self.manualSendMessage
+                    self.manualSendMessage = ""
+                }
+                
                 callback(ui)
             }, onError: { error in
                 debugPrint("failed initiate chat, \(error)")

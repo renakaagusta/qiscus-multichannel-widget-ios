@@ -121,6 +121,10 @@ class UIChatViewController: UIViewController {
     var scrollToComment : QMessage? = nil
     
     public var vcIsPresentModal : Bool = false
+    
+    var automaticSendMessage : String = ""
+    var manualSendMessage : String = ""
+    var automaticSendMessageModel : QMessage? = nil
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupUI()
@@ -161,6 +165,32 @@ class UIChatViewController: UIViewController {
         center.addObserver(self, selector: #selector(UIChatViewController.keyboardChange(_:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         center.addObserver(self,selector: #selector(reSubscribeRoom(_:)), name: Notification.Name(rawValue: "reSubscribeRoom"),object: nil)
         view.endEditing(true)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            if !self.automaticSendMessage.isEmpty{
+                let comment = QMessage()
+                comment.message = self.automaticSendMessage
+                comment.chatRoomId = self.roomId
+                self.sendMessage(message: comment)
+                
+                self.automaticSendMessage = ""
+            }
+            
+            if let message = self.automaticSendMessageModel{
+                if !message.chatRoomId.isEmpty {
+                    message.chatRoomId = self.roomId
+                }
+               
+                self.sendMessage(message: message)
+                self.automaticSendMessageModel = nil
+            }
+            
+            if !self.manualSendMessage.isEmpty{
+                self.chatInput.textView.text = self.manualSendMessage
+                self.chatInput.textView.becomeFirstResponder()
+                self.manualSendMessage = ""
+            }
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
