@@ -73,6 +73,23 @@ qiscusWidget.initiateChat()
 }
 ```
 
+### Auto send message and Manual Send Message when open Chat
+```
+// 1
+qiscusWidget.automaticSendMessage(textMessage: "testing automatic")
+     
+        
+//2
+let messageModel = QMessage()
+messageModel.message = "testing automatic"
+        
+qiscusWidget.automaticSendMessage(qMessage: messageModel)
+        
+        
+//3
+qiscusWidget.manualSendMessage(textMessage: "testing manual")
+```
+
 ### Clear User
 
 Use this function to clear the logged-in users.
