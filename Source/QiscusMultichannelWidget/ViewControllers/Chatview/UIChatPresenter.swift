@@ -337,7 +337,6 @@ class UIChatPresenter: UIChatUserInteraction {
     
     func sendMessage(withComment comment: QMessage, onSuccess: @escaping (QMessage) -> Void, onError: @escaping (String) -> Void) {
         addNewCommentUI(comment, isIncoming: false)
-        self.qiscus.database.message.save([comment])
         self.qiscus.shared.sendMessage(message: comment, onSuccess: { [weak self] (comment) in
             guard let self = self else {
                 return
@@ -609,5 +608,19 @@ extension UIChatPresenter : QiscusCoreRoomDelegate {
     //this func was deprecated
     func didComment(comment: QMessage, changeStatus status: QMessageStatus) {
         //
+        if status == .sent {
+            if SharedPreferences.getDeletedCommentUniqueId()?.contains(comment.uniqueId) ?? false {
+                return
+            }
+            
+            // check comment already exist in view
+            for (group,c) in self.comments.enumerated() {
+                if let index = c.index(where: { $0.uniqueId == comment.uniqueId }) {
+                    self.comments[group][index] = comment
+                    
+                    self.viewPresenter?.onUpdateComment(comment: comment, indexpath: IndexPath(row: index, section: group))
+                }
+            }
+        }
     }
 }

@@ -193,11 +193,17 @@ class QismoManager {
     
     public func remove(deviceToken token: String, isDevelopment: Bool = false, onSuccess: @escaping (Bool) -> Void, onError: @escaping (String) -> Void) {
         // call api
-        self.qiscus.shared.removeDeviceToken(token: token, isDevelopment: isDevelopment, onSuccess: { (success) in
-            onSuccess(success)
-        }) { (error) in
-            onError(error.message)
+        
+        if deviceToken.isEmpty == true {
+            onError("Device token is empty, please set deviceToken not empty")
+        }else{
+            self.qiscus.shared.removeDeviceToken(token: token, isDevelopment: isDevelopment, onSuccess: { (success) in
+                onSuccess(success)
+            }) { (error) in
+                onError(error.message)
+            }
         }
+       
     }
     
     /// Go to Chat user room id. Example when tap notification
