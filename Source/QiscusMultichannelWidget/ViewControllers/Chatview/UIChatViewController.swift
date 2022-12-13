@@ -390,8 +390,6 @@ class UIChatViewController: UIViewController {
         self.registerClass(nib: UINib(nibName: "QPostbackRightCell", bundle: QiscusMultichannelWidget.bundle), forMessageCellWithReuseIdentifier: "qPostBackRightCell")
         self.registerClass(nib: UINib(nibName: "QSystemCell", bundle:QiscusMultichannelWidget.bundle), forMessageCellWithReuseIdentifier: "qSystemCell")
         self.registerClass(nib: UINib(nibName: "QCarouselCell", bundle: QiscusMultichannelWidget.bundle), forMessageCellWithReuseIdentifier: "qCarouselCell")
-        self.registerClass(nib: UINib(nibName: "QVideoRightCell", bundle:QiscusMultichannelWidget.bundle), forMessageCellWithReuseIdentifier: "qVideoRightCell")
-        self.registerClass(nib: UINib(nibName: "QVideoLeftCell", bundle:QiscusMultichannelWidget.bundle), forMessageCellWithReuseIdentifier: "qVideoLeftCell")
         self.registerClass(nib: UINib(nibName: "QReplyImageRightCell", bundle:QiscusMultichannelWidget.bundle), forMessageCellWithReuseIdentifier: "qReplyImageRightCell")
         self.registerClass(nib: UINib(nibName: "QReplyImageLeftCell", bundle:QiscusMultichannelWidget.bundle), forMessageCellWithReuseIdentifier: "qReplyImageLeftCell")
     }
@@ -583,25 +581,10 @@ class UIChatViewController: UIViewController {
                         return cell
                     }
                 } else if(urlFile?.containsVideo == true) {
-                    if (message.isMyComment() == true ){
-                        let cell = tableView.dequeueReusableCell(withIdentifier: "qVideoRightCell", for: indexPath) as! QVideoRightCell
-                        cell.menuConfig = menuConfig
-                        cell.cellMenu = self
-                        cell.vc = self
-                        return cell
-                    }
-                    else{
-                        let cell = tableView.dequeueReusableCell(withIdentifier: "qVideoLeftCell", for: indexPath) as! QVideoLeftCell
-                        if self.room?.type == .group {
-                            cell.colorName = colorName
-                            cell.isPublic = true
-                        }else {
-                            cell.isPublic = false
-                        }
-                        cell.cellMenu = self
-                        cell.vc = self
-                        return cell
-                    }
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "qFileRightCell", for: indexPath) as! QFileRightCell
+                    cell.cellMenu = self
+                    
+                    return cell
                 } else {
                     if (message.isMyComment() == true){
                         let cell = tableView.dequeueReusableCell(withIdentifier: "qFileRightCell", for: indexPath) as! QFileRightCell

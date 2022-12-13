@@ -30,6 +30,5 @@ s.dependency 'AlamofireImage'
 s.dependency 'SwiftyJSON'
 s.dependency 'QiscusCore', '3.0.0-beta.16'
 s.dependency 'SDWebImage', '3.7.0'
-s.dependency 'SDWebImageWebPCoder'
 s.dependency 'CropViewController'
 end
