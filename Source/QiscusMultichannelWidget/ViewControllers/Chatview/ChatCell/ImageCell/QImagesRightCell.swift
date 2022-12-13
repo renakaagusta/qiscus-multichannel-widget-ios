@@ -131,7 +131,7 @@ class QImagesRightCell: UIBaseChatCell {
                     fileImage = "https://"
                 }
                 self.ivComment.backgroundColor = #colorLiteral(red: 0.9764705882, green: 0.9764705882, blue: 0.9764705882, alpha: 1)
-                self.ivComment.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
+                // self.ivComment.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
                 DispatchQueue.global(qos: .background).sync {
                     self.ivComment.sd_setImage(with: URL(string: url) ?? URL(string: "https://"), placeholderImage: nil, options: .highPriority) { (uiImage, error, cache, urlPath) in
                         if urlPath != nil && uiImage != nil{
@@ -149,7 +149,7 @@ class QImagesRightCell: UIBaseChatCell {
             }
             self.ivComment.backgroundColor = #colorLiteral(red: 0.9764705882, green: 0.9764705882, blue: 0.9764705882, alpha: 1)
             
-            self.ivComment.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
+            // self.ivComment.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
             DispatchQueue.global(qos: .background).sync {
                 self.ivComment.sd_setImage(with: URL(string: fileImage) ?? URL(string: "https://"), placeholderImage: nil, options: .highPriority) { (uiImage, error, cache, urlPath) in
                     if urlPath != nil && uiImage != nil{

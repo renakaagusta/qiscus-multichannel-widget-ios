@@ -141,7 +141,7 @@ class QCardLeftCell: UIBaseChatCell {
         let imageURL = payload["image"].string ?? ""
         
         if imageURL != "" {
-            self.displayImageView.sd_imageIndicator = SDWebImageActivityIndicator.whiteLarge
+            // self.displayImageView.sd_imageIndicator = SDWebImageActivityIndicator.whiteLarge
             
             DispatchQueue.global(qos: .background).sync {
                 self.displayImageView.sd_setImage(with: URL(string: imageURL) ?? URL(string: "https://"), placeholderImage: nil, options: .highPriority) { (uiImage, error, cache, urlPath) in
