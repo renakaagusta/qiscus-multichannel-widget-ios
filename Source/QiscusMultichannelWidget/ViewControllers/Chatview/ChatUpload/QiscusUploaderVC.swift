@@ -474,8 +474,8 @@ class QiscusUploaderVC: UIViewController, UIScrollViewDelegate,UITextViewDelegat
     
     //Alert
     func goToIPhoneSetting(){
-        UIApplication.shared.openURL(URL(string: UIApplication.openSettingsURLString)!)
-        let _ = self.navigationController?.popViewController(animated: true)
+        // UIApplication.shared.openURL(URL(string: UIApplication.openSettingsURLString)!)
+        // let _ = self.navigationController?.popViewController(animated: true)
     }
     
     func showCameraAccessAlert(){

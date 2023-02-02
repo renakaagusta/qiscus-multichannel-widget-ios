@@ -263,9 +263,9 @@ extension UIChatViewController : CustomChatInputDelegate {
                             }
                         })
                     }else{
-                        // DispatchQueue.main.async(execute: {
-                        //     self.showCameraAccessAlert()
-                        // })
+                        DispatchQueue.main.async(execute: {
+                            self.showCameraAccessAlert()
+                        })
                     }
                 }else{
                     //no camera
@@ -374,8 +374,8 @@ extension UIChatViewController : CustomChatInputDelegate {
     
     //Alert
     func goToIPhoneSetting(){
-        UIApplication.shared.openURL(URL(string: UIApplication.openSettingsURLString)!)
-        let _ = self.navigationController?.popViewController(animated: true)
+        // UIApplication.shared.openURL(URL(string: UIApplication.openSettingsURLString)!)
+        // let _ = self.navigationController?.popViewController(animated: true)
     }
     
     func showCameraAccessAlert(){
