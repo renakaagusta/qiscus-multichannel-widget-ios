@@ -263,9 +263,9 @@ extension UIChatViewController : CustomChatInputDelegate {
                             }
                         })
                     }else{
-                        DispatchQueue.main.async(execute: {
-                            self.showCameraAccessAlert()
-                        })
+                        // DispatchQueue.main.async(execute: {
+                        //     self.showCameraAccessAlert()
+                        // })
                     }
                 }else{
                     //no camera
